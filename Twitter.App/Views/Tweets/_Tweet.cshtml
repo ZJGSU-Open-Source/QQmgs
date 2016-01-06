@@ -1,0 +1,21 @@
+﻿@model Twitter.App.Models.ViewModels.TweetViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="text-muted" id="tweet-author">@Model.Author</span>
+        <span class="text-muted-for-right">@Model.DatePosted.ToString("D")</span>
+    </div>
+    <div class="panel-body">
+        <p class="tweet-text">@Model.Text</p>
+    </div>
+    <ul class="tweet-options">
+        <li><a href="#">Reply <span class="badge">@Model.RepliesCount</span></a></li>
+        <li><a href="#">Retweet <span class="badge">@Model.RetweetsCount</span></a></li>
+        <li>
+            @Ajax.ActionLink("Like", "Favourite", "Tweets",
+                new {tweetId = @Model.Id},
+                new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id})
+            <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
+        </li>
+    </ul>
+</div>

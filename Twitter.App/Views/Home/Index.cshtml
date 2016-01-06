@@ -1,0 +1,52 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
+
+<link href="~/Content/PagedList.css" rel="stylesheet">
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    ViewBag.Title = "Tweets";
+}
+
+<div id="tweets">
+
+    @{ Html.RenderPartial("_Tweets", Model); }
+
+</div>
+
+@*<div class="paging">
+    <ul class="pagination">
+        @for (int i = 0; i <= Model.Count(); i++)
+        {
+            if (i % 10 == 0)
+            {
+                <li>
+                    @Ajax.ActionLink((i / 10 + 1).ToString(), "TweetsByPage",
+                        new { page = (i / 10) + 1 },
+                        new AjaxOptions { UpdateTargetId = "tweets", InsertionMode = InsertionMode.Replace })
+                </li>
+            }
+        }
+    </ul>
+</div>*@
+
+<div class="paging">
+    <ul class="pagination">
+        
+        @{
+            var data = Model as IPagedList<TweetViewModel>;
+        }
+
+        @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Index", new {p = page}))
+    
+    </ul>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

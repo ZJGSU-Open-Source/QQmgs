@@ -1,0 +1,41 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
+
+<link href="~/Content/PagedList.css" rel="stylesheet">
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    ViewBag.Title = "Tweets";
+}
+
+<div id="tweets">
+
+    <h3>All My Tweets</h3>
+    <div id="new-tweet-place"></div>
+
+    @foreach (var tweet in Model)
+    {
+        Html.RenderPartial("_Tweet", tweet);
+    }
+
+</div>
+
+<div class="paging">
+    <ul class="pagination">
+
+        @{
+            var data = Model as IPagedList<TweetViewModel>;
+        }
+
+        @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("GetTweetBySpecifiedUser", new { p = page }))
+
+    </ul>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
