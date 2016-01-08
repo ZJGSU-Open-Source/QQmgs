@@ -223,6 +223,7 @@
     <Compile Include="Models\BindingModels\CreateTweetBindingModel.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\ReplyViewModel.cs" />
     <Compile Include="Models\ViewModels\TweetViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -292,6 +293,9 @@
     <Content Include="Views\Home\_Tweets.cshtml" />
     <Content Include="Views\Tweets\_TweetsByUser.cshtml" />
     <Content Include="Views\Tweets\GetTweetBySpecifiedUser.cshtml" />
+    <Content Include="Views\Account\_IntroductionPartial.cshtml" />
+    <Content Include="Views\Users\_User.cshtml" />
+    <Content Include="Views\Tweets\GetHotTweets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

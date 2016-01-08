@@ -1,7 +1,4 @@
-﻿    using System.Collections.Generic;
-    using PagedList;
-
-namespace Twitter.App.Controllers
+﻿namespace Twitter.App.Controllers
 {
     using System;
     using System.Linq;
@@ -14,6 +11,7 @@ namespace Twitter.App.Controllers
     using Twitter.App.Models.BindingModels;
     using Twitter.App.Models.ViewModels;
     using Twitter.Models;
+    using PagedList;
 
     [Authorize]
     [RoutePrefix("tweets")]
@@ -56,7 +54,33 @@ namespace Twitter.App.Controllers
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
 
             return this.View(pagedTweets);
-            // return PartialView("_TweetsByUser", tweets);
+        }
+
+        [HttpGet]
+        [Route("HotTweets")]
+        public ActionResult GetHotTweets(int p = 1)
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+
+            var recentTweets = Data.Tweets.All()
+                .OrderByDescending(t => t.UsersFavourite.Count)
+                .Select(
+                    t => new TweetViewModel
+                    {
+                        Id = t.Id,
+                        Author = t.Author.UserName,
+                        Text = t.Text,
+                        UsersFavouriteCount = t.UsersFavourite.Count,
+                        RepliesCount = t.Replies.Count,
+                        RetweetsCount = t.Retweets.Count,
+                        DatePosted = t.DatePosted
+                    })
+                .Take(12)
+                .ToList();
+
+            var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
+
+            return this.View(pagedTweets);
         }
 
         [HttpPost]
@@ -91,6 +115,18 @@ namespace Twitter.App.Controllers
                         UsersFavouriteCount = tweet.UsersFavourite.Count
                     });
         }
+
+        //[HttpGet]
+        //[Route("reply")]
+        //public ActionResult Reply(int tweetId)
+        //{
+        //    var tweet = Data.Tweets.Find(tweetId);
+
+        //    if (tweet != null)
+        //    {
+                
+        //    }
+        //}
 
         public int Favourite(int tweetId)
         {

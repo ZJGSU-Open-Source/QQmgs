@@ -1,14 +1,49 @@
-﻿@model IEnumerable<Twitter.App.Models.ViewModels.UserViewModel>
+﻿@using Microsoft.Ajax.Utilities
+@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model IEnumerable<Twitter.App.Models.ViewModels.UserViewModel>
+
+<link href="~/Content/PagedList.css" rel="stylesheet">
+
 @{
-    ViewBag.Title = "SearchUser";
+    ViewBag.Title = "Search User";
 }
 
-<h2>Search User</h2>
-<h3>Here we find the users</h3>
+<div id="tweets">
+    <h3>Here we find the Users</h3>
+    
+    <div id="new-tweet-place"></div>
+    @if (Model != null)
+    {
+        foreach (var tweet in Model)
+        {
+            Html.RenderPartial("_User", tweet);
+        }
 
-@foreach (var user in Model)
-{
-    @user.Username <br/>
-    @user.Email
+        <div class="paging">
+            <ul class="pagination">
+
+                @{
+                    var data = Model as IPagedList<UserViewModel>;
+                }
+
+                @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("SearchUser", new {searchTerm = ViewBag.searchTerm, p = page}))
+
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p class="tweet-text">User not found!</p>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
-

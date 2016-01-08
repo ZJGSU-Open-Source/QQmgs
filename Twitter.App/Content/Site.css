@@ -31,7 +31,9 @@ textarea {
     width: 70%;
 }
 #tweet-author {
+    color: #000000;
     font-weight: bold;
+    font-family: Microsoft YaHei;
 }
 .tweet-options > li {
     display: inline;
@@ -43,6 +45,14 @@ textarea {
 .tweet-text {
     margin-top: 10px;
     font-size: 20px;
+    font-family: Microsoft YaHei;
+}
+#tweet-text-time {
+    color: #4582ec;
+    float: right;
+}
+.footer-text {
+    color: #808080;
 }
 @media screen and (max-width: 860px) {
     #tweets {

@@ -11,6 +11,7 @@
         {
             this.UsersFavourite = new HashSet<User>();
             this.Replies = new HashSet<Tweet>();
+            this.Reply = new HashSet<Reply>();
             this.Retweets = new HashSet<Tweet>();
             this.Reports = new HashSet<Report>();
         }
@@ -33,6 +34,8 @@
         public virtual ICollection<User> UsersFavourite { get; set; }
 
         public virtual ICollection<Tweet> Replies { get; set; }
+
+        public virtual ICollection<Reply> Reply { get; set; } 
 
         public ICollection<Tweet> Retweets { get; set; }
 

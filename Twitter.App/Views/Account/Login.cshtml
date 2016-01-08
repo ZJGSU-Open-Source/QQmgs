@@ -11,7 +11,7 @@
             @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
+                <h4>Use TwitterV account to log in.</h4>
                 <hr/>
                 @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
                 <div class="form-group">
@@ -37,13 +37,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="col-md-offset-2 col-md-5">
+                        <br/>
                         <input type="submit" value="Log in" class="btn btn-default"/>
+                        <input type="button" value="Register" class="btn btn-default col-md-offset-1" onclick="window.open('Register', '_self')"/>
                     </div>
                 </div>
-                <p>
+                @*<p>
                     @Html.ActionLink("Register as a new user", "Register")
-                </p>
+                </p>*@
 
 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
@@ -54,7 +56,8 @@
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            @Html.Partial("_IntroductionPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
         </section>
     </div>
 </div>

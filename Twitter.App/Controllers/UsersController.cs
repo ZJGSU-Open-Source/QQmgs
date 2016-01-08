@@ -1,4 +1,7 @@
-﻿namespace Twitter.App.Controllers
+﻿using System.Web.UI.WebControls;
+using PagedList;
+
+namespace Twitter.App.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -17,24 +20,24 @@
         }
 
         [Route("search")]
-        public ActionResult SearchUser(string searchTerm)
+        public ActionResult SearchUser(string searchTerm, int p = 1)
         {
-            if (searchTerm.IsNullOrWhiteSpace())
+            ViewBag.searchTerm = searchTerm;
+
+            if (string.IsNullOrEmpty(searchTerm))
             {
-                return this.HttpNotFound();
+                return this.View();
             }
 
             var users =
                 this.Data.Users.All()
                     .Where(u => u.UserName.Contains(searchTerm))
+                    .OrderByDescending(u => u.UserName)
                     .Select(u => new UserViewModel { Username = u.UserName, Email = u.Email });
 
-            if (!users.Any())
-            {
-                return this.HttpNotFound();
-            }
-            
-            return this.View(users);
+            var pagedUsers = users.ToPagedList(pageNumber: p, pageSize: 6);
+
+            return !users.Any() ? this.View() : this.View(pagedUsers);
         }
     }
 }
