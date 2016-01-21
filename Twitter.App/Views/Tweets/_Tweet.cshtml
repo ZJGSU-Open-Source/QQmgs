@@ -1,9 +1,16 @@
 ﻿@model Twitter.App.Models.ViewModels.TweetViewModel
 
-<div class="panel panel-default">
+<div class="panel panel-default" id ="@($"TweetPanel{@Model.Id}")">
     <div class="panel-heading">
         <span class="text-muted" id="tweet-author">@Model.Author</span>
         <span class="text-muted" id="tweet-text-time">@Model.DatePosted.ToString("D")</span>
+        @if (User.Identity.Name == Model.Author)
+        {
+            <span class="tweet-delete">@Ajax.ActionLink("Delete", "Delete", "Tweets",
+                new { tweetId = @Model.Id },
+                new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id })
+            </span>
+        }
     </div>
     <div class="panel-body">
         <p class="tweet-text">@Model.Text</p>

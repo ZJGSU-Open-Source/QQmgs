@@ -139,5 +139,18 @@
 
             return tweet.UsersFavourite.Count();
         }
+
+        [Route("delete")]
+        public bool Delete(int tweetId)
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            var tweet = this.Data.Tweets.Find(tweetId);
+
+            var removedTweet = this.Data.Tweets.Remove(tweetId);
+
+            this.Data.SaveChanges();
+
+            return true;
+        }
     }
 }

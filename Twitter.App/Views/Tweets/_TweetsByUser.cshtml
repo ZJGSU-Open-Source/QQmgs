@@ -1,6 +1,6 @@
 ﻿@model List<Twitter.App.Models.ViewModels.TweetViewModel>
 
-    @foreach (var tweet in Model)
-         {
-             Html.RenderPartial("_Tweet", tweet);
-         }
+@foreach (var tweet in Model)
+{
+    Html.RenderPartial("_Tweet", tweet);
+}

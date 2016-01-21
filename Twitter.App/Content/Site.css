@@ -47,6 +47,11 @@ textarea {
     font-size: 20px;
     font-family: Microsoft YaHei;
 }
+.tweet-delete {
+    float: right;
+    color: #008000;
+    margin-right: 15px;
+}
 #tweet-text-time {
     color: #4582ec;
     float: right;
