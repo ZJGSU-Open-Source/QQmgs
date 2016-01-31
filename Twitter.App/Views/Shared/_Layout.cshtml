@@ -14,8 +14,6 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
             </button>
             @Html.ActionLink("TwitterV", "Index", "Home", new { area = string.Empty }, new { @class = "navbar-brand" })
         </div>
@@ -52,12 +50,12 @@
                     </li>
 
                     using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new {@class = "navbar-form navbar-left"}))
-                     {
-                         <li class="form-group">
-                             <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
-                         </li>
-                         <button type="submit" class="btn btn-default">Go</button>
-                     }
+                    {
+                        <li class="form-group">
+                            <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
+                        </li>
+                        <button type="submit" class="btn btn-success">Go</button>
+                    }
 
                 }
             </ul>

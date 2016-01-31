@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Net;
 
     using Twitter.Data.UnitOfWork;
 
@@ -122,10 +123,14 @@
         //{
         //    var tweet = Data.Tweets.Find(tweetId);
 
-        //    if (tweet != null)
+        //    if (tweet == null)
         //    {
-                
+        //        return this.PartialView(
+        //            "_Tweet"
+        //            );
         //    }
+
+        //    return PartialView();
         //}
 
         public int Favourite(int tweetId)
@@ -140,8 +145,52 @@
             return tweet.UsersFavourite.Count();
         }
 
+        [HttpGet]
+        [Route("edit")]
+        public ActionResult Edit(int? tweetId)
+        {
+            if (tweetId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Tweet tweet = Data.Tweets.Find(tweetId);
+            if (tweet == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (tweet.AuthorId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(tweet);
+        }
+
+        [HttpPost]
+        [Route("edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Tweet tweet)
+        {
+            if (ModelState.IsValid)
+            {
+                var loggedUserId = this.User.Identity.GetUserId();
+
+                tweet.AuthorId = loggedUserId;
+                tweet.DatePosted = DateTime.Now;
+
+                Data.Tweets.Update(tweet);
+                Data.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(tweet);
+        }
+
         [Route("delete")]
-        public bool Delete(int tweetId)
+        public string Delete(int tweetId)
         {
             var loggedUserId = this.User.Identity.GetUserId();
             var tweet = this.Data.Tweets.Find(tweetId);
@@ -150,7 +199,7 @@
 
             this.Data.SaveChanges();
 
-            return true;
+            return "Delete Successfully";
         }
     }
 }

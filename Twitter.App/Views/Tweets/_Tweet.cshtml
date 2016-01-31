@@ -3,16 +3,9 @@
 <div class="panel panel-default" id ="@($"TweetPanel{@Model.Id}")">
     <div class="panel-heading">
         <span class="text-muted" id="tweet-author">@Model.Author</span>
-        <span class="text-muted" id="tweet-text-time">@Model.DatePosted.ToString("D")</span>
-        @if (User.Identity.Name == Model.Author)
-        {
-            <span class="tweet-delete">@Ajax.ActionLink("Delete", "Delete", "Tweets",
-                new { tweetId = @Model.Id },
-                new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id })
-            </span>
-        }
+        <span class="text-muted" id="tweet-text-time">@Model.DatePosted</span>
     </div>
-    <div class="panel-body">
+    <div class="panel-body" id="@($"TweetText{@Model.Id}")">
         <p class="tweet-text">@Model.Text</p>
     </div>
     <ul class="tweet-options">
@@ -24,5 +17,21 @@
                 new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id})
             <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
         </li>
+
+        @if (User.Identity.Name == Model.Author)
+        {
+            <li>
+                <span class="text-muted tweet-operation">
+                   @Html.ActionLink("Edit", "Edit", "Tweets", new { tweetId = @Model.Id }, null)
+                </span>
+            </li>
+            <li>
+                <span class="text-muted tweet-operation">
+                    @Ajax.ActionLink("Delete", "Delete", "Tweets",
+                    new { tweetId = @Model.Id },
+                    new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id })
+                </span>
+            </li>
+        }
     </ul>
 </div>

@@ -30,11 +30,6 @@ textarea {
     margin: 0 auto;
     width: 70%;
 }
-#tweet-author {
-    color: #000000;
-    font-weight: bold;
-    font-family: Microsoft YaHei;
-}
 .tweet-options > li {
     display: inline;
     margin: 15px;
@@ -47,10 +42,16 @@ textarea {
     font-size: 20px;
     font-family: Microsoft YaHei;
 }
-.tweet-delete {
+.tweet-operation {
+    color: #ffffff;
     float: right;
-    color: #008000;
+    font-family: Microsoft YaHei;
     margin-right: 15px;
+}
+#tweet-author {
+    color: #000000;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
 }
 #tweet-text-time {
     color: #4582ec;

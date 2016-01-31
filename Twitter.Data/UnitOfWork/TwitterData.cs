@@ -1,4 +1,6 @@
-﻿namespace Twitter.Data.UnitOfWork
+﻿using System.Data.Entity.Infrastructure;
+
+namespace Twitter.Data.UnitOfWork
 {
     using System;
     using System.Collections.Generic;
@@ -32,70 +34,28 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public IRepository<Tweet> Tweets
-        {
-            get
-            {
-                return this.GetRepository<Tweet>();
-            }
-        }
+        public IRepository<Tweet> Tweets => this.GetRepository<Tweet>();
 
-        public IRepository<Message> Messages
-        {
-            get
-            {
-                return this.GetRepository<Message>();
-            }
-        }
+        public IRepository<Message> Messages => this.GetRepository<Message>();
 
-        public IRepository<Report> Reports
-        {
-            get
-            {
-                return this.GetRepository<Report>();
-            }
-        }
+        public IRepository<Report> Reports => this.GetRepository<Report>();
 
-        public IRepository<Notification> Notifications
-        {
-            get
-            {
-                return this.GetRepository<Notification>();
-            }
-        }
+        public IRepository<Notification> Notifications => this.GetRepository<Notification>();
 
-        public IRepository<User> Users
-        {
-            get
-            {
-                return this.GetRepository<User>();
-            }
-        }
+        public IRepository<User> Users => this.GetRepository<User>();
 
-        public IRepository<IdentityRole> Roles
-        {
-            get
-            {
-                return this.GetRepository<IdentityRole>();
-            }
-        }
+        public IRepository<IdentityRole> Roles => this.GetRepository<IdentityRole>();
 
-        public IUserStore<User> UserStore
-        {
-            get
-            {
-                if (this.userStore == null)
-                {
-                    this.userStore = new UserStore<User>(this.dbContext);
-                }
-
-                return this.userStore;
-            }
-        }
+        public IUserStore<User> UserStore => this.userStore ?? (this.userStore = new UserStore<User>(this.dbContext));
 
         public void SaveChanges()
         {
             this.dbContext.SaveChanges();
+        }
+
+        public DbEntityEntry Entry(object entity)
+        {
+            return this.dbContext.Entry(entity);
         }
 
         private IRepository<T> GetRepository<T>() where T : class

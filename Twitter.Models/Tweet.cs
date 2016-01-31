@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Tweet
     {
@@ -21,12 +20,16 @@
 
         [Required]
         [MinLength(2)]
+        [MaxLength(250)]
         public string Text { get; set; }
 
         public string AuthorId { get; set; }
 
         public virtual User Author { get; set; }
 
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DatePosted { get; set; }
 
         public bool IsRetweet { get; set; }

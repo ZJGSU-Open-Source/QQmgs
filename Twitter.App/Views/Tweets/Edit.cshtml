@@ -1,0 +1,33 @@
+﻿@model Twitter.Models.Tweet
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <br />
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="modal-body">
+                Tweet Content:
+                <hr />
+                @Html.TextAreaFor(t => t.Text, new { @class = "form-control" })
+                @Html.ValidationMessageFor(t => t.Text, string.Empty, new { @class = "text-danger" })
+            </div>
+
+            @*Genre and Price removed for brevity.*@
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @*<input type="reset" value="Cancel" class="btn btn-default" onclick="window.location.href = @Url.Action("Index", "Home")" />*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
