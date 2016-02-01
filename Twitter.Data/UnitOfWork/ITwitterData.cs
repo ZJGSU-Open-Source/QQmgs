@@ -1,6 +1,4 @@
-﻿using System.Data.Entity.Infrastructure;
-
-namespace Twitter.Data.UnitOfWork
+﻿namespace Twitter.Data.UnitOfWork
 {
     using Twitter.Data.Repositories;
 

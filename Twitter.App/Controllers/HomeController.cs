@@ -65,5 +65,10 @@
 
             return this.PartialView("_Tweets", tweets);
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

@@ -5,7 +5,7 @@
     public class CreateTweetBindingModel
     {
         [Required]
-        [MinLength(2)]
+        [MinLength(3)]
         [MaxLength(250)]
         public string Text { get; set; }
     }

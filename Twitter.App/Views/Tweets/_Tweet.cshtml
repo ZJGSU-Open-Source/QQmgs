@@ -11,13 +11,24 @@
     <ul class="tweet-options">
         <li><a href="#">Reply <span class="badge">@Model.RepliesCount</span></a></li>
         <li><a href="#">Retweet <span class="badge">@Model.RetweetsCount</span></a></li>
-        <li>
-            @Ajax.ActionLink("Like", "Favourite", "Tweets",
-                new {tweetId = @Model.Id},
-                new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id})
-            <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
-        </li>
-
+        @if (ViewBag.IsFavorite == false || ViewBag.IsFavorite == null)
+        {
+            <li>
+                @Ajax.ActionLink("Like", "Favourite", "Tweets",
+                new { tweetId = @Model.Id },
+                new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id })
+                <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
+            </li>
+        }
+        else
+        {
+            <li>
+                @Ajax.ActionLink("Unlike", "Favourite", "Tweets",
+                new { tweetId = @Model.Id },
+                new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id })
+                <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
+            </li>
+        }
         @if (User.Identity.Name == Model.Author)
         {
             <li>

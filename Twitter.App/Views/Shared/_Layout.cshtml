@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Twitter</title>
+    <title>@ViewBag.Title - 全球某工商.com</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -14,49 +14,55 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>   
             </button>
             @Html.ActionLink("TwitterV", "Index", "Home", new { area = string.Empty }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
                 @if (Request.IsAuthenticated)
                 {
-                    <li>
-                        @Ajax.ActionLink("New Tweet", "NewTweetForm", "Tweets",
-                            new AjaxOptions
-                            {
-                                UpdateTargetId = "new-tweet", // <-- DOM element ID to update
-                                InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                HttpMethod = "GET", // <-- HTTP method,
-                                OnSuccess = "app.showNewTweetModal"
-                            })
-                    </li>
-                    @*<li>
-                        @Ajax.ActionLink("All my Tweets", "GetTweetBySpecifiedUser", "Tweets",
-                            new AjaxOptions
-                            {
-                                UpdateTargetId = "tweets", // <-- DOM element ID to update
-                                InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                HttpMethod = "GET", // <-- HTTP method,
-                                OnSuccess = "app.showNewTweetModal"
-                            })
-                    </li>*@
-                    <li>
-                        @Html.ActionLink("All My Tweets", "GetTweetBySpecifiedUser", "Tweets")
-                    </li>
-                    <li>
-                        @Html.ActionLink("HOT Tweets", "GetHotTweets", "Tweets")
+                    <li class="dropdown-header">
+                        <a href="#" class="dropdown-toggle" id="dropdownCommonMenu" data-toggle="dropdown">
+                            Tweets
+                            <span class="caret"></span>
+                        </a>
+
+                        @*<a href="#" class="dropdown-toggle" id="dropdownCommonMenu" data-toggle="dropdown">Tweets</a>*@
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownCommonMenu">
+                            <li role="menuitem">@Html.ActionLink("All My Tweets", "GetTweetBySpecifiedUser", "Tweets")</li>
+                            <li role="menuitem">@Html.ActionLink("HOT Tweets", "GetHotTweets", "Tweets")</li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem" class="list-group-success">
+                                @Ajax.ActionLink("New Tweet", "NewTweetForm", "Tweets",
+                                    new AjaxOptions
+                                    {
+                                        UpdateTargetId = "new-tweet", // <-- DOM element ID to update
+                                        InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                        HttpMethod = "GET", // <-- HTTP method,
+                                        OnSuccess = "app.showNewTweetModal"
+                                    })
+                            </li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem">@Html.ActionLink("About", "About", "Home")</li>
+                            @*<li role="menuitem" class="disabled">@Html.ActionLink("Item 2 (disabled)", "Index", "Home")</li>*@
+                            @*<li role="menuitem" class="divider"></li>*@
+                            @*<li role="menuitem" class="nav-header">Header 2</li>*@
+                            <li role="menuitem">@*@Html.ActionLink("Item 3", "Index", "Home")*@</li>
+                        </ul>
                     </li>
 
-                    using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new {@class = "navbar-form navbar-left"}))
+                    using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
                     {
                         <li class="form-group">
                             <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
                         </li>
                         <button type="submit" class="btn btn-success">Go</button>
                     }
-
                 }
             </ul>
 

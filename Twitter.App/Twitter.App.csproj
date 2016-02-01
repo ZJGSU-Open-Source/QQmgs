@@ -297,6 +297,8 @@
     <Content Include="Views\Users\_User.cshtml" />
     <Content Include="Views\Tweets\GetHotTweets.cshtml" />
     <Content Include="Views\Tweets\Edit.cshtml" />
+    <Content Include="Views\Account\_IntroductionMorePartial.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

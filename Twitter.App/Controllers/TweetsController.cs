@@ -138,11 +138,21 @@
             var loggedUserId = this.User.Identity.GetUserId();
             var tweet = this.Data.Tweets.Find(tweetId);
 
-            this.Data.Users.Find(loggedUserId).FavouriteTweets.Add(tweet);
+            if (Data.Users.Find(loggedUserId).FavouriteTweets.Contains(tweet))
+            {
+                ViewBag.IsFavourite = false;
 
-            this.Data.SaveChanges();
+                this.Data.Users.Find(loggedUserId).FavouriteTweets.Remove(tweet);
+            }
+            else
+            {
+                ViewBag.IsFavourite = true;
 
-            return tweet.UsersFavourite.Count();
+                this.Data.Users.Find(loggedUserId).FavouriteTweets.Add(tweet);
+                this.Data.SaveChanges();
+            }
+
+            return tweet.UsersFavourite.Count;
         }
 
         [HttpGet]
