@@ -2,7 +2,7 @@
 
 <div class="panel panel-default" id ="@($"TweetPanel{@Model.Id}")">
     <div class="panel-heading">
-        <span class="text-muted" id="tweet-author">@Model.Author</span>
+        <span class="text-primary" id="tweet-author">@Model.Author.ToUpper()</span>
         <span class="text-muted" id="tweet-text-time">@Model.DatePosted</span>
     </div>
     <div class="panel-body" id="@($"TweetText{@Model.Id}")">

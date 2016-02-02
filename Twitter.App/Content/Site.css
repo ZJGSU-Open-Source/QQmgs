@@ -49,8 +49,10 @@ textarea {
     margin-right: 15px;
 }
 #tweet-author {
-    color: #000000;
+    margin: 5px;
     font-weight: bold;
+    font-size: 14px;
+    color: #4582ec;
     font-family: Microsoft YaHei;
 }
 #tweet-text-time {
