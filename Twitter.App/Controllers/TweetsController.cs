@@ -140,14 +140,11 @@
 
             if (Data.Users.Find(loggedUserId).FavouriteTweets.Contains(tweet))
             {
-                ViewBag.IsFavourite = false;
-
                 this.Data.Users.Find(loggedUserId).FavouriteTweets.Remove(tweet);
+                this.Data.SaveChanges();
             }
             else
             {
-                ViewBag.IsFavourite = true;
-
                 this.Data.Users.Find(loggedUserId).FavouriteTweets.Add(tweet);
                 this.Data.SaveChanges();
             }
