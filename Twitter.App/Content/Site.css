@@ -5,8 +5,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -35,7 +35,16 @@ textarea {
     margin: 15px;
 }
 .tweet-options {
-    padding-left: 0;
+    padding-left: 0px;
+}
+.tweet-reply {
+    display: flex;
+}
+.tweet-reply > li {
+    display: inline;
+    margin: 0px;
+    margin-left: -28px;
+
 }
 .tweet-text {
     margin-top: 10px;
@@ -61,6 +70,16 @@ textarea {
 }
 .footer-text {
     color: #808080;
+}
+.panel > .panel-heading {
+    background-color: #ffffff;
+    color: white;
+}
+.navbar {
+    background-color: #faffff;
+    margin: 0px auto;
+    padding-right: 24px;
+    padding-left: 24px;
 }
 @media screen and (max-width: 860px) {
     #tweets {

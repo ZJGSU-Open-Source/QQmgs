@@ -1,0 +1,7 @@
+﻿@model Twitter.App.Models.ViewModels.ReplyViewModel
+
+<div class="panel panel-default" id="@($"ReplyPanel{@Model.Id}")">
+    <div class="panel-body" id="@($"ReplyText{@Model.Id}")">
+        <p class="tweet-text">@Model.Text</p>
+    </div>
+</div>

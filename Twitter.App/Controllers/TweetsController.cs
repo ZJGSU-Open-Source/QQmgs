@@ -46,9 +46,10 @@
                         Author = t.Author.UserName,
                         Text = t.Text,
                         UsersFavouriteCount = t.UsersFavourite.Count,
-                        RepliesCount = t.Replies.Count,
+                        RepliesCount = t.Reply.Count,
                         RetweetsCount = t.Retweets.Count,
-                        DatePosted = t.DatePosted
+                        DatePosted = t.DatePosted,
+                        ReplyList = t.Reply.ToList()
                     })
                 .ToList();
 
@@ -72,9 +73,10 @@
                         Author = t.Author.UserName,
                         Text = t.Text,
                         UsersFavouriteCount = t.UsersFavourite.Count,
-                        RepliesCount = t.Replies.Count,
+                        RepliesCount = t.Reply.Count,
                         RetweetsCount = t.Retweets.Count,
-                        DatePosted = t.DatePosted
+                        DatePosted = t.DatePosted,
+                        ReplyList = t.Reply.ToList()
                     })
                 .Take(12)
                 .ToList();
@@ -111,27 +113,51 @@
                         Author = loggedUserUsername,
                         DatePosted = tweet.DatePosted,
                         RetweetsCount = tweet.Retweets.Count,
-                        RepliesCount = tweet.Replies.Count,
+                        RepliesCount = tweet.Reply.Count,
                         Text = tweet.Text,
                         UsersFavouriteCount = tweet.UsersFavourite.Count
                     });
         }
 
-        //[HttpGet]
-        //[Route("reply")]
-        //public ActionResult Reply(int tweetId)
-        //{
-        //    var tweet = Data.Tweets.Find(tweetId);
+        [Route("reply")]
+        public ActionResult Reply(string content, int tweetId)
+        {
+            if (string.IsNullOrEmpty(content))
+            {
+                return this.PartialView("_Tweet");
+            }
 
-        //    if (tweet == null)
-        //    {
-        //        return this.PartialView(
-        //            "_Tweet"
-        //            );
-        //    }
+            var tweet = Data.Tweets.Find(tweetId);
 
-        //    return PartialView();
-        //}
+            if (tweet == null)
+            {
+                return this.PartialView("_Tweet");
+            }
+
+            var loggedUserId = this.User.Identity.GetUserId();
+            var loggedUserUsername = this.User.Identity.GetUserName();
+
+            var reply = new Reply()
+            {
+                AuthorId = loggedUserId,
+                AuthorName = loggedUserUsername,
+                Content = content,
+                PublishTime = DateTime.Now,
+                TweetId = tweetId
+            };
+
+            this.Data.Reply.Add(reply);
+            this.Data.SaveChanges();
+
+            return PartialView(
+                "Reply",
+                new ReplyViewModel
+                {
+                    PublishTime = reply.PublishTime,
+                    Text = reply.Content,
+                    Author = loggedUserUsername
+                });
+        }
 
         public int Favourite(int tweetId)
         {

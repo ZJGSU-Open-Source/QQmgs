@@ -299,6 +299,7 @@
     <Content Include="Views\Tweets\Edit.cshtml" />
     <Content Include="Views\Account\_IntroductionMorePartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Tweets\Reply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

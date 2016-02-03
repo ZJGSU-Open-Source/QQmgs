@@ -46,6 +46,8 @@ namespace Twitter.Data.UnitOfWork
 
         public IRepository<IdentityRole> Roles => this.GetRepository<IdentityRole>();
 
+        public IRepository<Reply> Reply => this.GetRepository<Reply>();
+
         public IUserStore<User> UserStore => this.userStore ?? (this.userStore = new UserStore<User>(this.dbContext));
 
         public void SaveChanges()

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Twitter.Models;
 
 namespace Twitter.App.Models.ViewModels
 {
@@ -15,6 +17,8 @@ namespace Twitter.App.Models.ViewModels
         public int RepliesCount { get; set; }
 
         public int RetweetsCount { get; set; }
+
+        public List<Reply> ReplyList { get; set; } 
 
         public DateTime DatePosted { get; set; }
     }

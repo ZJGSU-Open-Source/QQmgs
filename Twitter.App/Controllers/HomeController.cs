@@ -34,9 +34,10 @@
                             Author = t.Author.UserName,
                             Text = t.Text,
                             UsersFavouriteCount = t.UsersFavourite.Count,
-                            RepliesCount = t.Replies.Count,
+                            RepliesCount = t.Reply.Count,
                             RetweetsCount = t.Retweets.Count,
-                            DatePosted = t.DatePosted
+                            DatePosted = t.DatePosted,
+                            ReplyList = t.Reply.ToList()
                         });
 
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
@@ -56,9 +57,10 @@
                         Author = t.Author.UserName,
                         Text = t.Text,
                         UsersFavouriteCount = t.UsersFavourite.Count,
-                        RepliesCount = t.Replies.Count,
+                        RepliesCount = t.Reply.Count,
                         RetweetsCount = t.Retweets.Count,
-                        DatePosted = t.DatePosted
+                        DatePosted = t.DatePosted,
+                        ReplyList = t.Reply.ToList()
                     })
                 .Skip(10 * (page - 1))
                 .Take(10);

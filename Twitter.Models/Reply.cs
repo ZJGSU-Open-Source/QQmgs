@@ -25,6 +25,9 @@ namespace Twitter.Models
         [Required]
         public string AuthorId { get; set; }
 
+        [Required]
+        public string AuthorName { get; set; }
+
         public DateTime PublishTime { get; set; }
     }
 }
