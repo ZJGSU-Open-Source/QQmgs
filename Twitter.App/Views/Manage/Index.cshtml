@@ -10,17 +10,16 @@
     <h4>Change your account settings</h4>
     <hr/>
     <dl class="dl-horizontal">
+        <dt>Celebration:</dt>
+        <dd>
+            [
+            <a href="#">It's the @Model.RegisterTimeInterval th Day in QQmgs.com. You're Registered on @Model.RegisteredTime.ToString("D")</a>
+            ]
+        </dd>
         <dt>Password:</dt>
         <dd>
             [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+            @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") : Html.ActionLink("Create", "SetPassword"))
             ]
         </dd>
         @*<dt>External Logins:</dt>

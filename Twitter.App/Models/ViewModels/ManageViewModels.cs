@@ -1,5 +1,6 @@
 ﻿namespace Twitter.App.Models.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
@@ -18,6 +19,10 @@
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+
+        public DateTime RegisteredTime { get; set; }
+
+        public int RegisterTimeInterval { get; set; }
     }
 
     public class ManageLoginsViewModel

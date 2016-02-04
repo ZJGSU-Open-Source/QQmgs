@@ -1,4 +1,6 @@
-﻿namespace Twitter.Models
+﻿using System;
+
+namespace Twitter.Models
 {
     using System.Collections.Generic;
     using System.Security.Claims;
@@ -15,6 +17,8 @@
             this.Followers = new HashSet<User>();
             this.FollowingUsers = new HashSet<User>();
         }
+
+        public DateTime RegisteredTime { get; set; }
 
         public virtual ICollection<Tweet> Tweets { get; set; }
 

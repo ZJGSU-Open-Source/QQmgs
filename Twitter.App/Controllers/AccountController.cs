@@ -1,4 +1,6 @@
-﻿namespace Twitter.App.Controllers
+﻿using System;
+
+namespace Twitter.App.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -158,7 +160,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email, RegisteredTime = DateTime.Now};
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

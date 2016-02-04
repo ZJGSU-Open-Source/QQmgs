@@ -1,4 +1,7 @@
-﻿namespace Twitter.App.Controllers
+﻿using System;
+using Twitter.Data.UnitOfWork;
+
+namespace Twitter.App.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -12,17 +15,17 @@
     using Twitter.App.Models.ViewModels;
 
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
 
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public ManageController() : base(new TwitterData())
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(new TwitterData())
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
@@ -72,6 +75,9 @@
                                                                            : string.Empty;
 
             var userId = this.User.Identity.GetUserId();
+            var registeredTime = this.Data.Users.Find(userId).RegisteredTime;
+            var registerTimeInterval = (DateTime.Now - registeredTime).Days;
+
             var model = new IndexViewModel
                             {
                                 HasPassword = this.HasPassword(), 
@@ -80,8 +86,11 @@
                                 Logins = await this.UserManager.GetLoginsAsync(userId), 
                                 BrowserRemembered =
                                     await
-                                    this.AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-                            };
+                                    this.AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                                RegisteredTime = registeredTime,
+                                RegisterTimeInterval = registerTimeInterval
+            };
+
             return this.View(model);
         }
 
