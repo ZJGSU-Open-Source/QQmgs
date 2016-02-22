@@ -41,18 +41,18 @@
             </li>
         }
     </ul>
-    <ul class="tweet-reply">
+    @*<ul class="tweet-reply">
         <li>
             @using (Ajax.BeginForm("Reply", "Tweets", new { tweetId = Model.Id }, new AjaxOptions() {  InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "ReplyPanel" + Model.Id}))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                @*<div>
+                <div>
                     <input type="text" class="form-control" name="content" placeholder="Say something">
-                </div>*@
+                </div>
             }
         </li>
-    </ul>
+    </ul>*@
 
 
     @*<form class="form-inline" role="form">
@@ -75,14 +75,18 @@
                 }
 
                 <tr>
-                        @using (Ajax.BeginForm("Reply", "Tweets", new {tweetId = Model.Id}, new AjaxOptions() {InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "ReplyPanel" + Model.Id}))
+                        @using (Ajax.BeginForm("Reply", "Tweets", new {tweetId = Model.Id}, new AjaxOptions
+                        {
+                            InsertionMode = InsertionMode.InsertAfter,
+                            UpdateTargetId = "ReplyPanel" + Model.Id
+                        }))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
 
                             <td>
                                 <input type="text" class="form-control" name="content" placeholder="What's on your mind?'">
-                                <button type="submit" class="btn btn-success" value="refresh" onclick="javascript:location.reload();">Post</button>
+                                <button type="submit" class="btn btn-success" value="refresh" onclick="">Post</button>
                             </td>
                         }
                 </tr>

@@ -22,7 +22,7 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                
+
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
                 @if (Request.IsAuthenticated)
@@ -55,13 +55,18 @@
                         </ul>
                     </li>
 
-                    using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
-                    {
-                        <li class="form-group">
-                            <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
-                        </li>
-                        <button type="submit" class="btn btn-default">Go</button>
-                    }
+                    <li>
+                        <div class="input-group">
+                            @using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
+                            {
+                                <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Go!</button>
+                                </span>
+                            }
+                        </div>
+                    </li>
+
                 }
 
             </ul>

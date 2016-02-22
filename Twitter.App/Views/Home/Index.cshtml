@@ -15,9 +15,13 @@
 
 <div class="jumbotron">
     <h3>Notice!</h3>
-    <p>Reply method is under develop. Posted at 16-Feb-21 Sun</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+    <p>Reply method is under develop. QQmgs.com is friendly open now. </p>
+    <p>Posted at 16-Feb-21 Sun</p>
+    @using (Html.BeginForm("About", "Home"))
+    {
+        <button type="submit" class="btn btn-primary btn-lg">Learn more</button>
+        <p>@*<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>*@</p>
+    }
 </div>
 
 @using (Ajax.BeginForm("NewTweetForm", "Tweets", new AjaxOptions

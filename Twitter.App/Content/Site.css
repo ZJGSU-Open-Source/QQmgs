@@ -57,6 +57,11 @@ textarea {
     font-family: Microsoft YaHei;
     margin-right: 15px;
 }
+.reply-text {
+    margin-top: 10px;
+    font-size: 15px;
+    font-family: Microsoft YaHei;
+}
 #tweet-author {
     margin: 5px;
     font-weight: bold;
