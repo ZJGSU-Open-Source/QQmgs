@@ -15,7 +15,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>   
+                <span class="icon-bar"></span>
             </button>
             @Html.ActionLink("TwitterV", "About", "Home", new {area = string.Empty}, new {@class = "navbar-brand"})
         </div>
@@ -57,12 +57,12 @@
 
                     <li>
                         <div class="input-group">
-                            @using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
+                            @using (Html.BeginForm("SearchUser", "Users", FormMethod.Post, new {@class = "navbar-form navbar-left"}))
                             {
                                 <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Go!</button>
-                                </span>
+                                        <button class="btn btn-default" type="submit">Go!</button>
+                                    </span>
                             }
                         </div>
                     </li>
@@ -75,15 +75,19 @@
         </div>
     </div>
 </div>
+
+
 <div class="container body-content">
     <div id="new-tweet"></div>
     @RenderBody()
     <hr/>
     <footer>
-        <p align="right" class="footer-text">A <a class="text-success">Freedom Platform</a> For All The Students In ZJSU</p>
+        <p align="right" class="footer-text">A <a class="text-success">Freedom Platform</a> For All The Students In ZJSU
+        </p>
         <p align="right" class="footer-text">&copy; @DateTime.Now.Year - TwitterV Project</p>
-        <p align="right" class="footer-text">Individual Developer: <a href="https://github.com/shuaiyiwu">@@Shuaiyi Wu</a></p>
-       @* <p align="right" class="footer-text">Server local time: <a class="text-success">@DateTime.Now.ToString("G")</a></p>*@
+        <p align="right" class="footer-text">Individual Developer: <a href="https://github.com/shuaiyiwu">@@Shuaiyi Wu</a>
+        </p>
+        @* <p align="right" class="footer-text">Server local time: <a class="text-success">@DateTime.Now.ToString("G")</a></p>*@
         <p align="right" class="footer-text">浙ICP备15036767号</p>
     </footer>
 </div>

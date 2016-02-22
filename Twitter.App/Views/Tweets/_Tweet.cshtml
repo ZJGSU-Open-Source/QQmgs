@@ -9,11 +9,6 @@
         <p class="tweet-text">@Model.Text</p>
     </div>
     <ul class="tweet-options">
-        @*<li>
-            @Ajax.ActionLink("Reply", "Reply", "Tweets",
-                new {tweetId = @Model.Id},
-                new AjaxOptions() {InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "TweetPanel" + @Model.Id})
-        </li>*@
         <li><a data-toggle="collapse" href="#@($"ReplyPanel{@Model.Id}")" id="ReplyButton">Reply <span class="badge">@Model.RepliesCount</span></a></li>
 
         <li><a href="#">Retweet <span class="badge">@Model.RetweetsCount</span></a></li>
@@ -41,27 +36,6 @@
             </li>
         }
     </ul>
-    @*<ul class="tweet-reply">
-        <li>
-            @using (Ajax.BeginForm("Reply", "Tweets", new { tweetId = Model.Id }, new AjaxOptions() {  InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "ReplyPanel" + Model.Id}))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                <div>
-                    <input type="text" class="form-control" name="content" placeholder="Say something">
-                </div>
-            }
-        </li>
-    </ul>*@
-
-
-    @*<form class="form-inline" role="form">
-        <div class="form-group">
-            <input type="text" class="form-control" id="Commentcontent" placeholder="Say something">
-        </div>
-        <button type="submit" class="btn btn-info">Comment</button>
-    </form>*@
-
     <div id="@($"ReplyPanel{@Model.Id}")" class="panel-collapse collapse">
         @if (Model.ReplyList != null)
         {
@@ -85,7 +59,7 @@
                             @Html.ValidationSummary(true)
 
                             <td>
-                                <input type="text" class="form-control" name="content" placeholder="What's on your mind?'">
+                                <input type="text" class="form-control" name="content" placeholder="What's on your mind?">
                                 <button type="submit" class="btn btn-success" value="refresh" onclick="">Post</button>
                             </td>
                         }
