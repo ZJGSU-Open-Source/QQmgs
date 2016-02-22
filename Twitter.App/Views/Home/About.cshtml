@@ -4,7 +4,7 @@
     ViewBag.Title = "About";
 }
 <head>
-    <title>Bootstrap Example</title>
+    <title>About</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -61,6 +61,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            @*<a class="navbar-brand">@Html.ActionLink("Home", "Index", "Home")</a>*@
+
             <a class="navbar-brand" href="#">About</a>
         </div>
         <div>
@@ -110,3 +112,7 @@
 
 </body>
 </html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

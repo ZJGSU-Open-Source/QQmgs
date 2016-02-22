@@ -119,6 +119,7 @@
                     });
         }
 
+        [HttpPost]
         [Route("reply")]
         public ActionResult Reply(string content, int tweetId)
         {

@@ -13,6 +13,24 @@
     ViewBag.Title = "TwitterV";
 }
 
+<div class="jumbotron">
+    <h3>Notice!</h3>
+    <p>Reply method is under develop. Posted at 16-Feb-21 Sun</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+</div>
+
+@using (Ajax.BeginForm("NewTweetForm", "Tweets", new AjaxOptions
+{
+    UpdateTargetId = "new-tweet",
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "GET",
+    OnSuccess = "app.showNewTweetModal"
+}))
+{
+    <button type="submit" class="btn btn-success" style="float: right">New Tweet</button>
+}
+
 <div id="tweets">
 
     @{ Html.RenderPartial("_Tweets", Model); }

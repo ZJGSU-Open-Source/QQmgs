@@ -28,6 +28,8 @@ namespace Twitter.Models
         [Required]
         public string AuthorName { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PublishTime { get; set; }
     }
 }

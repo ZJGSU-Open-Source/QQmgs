@@ -47,9 +47,9 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                <div>
+                @*<div>
                     <input type="text" class="form-control" name="content" placeholder="Say something">
-                </div>
+                </div>*@
             }
         </li>
     </ul>
@@ -63,15 +63,42 @@
     </form>*@
 
     <div id="@($"ReplyPanel{@Model.Id}")" class="panel-collapse collapse">
-        <ul class="list-group">
-            @if (Model.ReplyList != null)
-            {
-                foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+        @if (Model.ReplyList != null)
+        {
+            <table class="table table-condensed table-striped table-hover">
+                <tbody>
+                @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
                 {
-                    <li class="list-group-item">@reply.AuthorName: @reply.Content</li>
+                    <tr>
+                        <td>@reply.AuthorName: @reply.Content</td>
+                    </tr>
                 }
-            }
-        </ul>
+
+                <tr>
+                        @using (Ajax.BeginForm("Reply", "Tweets", new {tweetId = Model.Id}, new AjaxOptions() {InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "ReplyPanel" + Model.Id}))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <td>
+                                <input type="text" class="form-control" name="content" placeholder="What's on your mind?'">
+                                <button type="submit" class="btn btn-success" value="refresh" onclick="javascript:location.reload();">Post</button>
+                            </td>
+                        }
+                </tr>
+
+                </tbody>
+            </table>
+
+            @*foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+            {
+                <li class="list-group-item">
+                    <span class="badge">@reply.PublishTime.ToString("MM/dd")</span>
+                    @reply.AuthorName: @reply.Content
+                </li>
+            }*@
+
+        }
     </div>
 
 </div>
