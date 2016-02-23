@@ -59,6 +59,7 @@ namespace Twitter.App.Controllers
 
         // GET: /Account/Login
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Login(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;

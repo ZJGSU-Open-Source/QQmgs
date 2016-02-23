@@ -106,3 +106,24 @@ section {
 	color: white;
 	background: #00a8ff;
 }
+/* Preloader */
+.preloader {
+	position: fixed;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+
+.preloader img {
+	position: absolute;
+	top: calc(50% - 32px);
+	left: calc(50% - 32px);
+}
+
+.preloader div {
+	display: none;
+	/* Preload the Second Pricing Image */
+	background: url(../img/pricing2.jpg) no-repeat 9999px 9999px;
+	background-position: 9999px 9999px;
+}
