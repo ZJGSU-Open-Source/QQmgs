@@ -17,6 +17,7 @@ namespace Twitter.Models
 
         [Required]
         [MinLength(1)]
+        [MaxLength(250)]
         public string Content { get; set; }
 
         [ForeignKey("TweetId")]
@@ -29,7 +30,7 @@ namespace Twitter.Models
         public string AuthorName { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PublishTime { get; set; }
     }
 }

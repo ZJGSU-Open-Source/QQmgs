@@ -1,4 +1,6 @@
-﻿namespace Twitter.App.Controllers
+﻿using System.Data.Entity.Validation;
+
+namespace Twitter.App.Controllers
 {
     using System;
     using System.Linq;
@@ -147,8 +149,20 @@
                 TweetId = tweetId
             };
 
-            this.Data.Reply.Add(reply);
-            this.Data.SaveChanges();
+            try
+            {
+                this.Data.Reply.Add(reply);
+                this.Data.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return PartialView(
+                    "Reply",
+                    new ReplyViewModel
+                    {
+                        Text = "Reply should not be empty or less than 250 words."
+                    });
+            }
 
             return PartialView(
                 "Reply",

@@ -3,6 +3,9 @@
 <div class="panel panel-default" id="@($"ReplyPanel{@Model.Id}")">
     <div class="panel-body" id="@($"ReplyText{@Model.Id}")">
         <p class="reply-text">@Model.Text</p>
-        <p class="reply-text" style="float: right">Successful comment on @DateTime.Now.ToString("G")</p>
+        @if (Model.Author != null)
+        {
+            <p class="reply-text" style="float: right">Successful comment on @DateTime.Now.ToString("G")</p>
+        }
     </div>
 </div>
