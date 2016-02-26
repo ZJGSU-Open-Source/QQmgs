@@ -330,6 +330,40 @@ namespace Twitter.App.Controllers
                        : this.RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+
+        // GET: /Manage/ChangeStatus
+        public ActionResult ChangeStatus()
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            ViewBag.oldStatus = Data.Users.Find(loggedUserId).Status; 
+
+            return this.View();
+        }
+
+        // POST: /Manage/ChangeStatus
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeStatus(ChangeStatusViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var loggedUserId = this.User.Identity.GetUserId();
+            
+            Data.Users.Find(loggedUserId).Status = model.Status;
+            Data.SaveChanges();
+
+            var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
+            if (user != null)
+            {
+                await this.SignInManager.SignInAsync(user, false, false);
+            }
+
+            return this.RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && this._userManager != null)

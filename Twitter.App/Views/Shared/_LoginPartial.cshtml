@@ -7,7 +7,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", null, new { title = "Manage" })
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", null, new {title = "Manage"})
             </li>
             <li>
                 <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
@@ -18,7 +18,19 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", null, new {id = "registerLink"})</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", null, new {id = "loginLink"})</li>
+        <li>
+            <button class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
+                    style="margin-top: 15px" type="button" onclick="location.href = '@Url.Action("Register", "Account")'">
+                Register
+            </button>
+        </li>
+        <li>
+            <button class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
+                    style="margin-top: 15px" type="button" onclick="location.href = '@Url.Action("Login", "Account")'">
+                Login
+            </button>
+        </li>
+        @*<li>@Html.ActionLink("Register", "Register", "Account", null, new {id = "registerLink"})</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", null, new {id = "loginLink"})</li>*@
     </ul>
 }

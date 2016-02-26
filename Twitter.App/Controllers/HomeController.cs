@@ -32,6 +32,7 @@
                         {
                             Id = t.Id,
                             Author = t.Author.UserName,
+                            AuthorStatus = t.Author.Status,
                             Text = t.Text,
                             UsersFavouriteCount = t.UsersFavourite.Count,
                             RepliesCount = t.Reply.Count,
@@ -55,6 +56,7 @@
                     {
                         Id = t.Id,
                         Author = t.Author.UserName,
+                        AuthorStatus = t.Author.Status,
                         Text = t.Text,
                         UsersFavouriteCount = t.UsersFavourite.Count,
                         RepliesCount = t.Reply.Count,

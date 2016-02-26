@@ -232,15 +232,45 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cardio\animate.css" />
+    <Content Include="Content\cardio\cardio.css" />
+    <Content Include="Content\mdl-v1.0.5\material.css" />
+    <Content Include="Content\mdl-v1.0.5\material.js" />
+    <Content Include="Content\mdl-v1.0.5\material.min.css" />
+    <Content Include="Content\mdl-v1.0.5\material.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\footer.jpg" />
+    <Content Include="img\header.jpg" />
+    <Content Include="img\icon\guru-blue.png" />
+    <Content Include="img\icon\heart-blue.png" />
+    <Content Include="img\icon\weight-blue.png" />
+    <Content Include="img\loader.gif" />
+    <Content Include="img\logo-active.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\photos\Mr.Zhou.jpg" />
+    <Content Include="img\popup.jpg" />
+    <Content Include="img\pricing1.jpg" />
+    <Content Include="img\pricing2.jpg" />
+    <Content Include="img\Quad%2520photo.png" />
+    <Content Include="img\table-1.jpg" />
+    <Content Include="img\table-2-hover.jpg" />
+    <Content Include="img\table-2.jpg" />
+    <Content Include="img\table-3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\mdl-v1.0.5\package.json" />
+    <Content Include="Content\mdl-v1.0.5\material.min.js.map" />
+    <Content Include="Content\mdl-v1.0.5\material.min.css.map" />
+    <Content Include="Content\mdl-v1.0.5\LICENSE" />
+    <Content Include="Content\mdl-v1.0.5\bower.json" />
+    <Content Include="img\.DS_Store" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cardio\main.js" />
     <Content Include="Scripts\Custom\app.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -300,6 +330,7 @@
     <Content Include="Views\Account\_IntroductionMorePartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Tweets\Reply.cshtml" />
+    <Content Include="Views\Manage\ChangeStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

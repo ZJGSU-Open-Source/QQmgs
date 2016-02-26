@@ -1,85 +1,157 @@
-﻿@model Twitter.App.Models.ViewModels.TweetViewModel
+﻿@using Twitter.App.Models.ViewModels
+@model Twitter.App.Models.ViewModels.TweetViewModel
 
-<div class="panel panel-default" id="@($"TweetPanel{@Model.Id}")">
-    <div class="panel-heading">
-        <span class="text-primary" id="tweet-author">@Model.Author.ToUpper()</span>
-        <span class="text-muted" id="tweet-text-time">@Model.DatePosted</span>
+<style>
+    .demo-card-wide.mdl-card {
+        width: auto;
+    }
+
+    .demo-card-wide > .mdl-card__title {
+        color: #4582ec;
+        height: auto;
+        background: whitesmoke;
+    }
+
+    .demo-card-wide > .mdl-card__menu {
+        color: #fff;
+    }
+</style>
+
+<div class="demo-card-wide mdl-card mdl-shadow--3dp" id="@($"TweetPanel{@Model.Id}")">
+    <div class="mdl-card__title">
+        <p>
+            <h2 class="mdl-card__title-text" id="@($"TweetAuthor{@Model.Id}")">
+                @@@Model.Author
+            </h2>
+            <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span>
+        </p>
+        
+        <div class="mdl-tooltip mdl-tooltip--large" for="@($"TweetAuthor{@Model.Id}")">
+            @Model.Author Online
+        </div>
+
+        @*<h2 class="mdl-card__title-text">@@@Model.Author
+            <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span></h2>*@
     </div>
-    <div class="panel-body" id="@($"TweetText{@Model.Id}")">
-        <p class="tweet-text">@Model.Text</p>
+    <div class="mdl-card__supporting-text" id="@($"TweetText{@Model.Id}")"
+         style="font-size: 18px; padding: 25px; width: auto; line-height: 25px; color: rgb(48, 48, 48)">
+        @Model.Text
     </div>
-    <ul class="tweet-options">
-        <li><a data-toggle="collapse" href="#@($"ReplyPanel{@Model.Id}")" id="ReplyButton">Reply <span class="badge">@Model.RepliesCount</span></a></li>
+    <div class="mdl-card__actions mdl-card--border">
+        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                data-toggle="collapse" href="#@($"ReplyPanel{@Model.Id}")" id="ReplyButton"
+                style="float: left">
+            Reply
+            <span class="badge">@Model.RepliesCount</span>
+        </button>
+        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                href="#" style="float: left">
+            Retweet
+            <span class="badge">@Model.RetweetsCount</span>
+        </button>
+        <a style="float: left">
+            @using (Ajax.BeginForm("Favourite", "Tweets", new {tweetId = @Model.Id},
+                new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id}))
+            {
+                <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Like
+                    <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
+                </button>
+            }
+        </a>
+        <a style="float: right; padding: 5px">
+            <p style="color: #4582ec">@Model.DatePosted</p>
+        </a>
+    </div>
 
-        <li><a href="#">Retweet <span class="badge">@Model.RetweetsCount</span></a></li>
+    <div class="mdl-card__menu">
+        <button id="@($"TweetMenu{@Model.Id}")" style="color: black"
+                class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+        </button>
 
-        <li>
-            @Ajax.ActionLink("Like", "Favourite", "Tweets",
-                new {tweetId = @Model.Id},
-                new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id})
-            <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
-        </li>
-
-        @if (User.Identity.Name == Model.Author)
-        {
-            <li>
-                <span class="text-muted tweet-operation">
-                   @Html.ActionLink("Edit", "Edit", "Tweets", new {tweetId = @Model.Id}, null)
-                </span>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="@($"TweetMenu{@Model.Id}")">
+            @if (User.Identity.Name == Model.Author)
+            {
+                <li class="mdl-menu__item">
+                    <button class="mdl-button mdl-js-button">
+                        @Html.ActionLink("Edit", "Edit", "Tweets", new {tweetId = @Model.Id}, null)
+                    </button>
+                </li>
+                <li class="mdl-menu__item">
+                    <button class="mdl-button mdl-js-button" type="button">
+                        @Ajax.ActionLink("Delete", "Delete", "Tweets",
+                            new {tweetId = @Model.Id},
+                            new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id})
+                    </button>
+                </li>
+            }
+            <li disabled class="mdl-menu__item">
+                <button class="mdl-button mdl-js-button">
+                    Details
+                </button>
             </li>
-            <li>
-                <span class="text-muted tweet-operation">
-                    @Ajax.ActionLink("Delete", "Delete", "Tweets",
-                        new {tweetId = @Model.Id},
-                        new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id})
-                </span>
-            </li>
-        }
-    </ul>
+        </ul>
+        @*<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">share</i>
+        </button>*@
+    </div>
+
     <div id="@($"ReplyPanel{@Model.Id}")" class="panel-collapse collapse">
+
         @if (Model.ReplyList != null)
         {
-            <table class="table table-condensed table-striped table-hover">
-                <tbody>
+            <style>
+                .reply-list {
+                    width: auto;
+                }
+            </style>
+            <ul class="reply-list mdl-list"
+                style="margin-bottom: 0px">
                 @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
                 {
-                    <tr>
-                        <td class="col-md-10">
-                            <p style="padding-left: 9px">
-                                @reply.AuthorName: @reply.Content
-                            </p>
-                        </td>
-                        <td class="col-md-2">
-                             On @reply.PublishTime.ToString("M")
-                        </td>
-                    </tr>
+                    <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-avatar">person</i>
+                            <span>
+                                @reply.AuthorName
+                            <span style="font-size: 12px; color: gray">On @reply.PublishTime.ToString("M")</span>
+                        </span>
+
+                        <span class="mdl-list__item-text-body">
+                            @reply.Content
+                        </span>
+                    </span>
+
+                        <span class="mdl-list__item-secondary-content">
+                        <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                    </span>
+                    </li>
                 }
-
-                <tr>
-                    <td>
-                        <div class="input-group">
-                            @using (Ajax.BeginForm("Reply", "Tweets", new {tweetId = Model.Id}, new AjaxOptions
-                            {
-                                HttpMethod = "POST",
-                                InsertionMode = InsertionMode.InsertAfter,
-                                UpdateTargetId = "ReplyPanel" + Model.Id
-                            },
-                                new {@class = "navbar-form"}))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary(true)
-
-                                <input type="text" class="form-control" name="content" placeholder="What's on your mind?">
-                                <span>
-                                    <button type="submit" class="btn btn-success" value="refresh" onclick="">Post</button>
-                                </span>
-                            }
-                        </div>
-                    </td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
+            </ul>
         }
+
+        <div class="input-group">
+            @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel {Id = Model.Id}, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.InsertAfter,
+                UpdateTargetId = "ReplyPanel" + Model.Id
+            },
+                new {@class = "navbar-form"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <input type="text" class="form-control" name="Text" placeholder="What's on your mind?"
+                       style="width: 280px">
+                <span>
+                    <button type="submit" class="btn btn-success" value="refresh" onclick="">Post</button>
+                </span>
+            }
+        </div>
     </div>
 </div>
+
+<br/>

@@ -98,4 +98,17 @@
 
         public ICollection<SelectListItem> Providers { get; set; }
     }
+
+    public class ChangeStatusViewModel
+    {
+        [DataType(DataType.Text)]
+        [Display(Name = "Old Status")]
+        public string OldStatus { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} should be no more than {1} charaters and no less than {2} charaters.", MinimumLength = 2)]
+        [DataType(DataType.Text)]
+        [Display(Name = "New Status")]
+        public string Status { get; set; }
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System.Data.Entity.Validation;
-
-namespace Twitter.App.Controllers
+﻿namespace Twitter.App.Controllers
 {
     using System;
     using System.Linq;
@@ -46,6 +44,7 @@ namespace Twitter.App.Controllers
                     {
                         Id = t.Id,
                         Author = t.Author.UserName,
+                        AuthorStatus = t.Author.Status,
                         Text = t.Text,
                         UsersFavouriteCount = t.UsersFavourite.Count,
                         RepliesCount = t.Reply.Count,
@@ -73,6 +72,7 @@ namespace Twitter.App.Controllers
                     {
                         Id = t.Id,
                         Author = t.Author.UserName,
+                        AuthorStatus = t.Author.Status,
                         Text = t.Text,
                         UsersFavouriteCount = t.UsersFavourite.Count,
                         RepliesCount = t.Reply.Count,
@@ -123,14 +123,14 @@ namespace Twitter.App.Controllers
 
         [HttpPost]
         [Route("reply")]
-        public ActionResult Reply(string content, int tweetId)
+        public ActionResult Reply(ReplyViewModel model)
         {
-            if (string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(model.Text))
             {
                 return this.PartialView("_Tweet");
             }
 
-            var tweet = Data.Tweets.Find(tweetId);
+            var tweet = Data.Tweets.Find(model.Id);
 
             if (tweet == null)
             {
@@ -140,13 +140,13 @@ namespace Twitter.App.Controllers
             var loggedUserId = this.User.Identity.GetUserId();
             var loggedUserUsername = this.User.Identity.GetUserName();
 
-            var reply = new Reply()
+            var reply = new Reply
             {
                 AuthorId = loggedUserId,
                 AuthorName = loggedUserUsername,
-                Content = content,
+                Content = model.Text,
                 PublishTime = DateTime.Now,
-                TweetId = tweetId
+                TweetId = model.Id
             };
 
             try

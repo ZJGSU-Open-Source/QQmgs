@@ -79,10 +79,13 @@ section {
 }
 
 .section {
-	padding: 30px 0;
-    margin-left: -30px;
+	padding: 40px 0;
+	background: #fff;
 }
 
+.section-padded {
+	padding: 30px 30 0px;
+}
 /*Btn blue*/
 .btn.btn-blue {
 	color: #ffffff;

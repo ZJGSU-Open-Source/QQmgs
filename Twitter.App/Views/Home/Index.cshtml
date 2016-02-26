@@ -13,6 +13,8 @@
     ViewBag.Title = "TwitterV";
 }
 
+<br />
+
 <section class="index-section">
     @using (Ajax.BeginForm("NewTweetForm", "Tweets", new AjaxOptions
     {
@@ -22,7 +24,10 @@
         OnSuccess = "app.showNewTweetModal"
     }))
     {
-        <button type="submit" class="btn btn-success" style="float: right">New Tweet</button>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                style="float: right">
+            <i class="material-icons">add</i>
+        </button>
     }
 
 </section>

@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace Twitter.Models
+﻿namespace Twitter.Models
 {
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -19,6 +19,9 @@ namespace Twitter.Models
         }
 
         public DateTime RegisteredTime { get; set; }
+
+        [MaxLength(50)]
+        public string Status { get; set; }
 
         public virtual ICollection<Tweet> Tweets { get; set; }
 

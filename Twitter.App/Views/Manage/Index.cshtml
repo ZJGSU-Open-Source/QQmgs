@@ -12,8 +12,12 @@
     <dl class="dl-horizontal">
         <dt>Celebration:</dt>
         <dd>
+            <p>It's the @Model.RegisterTimeInterval th Day in QQmgs.com. You're Registered on @Model.RegisteredTime.ToString("D")</p>
+        </dd>
+        <dt>Status:</dt>
+        <dd>
             [
-            <a href="#">It's the @Model.RegisterTimeInterval th Day in QQmgs.com. You're Registered on @Model.RegisteredTime.ToString("D")</a>
+            @Html.ActionLink("Update your status", "ChangeStatus")
             ]
         </dd>
         <dt>Password:</dt>
@@ -22,6 +26,7 @@
             @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") : Html.ActionLink("Create", "SetPassword"))
             ]
         </dd>
+
         @*<dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [

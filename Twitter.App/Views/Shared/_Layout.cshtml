@@ -1,4 +1,8 @@
 ﻿<!DOCTYPE html>
+<script src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+<!-- Material Design icon font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -66,8 +70,8 @@
                             {
                                 <input type="text" class="form-control" name="searchTerm" placeholder="Search fun">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Go!</button>
-                                </span>
+                                        <button class="btn btn-default" type="submit">Go!</button>
+                                    </span>
                             }
                         </div>
                     </li>
@@ -81,19 +85,18 @@
     </div>
 </div>
 
-
 <div class="container body-content">
     <div id="new-tweet"></div>
     @RenderBody()
     <hr/>
-    <footer>
-        <p align="right" class="footer-text">A <a class="text-success">Freedom Platform</a> For All The Students In ZJSU
-        </p>
-        <p align="right" class="footer-text">&copy; @DateTime.Now.Year - TwitterV Project</p>
-        <p align="right" class="footer-text">Individual Developer: <a href="https://github.com/shuaiyiwu">@@Shuaiyi Wu</a>
-        </p>
-        @* <p align="right" class="footer-text">Server local time: <a class="text-success">@DateTime.Now.ToString("G")</a></p>*@
-        <p align="right" class="footer-text">浙ICP备15036767号</p>
+    <footer class="mdl-mini-footer" style="line-height: normal">
+        <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">QQmgs.com - Twitter V Project · Made by Crimlin Studio</div>
+            <ul class="mdl-mini-footer__link-list">
+                <li><a href="#">浙ICP备15036767号</a></li>
+            </ul>
+            <div class="mdl-logo">Freedom paltform for All the Students of Zhejiang Gongshang Univ.</div>
+        </div>
     </footer>
 </div>
 
