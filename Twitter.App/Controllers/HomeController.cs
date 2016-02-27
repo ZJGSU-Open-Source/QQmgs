@@ -33,6 +33,7 @@
                             Id = t.Id,
                             Author = t.Author.UserName,
                             AuthorStatus = t.Author.Status,
+                            IsEvent = t.IsEvent,
                             Text = t.Text,
                             UsersFavouriteCount = t.UsersFavourite.Count,
                             RepliesCount = t.Reply.Count,
@@ -41,7 +42,7 @@
                             ReplyList = t.Reply.ToList()
                         });
 
-            var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
+            var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 8);
 
             return this.View(pagedTweets);
         }

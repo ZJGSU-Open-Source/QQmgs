@@ -1,12 +1,55 @@
 ﻿@model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
 
 <br />
-<h3>All Tweets</h3>
+<h4>@*Square Talking*@</h4>
 
 <div id="new-tweet-place"></div>
 
-@foreach (var tweet in Model)
-{
-    Html.RenderPartial("../Tweets/_Tweet", tweet);
+@{
+    var index = 0;
 }
 
+@foreach (var tweet in Model)
+{
+    if (index == 0)
+    {
+        @*<style>
+            .demo-card-image.mdl-card {
+                width: 256px;
+                height: 256px;
+            }
+
+            .demo-card-image > .mdl-card__actions {
+                height: 52px;
+                padding: 16px;
+                background: #000000;
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .demo-card-image__filename {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        </style>
+
+        <div class="demo-card-image mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <img alt="" style="width:100%;height:100%;" src="~/img/icon/heart-blue.png">
+            </div>
+            <div class="mdl-card__actions">
+                <span class="demo-card-image__filename">Image.jpg</span>
+            </div>
+        </div>*@
+    }
+    ++index;
+
+    if (tweet.IsEvent)
+    {
+        Html.RenderPartial("../Tweets/PushInformation", tweet);
+    }
+    else
+    {
+        Html.RenderPartial("../Tweets/_Tweet", tweet);
+    }
+}

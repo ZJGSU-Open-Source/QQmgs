@@ -12,6 +12,8 @@ namespace Twitter.App.Models.ViewModels
 
         public string AuthorStatus { get; set; }
 
+        public bool IsEvent { get; set; }
+
         public string Text { get; set; }
 
         public int UsersFavouriteCount { get; set; }

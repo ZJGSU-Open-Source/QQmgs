@@ -10,6 +10,7 @@
         color: #4582ec;
         height: auto;
         background: whitesmoke;
+        padding: 13px;
     }
 
     .demo-card-wide > .mdl-card__menu {
@@ -37,7 +38,8 @@
          style="font-size: 18px; padding: 25px; width: auto; line-height: 25px; color: rgb(48, 48, 48)">
         @Model.Text
     </div>
-    <div class="mdl-card__actions mdl-card--border">
+    <div class="mdl-card__actions mdl-card--border"
+         style="padding-bottom: 0px">
         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                 data-toggle="collapse" href="#@($"ReplyPanel{@Model.Id}")" id="ReplyButton"
                 style="float: left">
@@ -59,7 +61,7 @@
                 </button>
             }
         </a>
-        <a style="float: right; padding: 5px">
+        <a class="hidden-xs hidden-sm" style="float: right">
             <p style="color: #4582ec">@Model.DatePosted</p>
         </a>
     </div>

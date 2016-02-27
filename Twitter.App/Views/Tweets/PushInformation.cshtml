@@ -1,0 +1,176 @@
+﻿@using Twitter.App.Models.ViewModels
+@model Twitter.App.Models.ViewModels.TweetViewModel
+<style>
+     .demo-card-event.mdl-card {
+         width: auto;
+         height: 320px;
+         background: url('http://zjsu.edu.cn/UploadFiles/image/201602/2016022180661009.jpg') center / cover;
+     }
+
+    .demo-card-event > .mdl-card__actions {
+        border-color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .demo-card-event > .mdl-card__title {
+        align-items: flex-start;
+    }
+
+    .demo-card-event > .mdl-card__title > h4 {
+        margin-top: 0;
+    }
+
+    .demo-card-event > .mdl-card__actions {
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    .demo-card-event > .mdl-card__actions > .material-icons {
+        padding-right: 10px;
+    }
+
+    .demo-card-event > .mdl-card__title,
+    .demo-card-event > .mdl-card__actions,
+    .demo-card-event > .mdl-card__actions > .mdl-button {
+        color: #fff;
+    }
+</style>
+
+<div class="demo-card-event mdl-card mdl-shadow--2dp" id="@($"TopicPanel{@Model.Id}")">
+    <div class="mdl-card__title mdl-card--expand">
+        <h4>
+            @{
+                foreach (var word in @Model.Text)
+                {
+                    if (word == '\n')
+                    {
+                        <br/>
+                    }
+                    @word
+                }
+            }
+        </h4>
+
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+
+        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                data-toggle="collapse" href="#@($"TopicReplyPanel{@Model.Id}")" id="ReplyButton"
+                style="float: left">
+            Discuss!
+            <span class="badge">@Model.RepliesCount</span>
+        </button>
+
+        <a>
+            @using (Ajax.BeginForm("Favourite", "Tweets", new {tweetId = @Model.Id},
+                new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id}))
+            {
+                <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        style="color: white">
+                    Like
+                    <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
+                </button>
+            }
+        </a>
+
+        <div class="mdl-layout-spacer"></div>
+        <i class="material-icons">event</i>
+    </div>
+
+    @if (User.Identity.Name == Model.Author)
+    {
+        <div class="mdl-card__menu">
+            <button id="@($"TopicMenu{@Model.Id}")" style="color: white"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">more_vert</i>
+            </button>
+
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                for="@($"TopicMenu{@Model.Id}")">
+
+                <li class="mdl-menu__item">
+                    <button class="mdl-button mdl-js-button">
+                        @Html.ActionLink("Edit", "Edit", "Tweets", new {tweetId = @Model.Id}, null)
+                    </button>
+                </li>
+                <li class="mdl-menu__item">
+                    <button class="mdl-button mdl-js-button" type="button">
+                        @Ajax.ActionLink("Delete", "Delete", "Tweets",
+                            new {tweetId = @Model.Id},
+                            new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopicPanel" + @Model.Id})
+                    </button>
+                </li>
+                <li disabled class="mdl-menu__item">
+                    <button class="mdl-button mdl-js-button">
+                        Details
+                    </button>
+                </li>
+            </ul>
+        </div>
+    }
+</div>
+
+<div id="@($"TopicReplyPanel{@Model.Id}")" class="panel-collapse collapse"
+     style="background: #36347a; background: rgba(54, 52, 122, 0.8);">
+
+    <style>
+        .reply-list {
+            width: auto;
+        }
+    </style>
+
+    @if (Model.ReplyList != null)
+    {
+        <style>
+            .reply-list {
+                width: auto;
+            }
+        </style>
+        <ul class="reply-list mdl-list"
+            style="margin-bottom: 0px">
+            @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+            {
+                <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
+                    <span class="mdl-list__item-primary-content"
+                          style="color: white">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>
+                            @reply.AuthorName
+                            <span style="font-size: 12px">On @reply.PublishTime.ToString("M")</span>
+                        </span>
+
+                        <span class="mdl-list__item-text-body" style="color: white">
+                            @reply.Content
+                        </span>
+                    </span>
+
+                    <span class="mdl-list__item-secondary-content">
+                        <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                    </span>
+                </li>
+            }
+        </ul>
+
+        <div class="input-group" style="margin-top: -20px">
+            @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel {Id = Model.Id}, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.InsertAfter,
+                UpdateTargetId = "TopicReplyPanel" + Model.Id
+            },
+                new {@class = "navbar-form"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <input type="text" class="form-control" name="Text" placeholder="What's on your mind?"
+                       style="width: 280px">
+                <span>
+                    <button type="submit" class="btn btn-success" value="refresh" onclick="">Post</button>
+                </span>
+            }
+        </div>
+    }
+</div>
+<br/>

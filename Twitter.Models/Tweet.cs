@@ -25,6 +25,8 @@
 
         public string AuthorId { get; set; }
 
+        public bool IsEvent { get; set; }
+
         public virtual User Author { get; set; }
 
         [Display(Name = "Release Date")]

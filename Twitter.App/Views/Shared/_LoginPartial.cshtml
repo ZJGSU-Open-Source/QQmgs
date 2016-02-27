@@ -1,23 +1,30 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+    <a class="mdl-navigation__link" href="@Url.Action("Index", "Manage")">Hello @User.Identity.GetUserName() !</a>
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
+        <a class="mdl-navigation__link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+
+        @*<ul class="nav navbar-nav navbar-right">
             <li>
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", null, new {title = "Manage"})
             </li>
             <li>
                 <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
             </li>
-    </ul>
+        </ul>*@
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    <a class="mdl-navigation__link" href="@Url.Action("Register", "Account")">Register</a>
+    <a class="mdl-navigation__link" href="@Url.Action("Login", "Account")">Login</a>
+
+    @*<ul class="nav navbar-nav navbar-right">
         <li>
             <button class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
                     style="margin-top: 15px" type="button" onclick="location.href = '@Url.Action("Register", "Account")'">
@@ -30,7 +37,8 @@ else
                 Login
             </button>
         </li>
-        @*<li>@Html.ActionLink("Register", "Register", "Account", null, new {id = "registerLink"})</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", null, new {id = "loginLink"})</li>*@
-    </ul>
+
+        <li>@Html.ActionLink("Register", "Register", "Account", null, new {id = "registerLink"})</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", null, new {id = "loginLink"})</li>
+    </ul>*@
 }

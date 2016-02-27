@@ -101,7 +101,7 @@
             var loggedUserId = this.User.Identity.GetUserId();
             var loggedUserUsername = this.User.Identity.GetUserName();
 
-            var tweet = new Tweet { Text = model.Text, AuthorId = loggedUserId, DatePosted = DateTime.Now };
+            var tweet = new Tweet { Text = model.Text, AuthorId = loggedUserId, DatePosted = DateTime.Now, IsEvent = false};
 
             this.Data.Tweets.Add(tweet);
 
