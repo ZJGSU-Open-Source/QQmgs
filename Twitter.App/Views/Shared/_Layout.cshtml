@@ -73,22 +73,25 @@
     </div>
     <div id="new-tweet"></div>
     <main class="mdl-layout__content">
-        <div class="container body-content">
-            @RenderBody()
-        </div>
-        <footer class="mdl-mini-footer" style="line-height: normal">
+        @RenderBody()
+        <footer class="mdl-mini-footer">
+            <br/>
             <div class="mdl-mini-footer__left-section">
-                <div class="mdl-logo">QQmgs.com - Twitter V Project · Made by Crimlin Studio</div>
+                <div class="mdl-logo">QQmgs.com - Twitter V Project · Made by Crimlin Studio in ZJSU
+                </div>
                 <ul class="mdl-mini-footer__link-list">
                     <li><a href="#">浙ICP备15036767号</a></li>
+                </ul>
+                <ul class="mdl-mini-footer__link-list">
+                    <li>Thanks to: </li>
+                    <li><a href="http://zjsu.edu.cn/">Zhejiang Gongshang University</a></li>
+                    <li><a href="http://cie.zjsu.edu.cn">School of Computer Science and Information Engineering</a></li>
                 </ul>
                 <div class="mdl-logo">Freedom paltform for All the Students of Zhejiang Gongshang Univ.</div>
             </div>
         </footer>
     </main>
 </div>
-
-
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")

@@ -12,28 +12,31 @@
     ViewBag.Title = "Tweets";
 }
 
-<div id="tweets">
+<div class="container body-content">
 
-    <h3>Hot Tweets</h3>
-    <div id="new-tweet-place"></div>
+    <div id="tweets">
 
-    @foreach (var tweet in Model)
-    {
-        Html.RenderPartial("_Tweet", tweet);
-    }
+        <h3>Hot Tweets</h3>
+        <div id="new-tweet-place"></div>
 
-</div>
-
-<div class="paging">
-    <ul class="pagination">
-
-        @{
-            var data = Model as IPagedList<TweetViewModel>;
+        @foreach (var tweet in Model)
+        {
+            Html.RenderPartial("_Tweet", tweet);
         }
 
-        @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("GetTweetBySpecifiedUser", new { p = page }))
+    </div>
 
-    </ul>
+    <div class="paging">
+        <ul class="pagination">
+
+            @{
+                var data = Model as IPagedList<TweetViewModel>;
+            }
+
+            @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("GetTweetBySpecifiedUser", new {p = page}))
+
+        </ul>
+    </div>
 </div>
 
 @section Scripts {

@@ -3,117 +3,117 @@
 @{
     ViewBag.Title = "Log in";
 }
-
 <br />
-
-<h4>qqmgs.com (A.K.A. 全球某工商.com) - 商大人的精神家园</h4>
-@*<h2>@ViewBag.Title.</h2>*@
-<section class="section section-padded">
-    <div class="container">
-        <div class="hidden-xs hidden-sm row services">
-            <div class="col-md-4">
-                <div class="service">
-                    <div class="icon-holder">
-                        <img alt="" class="icon" src="~/img/icon/heart-blue.png">
+<div class="container body-content">
+    <h4>qqmgs.com (A.K.A. 全球某工商.com) - 商大人的精神家园</h4>
+    
+    <section class="section section-padded">
+        <div class="container">
+            <div class="hidden-xs hidden-sm row services">
+                <div class="col-md-4">
+                    <div class="service">
+                        <div class="icon-holder">
+                            <img alt="" class="icon" src="~/img/icon/heart-blue.png">
+                        </div>
+                        <h4 class="heading">Meet interests</h4>
+                        <p class="description">It's freedom place, send twitter and tell others what you like! You will easily make friends here.</p>
                     </div>
-                    <h4 class="heading">Meet interests</h4>
-                    <p class="description">It's freedom place, send twitter and tell others what you like! You will easily make friends here.</p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service">
-                    <div class="icon-holder">
-                        <img alt="" class="icon" src="~/img/icon/guru-blue.png">
+                <div class="col-md-4">
+                    <div class="service">
+                        <div class="icon-holder">
+                            <img alt="" class="icon" src="~/img/icon/guru-blue.png">
+                        </div>
+                        <h4 class="heading">Chat online</h4>
+                        <p class="description">Chatting on QQmgs.com, you will find much fun here.</p>
                     </div>
-                    <h4 class="heading">Chat online</h4>
-                    <p class="description">Chatting on QQmgs.com, you will find much fun here.</p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service">
-                    <div class="icon-holder">
-                        <img alt="" class="icon" src="~/img/icon/weight-blue.png">
+                <div class="col-md-4">
+                    <div class="service">
+                        <div class="icon-holder">
+                            <img alt="" class="icon" src="~/img/icon/weight-blue.png">
+                        </div>
+                        <h4 class="heading">Only for ZJSU</h4>
+                        <p class="description">QQmgs is the abbreviation of "全球某工商" where welcome all the students of ZJSU.</p>
                     </div>
-                    <h4 class="heading">Only for ZJSU</h4>
-                    <p class="description">QQmgs is the abbreviation of "全球某工商" where welcome all the students of ZJSU.</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use TwitterV account to log in.</h4>
-                <hr/>
-                @Html.ValidationSummary(true, string.Empty, new {@class = "text-danger"})
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Use TwitterV account to log in.</h4>
+                    <hr/>
+                    @Html.ValidationSummary(true, string.Empty, new {@class = "text-danger"})
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new {@class = "col-md-2 control-label"})
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.UserName, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(m => m.UserName, string.Empty, new {@class = "text-danger"})
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(m => m.Password, string.Empty, new {@class = "text-danger"})
-                    </div>
-                </div>
-
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect col-md-10 col-md-offset-2" for="checkbox-1">
-                    <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
-                    <span class="mdl-checkbox__label">@Html.LabelFor(m => m.RememberMe)</span>
-                </label>
-
-                @*<div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName, new {@class = "col-md-2 control-label"})
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.UserName, string.Empty, new {@class = "text-danger"})
                         </div>
                     </div>
-                </div>*@
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-5">
-                        <br/>
-                        <input type="submit" value="Log in" class="btn btn-primary"/>
-                        <input type="button" value="Register" class="btn btn-primary col-md-offset-1" onclick="window.open('Register', '_self')"/>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Password, string.Empty, new {@class = "text-danger"})
+                        </div>
                     </div>
-                </div>
-                @*<p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>*@
+
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect col-md-10 col-md-offset-2" for="checkbox-1">
+                        <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                        <span class="mdl-checkbox__label">@Html.LabelFor(m => m.RememberMe)</span>
+                    </label>
+
+                    @*<div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-5">
+                            <br/>
+                            <input type="submit" value="Log in" class="btn btn-primary"/>
+                            <input type="button" value="Register" class="btn btn-primary col-md-offset-1" onclick="window.open('Register', '_self')"/>
+                        </div>
+                    </div>
+                    @*<p>
+                            @Html.ActionLink("Register as a new user", "Register")
+                        </p>*@
 
                     @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_IntroductionPartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
-            @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
-        </section>
-        <br/>
-        <section id="socialLoginFormMore">
-            @Html.Partial("_IntroductionMorePartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
-            @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
-        </section>
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                }
+            </section>
+        </div>
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_IntroductionPartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
+                @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+            </section>
+            <br/>
+            <section id="socialLoginFormMore">
+                @Html.Partial("_IntroductionMorePartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
+                @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+            </section>
+        </div>
     </div>
 </div>
 
-
+<br/>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

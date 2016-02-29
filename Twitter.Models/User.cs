@@ -20,6 +20,9 @@
 
         public DateTime RegisteredTime { get; set; }
 
+        [MaxLength(30)]
+        public string Class { get; set; }
+
         [MaxLength(50)]
         public string Status { get; set; }
 

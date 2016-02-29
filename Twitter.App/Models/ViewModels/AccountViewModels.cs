@@ -78,6 +78,11 @@
         public string Email { get; set; }
 
         [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Display(Name = "Deparment/Class (ex. CS1301)")]
+        public string Class { get; set; }
+
+        [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
