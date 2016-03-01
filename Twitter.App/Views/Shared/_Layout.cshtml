@@ -1,15 +1,11 @@
 ﻿<!DOCTYPE html>
-<script src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
-<!-- Material Design icon font -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<html>
 <head>
-    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="~/Content/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title 全球某工商.com</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 <div class="preloader">
@@ -91,9 +87,9 @@
         </footer>
     </main>
 </div>
+</body>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modernizr")
 @RenderSection("scripts", false)
-</body>
-</html>

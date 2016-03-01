@@ -236,6 +236,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cardio\animate.css" />
     <Content Include="Content\cardio\cardio.css" />
+    <Content Include="Content\material.indigo-pink.min.css" />
     <Content Include="Content\mdl-v1.0.5\material.css" />
     <Content Include="Content\mdl-v1.0.5\material.js" />
     <Content Include="Content\mdl-v1.0.5\material.min.css" />

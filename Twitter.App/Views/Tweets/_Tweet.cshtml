@@ -20,12 +20,10 @@
 
 <div class="demo-card-wide mdl-card mdl-shadow--3dp" id="@($"TweetPanel{@Model.Id}")">
     <div class="mdl-card__title">
-        <p>
-            <h2 class="mdl-card__title-text" id="@($"TweetAuthor{@Model.Id}")">
-                @@@Model.Author
-            </h2>
-            <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span>
-        </p>
+        <h2 class="mdl-card__title-text" id="@($"TweetAuthor{@Model.Id}")">
+            @@@Model.Author
+        </h2>
+        <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span>
         
         <div class="mdl-tooltip mdl-tooltip--large" for="@($"TweetAuthor{@Model.Id}")">
             @Model.Author Online

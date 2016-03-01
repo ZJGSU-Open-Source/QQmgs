@@ -14,7 +14,7 @@
             string cultureName = null;
 
             // Attempt to read the culture cookie from Request
-            HttpCookie cultureCookie = Request.Cookies["_culture"];
+            var cultureCookie = Request.Cookies["_culture"];
             if (cultureCookie != null)
                 cultureName = cultureCookie.Value;
             else
