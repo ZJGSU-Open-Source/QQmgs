@@ -16,7 +16,7 @@
 
     [Authorize]
     [RoutePrefix("tweets")]
-    public class TweetsController : BaseController
+    public class TweetsController : TwitterBaseController
     {
         public TweetsController()
             : base(new TwitterData())

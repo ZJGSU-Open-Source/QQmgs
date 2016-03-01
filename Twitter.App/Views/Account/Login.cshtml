@@ -5,8 +5,7 @@
 }
 <br />
 <div class="container body-content">
-    <h4>qqmgs.com (A.K.A. 全球某工商.com) - 商大人的精神家园</h4>
-    
+    <h4>@Resources.HomePageTitle</h4>
     <section class="section section-padded">
         <div class="container">
             <div class="hidden-xs hidden-sm row services">
@@ -15,7 +14,7 @@
                         <div class="icon-holder">
                             <img alt="" class="icon" src="~/img/icon/heart-blue.png">
                         </div>
-                        <h4 class="heading">Meet interests</h4>
+                        <h4 class="heading">@Resources.MeetInterests</h4>
                         <p class="description">It's freedom place, send twitter and tell others what you like! You will easily make friends here.</p>
                     </div>
                 </div>
@@ -24,7 +23,7 @@
                         <div class="icon-holder">
                             <img alt="" class="icon" src="~/img/icon/guru-blue.png">
                         </div>
-                        <h4 class="heading">Chat online</h4>
+                        <h4 class="heading">@Resources.ChatOnline</h4>
                         <p class="description">Chatting on QQmgs.com, you will find much fun here.</p>
                     </div>
                 </div>
@@ -33,7 +32,7 @@
                         <div class="icon-holder">
                             <img alt="" class="icon" src="~/img/icon/weight-blue.png">
                         </div>
-                        <h4 class="heading">Only for ZJSU</h4>
+                        <h4 class="heading">@Resources.OnlyForZJSU</h4>
                         <p class="description">QQmgs is the abbreviation of "全球某工商" where welcome all the students of ZJSU.</p>
                     </div>
                 </div>
@@ -47,7 +46,7 @@
                 @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
                 {
                     @Html.AntiForgeryToken()
-                    <h4>Use TwitterV account to log in.</h4>
+                    <h4>@Resources.UseTwitterVAccountToLogIn</h4>
                     <hr/>
                     @Html.ValidationSummary(true, string.Empty, new {@class = "text-danger"})
 
@@ -84,8 +83,8 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-5">
                             <br/>
-                            <input type="submit" value="Log in" class="btn btn-primary"/>
-                            <input type="button" value="Register" class="btn btn-primary col-md-offset-1" onclick="window.open('Register', '_self')"/>
+                            <input type="submit" value="@Resources.LogInButton" class="btn btn-primary"/>
+                            <input type="button" value="@Resources.RegisterButton" class="btn btn-primary col-md-offset-1" onclick="window.open('Register', '_self')"/>
                         </div>
                     </div>
                     @*<p>

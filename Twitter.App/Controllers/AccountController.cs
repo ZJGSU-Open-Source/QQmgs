@@ -1,4 +1,5 @@
 ﻿using System;
+using Twitter.App.Helper;
 
 namespace Twitter.App.Controllers
 {
@@ -15,7 +16,7 @@ namespace Twitter.App.Controllers
     using Twitter.Models;
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
 
@@ -423,6 +424,33 @@ namespace Twitter.App.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return this.View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult SetCulture(string culture)
+        {
+            // Validate input
+            culture = CultureHelper.GetImplementedCulture(culture);
+
+            // Save culture in a cookie
+            var cookie = Request.Cookies["_culture"];
+
+            if (cookie != null)
+            {
+                cookie.Value = culture; // update cookie value
+            }
+            else
+            {
+                cookie = new HttpCookie("_culture")
+                {
+                    Value = culture,
+                    Expires = DateTime.Now.AddYears(1)
+                };
+            }
+
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("Register");
         }
 
         protected override void Dispose(bool disposing)

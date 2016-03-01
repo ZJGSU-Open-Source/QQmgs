@@ -12,7 +12,7 @@ namespace Twitter.App.Controllers
     using Twitter.Data.UnitOfWork;
 
     [RoutePrefix("users")]
-    public class UsersController : BaseController
+    public class UsersController : TwitterBaseController
     {
         public UsersController()
             : base(new TwitterData())

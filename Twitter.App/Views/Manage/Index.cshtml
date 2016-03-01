@@ -1,8 +1,16 @@
 ﻿@model Twitter.App.Models.ViewModels.IndexViewModel
 @{
     ViewBag.Title = "Manage";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
 
+@helper Selected(string c, string culture)
+{
+if (c == culture)
+{
+        @:checked="checked"
+    }
+}
 <div class="container body-content">
 
     <h2>@ViewBag.Title.</h2>
@@ -10,7 +18,7 @@
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div>
         <h4>Change your account settings</h4>
-        <hr />
+        <hr/>
         <dl class="dl-horizontal">
             <dt>Celebration:</dt>
             <dd>
@@ -87,5 +95,51 @@
                 }*@
             @*</dd>*@
         </dl>
+    @using (Html.BeginForm("SetCulture", "Manage"))
+    {
+        <fieldset>
+            <h4>@Resources.ChooseYourLanguage</h4>
+            <hr/>
+
+            <div style="padding: 8px">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="en-us">
+                    <input type="radio" id="en-us" class="mdl-radio__button" name="culture" value="en-us" @Selected("en-us", culture)>
+                    <span class="mdl-radio__label">English</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="zh-cn">
+                    <input type="radio" id="zh-cn" class="mdl-radio__button" name="culture" value="zh-cn" @Selected("zh-cn", culture)>
+                    <span class="mdl-radio__label">中文</span>
+                </label>
+            </div>
+
+            @*<div class="control-group">
+                <div class="controls">
+                    <label for="en-us">
+                        <input name="culture" id="en-us" value="en-us" type="radio" @Selected("en-us", culture)/> English
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label for="zh-cn">
+                        <input name="culture" id="zh-cn" value="zh-cn" type="radio" @Selected("zh-cn", culture)/> 中文
+                    </label>
+                </div>
+            </div>*@
+        </fieldset>
+        <br/>
+    }
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        (function($) {
+            $("input[type = 'radio']").click(function() {
+                $(this).parents("form").submit(); // post form
+            });
+
+        })(jQuery);
+    </script>
+}

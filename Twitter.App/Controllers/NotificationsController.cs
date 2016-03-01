@@ -2,7 +2,7 @@
 {
     using Twitter.Data.UnitOfWork;
 
-    public class NotificationsController : BaseController
+    public class NotificationsController : TwitterBaseController
     {
         public NotificationsController()
             : base(new TwitterData())

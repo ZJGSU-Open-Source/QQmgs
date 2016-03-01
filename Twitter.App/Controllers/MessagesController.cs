@@ -2,7 +2,7 @@
 {
     using Twitter.Data.UnitOfWork;
 
-    public class MessagesController : BaseController
+    public class MessagesController : TwitterBaseController
     {
         public MessagesController()
             : base(new TwitterData())
