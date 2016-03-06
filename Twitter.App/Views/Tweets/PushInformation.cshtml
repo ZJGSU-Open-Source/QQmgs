@@ -122,11 +122,6 @@
 
     @if (Model.ReplyList != null)
     {
-        <style>
-            .reply-list {
-                width: auto;
-            }
-        </style>
         <ul class="reply-list mdl-list"
             style="margin-bottom: 0px">
             @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))

@@ -5,16 +5,19 @@
     .demo-card-wide.mdl-card {
         width: auto;
     }
-
     .demo-card-wide > .mdl-card__title {
         color: #4582ec;
         height: auto;
         background: whitesmoke;
         padding: 13px;
     }
-
     .demo-card-wide > .mdl-card__menu {
         color: #fff;
+    }
+    .reply-list {
+        width: auto;
+        margin-bottom: 0px;
+        padding: 0px;
     }
 </style>
 
@@ -81,7 +84,7 @@
                 </li>
                 <li class="mdl-menu__item">
                     <button class="mdl-button mdl-js-button" type="button">
-                        @Ajax.ActionLink("Delete", "Delete", "Tweets",
+                        @Ajax.ActionLink(@"Delete", "Delete", "Tweets",
                             new {tweetId = @Model.Id},
                             new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id})
                     </button>
@@ -102,13 +105,7 @@
 
         @if (Model.ReplyList != null)
         {
-            <style>
-                .reply-list {
-                    width: auto;
-                }
-            </style>
-            <ul class="reply-list mdl-list"
-                style="margin-bottom: 0px; padding: 0px">
+            <ul id="@($"ReplyList{@Model.Id}")" class="reply-list mdl-list">
                 @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
                 {
                     <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
@@ -130,6 +127,7 @@
                     </li>
                 }
             </ul>
+            <ul id="@($"NewReply{@Model.Id}")" class="reply-list mdl-list"></ul>
         }
 
         <div class="input-group">
@@ -137,21 +135,20 @@
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.InsertAfter,
-                UpdateTargetId = "ReplyPanel" + Model.Id
+                UpdateTargetId = "NewReply" + Model.Id
             },
                 new {@class = "navbar-form"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
-                <input type="text" class="form-control" name="Text" placeholder="What's on your mind?"
+                <input id="reply-input" type="text" class="form-control" name="Text" placeholder="What's on your mind?"
                        style="width: 280px">
-                <span>
-                    <button type="submit" class="btn btn-success" value="refresh" onclick="">Post</button>
-                </span>
+                <button type="submit" class="btn btn-success" onclick="">Post</button>
             }
         </div>
     </div>
 </div>
 
 <br/>
+

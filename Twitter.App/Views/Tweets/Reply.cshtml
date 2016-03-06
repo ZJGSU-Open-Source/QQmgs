@@ -1,11 +1,20 @@
 ﻿@model Twitter.App.Models.ViewModels.ReplyViewModel
 
-<div class="panel panel-default" id="@($"ReplyPanel{@Model.Id}")">
-    <div class="panel-body" id="@($"ReplyText{@Model.Id}")">
-        <p class="reply-text">@Model.Text</p>
-        @if (Model.Author != null)
-        {
-            <p class="reply-text" style="float: right">Successful comment on @DateTime.Now.ToString("G")</p>
-        }
-    </div>
-</div>
+<li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
+    <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-avatar">person</i>
+        <span>
+            @Model.Author
+            <span style="font-size: 12px; color: gray">Now</span>
+        </span>
+
+        <span class="mdl-list__item-text-body">
+            @Model.Text
+        </span>
+    </span>
+
+    <span class="mdl-list__item-secondary-content">
+        <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+    </span>
+    
+</li>
