@@ -44,12 +44,12 @@
         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                 data-toggle="collapse" href="#@($"ReplyPanel{@Model.Id}")" id="ReplyButton"
                 style="float: left">
-            Reply
+            @Resources.Reply
             <span class="badge">@Model.RepliesCount</span>
         </button>
         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                 href="#" style="float: left">
-            Retweet
+            @Resources.Retweet
             <span class="badge">@Model.RetweetsCount</span>
         </button>
         <a style="float: left">
@@ -57,7 +57,7 @@
                 new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id}))
             {
                 <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Like
+                    @Resources.Like
                     <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
                 </button>
             }
@@ -79,12 +79,12 @@
             {
                 <li class="mdl-menu__item">
                     <button class="mdl-button mdl-js-button">
-                        @Html.ActionLink("Edit", "Edit", "Tweets", new {tweetId = @Model.Id}, null)
+                        @Html.ActionLink(Resources.Edit, "Edit", "Tweets", new {tweetId = @Model.Id}, null)
                     </button>
                 </li>
                 <li class="mdl-menu__item">
                     <button class="mdl-button mdl-js-button" type="button">
-                        @Ajax.ActionLink(@"Delete", "Delete", "Tweets",
+                        @Ajax.ActionLink(Resources.Delete, "Delete", "Tweets",
                             new {tweetId = @Model.Id},
                             new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id})
                     </button>
@@ -92,7 +92,7 @@
             }
             <li disabled class="mdl-menu__item">
                 <button class="mdl-button mdl-js-button">
-                    Details
+                    @Resources.Deatils
                 </button>
             </li>
         </ul>

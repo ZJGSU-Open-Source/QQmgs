@@ -186,4 +186,58 @@
   <data name="UseTwitterVAccountToLogIn" xml:space="preserve">
     <value>Use TwitterV account to log in.</value>
   </data>
+  <data name="AllMyTweets" xml:space="preserve">
+    <value>All My Tweets</value>
+  </data>
+  <data name="Celebration" xml:space="preserve">
+    <value>Celebration</value>
+  </data>
+  <data name="ChangeYourAccountSettings" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>Change your password</value>
+  </data>
+  <data name="Deatils" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="homename" xml:space="preserve">
+    <value>home</value>
+  </data>
+  <data name="HotTweets" xml:space="preserve">
+    <value>Hot Tweets</value>
+  </data>
+  <data name="Like" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>Now</value>
+  </data>
+  <data name="ProfileStatus" xml:space="preserve">
+    <value>ProfileStatus</value>
+  </data>
+  <data name="QQmgscom" xml:space="preserve">
+    <value>QQmgs.com</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="Retweet" xml:space="preserve">
+    <value>Retweet</value>
+  </data>
+  <data name="UpdateYourStatus" xml:space="preserve">
+    <value>Update your status</value>
+  </data>
 </root>

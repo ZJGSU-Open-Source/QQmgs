@@ -17,23 +17,23 @@ if (c == culture)
 
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div>
-        <h4>Change your account settings</h4>
+        <h4>@Resources.ChangeYourAccountSettings</h4>
         <hr/>
         <dl class="dl-horizontal">
-            <dt>Celebration:</dt>
+            <dt>@Resources.Celebration:</dt>
             <dd>
                 <p>It's the @Model.RegisterTimeInterval th Day in QQmgs.com. You're Registered on @Model.RegisteredTime.ToString("D")</p>
             </dd>
-            <dt>Status:</dt>
+            <dt>@Resources.ProfileStatus:</dt>
             <dd>
                 [
-                @Html.ActionLink("Update your status", "ChangeStatus")
+                @Html.ActionLink(Resources.UpdateYourStatus, "ChangeStatus")
                 ]
             </dd>
-            <dt>Password:</dt>
+            <dt>@Resources.Password:</dt>
             <dd>
                 [
-                @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") : Html.ActionLink("Create", "SetPassword"))
+                @(Model.HasPassword ? Html.ActionLink(Resources.ChangeYourPassword, "ChangePassword") : Html.ActionLink("Create", "SetPassword"))
                 ]
             </dd>
 

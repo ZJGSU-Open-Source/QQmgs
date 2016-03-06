@@ -1,15 +1,12 @@
-﻿using System.Web.UI.WebControls;
-using PagedList;
-
-namespace Twitter.App.Controllers
+﻿namespace Twitter.App.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
 
-    using Microsoft.Ajax.Utilities;
-
     using Twitter.App.Models.ViewModels;
     using Twitter.Data.UnitOfWork;
+
+    using PagedList;
 
     [RoutePrefix("users")]
     public class UsersController : TwitterBaseController

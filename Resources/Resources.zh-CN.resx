@@ -186,4 +186,58 @@
   <data name="UseTwitterVAccountToLogIn" xml:space="preserve">
     <value>使用社区账号在此登陆.</value>
   </data>
+  <data name="AllMyTweets" xml:space="preserve">
+    <value>我的发言</value>
+  </data>
+  <data name="Celebration" xml:space="preserve">
+    <value>庆祝</value>
+  </data>
+  <data name="ChangeYourAccountSettings" xml:space="preserve">
+    <value>更新个人资料</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>更改密码</value>
+  </data>
+  <data name="Deatils" xml:space="preserve">
+    <value>详细</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>你好</value>
+  </data>
+  <data name="homename" xml:space="preserve">
+    <value>校园广场</value>
+  </data>
+  <data name="HotTweets" xml:space="preserve">
+    <value>热门发言</value>
+  </data>
+  <data name="Like" xml:space="preserve">
+    <value>赞</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>现在</value>
+  </data>
+  <data name="ProfileStatus" xml:space="preserve">
+    <value>个人简介</value>
+  </data>
+  <data name="QQmgscom" xml:space="preserve">
+    <value>全球某工商 - Online</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>评论</value>
+  </data>
+  <data name="Retweet" xml:space="preserve">
+    <value>转发</value>
+  </data>
+  <data name="UpdateYourStatus" xml:space="preserve">
+    <value>更新个人简介</value>
+  </data>
 </root>

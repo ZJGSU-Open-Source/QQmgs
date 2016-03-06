@@ -16,38 +16,30 @@
         <!-- Top row, always visible -->
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">QQmgs.com</span>
-            <a class="mdl-navigation__link" href="@Url.Action("Index", "Home")">Home</a>
+            <span class="mdl-layout-title">@Resources.QQmgscom</span>
+            <a class="mdl-navigation__link" href="@Url.Action("Index", "Home")">@Resources.homename</a>
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation -->
             <nav class="mdl-navigation">
                 @if (Request.IsAuthenticated)
                 {
-                    <a class="mdl-navigation__link" href="@Url.Action("GetTweetBySpecifiedUser", "Tweets")">All My Tweets</a>
-                    <a class="mdl-navigation__link" href="@Url.Action("GetHotTweets", "Tweets")">HOT Tweets</a>
+                    <a class="mdl-navigation__link" href="@Url.Action("GetTweetBySpecifiedUser", "Tweets")">@Resources.AllMyTweets</a>
+                    <a class="mdl-navigation__link" href="@Url.Action("GetHotTweets", "Tweets")">@Resources.HotTweets</a>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                  mdl-textfield--floating-label mdl-textfield--align-right">
-                        <label class="mdl-button mdl-js-button mdl-button--icon"
-                               for="waterfall-exp">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" name="sample"
-                                   id="waterfall-exp"/>
+                    using (Html.BeginForm("SearchUser", "Users", new { searchTerm = "" }, FormMethod.Post,
+                        new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                            <label class="mdl-button mdl-js-button mdl-button--icon"
+                                   for="waterfall-exp">
+                                <i class="material-icons">search</i>
+                            </label>
+                            <div class="mdl-textfield__expandable-holder">
+                                <input class="mdl-textfield__input" type="text" name="sample"
+                                       id="waterfall-exp" />
+                            </div>
                         </div>
-                    </div>
-
-                        @*<a class="list-group-success">
-                            @Ajax.ActionLink("New Tweet", "NewTweetForm", "Tweets",
-                                new AjaxOptions
-                                {
-                                    UpdateTargetId = "new-tweet", // <-- DOM element ID to update
-                                    InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                    HttpMethod = "GET", // <-- HTTP method,
-                                    OnSuccess = "app.showNewTweetModal"
-                                })
-                        </a>*@
+                    }
                 }
                 @Html.Partial("_LoginPartial")
             </nav>

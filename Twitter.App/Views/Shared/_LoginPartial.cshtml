@@ -1,13 +1,13 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <a class="mdl-navigation__link" href="@Url.Action("Index", "Manage")">Hello @User.Identity.GetUserName() !</a>
+    <a class="mdl-navigation__link" href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a>
 
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
-        <a class="mdl-navigation__link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        <a class="mdl-navigation__link" href="javascript:document.getElementById('logoutForm').submit()">@Resources.LogOff</a>
 
         @*<ul class="nav navbar-nav navbar-right">
             <li>
@@ -21,8 +21,8 @@
 }
 else
 {
-    <a class="mdl-navigation__link" href="@Url.Action("Register", "Account")">Register</a>
-    <a class="mdl-navigation__link" href="@Url.Action("Login", "Account")">Login</a>
+    <a class="mdl-navigation__link" href="@Url.Action("Register", "Account")">@Resources.Register</a>
+    <a class="mdl-navigation__link" href="@Url.Action("Login", "Account")">@Resources.LogInButton</a>
 
     @*<ul class="nav navbar-nav navbar-right">
         <li>
