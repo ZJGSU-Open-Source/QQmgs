@@ -8,35 +8,39 @@ body {
     padding-top: 0px;
     padding-bottom: 20px;
 }
+.body-content {
+    padding-left: 40px;
+    padding-right: 20px;
+}
 
 /* Set padding to keep content from hitting the edges */
 @media (min-width: 768px) and (max-width: 991px) {
-    .body-content {
+    .body-content-index-tweet {
         padding-left: 0px;
         padding-right: 0px;
     }
 }
 
 @media (max-width: 767px) {
-    .body-content {
+    .body-content-index-tweet {
         padding-left: 0px;
         padding-right: 0px;
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-    .body-content {
+    .body-content-index-tweet {
         padding-left: 15px;
         padding-right: 15px;
     }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-    .body-content {
+    .body-content-index-tweet {
         padding-left: 25px;
         padding-right: 25px;
     }
 }
 @media (min-width: 1200px) {
-    .body-content {
+    .body-content-index-tweet {
         padding-left: 60px;
         padding-right: 60px;
     }
@@ -251,12 +255,15 @@ textarea {
   height: auto;
 }
 .mdl-demo .mdl-card .mdl-card__supporting-text {
-  margin: 40px;
+  margin: 0px;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  padding: 0;
-  color: inherit;
+  padding: 15px;
+  padding-left: 35px;
+  color: rgb(48, 48, 48);
+  font-size: 22px; 
+  line-height: 25px;
   width: calc(100% - 80px);
 }
 .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
@@ -416,4 +423,47 @@ textarea {
 }
 .mdl-demo .mdl-menu__container {
   z-index: 99;
+}
+.demo-card-wide.mdl-card {
+    width: auto;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #4582ec;
+    height: auto;
+    background: whitesmoke;
+    padding: 13px;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+.reply-list {
+    width: auto;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .tweet-option-padding {
+        float: right;
+    }
+}
+
+@media (max-width: 767px) {
+    .tweet-option-padding {
+        float: right;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .tweet-option-padding {
+        float: left;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .tweet-option-padding {
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .tweet-option-padding {
+        float: left;
+    }
 }

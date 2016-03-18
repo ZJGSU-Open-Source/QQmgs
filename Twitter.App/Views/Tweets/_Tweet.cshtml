@@ -1,27 +1,7 @@
 ﻿@using Twitter.App.Models.ViewModels
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
-<style>
-    .demo-card-wide.mdl-card {
-        width: auto;
-    }
-    .demo-card-wide > .mdl-card__title {
-        color: #4582ec;
-        height: auto;
-        background: whitesmoke;
-        padding: 13px;
-    }
-    .demo-card-wide > .mdl-card__menu {
-        color: #fff;
-    }
-    .reply-list {
-        width: auto;
-        margin-bottom: 0px;
-        padding: 0px;
-    }
-</style>
-
-<div class="demo-card-wide mdl-card mdl-shadow--3dp" id="@($"TweetPanel{@Model.Id}")">
+<div class="demo-card-wide mdl-card mdl-shadow--4dp" id="@($"TweetPanel{@Model.Id}")">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text" id="@($"TweetAuthor{@Model.Id}")">
             @@@Model.Author
@@ -35,10 +15,11 @@
         @*<h2 class="mdl-card__title-text">@@@Model.Author
             <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span></h2>*@
     </div>
-    <div class="mdl-card__supporting-text" id="@($"TweetText{@Model.Id}")"
-         style="font-size: 18px; padding: 25px; width: auto; line-height: 25px; color: rgb(48, 48, 48)">
+
+    <div class="mdl-card__supporting-text" id="@($"TweetText{@Model.Id}")">
         @Model.Text
     </div>
+
     <div class="mdl-card__actions mdl-card--border"
          style="padding-bottom: 0px">
         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
@@ -48,13 +29,13 @@
             <span class="badge">@Model.RepliesCount</span>
         </button>
         @*<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-                href="#" style="float: left">
-            @Resources.Retweet
-            <span class="badge">@Model.RetweetsCount</span>
-        </button>*@
-        <a style="float: left">
-            @using (Ajax.BeginForm("Favourite", "Tweets", new {tweetId = @Model.Id},
-                new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id}))
+                    href="#" style="float: left">
+                @Resources.Retweet
+                <span class="badge">@Model.RetweetsCount</span>
+            </button>*@
+        <a class="tweet-option-padding">
+            @using (Ajax.BeginForm("Favourite", "Tweets", new { tweetId = @Model.Id },
+                new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id }))
             {
                 <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     @Resources.Like
@@ -79,14 +60,14 @@
             {
                 <li class="mdl-menu__item">
                     <button class="mdl-button mdl-js-button">
-                        @Html.ActionLink(Resources.Edit, "Edit", "Tweets", new {tweetId = @Model.Id}, null)
+                        @Html.ActionLink(Resources.Edit, "Edit", "Tweets", new { tweetId = @Model.Id }, null)
                     </button>
                 </li>
                 <li class="mdl-menu__item">
                     <button class="mdl-button mdl-js-button" type="button">
                         @Ajax.ActionLink(Resources.Delete, "Delete", "Tweets",
-                            new {tweetId = @Model.Id},
-                            new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id})
+                            new { tweetId = @Model.Id },
+                            new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id })
                     </button>
                 </li>
             }
@@ -96,9 +77,6 @@
                 </button>
             </li>
         </ul>
-        @*<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            <i class="material-icons">share</i>
-        </button>*@
     </div>
 
     <div id="@($"ReplyPanel{@Model.Id}")" class="panel-collapse collapse">
@@ -127,10 +105,9 @@
                     </li>
                 }
             </ul>
-            <ul id="@($"NewReply{@Model.Id}")" class="reply-list mdl-list"></ul>
         }
 
-        <div class="input-group">
+        <div class="input-group" style="margin: 0">
             @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel {Id = Model.Id}, new AjaxOptions
             {
                 HttpMethod = "POST",
@@ -143,7 +120,7 @@
                 @Html.ValidationSummary(true)
 
                 <input id="reply-input" type="text" class="form-control" name="Text" placeholder="What's on your mind?"
-                       style="width: 280px">
+                       style="width: 240px">
                 <button type="submit" class="btn btn-success" onclick="">Post</button>
             }
         </div>

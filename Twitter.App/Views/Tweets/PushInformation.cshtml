@@ -113,13 +113,6 @@
 
 <div id="@($"TopicReplyPanel{@Model.Id}")" class="panel-collapse collapse"
      style="background: #36347a; background: rgba(54, 52, 122, 0.8);">
-
-    <style>
-        .reply-list {
-            width: auto;
-        }
-    </style>
-
     @if (Model.ReplyList != null)
     {
         <ul class="reply-list mdl-list"

@@ -46,16 +46,15 @@
         </div>
     </header>
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">QQmgs.com</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">更</a>
-            <a class="mdl-navigation__link" href="">多</a>
-            <a class="mdl-navigation__link" href="">内</a>
-            <a class="mdl-navigation__link" href="">容</a>
-            <a class="mdl-navigation__link" href="">敬</a>
-            <a class="mdl-navigation__link" href="">请</a>
-            <a class="mdl-navigation__link" href="">期</a>
-            <a class="mdl-navigation__link" href="">待</a>
+            @if (Request.IsAuthenticated)
+            {
+                <a class="mdl-navigation__link" href="@Url.Action("GetTweetBySpecifiedUser", "Tweets")">@Resources.AllMyTweets</a>
+                <a class="mdl-navigation__link" href="@Url.Action("GetHotTweets", "Tweets")">@Resources.HotTweets</a>
+            }
+
+            @Html.Partial("_LoginPartial")
         </nav>
     </div>
     <div id="new-tweet"></div>
