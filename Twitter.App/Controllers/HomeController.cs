@@ -1,8 +1,6 @@
 ﻿namespace Twitter.App.Controllers
 {
-    using System;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     using Twitter.App.Helper;
@@ -40,7 +38,7 @@
                             ReplyList = t.Reply.ToList()
                         });
 
-            var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 8);
+            var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
             return this.View(pagedTweets);
         }

@@ -10,9 +10,36 @@ body {
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 60px;
-    padding-right: 60px;
+@media (min-width: 768px) and (max-width: 991px) {
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 767px) {
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .body-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .body-content {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+@media (min-width: 1200px) {
+    .body-content {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -105,15 +132,65 @@ textarea {
     padding: 0px;
     padding-top: 40px;
 }
-#NewTweetButton {
-    position: fixed;
-    display: block;
-    right: 0;
-    bottom: 0;
-    margin-right: 60px;
-    margin-bottom: 60px;
-    z-index: 900;
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #NewTweetButton {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        z-index: 900;
+    }
 }
+
+@media (max-width: 767px) {
+    #NewTweetButton {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 28px;
+        margin-bottom: 20px;
+        z-index: 900;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    #NewTweetButton {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 60px;
+        margin-bottom: 60px;
+        z-index: 900;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    #NewTweetButton {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 60px;
+        margin-bottom: 60px;
+        z-index: 900;
+    }
+}
+@media (min-width: 1200px) {
+    #NewTweetButton {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 60px;
+        margin-bottom: 60px;
+        z-index: 900;
+    }
+}
+
+
 #view-source {
     position: fixed;
     display: block;

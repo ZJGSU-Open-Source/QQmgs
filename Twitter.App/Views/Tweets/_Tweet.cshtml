@@ -47,11 +47,11 @@
             @Resources.Reply
             <span class="badge">@Model.RepliesCount</span>
         </button>
-        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+        @*<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                 href="#" style="float: left">
             @Resources.Retweet
             <span class="badge">@Model.RetweetsCount</span>
-        </button>
+        </button>*@
         <a style="float: left">
             @using (Ajax.BeginForm("Favourite", "Tweets", new {tweetId = @Model.Id},
                 new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id}))

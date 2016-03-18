@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{3D87EFB1-8397-4468-A406-5006896A0D96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{AB5D2FA7-D8CE-4D66-8CEB-B1FF37B7946F}"
+	ProjectSection(SolutionItems) = preProject
+		Constants.cs = Constants.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02AB9C4A-C7E9-40B9-8A3B-4ED6E5D19CC4}"
 EndProject
