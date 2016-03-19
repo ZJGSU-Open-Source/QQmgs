@@ -18,6 +18,7 @@ body {
     .body-content-index-tweet {
         padding-left: 0px;
         padding-right: 0px;
+        line-height: 10px;
     }
 }
 
@@ -25,6 +26,7 @@ body {
     .body-content-index-tweet {
         padding-left: 0px;
         padding-right: 0px;
+        line-height: 10px;
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -254,26 +256,124 @@ textarea {
 .mdl-demo .mdl-card > * {
   height: auto;
 }
-.mdl-demo .mdl-card .mdl-card__supporting-text {
-  margin: 0px;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding: 15px;
-  padding-left: 35px;
-  color: rgb(48, 48, 48);
-  font-size: 22px; 
-  line-height: 25px;
-  width: calc(100% - 80px);
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .mdl-demo .mdl-card .mdl-card__supporting-text {
+        margin: 0px;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding-right: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        color: rgb(48, 48, 48);
+        font-size: 22px;
+        line-height: 25px;
+    }
 }
+
+@media (max-width: 767px) {
+    .mdl-demo .mdl-card .mdl-card__supporting-text {
+        margin: 0px;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding-right: 0px;
+        padding-top: 13px;
+        padding-bottom: 5px;
+        padding-left: 20px;
+        color: rgb(48, 48, 48);
+        font-size: 22px;
+        line-height: 25px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .mdl-demo .mdl-card .mdl-card__supporting-text {
+        margin: 0px;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding-right: 0px;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        padding-left: 20px;
+        color: rgb(48, 48, 48);
+        font-size: 22px;
+        line-height: 25px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .mdl-demo .mdl-card .mdl-card__supporting-text {
+        margin: 0px;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding-right: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        color: rgb(48, 48, 48);
+        font-size: 22px;
+        line-height: 25px;
+    }
+}
+@media (min-width: 1200px) {
+    .mdl-demo .mdl-card .mdl-card__supporting-text {
+        margin: 0px;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding-right: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        color: rgb(48, 48, 48);
+        font-size: 22px;
+        line-height: 25px;
+    }
+}
+
 .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
   margin-top: 0;
   margin-bottom: 20px;
 }
-.mdl-demo .mdl-card__actions {
-  margin: 0;
-  padding: 4px 40px;
-  color: inherit;
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .mdl-demo .mdl-card__actions {
+        margin: 0;
+        padding: 4px 40px;
+        color: inherit;
+    }
+}
+
+@media (max-width: 767px) {
+    .mdl-demo .mdl-card__actions {
+        margin: 0;
+        padding: 4px 40px;
+        color: inherit;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .mdl-demo .mdl-card__actions {
+        margin: 0;
+        padding: 4px 20px;
+        color: inherit;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .mdl-demo .mdl-card__actions {
+        margin: 0;
+        padding: 4px 20px;
+        color: inherit;
+    }
+}
+@media (min-width: 1200px) {
+    .mdl-demo .mdl-card__actions {
+        margin: 0;
+        padding: 4px 20px;
+        color: inherit;
+    }
 }
 .mdl-demo .mdl-card__actions a {
   color: #00BCD4;
@@ -427,12 +527,51 @@ textarea {
 .demo-card-wide.mdl-card {
     width: auto;
 }
-.demo-card-wide > .mdl-card__title {
-    color: #4582ec;
-    height: auto;
-    background: whitesmoke;
-    padding: 13px;
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .demo-card-wide > .mdl-card__title {
+        color: #4582ec;
+        height: auto;
+        background: whitesmoke;
+        padding: 5px;
+    }
 }
+
+@media (max-width: 767px) {
+    .demo-card-wide > .mdl-card__title {
+        color: #4582ec;
+        height: auto;
+        background: whitesmoke;
+        padding: 5px;
+        padding-left: 15px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .demo-card-wide > .mdl-card__title {
+        color: #4582ec;
+        height: auto;
+        background: whitesmoke;
+        padding: 13px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .demo-card-wide > .mdl-card__title {
+        color: #4582ec;
+        height: auto;
+        background: whitesmoke;
+        padding: 13px;
+    }
+}
+@media (min-width: 1200px) {
+    .demo-card-wide > .mdl-card__title {
+        color: #4582ec;
+        height: auto;
+        background: whitesmoke;
+        padding: 13px;
+    }
+}
+
+
 .demo-card-wide > .mdl-card__menu {
     color: #fff;
 }
@@ -465,5 +604,10 @@ textarea {
 @media (min-width: 1200px) {
     .tweet-option-padding {
         float: left;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .tweet-title-font {
+        font-size: 30px;
     }
 }

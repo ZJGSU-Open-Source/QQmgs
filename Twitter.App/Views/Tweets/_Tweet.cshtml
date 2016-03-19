@@ -16,6 +16,7 @@
             <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span></h2>*@
     </div>
 
+    @*mdl-card__supporting-text deleted*@
     <div class="mdl-card__supporting-text" id="@($"TweetText{@Model.Id}")">
         @Model.Text
     </div>
@@ -107,6 +108,8 @@
             </ul>
         }
 
+        <ul id="@($"NewReply{@Model.Id}")" class="reply-list mdl-list"></ul>
+        
         <div class="input-group" style="margin: 0">
             @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel {Id = Model.Id}, new AjaxOptions
             {
