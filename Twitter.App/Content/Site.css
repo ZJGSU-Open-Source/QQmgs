@@ -43,8 +43,8 @@ body {
 }
 @media (min-width: 1200px) {
     .body-content-index-tweet {
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 130px;
+        padding-right: 130px;
     }
 }
 
@@ -574,6 +574,9 @@ textarea {
 
 .demo-card-wide > .mdl-card__menu {
     color: #fff;
+    position: absolute;
+    right: 6px;
+    top: 6px;
 }
 .reply-list {
     width: auto;

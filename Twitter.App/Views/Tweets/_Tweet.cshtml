@@ -55,29 +55,23 @@
             <i class="material-icons">more_vert</i>
         </button>
 
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-            for="@($"TweetMenu{@Model.Id}")">
+        <div class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+             for="@($"TweetMenu{@Model.Id}")">
             @if (User.Identity.Name == Model.Author)
             {
-                <li class="mdl-menu__item">
-                    <button class="mdl-button mdl-js-button">
-                        @Html.ActionLink(Resources.Edit, "Edit", "Tweets", new { tweetId = @Model.Id }, null)
-                    </button>
-                </li>
-                <li class="mdl-menu__item">
-                    <button class="mdl-button mdl-js-button" type="button">
-                        @Ajax.ActionLink(Resources.Delete, "Delete", "Tweets",
+                <button type="submit" class="mdl-button mdl-js-button" onclick="location.href = '@Url.Action("Edit", "Tweets", new {tweetId = Model.Id})'">
+                    @Resources.Edit
+                </button>
+                <button class="mdl-button mdl-js-button" type="button">
+                    @Ajax.ActionLink(Resources.Delete, "Delete", "Tweets",
                             new { tweetId = @Model.Id },
                             new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id })
-                    </button>
-                </li>
-            }
-            <li disabled class="mdl-menu__item">
-                <button class="mdl-button mdl-js-button">
-                    @Resources.Deatils
                 </button>
-            </li>
-        </ul>
+            }
+            <button class="mdl-button mdl-js-button">
+                @Resources.Deatils
+            </button>
+        </div>
     </div>
 
     <div id="@($"ReplyPanel{@Model.Id}")" class="panel-collapse collapse">
