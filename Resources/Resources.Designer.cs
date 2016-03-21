@@ -412,7 +412,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UserName Must be less than 50 and more than 3 characters.
+        ///   Looks up a localized string similar to UserName Must be less than 50 and more than 2 characters.
         /// </summary>
         public static string UserNameLong {
             get {

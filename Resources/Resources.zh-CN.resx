@@ -121,7 +121,7 @@
     <value>社区昵称</value>
   </data>
   <data name="UserNameLong" xml:space="preserve">
-    <value>社区昵称下限3个字上限50个字噢</value>
+    <value>社区昵称下限2个字上限50个字噢</value>
   </data>
   <data name="UserNameRequired" xml:space="preserve">
     <value>一定要设置社区昵称，这样你的小伙伴才知道你是谁</value>

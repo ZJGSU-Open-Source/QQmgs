@@ -57,7 +57,7 @@
             ErrorMessageResourceName = "LoginUserNameRequired")]
         [Display(Name = "UserName", ResourceType = typeof(Resources.Resources))]
         [StringLength(50, ErrorMessageResourceType = typeof(Resources.Resources),
-            ErrorMessageResourceName = "UserNameLong", MinimumLength = 3)]
+            ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
         public string UserName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
@@ -78,7 +78,7 @@
             ErrorMessageResourceName = "UserNameRequired")]
         [Display(Name = "UserName", ResourceType = typeof (Resources.Resources))]
         [StringLength(50, ErrorMessageResourceType = typeof (Resources.Resources),
-            ErrorMessageResourceName = "UserNameLong", MinimumLength = 3)]
+            ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
         public string UserName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof (Resources.Resources),

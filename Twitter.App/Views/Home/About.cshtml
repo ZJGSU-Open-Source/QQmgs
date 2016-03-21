@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
-    <title>Parallax Template - Materialize</title>
+    <title>@Resources.aboutUs - @Resources.QQmgscom</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,7 +32,15 @@
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-            <li><a href="@Url.Action("Index", "Home")">@Resources.homename</a></li>
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
+                <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+            }
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -42,7 +50,7 @@
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <h1 class="header center teal-text text-lighten-2">Design for Zhejiang Gongshang Univ.</h1>
+            <h1 class="header center teal-text text-lighten-2">Design for ZJSU</h1>
             <div class="row center">
                 <h5 class="header col s12 light">全球某工商在线是商大最大的的社交网络，面向公众开放</h5>
             </div>

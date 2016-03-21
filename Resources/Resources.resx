@@ -178,7 +178,7 @@
     <value>UserName</value>
   </data>
   <data name="UserNameLong" xml:space="preserve">
-    <value>UserName Must be less than 50 and more than 3 characters</value>
+    <value>UserName Must be less than 50 and more than 2 characters</value>
   </data>
   <data name="UserNameRequired" xml:space="preserve">
     <value>User name must be required</value>

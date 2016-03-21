@@ -1,17 +1,14 @@
-﻿using System;
-using Twitter.App.Helper;
-
-namespace Twitter.App.Controllers
+﻿namespace Twitter.App.Controllers
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
-
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.Owin;
-    using Microsoft.Owin.Security;
-
+    using Twitter.App.Helper;
     using Twitter.App.Models.ViewModels;
     using Twitter.Models;
 
