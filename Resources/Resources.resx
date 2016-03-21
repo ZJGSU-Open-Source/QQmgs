@@ -240,4 +240,7 @@
   <data name="UpdateYourStatus" xml:space="preserve">
     <value>Update your status</value>
   </data>
+  <data name="aboutUs" xml:space="preserve">
+    <value>About us</value>
+  </data>
 </root>

@@ -43,6 +43,7 @@
             return this.View(pagedTweets);
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             return View();

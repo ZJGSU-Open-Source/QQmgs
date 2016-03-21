@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About us.
+        /// </summary>
+        public static string aboutUs {
+            get {
+                return ResourceManager.GetString("aboutUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All My Tweets.
         /// </summary>
         public static string AllMyTweets {

@@ -240,4 +240,7 @@
   <data name="UpdateYourStatus" xml:space="preserve">
     <value>更新个人简介</value>
   </data>
+  <data name="aboutUs" xml:space="preserve">
+    <value>关于我们</value>
+  </data>
 </root>

@@ -238,6 +238,9 @@
     <Content Include="Content\cardio\animate.css" />
     <Content Include="Content\cardio\cardio.css" />
     <Content Include="Content\material.indigo-pink.min.css" />
+    <Content Include="Content\materizeCss\materialize.css" />
+    <Content Include="Content\materizeCss\materialize.min.css" />
+    <Content Include="Content\materizeCss\style.css" />
     <Content Include="Content\mdl-v1.0.5\material.css" />
     <Content Include="Content\mdl-v1.0.5\material.js" />
     <Content Include="Content\mdl-v1.0.5\material.min.css" />
@@ -247,6 +250,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\About\background1.jpg" />
+    <Content Include="img\About\background2.jpg" />
+    <Content Include="img\About\background3.jpg" />
     <Content Include="img\footer.jpg" />
     <Content Include="img\header.jpg" />
     <Content Include="img\icon\guru-blue.png" />
@@ -285,6 +291,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MaterizeJS\init.js" />
+    <Content Include="Scripts\MaterizeJS\materialize.js" />
+    <Content Include="Scripts\MaterizeJS\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

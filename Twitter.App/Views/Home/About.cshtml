@@ -1,89 +1,184 @@
-﻿<!DOCTYPE html>
-<html>
-@{
-    ViewBag.Title = "About";
-}
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>About</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            position: relative;
-        }
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>Parallax Template - Materialize</title>
 
-        #section1 {
-            padding-top: 50px;
-            height: 500px;
-            color: #fff;
-            background-color: #1E88E5;
-        }
-
-        #section2 {
-            padding-top: 50px;
-            height: 500px;
-            color: #fff;
-            background-color: #673ab7;
-        }
-
-        #section3 {
-            padding-top: 50px;
-            height: 500px;
-            color: #fff;
-            background-color: #ff9800;
-        }
-
-        #section41 {
-            padding-top: 50px;
-            height: 500px;
-            color: #fff;
-            background-color: #00bcd4;
-        }
-
-        #section42 {
-            padding-top: 50px;
-            height: 500px;
-            color: #fff;
-            background-color: #009688;
-        }
-    </style>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
+<body>
+@{
+    Layout = "";    // clear Layout
+}
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-<div class="container body-content">
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
+        <ul class="right hide-on-med-and-down">
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
+                <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+            }
+        </ul>
 
-    <div id="section1" class="container-fluid">
-        <h1>Section 1</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="@Url.Action("Index", "Home")">@Resources.homename</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
-    <div id="section2" class="container-fluid">
-        <h1>Section 2</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+</nav>
+
+<div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <br><br>
+            <h1 class="header center teal-text text-lighten-2">Design for Zhejiang Gongshang Univ.</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">全球某工商在线是商大最大的的社交网络，面向公众开放</h5>
+            </div>
+            <div class="row center">
+                <a href="@Url.Action("Index", "Home")" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+            </div>
+            <br><br>
+
+        </div>
     </div>
-    <div id="section3" class="container-fluid">
-        <h1>Section 3</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-    </div>
-    <div id="section41" class="container-fluid">
-        <h1>Section 4 Submenu 1</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-    </div>
-    <div id="section42" class="container-fluid">
-        <h1>Section 4 Submenu 2</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+    <div class="parallax"><img src="~/img/About/background1.jpg" alt="Unsplashed background img 1">
     </div>
 </div>
+
+
+<div class="container">
+    <div class="section">
+
+        <!-- Icon Section -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">flash_on</i>
+                    </h2>
+                    <h5 class="center">Speeds up development</h5>
+
+                    <p class="light" style="text-align: center">由@@Shuaiyi 于业余时间开发.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">group</i>
+                    </h2>
+                    <h5 class="center">User Experience Focused</h5>
+
+                    <p class="light" style="text-align: center">聆听所有用户的声音.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">settings</i>
+                    </h2>
+                    <h5 class="center">Easy to work with</h5>
+
+                    <p class="light" style="text-align: center">简约但不简单.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="row center">
+                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="~/img/About/background2.jpg" alt="Unsplashed background img 2">
+    </div>
+</div>
+
+<div class="container">
+    <div class="section">
+
+        <div class="row">
+            <div class="col s12 center">
+                <h3><i class="mdi-content-send brown-text"></i>
+                </h3>
+                <h4>Contact Us</h4>
+                <p class="left-align light" style="text-align: center">计算机与信息工程学院 计算机科学系 1301</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="row center">
+                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="~/img/About/background3.jpg" alt="Unsplashed background img 3">
+    </div>
+</div>
+
+<footer class="page-footer teal">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Company Bio</h5>
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts-->
+<script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/MaterizeJS/materialize.js"></script>
+<script src="~/Scripts/MaterizeJS/init.js"></script>
+
 </body>
 </html>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
