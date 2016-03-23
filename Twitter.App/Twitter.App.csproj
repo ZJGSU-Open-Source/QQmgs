@@ -376,7 +376,8 @@
     <Content Include="Views\Tweets\Reply.cshtml" />
     <Content Include="Views\Manage\ChangeStatus.cshtml" />
     <Content Include="Views\Tweets\PushInformation.cshtml" />
-    <None Include="Views\Tweets\GetTweet.cshtml" />
+    <Content Include="Views\Tweets\GetTweet.cshtml" />
+    <Content Include="Views\Home\Dev.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,7 +45,9 @@
                 <div class="form-group">
                     <div class="col-md-offset-0 col-md-10">
                         <input type="submit" value="Save" class="btn btn-primary"/>
-                        <input type="reset" value="Cancel" class="btn btn-default" onclick="window.location.href = @Url.Action("Index", "Home")"/>
+                        <button type="reset" class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Home")'">
+                            Cancel
+                        </button>
                     </div>
                 </div>
             </div>

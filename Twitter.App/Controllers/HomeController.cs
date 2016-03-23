@@ -41,6 +41,13 @@ namespace Twitter.App.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        [Route("~/dev")]
+        public ActionResult Dev()
+        {
+            return View();
+        }
+
         private static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
             t => new TweetViewModel
             {
