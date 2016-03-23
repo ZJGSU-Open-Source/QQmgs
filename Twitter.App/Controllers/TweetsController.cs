@@ -1,4 +1,7 @@
-﻿namespace Twitter.App.Controllers
+﻿using System.Linq.Expressions;
+using System.Web.Http;
+
+namespace Twitter.App.Controllers
 {
     using System;
     using System.Linq;
@@ -30,8 +33,9 @@
             return this.PartialView("_NewTweetModal");
         }
 
+        // GET /tweets/MyTweets
         [HttpGet]
-        [Route("get")]
+        [Route("MyTweets")]
         public ActionResult GetTweetBySpecifiedUser(int p = 1)
         {
             var loggedUserId = this.User.Identity.GetUserId();
@@ -39,19 +43,7 @@
             var recentTweets = Data.Tweets.All()
                 .OrderByDescending(t => t.DatePosted)
                 .Where(t => t.Author.Id == loggedUserId)
-                .Select(
-                    t => new TweetViewModel
-                    {
-                        Id = t.Id,
-                        Author = t.Author.UserName,
-                        AuthorStatus = t.Author.Status,
-                        Text = t.Text,
-                        UsersFavouriteCount = t.UsersFavourite.Count,
-                        RepliesCount = t.Reply.Count,
-                        RetweetsCount = t.Retweets.Count,
-                        DatePosted = t.DatePosted,
-                        ReplyList = t.Reply.ToList()
-                    })
+                .Select(AsTweetViewModel)
                 .ToList();
 
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
@@ -59,6 +51,7 @@
             return this.View(pagedTweets);
         }
 
+        // GET /tweets/HotTweets
         [HttpGet]
         [Route("HotTweets")]
         public ActionResult GetHotTweets(int p = 1)
@@ -67,19 +60,7 @@
 
             var recentTweets = Data.Tweets.All()
                 .OrderByDescending(t => t.UsersFavourite.Count)
-                .Select(
-                    t => new TweetViewModel
-                    {
-                        Id = t.Id,
-                        Author = t.Author.UserName,
-                        AuthorStatus = t.Author.Status,
-                        Text = t.Text,
-                        UsersFavouriteCount = t.UsersFavourite.Count,
-                        RepliesCount = t.Reply.Count,
-                        RetweetsCount = t.Retweets.Count,
-                        DatePosted = t.DatePosted,
-                        ReplyList = t.Reply.ToList()
-                    })
+                .Select(AsTweetViewModel)
                 .Take(12)
                 .ToList();
 
@@ -87,6 +68,26 @@
 
             return this.View(pagedTweets);
         }
+
+        // GET /tweets?tweetId={tweetId}
+        [HttpGet]
+        [Route("{tweetId:int}/details")]
+        public ActionResult GetTweet(int tweetId)
+        {
+            var tweet = Data.Tweets.All()
+                .OrderByDescending(t => t.DatePosted)
+                .Where(t => t.Id == tweetId)
+                .Select(AsTweetViewModel)
+                .FirstOrDefault();
+
+            if (tweet == null)
+            {
+                return HttpNotFound($"Tweet with id {tweetId} not found");
+            }
+
+            return this.View(tweet);
+        }
+
 
         [HttpPost]
         [Route("add")]
@@ -194,7 +195,7 @@
         }
 
         [HttpGet]
-        [Route("edit")]
+        [Route("{tweetId:int}/edit")]
         public ActionResult Edit(int? tweetId)
         {
             if (tweetId == null)
@@ -217,7 +218,7 @@
         }
 
         [HttpPost]
-        [Route("edit")]
+        [Route("{tweetId:int}/edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tweet tweet)
         {
@@ -231,7 +232,7 @@
                 Data.Tweets.Update(tweet);
                 Data.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetTweet", "Tweets", new {tweetId = tweet.Id});
             }
 
             return View(tweet);
@@ -249,5 +250,20 @@
 
             return "Delete Successfully";
         }
+
+        private static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
+            t => new TweetViewModel
+            {
+                Id = t.Id,
+                Author = t.Author.UserName,
+                AuthorStatus = t.Author.Status,
+                IsEvent = t.IsEvent,
+                Text = t.Text,
+                UsersFavouriteCount = t.UsersFavourite.Count,
+                RepliesCount = t.Reply.Count,
+                RetweetsCount = t.Retweets.Count,
+                DatePosted = t.DatePosted,
+                ReplyList = t.Reply.ToList()
+            };
     }
 }

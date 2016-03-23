@@ -3,51 +3,52 @@
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.IsEvent)
+<div class="container body-content-index-tweet mdl-demo">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.IsEvent)
 
-    <br />
-    <br />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="modal-body mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                     style="width: auto">
+                    <h1>
+                        Tweet Content:
+                    </h1>
+                    @Html.TextAreaFor(t => t.Text, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(t => t.Text, string.Empty, new {@class = "text-danger"})
+                </div>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="modal-body">
-                Tweet Content:
-                <hr/>
-                @Html.TextAreaFor(t => t.Text, new {@class = "form-control"})
-                @Html.ValidationMessageFor(t => t.Text, string.Empty, new {@class = "text-danger"})
-            </div>
+                <div class="modal-body">
+                    Latest update:
+                    <h5>@Model.DatePosted</h5>
+                    @*@if (@Model.IsEvent)
+                    {
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="IsEvent">
+                            <input type="checkbox" id="IsEvent" class="mdl-switch__input" checked disabled>
+                            <span class="mdl-switch__label">Event Toggle</span>
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="IsEvent">
+                            <input type="checkbox" id="IsEvent" class="mdl-switch__input" disabled>
+                            <span class="mdl-switch__label">Event Toggle</span>
+                        </label>
+                    }*@
 
-            <div class="modal-body">
-                Latest update:
-                <h5>@Model.DatePosted</h5>
-                @if (@Model.IsEvent)
-                {
-                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="IsEvent">
-                        <input type="checkbox" id="IsEvent" class="mdl-switch__input" checked disabled>
-                        <span class="mdl-switch__label">Event Toggle</span>
-                    </label>
-                }
-                else
-                {
-                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="IsEvent">
-                        <input type="checkbox" id="IsEvent" class="mdl-switch__input" disabled>
-                        <span class="mdl-switch__label">Event Toggle</span>
-                    </label>
-                }
+                </div>
 
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-0 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <input type="reset" value="Cancel" class="btn btn-default" onclick="window.location.href = @Url.Action("Index", "Home")" />
+                <div class="form-group">
+                    <div class="col-md-offset-0 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary"/>
+                        <input type="reset" value="Cancel" class="btn btn-default" onclick="window.location.href = @Url.Action("Index", "Home")"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>

@@ -17,11 +17,11 @@ namespace Twitter.Data.UnitOfWork
 
     public class TwitterData : ITwitterData
     {
-        private readonly DbContext dbContext;
+        private readonly DbContext _dbContext;
 
-        private readonly IDictionary<Type, object> repositories;
+        private readonly IDictionary<Type, object> _repositories;
 
-        private IUserStore<User> userStore;
+        private IUserStore<User> _userStore;
 
         public TwitterData()
             : this(new TwitterDbContext())
@@ -30,8 +30,8 @@ namespace Twitter.Data.UnitOfWork
 
         public TwitterData(DbContext dbContext)
         {
-            this.dbContext = dbContext;
-            this.repositories = new Dictionary<Type, object>();
+            this._dbContext = dbContext;
+            this._repositories = new Dictionary<Type, object>();
         }
 
         public IRepository<Tweet> Tweets => this.GetRepository<Tweet>();
@@ -48,27 +48,27 @@ namespace Twitter.Data.UnitOfWork
 
         public IRepository<Reply> Reply => this.GetRepository<Reply>();
 
-        public IUserStore<User> UserStore => this.userStore ?? (this.userStore = new UserStore<User>(this.dbContext));
+        public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 
         public void SaveChanges()
         {
-            this.dbContext.SaveChanges();
+            this._dbContext.SaveChanges();
         }
 
         public DbEntityEntry Entry(object entity)
         {
-            return this.dbContext.Entry(entity);
+            return this._dbContext.Entry(entity);
         }
 
         private IRepository<T> GetRepository<T>() where T : class
         {
-            if (!this.repositories.ContainsKey(typeof(T)))
+            if (!this._repositories.ContainsKey(typeof(T)))
             {
                 var type = typeof(GenericEfRepository<T>);
-                this.repositories.Add(typeof(T), Activator.CreateInstance(type, this.dbContext));
+                this._repositories.Add(typeof(T), Activator.CreateInstance(type, this._dbContext));
             }
 
-            return (IRepository<T>)this.repositories[typeof(T)];
+            return (IRepository<T>)this._repositories[typeof(T)];
         }
     }
 }

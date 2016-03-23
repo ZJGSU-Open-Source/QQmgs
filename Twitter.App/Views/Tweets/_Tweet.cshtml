@@ -68,7 +68,7 @@
                             new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id })
                 </button>
             }
-            <button class="mdl-button mdl-js-button">
+            <button type="submit" class="mdl-button mdl-js-button" onclick="location.href = '@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})'">
                 @Resources.Deatils
             </button>
         </div>

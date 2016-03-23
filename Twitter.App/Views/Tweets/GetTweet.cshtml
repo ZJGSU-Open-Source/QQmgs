@@ -1,0 +1,143 @@
+﻿@using Twitter.App.Models.ViewModels
+@model Twitter.App.Models.ViewModels.TweetViewModel
+
+@{
+    ViewBag.Title = "Tweet";
+}
+
+<div class="container body-content-index-tweet mdl-demo">
+
+    <div id="tweet">
+
+        <h3>Tweet</h3>
+        <div id="new-tweet-place"></div>
+
+        <div class="demo-card-wide mdl-card mdl-shadow--4dp" id="@($"TweetPanel{@Model.Id}")">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text" id="@($"TweetAuthor{@Model.Id}")">
+                    @@@Model.Author
+                </h2>
+                <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span>
+
+                <div class="mdl-tooltip mdl-tooltip--large" for="@($"TweetAuthor{@Model.Id}")">
+                    @Model.Author Online
+                </div>
+
+                @*<h2 class="mdl-card__title-text">@@@Model.Author
+                <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span></h2>*@
+            </div>
+
+            @*mdl-card__supporting-text deleted*@
+            <div class="mdl-card__supporting-text" id="@($"TweetText{@Model.Id}")">
+                @Model.Text
+            </div>
+
+            <div class="mdl-card__actions mdl-card--border"
+                 style="padding-bottom: 0px">
+                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        href="#@($"ReplyPanel{@Model.Id}")" id="ReplyButton"
+                        style="float: left">
+                    @Resources.Reply
+                    <span class="badge">@Model.RepliesCount</span>
+                </button>
+                @*<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        href="#" style="float: left">
+                    @Resources.Retweet
+                    <span class="badge">@Model.RetweetsCount</span>
+                </button>*@
+                <a class="tweet-option-padding">
+                    @using (Ajax.BeginForm("Favourite", "Tweets", new {tweetId = @Model.Id},
+                        new AjaxOptions() {InsertionMode = InsertionMode.Replace, UpdateTargetId = "Favourites" + @Model.Id}))
+                    {
+                        <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            @Resources.Like
+                            <span class="badge" id="@($"Favourites{@Model.Id}")">@Model.UsersFavouriteCount</span>
+                        </button>
+                    }
+                </a>
+                <a class="hidden-xs hidden-sm" style="float: right">
+                    <p style="color: #4582ec">@Model.DatePosted</p>
+                </a>
+            </div>
+
+            <div class="mdl-card__menu">
+                <button id="@($"TweetMenu{@Model.Id}")" style="color: black"
+                        class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">more_vert</i>
+                </button>
+
+                <div class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                     for="@($"TweetMenu{@Model.Id}")">
+                    @if (User.Identity.Name == Model.Author)
+                    {
+                        <button type="submit" class="mdl-button mdl-js-button" onclick="location.href = '@Url.Action("Edit", "Tweets", new {tweetId = Model.Id})'">
+                            @Resources.Edit
+                        </button>
+                        <button class="mdl-button mdl-js-button" type="button">
+                            @Ajax.ActionLink(Resources.Delete, "Delete", "Tweets",
+                                new {tweetId = @Model.Id},
+                                new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "TweetPanel" + @Model.Id})
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div id="@($"ReplyPanel{@Model.Id}")">
+
+                @if (Model.ReplyList != null)
+                {
+                    <ul id="@($"ReplyList{@Model.Id}")" class="reply-list mdl-list">
+                        @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+                        {
+                            <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-avatar">person</i>
+                                    <span>
+                                        @reply.AuthorName
+                                        <span style="font-size: 12px; color: gray">On @reply.PublishTime.ToString("M")</span>
+                                    </span>
+
+                                    <span class="mdl-list__item-text-body">
+                                        @reply.Content
+                                    </span>
+                                </span>
+
+                                <span class="mdl-list__item-secondary-content">
+                                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                                </span>
+                            </li>
+                        }
+                    </ul>
+                }
+
+                <ul id="@($"NewReply{@Model.Id}")" class="reply-list mdl-list"></ul>
+
+                <div class="input-group" style="margin: 0">
+                    @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel {Id = Model.Id}, new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.InsertAfter,
+                        UpdateTargetId = "NewReply" + Model.Id
+                    },
+                        new {@class = "navbar-form"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input id="reply-input" type="text" class="form-control" name="Text" placeholder="What's on your mind?"
+                               style="width: 240px">
+                        <button type="submit" class="btn btn-success" onclick="">Post</button>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

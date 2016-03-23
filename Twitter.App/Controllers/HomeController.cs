@@ -1,4 +1,8 @@
-﻿namespace Twitter.App.Controllers
+﻿using System;
+using System.Linq.Expressions;
+using Twitter.Models;
+
+namespace Twitter.App.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -20,23 +24,11 @@
 
         public ActionResult Index(int p = 1)
         {
+
             var recentTweets =
                 this.Data.Tweets.All()
                     .OrderByDescending(t => t.DatePosted)
-                    .Select(
-                        t => new TweetViewModel
-                        {
-                            Id = t.Id,
-                            Author = t.Author.UserName,
-                            AuthorStatus = t.Author.Status,
-                            IsEvent = t.IsEvent,
-                            Text = t.Text,
-                            UsersFavouriteCount = t.UsersFavourite.Count,
-                            RepliesCount = t.Reply.Count,
-                            RetweetsCount = t.Retweets.Count,
-                            DatePosted = t.DatePosted,
-                            ReplyList = t.Reply.ToList()
-                        });
+                    .Select(AsTweetViewModel);
 
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
@@ -48,5 +40,20 @@
         {
             return View();
         }
+
+        private static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
+            t => new TweetViewModel
+            {
+                Id = t.Id,
+                Author = t.Author.UserName,
+                AuthorStatus = t.Author.Status,
+                IsEvent = t.IsEvent,
+                Text = t.Text,
+                UsersFavouriteCount = t.UsersFavourite.Count,
+                RepliesCount = t.Reply.Count,
+                RetweetsCount = t.Retweets.Count,
+                DatePosted = t.DatePosted,
+                ReplyList = t.Reply.ToList()
+            };
     }
 }
