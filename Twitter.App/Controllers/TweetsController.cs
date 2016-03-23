@@ -17,6 +17,8 @@ namespace Twitter.App.Controllers
     using Twitter.Models;
     using PagedList;
 
+    using Constants = App.Constants.Constants;
+
     [Authorize]
     [RoutePrefix("tweets")]
     public class TweetsController : TwitterBaseController

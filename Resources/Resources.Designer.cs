@@ -223,7 +223,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to home.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string homename {
             get {
@@ -246,6 +246,15 @@ namespace Resources {
         public static string HotTweets {
             get {
                 return ResourceManager.GetString("HotTweets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid user name, user name cannot contains white spce.
+        /// </summary>
+        public static string InvalidUserName {
+            get {
+                return ResourceManager.GetString("InvalidUserName", resourceCulture);
             }
         }
         

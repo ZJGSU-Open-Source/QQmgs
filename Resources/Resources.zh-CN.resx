@@ -243,4 +243,7 @@
   <data name="aboutUs" xml:space="preserve">
     <value>关于我们</value>
   </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>用户名不可以带空格哦~</value>
+  </data>
 </root>

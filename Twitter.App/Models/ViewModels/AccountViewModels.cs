@@ -1,4 +1,6 @@
-﻿namespace Twitter.App.Models.ViewModels
+﻿using Glimpse.Core.Extensions;
+
+namespace Twitter.App.Models.ViewModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -58,6 +60,8 @@
         [Display(Name = "UserName", ResourceType = typeof(Resources.Resources))]
         [StringLength(50, ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
+        [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "InvalidUserName")]
         public string UserName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
@@ -79,6 +83,8 @@
         [Display(Name = "UserName", ResourceType = typeof (Resources.Resources))]
         [StringLength(50, ErrorMessageResourceType = typeof (Resources.Resources),
             ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
+        [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources), 
+            ErrorMessageResourceName = "InvalidUserName")]
         public string UserName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof (Resources.Resources),

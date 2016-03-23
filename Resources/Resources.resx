@@ -211,7 +211,7 @@
     <value>Hello</value>
   </data>
   <data name="homename" xml:space="preserve">
-    <value>home</value>
+    <value>Home</value>
   </data>
   <data name="HotTweets" xml:space="preserve">
     <value>Hot Tweets</value>
@@ -242,5 +242,8 @@
   </data>
   <data name="aboutUs" xml:space="preserve">
     <value>About us</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Invalid user name, user name cannot contains white spce</value>
   </data>
 </root>
