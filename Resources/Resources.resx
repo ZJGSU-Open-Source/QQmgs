@@ -246,4 +246,13 @@
   <data name="InvalidUserName" xml:space="preserve">
     <value>Invalid user name, user name cannot contains white spce</value>
   </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>Forget password</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>Get Started</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Invalid login attempt, please check your user name or password</value>
+  </data>
 </root>

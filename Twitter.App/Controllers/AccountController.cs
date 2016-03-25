@@ -89,7 +89,7 @@
                     return this.RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    this.ModelState.AddModelError(string.Empty, Resources.Resources.InvalidLoginAttempt);
                     return this.View(model);
             }
         }
@@ -173,10 +173,12 @@
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    return this.RedirectToAction("Index", "Home");
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url?.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "全球某工商注册确认【系统邮件】", callbackUrl);
+
+                    return View("DisplayEmail");
+                    //return this.RedirectToAction("Index", "Home");
                 }
 
                 this.AddErrors(result);
@@ -223,10 +225,10 @@
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url?.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "全球某工商忘记密码【系统邮件】", callbackUrl);
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -262,7 +264,7 @@
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return this.RedirectToAction("ResetPasswordConfirmation", "Account");
+                return this.View("ForgotPasswordConfirmation");
             }
 
             var result = await this.UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);

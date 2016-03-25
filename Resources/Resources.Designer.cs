@@ -214,6 +214,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forget password.
+        /// </summary>
+        public static string ForgetPassword {
+            get {
+                return ResourceManager.GetString("ForgetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Started.
+        /// </summary>
+        public static string GetStarted {
+            get {
+                return ResourceManager.GetString("GetStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         public static string Hello {
@@ -246,6 +264,15 @@ namespace Resources {
         public static string HotTweets {
             get {
                 return ResourceManager.GetString("HotTweets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid login attempt, please check your user name or password.
+        /// </summary>
+        public static string InvalidLoginAttempt {
+            get {
+                return ResourceManager.GetString("InvalidLoginAttempt", resourceCulture);
             }
         }
         

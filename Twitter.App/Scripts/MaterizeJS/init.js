@@ -1,4 +1,4 @@
-(function($){
+﻿(function($){
   $(function(){
 
     $('.button-collapse').sideNav();
@@ -12,4 +12,5 @@ $(document).ready(function () {
 });
 
 // Materialize.toast(message, displayLength, className, completeCallback);
-Materialize.toast('Welcome to QQmgs.com', 4000); // 4000 is the duration of the toast
+Materialize.toast("Welcome to QQmgs.com", 4000); // 4000 is the duration of the toast
+Materialize.toast("全球某工商还在测试，开发中，如果发现 Bug 敬请谅解", 4000); // 4000 is the duration of the toast

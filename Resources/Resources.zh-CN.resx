@@ -243,6 +243,15 @@
   <data name="aboutUs" xml:space="preserve">
     <value>关于我们</value>
   </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>忘记密码</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>现在开始</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>登陆失败了 T^T 请确认以下用户名密码是否填写正确</value>
+  </data>
   <data name="InvalidUserName" xml:space="preserve">
     <value>用户名不可以带空格哦~</value>
   </data>

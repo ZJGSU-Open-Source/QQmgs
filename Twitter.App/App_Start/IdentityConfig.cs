@@ -1,15 +1,21 @@
-﻿namespace Twitter.App
-{
-    using System;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Web;
 
+namespace Twitter.App
+{
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
     using Microsoft.Owin.Security;
-
+    using SendGrid;
+    using System;
+    using System.Configuration;
+    using System.Net;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
     using Twitter.Data;
     using Twitter.Models;
 
@@ -17,7 +23,41 @@
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            return ConfigMailSendAsync(message);
+        }
+
+        private static Task ConfigMailSendAsync(IdentityMessage message)
+        {
+            #region formatter
+                var text = $"Please click on this link to {message.Subject}: {message.Body}";
+                var html = "请点击此链接确认这是您的邮箱 <a href=\"" + message.Body + "\">here</a><br/><br/>";
+
+                html += HttpUtility.HtmlEncode("Or copy and paste the following link on the browser:\n\n" + message.Body) + "\n";
+            #endregion
+
+            var msg = new MailMessage { From = new MailAddress("Admin@qqmgs.com") };
+            msg.To.Add(new MailAddress(message.Destination));
+            msg.Subject = message.Subject;
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+
+            var smtpClient = new SmtpClient("smtp.ym.163.com", Convert.ToInt32(25));
+            var credentials = new NetworkCredential(
+                ConfigurationManager.AppSettings["mailAccount"],
+                ConfigurationManager.AppSettings["mailPassword"]);
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+
+            try
+            {
+                smtpClient.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+                    ex.ToString());
+            }
+
             return Task.FromResult(0);
         }
     }
