@@ -2,14 +2,14 @@
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
 @{
-    ViewBag.Title = "Tweet";
+    ViewBag.Title = "Tweet - ";
 }
 
 <div class="container body-content-index-tweet mdl-demo">
 
-    <div id="tweet">
+    <div id="tweets">
 
-        <h3>Tweet</h3>
+        <h3 style="text-align: center">Tweet</h3>
         <div id="new-tweet-place"></div>
 
         <div class="demo-card-wide mdl-card mdl-shadow--4dp" id="@($"TweetPanel{@Model.Id}")">

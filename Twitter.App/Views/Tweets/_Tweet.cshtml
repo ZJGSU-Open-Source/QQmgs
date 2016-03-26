@@ -1,26 +1,25 @@
 ﻿@using Twitter.App.Models.ViewModels
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
+@{
+    var replyCount = Model.ReplyList.Count;
+}
+
 <div class="demo-card-wide mdl-card mdl-shadow--4dp" id="@($"TweetPanel{@Model.Id}")">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text" id="@($"TweetAuthor{@Model.Id}")">
             @@@Model.Author
         </h2>
-        <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span>
-        
+        <span style="font-size: 13px; margin-top: auto; padding: 7px">
+            @Model.AuthorStatus
+        </span>
         <div class="mdl-tooltip mdl-tooltip--large" for="@($"TweetAuthor{@Model.Id}")">
             @Model.Author Online
         </div>
-
-        @*<h2 class="mdl-card__title-text">@@@Model.Author
-            <span style="font-size: 13px; margin-top: auto; padding: 7px">@Model.AuthorStatus</span></h2>*@
     </div>
-
-    @*mdl-card__supporting-text deleted*@
     <div class="mdl-card__supporting-text" id="@($"TweetText{@Model.Id}")">
         @Model.Text
     </div>
-
     <div class="mdl-card__actions mdl-card--border"
          style="padding-bottom: 0px">
         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
@@ -79,50 +78,83 @@
         @if (Model.ReplyList != null)
         {
             <ul id="@($"ReplyList{@Model.Id}")" class="reply-list mdl-list">
-                @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+                @if (replyCount > 6)
                 {
-                    <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
-                        <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-avatar">person</i>
-                            <span>
-                                @reply.AuthorName
-                            <span style="font-size: 12px; color: gray">On @reply.PublishTime.ToString("M")</span>
-                        </span>
+                    foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime).Take(6))
+                    {
+                        <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+                                <span>
+                                    @reply.AuthorName
+                                    <span style="font-size: 12px; color: gray">On @reply.PublishTime.ToString("M")</span>
+                                </span>
 
+                                <span class="mdl-list__item-text-body">
+                                    @reply.Content
+                                </span>
+                            </span>
+
+                            <span class="mdl-list__item-secondary-content">
+                                <a href="#@($"ReplyInput{@Model.Id}")" style="color: gray">Reply</a>
+                            </span>
+                        </li>
+                    }
+                    <li class="mdl-list__item mdl-list__item-sub-title"
+                        style="padding: 2px; padding-left: 15px">
                         <span class="mdl-list__item-text-body">
-                            @reply.Content
+                            <a class="mdl-navigation__link" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})"
+                               style="align-content: center">There's totally @replyCount comments here. Click to view more comments...</a>
                         </span>
-                    </span>
-
-                        <span class="mdl-list__item-secondary-content">
-                        <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-                    </span>
                     </li>
                 }
+                else
+                {
+                    foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+                    {
+                        <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+                                <span>
+                                    @reply.AuthorName
+                                    <span style="font-size: 12px; color: gray">On @reply.PublishTime.ToString("M")</span>
+                                </span>
+
+                                <span class="mdl-list__item-text-body">
+                                    @reply.Content
+                                </span>
+                            </span>
+
+                            <span class="mdl-list__item-secondary-content">
+                                <a href="#@($"ReplyInput{@Model.Id}")" style="color: gray">Reply</a>
+                            </span>
+                        </li>
+                    }
+                }
+
             </ul>
         }
 
         <ul id="@($"NewReply{@Model.Id}")" class="reply-list mdl-list"></ul>
-        
+
         <div class="input-group" style="margin: 0">
-            @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel {Id = Model.Id}, new AjaxOptions
+            @using (Ajax.BeginForm("Reply", "Tweets", new ReplyViewModel { Id = Model.Id }, new AjaxOptions
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.InsertAfter,
-                UpdateTargetId = "NewReply" + Model.Id
+                UpdateTargetId = "NewReply" + Model.Id,
             },
-                new {@class = "navbar-form"}))
+                new { @class = "navbar-form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
-                <input id="reply-input" type="text" class="form-control" name="Text" placeholder="What's on your mind?"
+                <input id="@($"ReplyInput{@Model.Id}")" type="text" class="form-control" name="Text" placeholder="What's on your mind?"
                        style="width: 240px">
-                <button type="submit" class="btn btn-success" onclick="">Post</button>
+                <button type="submit" class="btn btn-success" onclick="this.from.send(); this.form.reset();">Post</button>
             }
         </div>
     </div>
 </div>
 
-<br/>
-
+<br />
