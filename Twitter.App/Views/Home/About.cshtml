@@ -12,187 +12,194 @@
     <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 <body>
-@{
-    Layout = "";    // clear Layout
-}
+    @{
+        Layout = "";    // clear Layout
+    }
 
-<nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
-        <ul class="right hide-on-med-and-down">
-            @if (Request.IsAuthenticated)
-            {
-                <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
-            }
-            else
-            {
-                <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
-                <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
-            }
-        </ul>
-
-        <ul id="nav-mobile" class="side-nav">
-            @if (Request.IsAuthenticated)
-            {
-                <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
-            }
-            else
-            {
-                <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
-                <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
-            }
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-</nav>
-
-<div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <br><br>
-            <h1 class="header center teal-text text-lighten-2">Design for ZJSU</h1>
-            <div class="row center">
-                <h5 class="header col s12 light">全球某工商在线是商大最大的的社交网络，面向公众开放</h5>
-            </div>
-            <div class="row center">
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
+            <ul class="right hide-on-med-and-down">
                 @if (Request.IsAuthenticated)
-                {
-                    <a href="@Url.Action("Index", "Home")" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">@Resources.GetStarted</a>
+            {
+                    <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
                 }
                 else
                 {
-                    <a href="@Url.Action("Login", "Account")" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">@Resources.GetStarted</a>
+                    <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
                 }
-            </div>
-            <br><br>
+            </ul>
 
+            <ul id="nav-mobile" class="side-nav">
+                @if (Request.IsAuthenticated)
+            {
+                    <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+                }
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
-    </div>
-    <div class="parallax"><img src="~/img/About/background1.jpg" alt="Unsplashed background img 1">
-    </div>
-</div>
+    </nav>
 
-
-<div class="container">
-    <div class="section">
-
-        <!-- Icon Section -->
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">flash_on</i>
-                    </h2>
-                    <h5 class="center">Meet Interests</h5>
-
-                    <p class="light" style="text-align: center">终于有一个地方，商大学生能够自由交流.</p>
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 class="header center teal-text text-lighten-2">Design for ZJSU</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">全球某工商在线是专属浙江工商大学的社交网络，面向公众开放</h5>
                 </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">group</i>
-                    </h2>
-                    <h5 class="center">User Experience Focused</h5>
-
-                    <p class="light" style="text-align: center">聆听所有用户的声音，持续开发ing.</p>
+                <div class="row center">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Index", "Home")" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">@Resources.GetStarted</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">@Resources.GetStarted</a>
+                    }
                 </div>
-            </div>
+                <br><br>
 
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">settings</i>
-                    </h2>
-                    <h5 class="center">Easy to work with</h5>
-
-                    <p class="light" style="text-align: center">简约但不简单.</p>
-                </div>
             </div>
         </div>
-
-    </div>
-</div>
-
-
-<div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <div class="row center">
-                <h5 class="header col s12 light">全球某工商是一个社区，类似于 Twitter, 用户可以自由的在社区发言，参与大家的讨论</h5>
-            </div>
+        <div class="parallax">
+            <img src="~/img/About/background1.jpg" alt="Unsplashed background img 1">
         </div>
     </div>
-    <div class="parallax"><img src="~/img/About/background2.jpg" alt="Unsplashed background img 2">
-    </div>
-</div>
-
-<div class="container">
-    <div class="section">
-        <div class="row">
-            <div class="col s12 center">
-                <h3><i class="mdi-content-send brown-text"></i>
-                </h3>
-                <h4>Contact Us</h4>
-                <p class="left-align light" style="text-align: center">开发团队来自于: 计算机与信息工程学院 计算机科学系 1301。由商大学生自主开发。</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <div class="row center">
-                <h5 class="header col s12 light">Join QQmgs.com today, enjoy yourself !</h5>
-            </div>
-        </div>
-    </div>
-    <div class="parallax"><img src="~/img/About/background3.jpg" alt="Unsplashed background img 3">
-    </div>
-</div>
-
-<footer class="page-footer teal">
     <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are students from CS1301, enrolled in course SYSTEM DESIGN PRACTICE. Under group work we keep developing, keep moving. Any donate to us will be appreciated.</p>
+        <div class="section">
+
+            <!-- Icon Section -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text">
+                            <i class="material-icons">flash_on</i>
+                        </h2>
+                        <h5 class="center">Meet Interests</h5>
+
+                        <p class="light" style="text-align: center">终于有一个地方，商大学生能够自由交流.</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text">
+                            <i class="material-icons">group</i>
+                        </h2>
+                        <h5 class="center">User Experience Focused</h5>
+
+                        <p class="light" style="text-align: center">聆听所有用户的声音，持续开发ing.</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text">
+                            <i class="material-icons">settings</i>
+                        </h2>
+                        <h5 class="center">Easy to work with</h5>
+
+                        <p class="light" style="text-align: center">简约但不简单.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">全球某工商是一个社区，类似于 Twitter, 用户可以自由的在社区发言，参与大家的讨论</h5>
+                </div>
             </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Zhejiang Gongshang Univ.</a></li>
-                    <li><a class="white-text" href="#!">School of Computer Science and Information Engineering</a></li>
-                    <li><a class="white-text" href="#!">CS1301</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Jeremy Wu</a></li>
-                    <li><a class="white-text" href="#!">Jerry Li</a></li>
-                    <li><a class="white-text" href="#!">Sam</a></li>
-                    <li><a class="white-text" href="#!">Lan Miao</a></li>
-                    <li><a class="white-text" href="#!">Ying Cui</a></li>
-                    <li><a class="white-text" href="#!">Tao Sun</a></li>
-                </ul>
+        </div>
+        <div class="parallax">
+            <img src="~/img/About/background2.jpg" alt="Unsplashed background img 2">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s12 center">
+                    <h3>
+                        <i class="mdi-content-send brown-text"></i>
+                    </h3>
+                    <h4>Contact Us</h4>
+                    <p class="left-align light" style="text-align: center">开发团队来自于: 计算机与信息工程学院 计算机科学系 1301。由商大学生自主开发。</p>
+                    <p class="left-align light" style="text-align: center">Contact Mail: qqmgs@@qqmgs.com</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
+
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">致力于打造一个专属浙江工商大学的校内在线社区，拉近人与人之间的距离</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax">
+            <img src="~/img/About/background3.jpg" alt="Unsplashed background img 3">
+        </div>
+    </div>
+
+    <footer class="page-footer teal">
         <div class="container">
-            Twitter V Project · 浙ICP备15036767号
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are students from CS1301, enrolled in course SYSTEM DESIGN PRACTICE. Under group work we keep developing, keep moving. Any donate to us will be appreciated.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Zhejiang Gongshang Univ.</a></li>
+                        <li><a class="white-text" href="#!">School of Computer Science and Information Engineering</a></li>
+                        <li><a class="white-text" href="#!">CS1301</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Jeremy Wu</a></li>
+                        <li><a class="white-text" href="#!">Jerry Li</a></li>
+                        <li><a class="white-text" href="#!">Sam</a></li>
+                        <li><a class="white-text" href="#!">Lan Miao</a></li>
+                        <li><a class="white-text" href="#!">Ying Cui</a></li>
+                        <li><a class="white-text" href="#!">Tao Sun</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</footer>
+        <div class="footer-copyright">
+            <div class="container">
+                Twitter V Project · 浙ICP备15036767号
+            </div>
+        </div>
+    </footer>
 
 
-<!-- Scripts-->
-<script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
-<script src="~/Scripts/MaterizeJS/materialize.js"></script>
-<script src="~/Scripts/MaterizeJS/init.js"></script>
+    <!-- Scripts-->
+    <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/MaterizeJS/materialize.js"></script>
+    <script src="~/Scripts/MaterizeJS/init.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,11 @@
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
 @{
-    var replyCount = Model.ReplyList.Count;
+    var replyCount = 0;
+    if (Model.ReplyList != null)
+    {
+        replyCount = Model.ReplyList.Count;
+    }
 }
 
 <div class="demo-card-wide mdl-card mdl-shadow--4dp" id="@($"TweetPanel{@Model.Id}")">

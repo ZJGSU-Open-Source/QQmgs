@@ -28,6 +28,7 @@ namespace Twitter.App.Controllers
         {
         }
 
+        // GET /tweets/create
         [HttpGet]
         [Route("create")]
         public ActionResult NewTweetForm()
@@ -90,6 +91,12 @@ namespace Twitter.App.Controllers
             return this.View(tweet);
         }
 
+        [HttpGet]
+        [Route("add")]
+        public ActionResult InsertTweet()
+        {
+            return View();
+        }
 
         [HttpPost]
         [Route("add")]
@@ -104,24 +111,29 @@ namespace Twitter.App.Controllers
             var loggedUserId = this.User.Identity.GetUserId();
             var loggedUserUsername = this.User.Identity.GetUserName();
 
-            var tweet = new Tweet { Text = model.Text, AuthorId = loggedUserId, DatePosted = DateTime.Now, IsEvent = false};
+            var tweet = new Tweet
+            {
+                Text = model.Text,
+                AuthorId = loggedUserId,
+                DatePosted = DateTime.Now,
+                IsEvent = false
+            };
 
             this.Data.Tweets.Add(tweet);
-
             this.Data.SaveChanges();
 
             return this.PartialView(
                 "_Tweet",
                 new TweetViewModel
-                    {
-                        Id = tweet.Id,
-                        Author = loggedUserUsername,
-                        DatePosted = tweet.DatePosted,
-                        RetweetsCount = tweet.Retweets.Count,
-                        RepliesCount = tweet.Reply.Count,
-                        Text = tweet.Text,
-                        UsersFavouriteCount = tweet.UsersFavourite.Count
-                    });
+                {
+                    Id = tweet.Id,
+                    Author = loggedUserUsername,
+                    DatePosted = tweet.DatePosted,
+                    RetweetsCount = tweet.Retweets.Count,
+                    RepliesCount = tweet.Reply.Count,
+                    Text = tweet.Text,
+                    UsersFavouriteCount = tweet.UsersFavourite.Count
+                });
         }
 
         [HttpPost]

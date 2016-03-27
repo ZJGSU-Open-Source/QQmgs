@@ -87,7 +87,7 @@
                 @if (Model.ReplyList != null)
                 {
                     <ul id="@($"ReplyList{@Model.Id}")" class="reply-list mdl-list">
-                        @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime))
+                        @foreach (var reply in Model.ReplyList.OrderByDescending(r => r.PublishTime))
                         {
                             <li class="mdl-list__item mdl-list__item--three-line" style="height: 65px">
                                 <span class="mdl-list__item-primary-content">

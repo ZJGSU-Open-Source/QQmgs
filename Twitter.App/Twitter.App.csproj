@@ -400,6 +400,7 @@
     <Content Include="Views\Tweets\GetTweet.cshtml" />
     <Content Include="Views\Home\Dev.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Tweets\InsertTweet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

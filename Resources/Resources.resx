@@ -255,4 +255,7 @@
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Invalid login attempt, please check your user name or password</value>
   </data>
+  <data name="SendTweet" xml:space="preserve">
+    <value>Send Tweet</value>
+  </data>
 </root>

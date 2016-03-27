@@ -2,6 +2,6 @@
 {
     public class Constants
     {
-        public static int PageTweetsNumber = 10;
+        public static int PageTweetsNumber = 12;
     }
 }

@@ -238,7 +238,7 @@
     <value>转发</value>
   </data>
   <data name="UpdateYourStatus" xml:space="preserve">
-    <value>更新个人简介</value>
+    <value>更新签名</value>
   </data>
   <data name="aboutUs" xml:space="preserve">
     <value>关于我们</value>
@@ -254,5 +254,8 @@
   </data>
   <data name="InvalidUserName" xml:space="preserve">
     <value>用户名不可以带空格哦~</value>
+  </data>
+  <data name="SendTweet" xml:space="preserve">
+    <value>发言</value>
   </data>
 </root>
