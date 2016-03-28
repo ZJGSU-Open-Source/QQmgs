@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>@Resources.QQmgscom</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/Site.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
+            <ul class="right hide-on-med-and-down">
+                @if (Request.IsAuthenticated)
+            {
+                    <li><a href="@Url.Action("Index", "Home")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+                }
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                @if (Request.IsAuthenticated)
+            {
+                    <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+                }
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are students from CS1301, enrolled in course SYSTEM DESIGN PRACTICE. Under group work we keep developing, keep moving. Any donate to us will be appreciated.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Zhejiang Gongshang Univ.</a></li>
+                        <li><a class="white-text" href="#!">School of Computer Science and Information Engineering</a></li>
+                        <li><a class="white-text" href="#!">CS1301</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Jeremy Wu</a></li>
+                        <li><a class="white-text" href="#!">Jerry Li</a></li>
+                        <li><a class="white-text" href="#!">Sam</a></li>
+                        <li><a class="white-text" href="#!">Lan Miao</a></li>
+                        <li><a class="white-text" href="#!">Ying Cui</a></li>
+                        <li><a class="white-text" href="#!">Tao Sun</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Twitter V Project · 浙ICP备15036767号
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts-->
+    <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/MaterizeJS/materialize.js"></script>
+    <script src="~/Scripts/MaterizeJS/init.js"></script>
+
+</body>
+</html>

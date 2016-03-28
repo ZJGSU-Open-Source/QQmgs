@@ -232,6 +232,7 @@
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\TwitterBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -286,7 +287,8 @@
     <Content Include="img\loader.gif" />
     <Content Include="img\logo-active.png" />
     <Content Include="img\logo.png" />
-    <Content Include="img\photos\Mr.Zhou.jpg" />
+    <Content Include="img\Photo\FlowerInZJSU.jpg" />
+    <Content Include="img\Photo\Sun_Flower_in_ZJSU.jpg" />
     <Content Include="img\popup.jpg" />
     <Content Include="img\pricing1.jpg" />
     <Content Include="img\pricing2.jpg" />
@@ -401,6 +403,8 @@
     <Content Include="Views\Home\Dev.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Tweets\InsertTweet.cshtml" />
+    <Content Include="Views\Shared\_Materize_Layout.cshtml" />
+    <Content Include="Views\Photo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
