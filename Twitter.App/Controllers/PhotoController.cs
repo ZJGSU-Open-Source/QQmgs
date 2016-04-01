@@ -9,6 +9,7 @@ namespace Twitter.App.Controllers
     public class PhotoController : Controller
     {
         // GET: Photo
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();

@@ -1,0 +1,105 @@
+﻿
+<div class="row">
+    <div class="col s12 m9 l10">
+        <div id="introduction" class="section scrollspy">
+            <h3>Here is Zhejiang Gongshang Univ.</h3>
+            <p class="flow-text">We provide the most beautiful photos here.</p>
+        </div>
+
+        <div id="photos" class="section scrollspy">
+            @for (var index = 0; index < 3; ++index)
+            {
+                if (index % 2 == 0)
+                {
+                    <div class="row">
+                        <div class="col photo-row">
+                            <div class="card z-depth-2">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img id=@($"Row{index}") class="activator" src="~/img/Photo/FlowerInZJSU.jpg" alt="">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">Cherry Blossoms<i class="material-icons right">more_vert</i></span>
+                                    <p><a href="#">Photoed by photography Echo Jin</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">Cherry blossoms near modern teaching building<i class="material-icons right">close</i></span>
+                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col photo-row">
+                            <div class="card z-depth-2">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img id=@($"Row{index}") class="activator" src="~/img/Photo/Sun_Flower_in_ZJSU.jpg" alt="">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">Love Sunshine<i class="material-icons right">more_vert</i></span>
+                                    <p>
+                                        <a href="#">Photoed by photography Echo Jin</a>
+                                    </p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">Love Sunshine<i class="material-icons right">close</i></span>
+                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col photo-row">
+                            <div class="card z-depth-2">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img id=@($"Row{index}") class="activator" src="~/img/Photo/Sun_Flower_in_ZJSU.jpg" alt="">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">Love Sunshine<i class="material-icons right">more_vert</i></span>
+                                    <p>
+                                        <a href="#">Photoed by photography Echo Jin</a>
+                                    </p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">Love Sunshine<i class="material-icons right">close</i></span>
+                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col photo-row">
+                            <div class="card z-depth-2">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img id=@($"Row{index}") class="activator" src="~/img/Photo/FlowerInZJSU.jpg" alt="">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">Cherry Blossoms<i class="material-icons right">more_vert</i></span>
+                                    <p>
+                                        <a href="#">Photoed by photography Echo Jin</a>
+                                    </p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">Cherry blossoms near modern teaching building<i class="material-icons right">close</i></span>
+                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                }
+            }
+        </div>
+
+        <div id="End" class="section scrollspy">
+            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.</p>
+        </div>
+    </div>
+    <div class="col hide-on-small-only m3 l2" style="position: fixed; top: 12%; right: 8%;">
+        <ul class="section table-of-contents">
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#photos">Photos</a></li>
+            <li><a href="#End">End</a></li>
+        </ul>
+    </div>
+</div>
+

@@ -405,6 +405,7 @@
     <Content Include="Views\Tweets\InsertTweet.cshtml" />
     <Content Include="Views\Shared\_Materize_Layout.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
+    <Content Include="Views\Photo\PhotoPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
