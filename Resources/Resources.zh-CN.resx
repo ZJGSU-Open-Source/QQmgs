@@ -258,4 +258,13 @@
   <data name="SendTweet" xml:space="preserve">
     <value>发言</value>
   </data>
+  <data name="FindMoreDetail" xml:space="preserve">
+    <value>还有犹豫什么呢，点击“现在开始”立刻加入全球某工商吧！</value>
+  </data>
+  <data name="MeetInterestsDetail" xml:space="preserve">
+    <value>终于有一个地方，商大学生能够自由交流.</value>
+  </data>
+  <data name="SharingDetail" xml:space="preserve">
+    <value>在这里，每一位浙小商可以找到志趣相投的朋友。</value>
+  </data>
 </root>

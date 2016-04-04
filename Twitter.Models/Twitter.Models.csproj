@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DevLog.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="NotificationType.cs" />

@@ -7,6 +7,7 @@
 
     using Twitter.App.Helper;
 
+    // In base controller, here implements culture cookie update
     public class BaseController : Controller
     {
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)

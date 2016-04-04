@@ -1,10 +1,9 @@
-﻿using System.Data.Entity.Infrastructure;
-
-namespace Twitter.Data.UnitOfWork
+﻿namespace Twitter.Data.UnitOfWork
 {
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
 
     using Twitter.Data.Repositories;
 
@@ -47,6 +46,8 @@ namespace Twitter.Data.UnitOfWork
         public IRepository<IdentityRole> Roles => this.GetRepository<IdentityRole>();
 
         public IRepository<Reply> Reply => this.GetRepository<Reply>();
+
+        public IRepository<DevLog> DevLog => this.GetRepository<DevLog>();
 
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 

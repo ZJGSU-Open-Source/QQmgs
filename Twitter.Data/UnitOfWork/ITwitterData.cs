@@ -23,7 +23,9 @@
 
         IRepository<IdentityRole> Roles { get; }
 
-        IRepository<Reply> Reply { get; } 
+        IRepository<Reply> Reply { get; }
+
+        IRepository<DevLog> DevLog { get; }
 
         void SaveChanges();
     }

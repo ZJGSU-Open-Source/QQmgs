@@ -214,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to meet us right now, please click Getting Started. We&apos;re looking forward to meetiing you !!!.
+        /// </summary>
+        public static string FindMoreDetail {
+            get {
+                return ResourceManager.GetString("FindMoreDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forget password.
         /// </summary>
         public static string ForgetPassword {
@@ -331,6 +340,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to QQmgs will be a free community for all the students of ZJSU talking and sharing. We do hope you will enjoy yourself here..
+        /// </summary>
+        public static string MeetInterestsDetail {
+            get {
+                return ResourceManager.GetString("MeetInterestsDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now.
         /// </summary>
         public static string Now {
@@ -435,6 +453,15 @@ namespace Resources {
         public static string SendTweet {
             get {
                 return ResourceManager.GetString("SendTweet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Everyone can share anything on QQmgs. QQmgs will be the first modern social network for Zhejiang Gongshang University and totally developed by undergeaduates..
+        /// </summary>
+        public static string SharingDetail {
+            get {
+                return ResourceManager.GetString("SharingDetail", resourceCulture);
             }
         }
         

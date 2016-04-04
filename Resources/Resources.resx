@@ -258,4 +258,13 @@
   <data name="SendTweet" xml:space="preserve">
     <value>Send Tweet</value>
   </data>
+  <data name="FindMoreDetail" xml:space="preserve">
+    <value>Do you want to meet us right now, please click Getting Started. We're looking forward to meetiing you !!!</value>
+  </data>
+  <data name="MeetInterestsDetail" xml:space="preserve">
+    <value>QQmgs will be a free community for all the students of ZJSU talking and sharing. We do hope you will enjoy yourself here.</value>
+  </data>
+  <data name="SharingDetail" xml:space="preserve">
+    <value>Everyone can share anything on QQmgs. QQmgs will be the first modern social network for Zhejiang Gongshang University and totally developed by undergeaduates.</value>
+  </data>
 </root>

@@ -23,6 +23,8 @@ namespace Twitter.Data
 
         public IDbSet<Notification> Notifications { get; set; }
 
+        public IDbSet<DevLog> DevLogs { get; set; } 
+
         public static TwitterDbContext Create()
         {
             return new TwitterDbContext();
