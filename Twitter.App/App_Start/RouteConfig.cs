@@ -1,4 +1,6 @@
-﻿namespace Twitter.App
+﻿using System.Web.Http;
+
+namespace Twitter.App
 {
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -11,9 +13,9 @@
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}/{id}",
-                new {controller = "Home", action = "About", id = UrlParameter.Optional},
+                name: "Default", 
+                url: "{controller}/{action}/{id}",
+                defaults: new {controller = "Home", action = "About", id = UrlParameter.Optional},
                 namespaces: new[]
                 {
                     "Twitter.App.HomeController"

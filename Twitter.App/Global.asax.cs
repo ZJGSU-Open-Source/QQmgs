@@ -1,4 +1,6 @@
-﻿namespace Twitter.App
+﻿using System.Web.Http;
+
+namespace Twitter.App
 {
     using System.Web;
     using System.Web.Mvc;
@@ -9,6 +11,7 @@
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

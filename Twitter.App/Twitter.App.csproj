@@ -231,8 +231,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\V2Controllers\JsonContent.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DevLogController.cs" />
+    <Compile Include="Controllers\DevController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\TwitterBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,6 +242,8 @@
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\V2Controllers\TwitterApiController.cs" />
+    <Compile Include="Controllers\V2Controllers\V2TweetsController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -409,14 +412,15 @@
     <Content Include="Views\Shared\_Materize_Layout.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
     <Content Include="Views\Photo\PhotoPartialView.cshtml" />
-    <Content Include="Views\DevLog\Index.cshtml" />
-    <Content Include="Views\DevLog\Create.cshtml" />
+    <Content Include="Views\Dev\Index.cshtml" />
+    <Content Include="Views\Dev\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Messages\" />
     <Folder Include="Views\Notifications\" />
+    <Folder Include="Views\V2Tweets\" />
     <Folder Include="XML\" />
   </ItemGroup>
   <ItemGroup>

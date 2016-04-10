@@ -14,9 +14,10 @@ namespace Twitter.App.Controllers
 {
     [AllowAnonymous]
     [RoutePrefix("dev")]
-    public class DevLogController : TwitterBaseController
+    public class DevController : TwitterBaseController
     {
-        public DevLogController() : base(new TwitterData())
+        public DevController() 
+            : base(new TwitterData())
         {
         }
     

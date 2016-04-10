@@ -277,7 +277,13 @@ namespace Twitter.App.Controllers
                 RepliesCount = t.Reply.Count,
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
-                ReplyList = t.Reply.ToList()
+                ReplyList = t.Reply.Select(reply => new ReplyViewModel
+                {
+                    Text = reply.Content,
+                    Id = reply.Id,
+                    PublishTime = reply.PublishTime,
+                    Author = reply.AuthorId
+                }).ToList()
             };
     }
 }
