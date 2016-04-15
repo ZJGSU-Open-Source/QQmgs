@@ -1,21 +1,17 @@
-﻿using System.Linq.Expressions;
-using System.Web.Http;
-
-namespace Twitter.App.Controllers
+﻿namespace Twitter.App.Controllers
 {
+    using Microsoft.AspNet.Identity;
+    using PagedList;
     using System;
     using System.Linq;
-    using System.Web.Mvc;
+    using System.Linq.Expressions;
     using System.Net;
-
-    using Twitter.Data.UnitOfWork;
-
-    using Microsoft.AspNet.Identity;
+    using System.Web.Mvc;
 
     using Twitter.App.Models.BindingModels;
     using Twitter.App.Models.ViewModels;
+    using Twitter.Data.UnitOfWork;
     using Twitter.Models;
-    using PagedList;
 
     using Constants = App.Constants.Constants;
 
@@ -100,7 +96,7 @@ namespace Twitter.App.Controllers
 
         [HttpPost]
         [Route("add")]
-        public ActionResult InsertTweet(CreateTweetBindingModel model)
+        public ActionResult InsertTweet(CreateTweetBindingModel model, bool directToHome = false)
         {
             if (!this.ModelState.IsValid)
             {
@@ -121,6 +117,11 @@ namespace Twitter.App.Controllers
 
             this.Data.Tweets.Add(tweet);
             this.Data.SaveChanges();
+
+            if (directToHome)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             return this.PartialView(
                 "_Tweet",
@@ -282,7 +283,7 @@ namespace Twitter.App.Controllers
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.AuthorId
+                    Author = t.Author.UserName
                 }).ToList()
             };
     }

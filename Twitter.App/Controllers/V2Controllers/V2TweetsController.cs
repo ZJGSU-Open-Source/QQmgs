@@ -53,7 +53,7 @@ namespace Twitter.App.Controllers.V2Controllers
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.AuthorId
+                    Author = t.Author.UserName
                 }).ToList()
             };
     }

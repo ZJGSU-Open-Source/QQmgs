@@ -9,7 +9,8 @@
 
     <div id="tweets">
 
-        <h3 style="text-align: center">Tweet</h3>
+        <br/>
+
         <div id="new-tweet-place"></div>
 
         <div class="demo-card-wide mdl-card mdl-shadow--4dp" id="@($"TweetPanel{@Model.Id}")">
@@ -93,12 +94,12 @@
                                 <span class="mdl-list__item-primary-content">
                                     <i class="material-icons mdl-list__item-avatar">person</i>
                                     <span>
-                                        @reply.AuthorName
+                                        @reply.Author
                                         <span style="font-size: 12px; color: gray">On @reply.PublishTime.ToString("M")</span>
                                     </span>
 
                                     <span class="mdl-list__item-text-body">
-                                        @reply.Content
+                                        @reply.Text
                                     </span>
                                 </span>
 
