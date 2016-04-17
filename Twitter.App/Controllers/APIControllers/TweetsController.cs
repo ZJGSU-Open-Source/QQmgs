@@ -42,7 +42,7 @@ namespace Twitter.App.Controllers.APIControllers
                 .FirstOrDefault();
 
             return tweet == null
-                ? Request.CreateResponse(HttpStatusCode.NotFound)
+                ? Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find tweet for tweet ID {tweetId}")
                 : Request.CreateResponse(HttpStatusCode.OK, tweet);
         }
 
@@ -63,7 +63,7 @@ namespace Twitter.App.Controllers.APIControllers
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = t.Author.UserName
+                    Author = reply.AuthorName
                 }).ToList()
             };
     }
