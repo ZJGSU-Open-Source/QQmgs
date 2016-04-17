@@ -267,4 +267,7 @@
   <data name="SharingDetail" xml:space="preserve">
     <value>Everyone can share anything on QQmgs. QQmgs will be the first modern social network for Zhejiang Gongshang University and totally developed by undergeaduates.</value>
   </data>
+  <data name="PhotoSharing" xml:space="preserve">
+    <value>Photo Sharing</value>
+  </data>
 </root>

@@ -15,6 +15,6 @@ namespace Twitter.App.Controllers.V2Controllers
             this.Data = data;
         }
 
-        protected ITwitterData Data { get; }
+        protected ITwitterData Data { get; set; }
     }
 }

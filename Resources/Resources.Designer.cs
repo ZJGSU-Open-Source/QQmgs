@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Photo Sharing.
+        /// </summary>
+        public static string PhotoSharing {
+            get {
+                return ResourceManager.GetString("PhotoSharing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ProfileStatus.
         /// </summary>
         public static string ProfileStatus {

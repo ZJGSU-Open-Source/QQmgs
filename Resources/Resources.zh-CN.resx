@@ -267,4 +267,7 @@
   <data name="SharingDetail" xml:space="preserve">
     <value>在这里，每一位浙小商可以找到志趣相投的朋友。</value>
   </data>
+  <data name="PhotoSharing" xml:space="preserve">
+    <value>摄影分享</value>
+  </data>
 </root>

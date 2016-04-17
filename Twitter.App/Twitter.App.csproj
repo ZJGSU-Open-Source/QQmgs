@@ -231,7 +231,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\V2Controllers\JsonContent.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DevController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
@@ -242,8 +241,8 @@
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\V2Controllers\TwitterApiController.cs" />
-    <Compile Include="Controllers\V2Controllers\V2TweetsController.cs" />
+    <Compile Include="Controllers\APIControllers\TwitterApiController.cs" />
+    <Compile Include="Controllers\APIControllers\TweetsController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

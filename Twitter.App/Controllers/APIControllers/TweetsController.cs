@@ -1,39 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
+using System.Web.Http;
+using Twitter.App.Controllers.V2Controllers;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 
-namespace Twitter.App.Controllers.V2Controllers
+namespace Twitter.App.Controllers.APIControllers
 {
-    [RoutePrefix("v2tweets")]
-    public class V2TweetsController : TwitterApiController
+    [RoutePrefix("api/tweets")]
+    public class TweetsController : TwitterApiController
     {
-        public V2TweetsController()
+        public TweetsController()
             : base(new TwitterData())
         {
         }
 
         [HttpGet]
-        [Route("index")]
-        public HttpResponseMessage GetHotTweets()
+        [Route("~/api/Queries/Tweets")]
+        public HttpResponseMessage GetAll()
         {
             var recentTweets =
                 this.Data.Tweets.All()
                     .OrderByDescending(t => t.DatePosted)
                     .Select(AsTweetViewModel).ToList();
-
-            //const string testJsonString = "{ 'firstname' : 'Jason', 'lastname' : 'Voorhees' }";
-            //JToken json = JObject.Parse(testJsonString);
-
+            
             return Request.CreateResponse(HttpStatusCode.OK, recentTweets);
+        }
+
+        [Route("{tweetId}")]
+        [HttpGet]
+        public HttpResponseMessage Get([FromUri] int tweetId)
+        {
+            var tweet = Data.Tweets.All()
+                .OrderByDescending(t => t.DatePosted)
+                .Where(t => t.Id == tweetId)
+                .Select(AsTweetViewModel)
+                .FirstOrDefault();
+
+            return tweet == null
+                ? Request.CreateResponse(HttpStatusCode.NotFound)
+                : Request.CreateResponse(HttpStatusCode.OK, tweet);
         }
 
         private static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
