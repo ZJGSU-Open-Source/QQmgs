@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Twitter.App.Controllers.V2Controllers;
+using Twitter.App.DataContracts;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
@@ -21,14 +21,20 @@ namespace Twitter.App.Controllers.APIControllers
 
         [HttpGet]
         [Route("~/api/Queries/Tweets")]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage GetAll([FromUri] int pageNo = DefaultPageNo, [FromUri] int pageSize = DefaultPageSize)
         {
-            var recentTweets =
-                this.Data.Tweets.All()
-                    .OrderByDescending(t => t.DatePosted)
-                    .Select(AsTweetViewModel).ToList();
-            
-            return Request.CreateResponse(HttpStatusCode.OK, recentTweets);
+            if (pageNo <= 0 || pageSize <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "pageNo and pageSize should be both grater than 0.");
+            }
+
+            var recentTweets = this.Data.Tweets.All()
+                .OrderByDescending(t => t.DatePosted)
+                .Select(AsTweetViewModel).ToList();
+
+            var pagedTweets = new PaginationResult<TweetViewModel>(recentTweets, pageNo, pageSize, recentTweets.Count);
+
+            return Request.CreateResponse(HttpStatusCode.OK, pagedTweets);
         }
 
         [Route("{tweetId}")]

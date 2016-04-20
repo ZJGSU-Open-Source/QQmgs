@@ -42,8 +42,7 @@
             var recentTweets = Data.Tweets.All()
                 .OrderByDescending(t => t.DatePosted)
                 .Where(t => t.Author.Id == loggedUserId)
-                .Select(AsTweetViewModel)
-                .ToList();
+                .Select(AsTweetViewModel).ToList();
 
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
 
@@ -55,13 +54,10 @@
         [Route("HotTweets")]
         public ActionResult GetHotTweets(int p = 1)
         {
-            var loggedUserId = this.User.Identity.GetUserId();
-
             var recentTweets = Data.Tweets.All()
                 .OrderByDescending(t => t.UsersFavourite.Count)
                 .Select(AsTweetViewModel)
-                .Take(12)
-                .ToList();
+                .Take(12).ToList();
 
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: 6);
 

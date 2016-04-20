@@ -243,6 +243,7 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\APIControllers\TwitterApiController.cs" />
     <Compile Include="Controllers\APIControllers\TweetsController.cs" />
+    <Compile Include="DataContracts\PagenationResult.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

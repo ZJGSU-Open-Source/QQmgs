@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
+﻿using System.Web.Http;
 using Twitter.Data.UnitOfWork;
 
-namespace Twitter.App.Controllers.V2Controllers
+namespace Twitter.App.Controllers.APIControllers
 {
     public class TwitterApiController : ApiController
     {
@@ -16,5 +11,9 @@ namespace Twitter.App.Controllers.V2Controllers
         }
 
         protected ITwitterData Data { get; set; }
+
+        protected const int DefaultPageNo = 1;
+
+        protected const int DefaultPageSize = 12;
     }
 }

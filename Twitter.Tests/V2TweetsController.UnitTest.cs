@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Twitter.App.Controllers.APIControllers;
-using Twitter.App.Controllers.V2Controllers;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Xunit;
