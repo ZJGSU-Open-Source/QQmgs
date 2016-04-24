@@ -103,12 +103,21 @@
             var loggedUserId = this.User.Identity.GetUserId();
             var loggedUserUsername = this.User.Identity.GetUserName();
 
+            model.GroupId = 3; // for test
+            var group = Data.Group.Find(model.GroupId);
+            if (group == null)
+            {
+                this.Response.StatusCode = 400;
+                return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+            }
+
             var tweet = new Tweet
             {
                 Text = model.Text,
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
-                IsEvent = false
+                IsEvent = false,
+                GroupId = model.GroupId
             };
 
             this.Data.Tweets.Add(tweet);
@@ -129,7 +138,8 @@
                     RetweetsCount = tweet.Retweets.Count,
                     RepliesCount = tweet.Reply.Count,
                     Text = tweet.Text,
-                    UsersFavouriteCount = tweet.UsersFavourite.Count
+                    UsersFavouriteCount = tweet.UsersFavourite.Count,
+                    GroupId = tweet.GroupId
                 });
         }
 
@@ -274,6 +284,7 @@
                 RepliesCount = t.Reply.Count,
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
+                GroupId = t.GroupId,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,

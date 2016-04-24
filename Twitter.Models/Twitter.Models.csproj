@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DevLog.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="NotificationType.cs" />

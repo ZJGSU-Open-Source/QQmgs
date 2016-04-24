@@ -36,5 +36,8 @@ namespace Twitter.App.Models.ViewModels
 
         [JsonProperty("date_posted")]
         public DateTime DatePosted { get; set; }
+
+        [JsonProperty("group_id")]
+        public int GroupId { get; set; }
     }
 }

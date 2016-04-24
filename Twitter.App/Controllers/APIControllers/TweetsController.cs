@@ -64,6 +64,7 @@ namespace Twitter.App.Controllers.APIControllers
                 RepliesCount = t.Reply.Count,
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
+                GroupId = t.GroupId,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,

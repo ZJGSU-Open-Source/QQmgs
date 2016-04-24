@@ -27,6 +27,8 @@
 
         IRepository<DevLog> DevLog { get; }
 
+        IRepository<Group> Group { get; }
+
         void SaveChanges();
     }
 }

@@ -15,13 +15,13 @@ namespace Twitter.Models
 
         public int TweetId { get; set; }
 
+        [ForeignKey("TweetId")]
+        public virtual Tweet Tweet { get; set; }
+
         [Required]
         [MinLength(1)]
         [MaxLength(250)]
         public string Content { get; set; }
-
-        [ForeignKey("TweetId")]
-        public virtual Tweet Tweet { get; set; }
 
         [Required]
         public string AuthorId { get; set; }

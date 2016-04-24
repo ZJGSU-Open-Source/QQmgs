@@ -49,6 +49,8 @@
 
         public IRepository<DevLog> DevLog => this.GetRepository<DevLog>();
 
+        public IRepository<Group> Group => this.GetRepository<Group>();
+
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 
         public void SaveChanges()

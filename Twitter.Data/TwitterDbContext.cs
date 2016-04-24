@@ -23,7 +23,7 @@ namespace Twitter.Data
 
         public IDbSet<Notification> Notifications { get; set; }
 
-        public IDbSet<DevLog> DevLogs { get; set; } 
+        public IDbSet<DevLog> DevLogs { get; set; }
 
         public static TwitterDbContext Create()
         {
@@ -45,6 +45,12 @@ namespace Twitter.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Tweet>()
+                .HasRequired(t => t.Group)
+                .WithMany(u => u.Tweets)
+                .HasForeignKey(t => t.GroupId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tweet>()
                 .HasRequired(t => t.Author)
                 .WithMany(u => u.Tweets)
                 .HasForeignKey(t => t.AuthorId)
@@ -59,7 +65,6 @@ namespace Twitter.Data
                 .HasMany(t => t.Retweets)
                 .WithMany()
                 .Map(t => t.MapLeftKey("TweetId").MapRightKey("RetweetId").ToTable("TweetsRetweets"));
-
 
             modelBuilder.Entity<User>()
                .HasMany(u => u.FavouriteTweets)
