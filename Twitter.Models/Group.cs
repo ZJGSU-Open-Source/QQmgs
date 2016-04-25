@@ -17,10 +17,14 @@ namespace Twitter.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public string CreaterId { get; set; }
 
         public string Name { get; set; }
 
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreatedTime { get; set; }
 
         public virtual ICollection<Tweet> Tweets { get; set; }

@@ -3,7 +3,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
+using System.Web.Helpers;
 using System.Web.Http;
+using Twitter.App.BusinessLogic;
 using Twitter.App.DataContracts;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
@@ -32,9 +34,9 @@ namespace Twitter.App.Controllers.APIControllers
                 .OrderByDescending(t => t.DatePosted)
                 .Select(AsTweetViewModel).ToList();
 
-            var pagedTweets = new PaginationResult<TweetViewModel>(recentTweets, pageNo, pageSize, recentTweets.Count);
+            var pagedTweets = recentTweets.GetPagedResult(t => t.Id, pageNo, pageSize, SortDirection.Descending);
 
-            return Request.CreateResponse(HttpStatusCode.OK, pagedTweets);
+            return Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<TweetViewModel>(pagedTweets, pageNo, pageSize, recentTweets.Count));
         }
 
         [Route("{tweetId}")]

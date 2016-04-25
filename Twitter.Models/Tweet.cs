@@ -32,6 +32,7 @@ namespace Twitter.Models
 
         public bool IsRetweet { get; set; }
 
+        [Required]
         public string AuthorId { get; set; }
 
         public virtual User Author { get; set; }
