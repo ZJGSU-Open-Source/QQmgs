@@ -270,4 +270,7 @@
   <data name="PhotoSharing" xml:space="preserve">
     <value>摄影分享</value>
   </data>
+  <data name="Group" xml:space="preserve">
+    <value>兴趣小组</value>
+  </data>
 </root>

@@ -1,0 +1,11 @@
+﻿@model Twitter.App.Models.ViewModels.TweetViewModel
+
+<li class="collection-item avatar">
+    <i class="material-icons circle green">insert_chart</i>
+    <span class="title">@Model.Author</span>
+    <p>
+        @Model.Text <br/>
+        @Model.DatePosted
+    </p>
+    <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" class="secondary-content"><i class="material-icons">grade</i></a>
+</li>

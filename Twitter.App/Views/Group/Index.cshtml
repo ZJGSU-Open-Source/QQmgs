@@ -1,1 +1,22 @@
-﻿
+﻿@model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br>
+
+        <div class="row center">
+            <h5 class="header col s12 light grey-text">Group index</h5>
+        </div>
+
+        <div class="collection" style="max-width: 700px; margin: auto">
+            @foreach (var group in Model)
+            {
+                <a href="@Url.Action("Get", new { groupId = group.Id, p = 1 })" class="collection-item">@group.Name<span class="new badge">@group.TweetsCount</span></a>
+            }
+        </div>
+        <br>
+    </div>
+</div>

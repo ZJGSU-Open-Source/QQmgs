@@ -1,0 +1,36 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br>
+
+        <div class="row center">
+            <h5 class="header col s12 light grey-text">@Resources.Group: @ViewData["GroupName"]</h5>
+        </div>
+
+        <div style="max-width: 700px; margin: auto">
+            <ul class="collection">
+                @foreach (var tweet in Model)
+            {
+                 Html.RenderPartial("MaterializedTweet", tweet);
+            }
+            </ul>
+            <br>
+            <div class="paging">
+                <ul class="pagination">
+                    @{
+                        var data = Model as IPagedList<TweetViewModel>;
+                    }
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

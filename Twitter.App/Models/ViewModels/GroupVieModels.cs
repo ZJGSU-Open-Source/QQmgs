@@ -14,5 +14,7 @@ namespace Twitter.App.Models.ViewModels
         public string CreaterId { get; set; }
 
         public DateTime CreatedTime { get; set; }
+
+        public int TweetsCount { get; set; }
     }
 }
