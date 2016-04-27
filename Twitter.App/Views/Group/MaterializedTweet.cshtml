@@ -1,11 +1,63 @@
 ﻿@model Twitter.App.Models.ViewModels.TweetViewModel
 
-<li class="collection-item avatar">
-    <i class="material-icons circle green">insert_chart</i>
-    <span class="title">@Model.Author</span>
-    <p>
-        @Model.Text <br/>
-        @Model.DatePosted
-    </p>
-    <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" class="secondary-content"><i class="material-icons">grade</i></a>
+@*<li class="collection-item avatar">
+        <i class="material-icons circle green">insert_chart</i>
+        <span class="title">@Model.Author</span>
+        <p>
+            @Model.Text <br />
+            @Model.DatePosted
+        </p>
+        <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>*@
+<li>
+    <div class="col s12 m8 offset-m2 l6 offset-l3 hoverable">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s2">
+                    @switch (Model.Id % 5)
+                    {
+                        case 0:
+                            <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                            break;
+                        case 1:
+                            <img src="http://lionsdenu.s3.amazonaws.com/wp-content/uploads/2014/04/tumblr_m768mueaEQ1r9ihmlo1_500-150x150.jpeg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                            break;
+                        case 2:
+                            <img src="http://lionsdenu.s3.amazonaws.com/wp-content/uploads/2013/12/86c0b2823b5a11e2b4d922000a1fae83_7-150x150.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                            break;
+                        case 3:
+                            <img src="http://cdn.nextimpulsesports.com/wp-content/uploads/2014/03/sasa-150x150.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                            break;
+                        case 4:
+                            <img src="http://tse4.mm.bing.net/th?id=OIP.M6f728087d8b47defbd6741c07252dc44o0&pid=15.1" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                            break;
+                    }
+                </div>
+                <div class="col s10">
+                    <span class="black-text" style="font-size: 20px">
+                        <a style="font-family: GillSans, Calibri, Trebuchet, sans-serif; font-size: 26px">@Model.Author</a>
+                        <br/>
+                        @Model.Text <br />
+                    </span>
+                </div>
+            </div>
+            <div class="card-action">
+                <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})">View More</a>
+            </div>
+        </div>
+    </div>
 </li>
+@*<li>
+    <div class="card-panel grey lighten-5 z-depth-1 hoverable">
+        <div class="card-content black-text">
+            <span class="card-title">@Model.Author</span>
+            <p>
+                @Model.Text <br />
+                @Model.DatePosted
+            </p>
+        </div>
+        <div class="card-action">
+            <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})">View More</a>
+        </div>
+    </div>
+</li>*@

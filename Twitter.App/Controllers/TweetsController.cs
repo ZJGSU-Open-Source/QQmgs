@@ -144,6 +144,41 @@
         }
 
         [HttpPost]
+        [Route("create")]
+        public ActionResult CreateTweet(CreateTweetBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.Response.StatusCode = 400;
+                return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+            }
+
+            var loggedUserId = this.User.Identity.GetUserId();
+            var loggedUserUsername = this.User.Identity.GetUserName();
+
+            var group = Data.Group.Find(model.GroupId);
+            if (group == null)
+            {
+                this.Response.StatusCode = 400;
+                return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+            }
+
+            var tweet = new Tweet
+            {
+                Text = model.Text,
+                AuthorId = loggedUserId,
+                DatePosted = DateTime.Now,
+                IsEvent = false,
+                GroupId = model.GroupId
+            };
+
+            this.Data.Tweets.Add(tweet);
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Get", "Group", new { groupId = model.GroupId, p = 1 });
+        }
+
+        [HttpPost]
         [Route("reply")]
         public ActionResult Reply(ReplyViewModel model)
         {
@@ -253,7 +288,7 @@
                 Data.Tweets.Update(tweet);
                 Data.SaveChanges();
 
-                return RedirectToAction("GetTweet", "Tweets", new {tweetId = tweet.Id});
+                return RedirectToAction("GetTweet", "Tweets", new { tweetId = tweet.Id });
             }
 
             return View(tweet);

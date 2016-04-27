@@ -11,15 +11,15 @@
         <br>
 
         <div class="row center">
-            <h5 class="header col s12 light grey-text">@Resources.Group: @ViewData["GroupName"]</h5>
+            <h5 class="header col s12 light grey-text">@Resources.Group·@ViewData["GroupName"]</h5>
         </div>
 
         <div style="max-width: 700px; margin: auto">
-            <ul class="collection">
+            <ul class="">
                 @foreach (var tweet in Model)
-            {
-                 Html.RenderPartial("MaterializedTweet", tweet);
-            }
+                {
+                    Html.RenderPartial("MaterializedTweet", tweet);
+                }
             </ul>
             <br>
             <div class="paging">
@@ -30,6 +30,12 @@
                     @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
                 </ul>
             </div>
+        </div>
+
+        <div class="fixed-action-btn" style="bottom: 45px; right: 48px;">
+            <a class="btn-floating btn-large red" href="@Url.Action("Add", "Group", new { groupId = $"{ViewData["GroupId"]}" })">
+            <i class="large material-icons">mode_edit</i>
+            </a>
         </div>
 
     </div>

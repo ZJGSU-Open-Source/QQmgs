@@ -16,13 +16,24 @@
     <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 <body>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">one</a></li>
+        <li><a href="#!">two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">three</a></li>
+    </ul>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
             <ul class="right hide-on-med-and-down">
                 @if (Request.IsAuthenticated)
-            {
-                    <li><a href="@Url.Action("Index", "Home")">@Resources.Hello @User.Identity.GetUserName() !</a></li>
+                {
+                    <li>@*<a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a>*@</li>
+                    <li><a href="@Url.Action("index", "Group")">Group</a></li>
+                    <li><a href="#"><i class="material-icons">search</i></a></li>
+                    <li><a href="@Url.Action("Index", "Home")"><i class="material-icons">view_module</i></a></li>
+                    <li><a href="@Url.Action("Index", "Manage")"><i class="material-icons">more_vert</i></a></li>
                 }
                 else
                 {
@@ -55,7 +66,9 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Company Bio</h5>
-                    <p class="grey-text text-lighten-4">We are students from CS1301, enrolled in course SYSTEM DESIGN PRACTICE. Under group work we keep developing, keep moving. Any donate to us will be appreciated.<br/>Contact Mail: qqmgs@@qqmgs.com</p>
+                    <p class="grey-text text-lighten-4">
+                        We are students from CS1301, enrolled in course SYSTEM DESIGN PRACTICE. Under group work we keep developing, keep moving. Any donate to us will be appreciated.<br />Contact Mail: qqmgs@@qqmgs.com
+                    </p>
 
 
                 </div>

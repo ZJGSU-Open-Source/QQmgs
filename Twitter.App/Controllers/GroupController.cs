@@ -81,20 +81,28 @@ namespace Twitter.App.Controllers
                     PublishTime = reply.PublishTime,
                     Author = reply.AuthorName
                 }).ToList()
-            }).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
+            }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
+            // pass Group info to view
             ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
 
             return this.View(tweetsViewModel);
         }
 
-        // GET: DevLog/Create
+        public ActionResult Add(int groupId)
+        {
+            // pass Group info to view
+            ViewData["GroupId"] = groupId;
+
+            return View();
+        }
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DevLog/Create
         [HttpPost]
         public ActionResult Create(CreateLogBindingModel model)
         {
@@ -117,13 +125,11 @@ namespace Twitter.App.Controllers
             }
         }
 
-        // GET: DevLog/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: DevLog/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -139,13 +145,11 @@ namespace Twitter.App.Controllers
             }
         }
 
-        // GET: DevLog/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: DevLog/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
