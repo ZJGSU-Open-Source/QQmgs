@@ -1,5 +1,9 @@
-﻿@using (Html.BeginForm("Upload", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+﻿@if (Request.IsAuthenticated)
 {
-    <input type="file" name="file" />
+    using (Html.BeginForm("Upload", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="file" />
         <input class="waves-effect waves-light btn" type="submit" value="Post" />
+    }
 }
+
