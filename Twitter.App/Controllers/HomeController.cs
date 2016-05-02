@@ -25,6 +25,8 @@ namespace Twitter.App.Controllers
 
         public ActionResult Index(int p = 1)
         {
+            return RedirectToAction("Index", "Group");
+
             var recentTweets =
                 this.Data.Tweets.All()
                     .OrderByDescending(t => t.DatePosted)
