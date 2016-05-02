@@ -6,4 +6,8 @@
         <input class="waves-effect waves-light btn" type="submit" value="Post" />
     }
 }
+else
+{
+    <h5>你需要首先登陆全球某工商才能post,请点击 <a href="@Url.Action("Login", "Account", new { returnUrl = @Url.Action("index", "Photo") })">登陆</a></h5>
+}
 
