@@ -11275,7 +11275,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 @media (min-width: 768px) and (max-width: 991px) {
     .row .col.photo-row {
-        width: 50%;
+        width: 100%;
         margin-left: auto;
         left: auto;
         right: auto;
@@ -11283,7 +11283,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 @media (min-width: 992px) and (max-width: 1199px) {
     .row .col.photo-row {
-        width: 50%;
+        width: 100%;
         margin-left: auto;
         left: auto;
         right: auto;
@@ -11291,7 +11291,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 @media (min-width: 1200px) {
     .row .col.photo-row {
-        width: 50%;
+        width: 100%;
         margin-left: auto;
         left: auto;
         right: auto;

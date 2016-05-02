@@ -56,6 +56,12 @@ namespace Twitter.Data
                 .HasForeignKey(t => t.AuthorId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Photo>()
+                .HasRequired(t => t.Author)
+                .WithMany(u => u.Photos)
+                .HasForeignKey(t => t.AuthorId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Tweet>()
                 .HasMany(t => t.Replies)
                 .WithMany()

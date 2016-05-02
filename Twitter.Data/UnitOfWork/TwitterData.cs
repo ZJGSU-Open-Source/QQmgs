@@ -51,6 +51,8 @@
 
         public IRepository<Group> Group => this.GetRepository<Group>();
 
+        public IRepository<Photo> Photo => this.GetRepository<Photo>();
+
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 
         public void SaveChanges()

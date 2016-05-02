@@ -229,6 +229,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\FileUpload.cs" />
     <Compile Include="BusinessLogic\ManagerHelper.cs" />
     <Compile Include="Common\Guard.cs" />
     <Compile Include="Constants\Constants.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Models\ViewModels\DevLogViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupVieModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\PhotoViewModel.cs" />
     <Compile Include="Models\ViewModels\ReplyViewModel.cs" />
     <Compile Include="Models\ViewModels\TweetViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
@@ -423,6 +425,8 @@
     <Content Include="Views\Group\MaterializedTweet.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Group\Add.cshtml" />
+    <Content Include="Views\Photo\Test.cshtml" />
+    <Content Include="Views\Photo\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

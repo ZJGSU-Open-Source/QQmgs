@@ -29,6 +29,8 @@
 
         IRepository<Group> Group { get; }
 
+        IRepository<Photo> Photo { get; } 
+
         void SaveChanges();
     }
 }
