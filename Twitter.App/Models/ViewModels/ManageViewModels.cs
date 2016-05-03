@@ -12,6 +12,10 @@
     {
         public bool HasPassword { get; set; }
 
+        public bool HasAvatarImage { get; set; }
+
+        public string AvatarImageName { get; set; }
+
         public IList<UserLoginInfo> Logins { get; set; }
 
         public string PhoneNumber { get; set; }

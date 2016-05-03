@@ -26,6 +26,10 @@
         [MaxLength(50)]
         public string Status { get; set; }
 
+        public bool HasAvatarImage { get; set; }
+
+        public string AvatarImageName { get; set; }
+
         public virtual ICollection<Tweet> Tweets { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; } 

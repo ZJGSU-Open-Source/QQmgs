@@ -1,0 +1,18 @@
+﻿@model Twitter.App.Models.ViewModels.ChangeStatusViewModel
+@{
+    ViewBag.Title = "Upload Avatar image";
+}
+<div class="container body-content">
+    <h2>@ViewBag.Title.</h2>
+    @using (Html.BeginForm("UploadAvatarImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Upload.</h4>
+        <hr />
+        <input type="file" name="file" />
+        <input class="waves-effect waves-light btn" type="submit" value="Post" />
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

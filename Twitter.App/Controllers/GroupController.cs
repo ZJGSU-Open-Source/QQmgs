@@ -74,6 +74,8 @@ namespace Twitter.App.Controllers
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
+                HasAvatarImage = t.Author.HasAvatarImage,
+                AvatarImageName = t.Author.AvatarImageName,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,

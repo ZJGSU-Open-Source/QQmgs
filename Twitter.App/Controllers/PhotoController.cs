@@ -24,7 +24,8 @@ namespace Twitter.App.Controllers
         {
             var photos =
                 this.Data.Photo.All()
-                    .OrderByDescending(t => t.DatePosted)
+                    .OrderByDescending(p => p.DatePosted)
+                    .Where(p => !p.IsAvatarImage)
                     .Select(AsPhotoViewModel);
 
             return View(photos);
@@ -39,20 +40,19 @@ namespace Twitter.App.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
-            var uploadedFile = FileUpload.UploadFile(file);
+            var uploadedFile = FileUploadHelper.UploadFile(file);
             var loggedUserId = this.User.Identity.GetUserId();
 
             var photo = new Photo
             {
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
-                Name = uploadedFile
+                Name = uploadedFile,
+                IsAvatarImage = false
             };
 
             this.Data.Photo.Add(photo);
             this.Data.SaveChanges();
-
-            ViewData["uploadedFile"] = uploadedFile;
 
             return RedirectToAction("Index");
         }

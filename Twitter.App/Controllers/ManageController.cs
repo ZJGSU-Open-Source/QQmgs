@@ -1,6 +1,8 @@
 ﻿using System;
+using Twitter.App.BusinessLogic;
 using Twitter.App.Helper;
 using Twitter.Data.UnitOfWork;
+using Twitter.Models;
 
 namespace Twitter.App.Controllers
 {
@@ -79,6 +81,8 @@ namespace Twitter.App.Controllers
             var registeredTime = this.Data.Users.Find(userId).RegisteredTime;
             var registerTimeInterval = (DateTime.Now - registeredTime).Days;
 
+            var user = this.Data.Users.Find(userId);
+
             var model = new IndexViewModel
                             {
                                 HasPassword = this.HasPassword(), 
@@ -89,7 +93,9 @@ namespace Twitter.App.Controllers
                                     await
                                     this.AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                                 RegisteredTime = registeredTime,
-                                RegisterTimeInterval = registerTimeInterval
+                                RegisterTimeInterval = registerTimeInterval,
+                                HasAvatarImage = user.HasAvatarImage,
+                                AvatarImageName = user.AvatarImageName
             };
 
             return this.View(model);
@@ -364,6 +370,41 @@ namespace Twitter.App.Controllers
 
             return this.RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public ActionResult UploadAvatarImage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadAvatarImage(HttpPostedFileBase file)
+        {
+            var uploadedFile = FileUploadHelper.UploadFile(file);
+            var loggedUserId = this.User.Identity.GetUserId();
+
+            var photo = new Photo
+            {
+                AuthorId = loggedUserId,
+                DatePosted = DateTime.Now,
+                Name = uploadedFile,
+                IsAvatarImage = true
+            };
+
+            this.Data.Photo.Add(photo);
+            this.Data.SaveChanges();
+
+            var user = this.Data.Users.Find(loggedUserId);
+            user.HasAvatarImage = true;
+            user.AvatarImageName = photo.Name;
+            this.Data.Users.Update(user);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult SetCulture(string culture)
         {

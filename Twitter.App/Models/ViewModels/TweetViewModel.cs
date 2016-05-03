@@ -37,6 +37,12 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("date_posted")]
         public DateTime DatePosted { get; set; }
 
+        [JsonProperty("has_avatar_image")]
+        public bool HasAvatarImage { get; set; }
+
+        [JsonProperty("avatar_image_name")]
+        public string AvatarImageName { get; set; }
+
         [JsonProperty("group_id")]
         public int GroupId { get; set; }
     }

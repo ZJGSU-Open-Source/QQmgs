@@ -20,6 +20,20 @@ if (c == culture)
         <h4>@Resources.ChangeYourAccountSettings</h4>
         <hr/>
         <dl class="dl-horizontal">
+            <dt>Avatar image:</dt>
+            <dd>
+                @if (Model.HasAvatarImage)
+                {
+                    <img src="~/img/Uploads/Thumbnails/@Model.AvatarImageName" alt=""/>
+                }
+                else
+                {
+                    <img src="~/img/Uploads/Thumbnails/LA.jpg" alt="" />
+                }
+                [
+                @Html.ActionLink("Upload Aavatar image", "UploadAvatarImage")
+                ]
+            </dd>
             <dt>@Resources.Celebration:</dt>
             <dd>
                 <p>It's the @Model.RegisterTimeInterval th Day in QQmgs.com. You're Registered on @Model.RegisteredTime.ToString("D")</p>

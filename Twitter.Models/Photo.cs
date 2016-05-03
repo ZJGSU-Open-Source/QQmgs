@@ -21,5 +21,7 @@ namespace Twitter.Models
         public string AuthorId { get; set; }
 
         public virtual User Author { get; set; }
+
+        public bool IsAvatarImage { get; set; }
     }
 }

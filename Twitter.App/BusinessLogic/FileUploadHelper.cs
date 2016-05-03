@@ -9,12 +9,14 @@ using Glimpse.Core.Extensibility;
 
 namespace Twitter.App.BusinessLogic
 {
-    public static class FileUpload
+    public static class FileUploadHelper
     {
         public static char DirSeparator = System.IO.Path.DirectorySeparatorChar;
 
         public static string FilesPath =
             HttpContext.Current.Server.MapPath("~\\img" + DirSeparator + "Uploads" + DirSeparator);
+
+        public static int DefaultResizeSize { get; } = 200;
 
         public static string UploadFile(HttpPostedFileBase file)
         {
@@ -46,7 +48,7 @@ namespace Twitter.App.BusinessLogic
             file.SaveAs(Path.GetFullPath(path));
 
             // Save our thumbnail as well
-            ResizeImage(file, 70, 70);
+            ResizeImage(file, fileName, DefaultResizeSize, DefaultResizeSize);
 
             // Return the filename
             return fileName;
@@ -75,9 +77,9 @@ namespace Twitter.App.BusinessLogic
             }
         }
 
-        public static void ResizeImage(HttpPostedFileBase file, int width, int height)
+        public static void ResizeImage(HttpPostedFileBase file, string fileName, int width, int height)
         {
-            string thumbnailDirectory = String.Format(@"{0}{1}{2}", FilesPath, DirSeparator, "Thumbnails");
+            string thumbnailDirectory = $@"{FilesPath}{DirSeparator}{"Thumbnails"}";
 
             // Check if the directory we are saving to exists
             if (!Directory.Exists(thumbnailDirectory))
@@ -87,7 +89,7 @@ namespace Twitter.App.BusinessLogic
             }
 
             // Final path we will save our thumbnail
-            string imagePath = String.Format(@"{0}{1}{2}", thumbnailDirectory, DirSeparator, file.FileName);
+            string imagePath = $@"{thumbnailDirectory}{DirSeparator}{fileName}";
             // Create a stream to save the file to when we're done resizing
             FileStream stream = new FileStream(Path.GetFullPath(imagePath), FileMode.OpenOrCreate);
 
