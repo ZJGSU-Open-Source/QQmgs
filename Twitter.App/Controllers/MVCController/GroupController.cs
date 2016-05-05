@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PagedList;
+using Twitter.App.BusinessLogic;
 using Twitter.App.Models.BindingModels;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
@@ -19,28 +22,13 @@ namespace Twitter.App.Controllers
         {
         }
 
+        [HttpGet]
+        [Route("")]
         public ActionResult Index()
         {
-            //for (var i = 0; i < 10; ++i)
-            //{
-            //    var group = this.Data.Group.Find(i);
-            //    if (group == null)
-            //    {
-            //        var testGroup = new Group
-            //        {
-            //            Name = "TEST" + DateTime.Now.ToString("O"),
-            //            CreatedTime = DateTime.Now,
-            //            CreaterId = this.User.Identity.GetUserId()
-            //        };
-
-            //        Data.Group.Add(testGroup);
-            //        Data.SaveChanges();
-            //    }
-            //}
-
             var recentLogs = Data.Group.All()
                 .OrderByDescending(t => t.CreatedTime)
-                .Select(AsGroupViewModel)
+                .Select(ViewModelsHelper.AsGroupViewModel)
                 .ToList();
 
             return this.View(recentLogs);
@@ -92,9 +80,16 @@ namespace Twitter.App.Controllers
             return this.View(tweetsViewModel);
         }
 
-        public ActionResult Add(int groupId)
+        public ActionResult AddTweet(int groupId)
         {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
             // pass Group info to view
+            ViewData["GroupName"] = group.Name;
             ViewData["GroupId"] = groupId;
 
             return View();
@@ -106,17 +101,20 @@ namespace Twitter.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateLogBindingModel model)
+        public ActionResult Create(CreateGroupBindingModel model)
         {
+            var loggedUserId = this.User.Identity.GetUserId();
+
             try
             {
-                var devLog = new DevLog
+                var group = new Group
                 {
-                    Log = model.Log,
-                    PublishedTime = DateTime.Now
+                    Name = model.Name,
+                    CreatedTime = DateTime.Now,
+                    CreaterId = loggedUserId
                 };
 
-                Data.DevLog.Add(devLog);
+                Data.Group.Add(group);
                 Data.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -167,13 +165,39 @@ namespace Twitter.App.Controllers
             }
         }
 
-        private static readonly Expression<Func<Group, GroupVieModels>> AsGroupViewModel =
-            t => new GroupVieModels
+        [HttpGet]
+        public ActionResult UploadGroupImage(int groupId)
+        {
+            ViewData["GroupId"] = groupId;
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadGroupImage(HttpPostedFileBase file, int groupId)
+        {
+            var uploadedFile = FileUploadHelper.UploadFile(file);
+            var loggedUserId = this.User.Identity.GetUserId();
+
+            var photo = new Photo
             {
-                Id = t.Id,
-                CreatedTime = t.CreatedTime,
-                Name = t.Name,
-                TweetsCount = t.Tweets.Count
+                AuthorId = loggedUserId,
+                DatePosted = DateTime.Now,
+                Name = uploadedFile,
+                PhotoType = PhotoType.GroupImage
             };
+
+            this.Data.Photo.Add(photo);
+            this.Data.SaveChanges();
+
+            var group = this.Data.Group.Find(groupId);
+            group.HasImageOverview = true;
+            group.ImageOverview = photo.Name;
+            this.Data.Group.Update(group);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

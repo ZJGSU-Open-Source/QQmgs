@@ -1,0 +1,18 @@
+﻿@model Twitter.App.Models.ViewModels.ChangeStatusViewModel
+@{
+    ViewBag.Title = "Upload Group image";
+}
+<div class="container body-content">
+    <h2>@ViewBag.Title.</h2>
+    @using (Html.BeginForm("UploadGroupImage", "Group", FormMethod.Post, new { enctype = "multipart/form-data", groupId = @ViewData["GroupId"] }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Upload.</h4>
+        <hr />
+        <input type="file" name="file" />
+        <input class="waves-effect waves-light btn" type="submit" value="Post" />
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

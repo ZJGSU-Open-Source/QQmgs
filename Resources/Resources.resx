@@ -273,4 +273,7 @@
   <data name="Group" xml:space="preserve">
     <value>Group</value>
   </data>
+  <data name="GroupIndex" xml:space="preserve">
+    <value>Group index</value>
+  </data>
 </root>

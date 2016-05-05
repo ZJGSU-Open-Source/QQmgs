@@ -27,6 +27,10 @@ namespace Twitter.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreatedTime { get; set; }
 
+        public bool HasImageOverview { get; set; }
+
+        public string ImageOverview { get; set; }
+
         public virtual ICollection<Tweet> Tweets { get; set; }
     }
 }

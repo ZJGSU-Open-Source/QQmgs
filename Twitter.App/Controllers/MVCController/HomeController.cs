@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Twitter.App.BusinessLogic;
 using Twitter.Models;
 
 namespace Twitter.App.Controllers
@@ -30,7 +31,7 @@ namespace Twitter.App.Controllers
             var recentTweets =
                 this.Data.Tweets.All()
                     .OrderByDescending(t => t.DatePosted)
-                    .Select(AsTweetViewModel);
+                    .Select(ViewModelsHelper.AsTweetViewModel);
 
             var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
@@ -42,27 +43,5 @@ namespace Twitter.App.Controllers
         {
             return View();
         }
-
-        private static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
-            t => new TweetViewModel
-            {
-                Id = t.Id,
-                Author = t.Author.UserName,
-                AuthorStatus = t.Author.Status,
-                IsEvent = t.IsEvent,
-                Text = t.Text,
-                UsersFavouriteCount = t.UsersFavourite.Count,
-                RepliesCount = t.Reply.Count,
-                RetweetsCount = t.Retweets.Count,
-                DatePosted = t.DatePosted,
-                GroupId = t.GroupId,
-                ReplyList = t.Reply.Select(reply => new ReplyViewModel
-                {
-                    Text = reply.Content,
-                    Id = reply.Id,
-                    PublishTime = reply.PublishTime,
-                    Author = reply.AuthorName
-                }).ToList()
-            };
     }
 }

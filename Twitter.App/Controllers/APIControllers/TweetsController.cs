@@ -22,7 +22,7 @@ namespace Twitter.App.Controllers.APIControllers
         }
 
         [HttpGet]
-        [Route("~/api/Queries/Tweets")]
+        [Route("~/api/queries/Tweets")]
         public HttpResponseMessage GetAll([FromUri] int pageNo = DefaultPageNo, [FromUri] int pageSize = DefaultPageSize)
         {
             if (pageNo <= 0 || pageSize <= 0)
@@ -32,7 +32,7 @@ namespace Twitter.App.Controllers.APIControllers
 
             var recentTweets = this.Data.Tweets.All()
                 .OrderByDescending(t => t.DatePosted)
-                .Select(AsTweetViewModel).ToList();
+                .Select(ViewModelsHelper.AsTweetViewModel).ToList();
 
             var pagedTweets = recentTweets.GetPagedResult(t => t.Id, pageNo, pageSize, SortDirection.Descending);
 
@@ -46,7 +46,7 @@ namespace Twitter.App.Controllers.APIControllers
             var tweet = Data.Tweets.All()
                 .OrderByDescending(t => t.DatePosted)
                 .Where(t => t.Id == tweetId)
-                .Select(AsTweetViewModel)
+                .Select(ViewModelsHelper.AsTweetViewModel)
                 .FirstOrDefault();
 
             return tweet == null
@@ -54,26 +54,5 @@ namespace Twitter.App.Controllers.APIControllers
                 : Request.CreateResponse(HttpStatusCode.OK, tweet);
         }
 
-        private static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
-            t => new TweetViewModel
-            {
-                Id = t.Id,
-                Author = t.Author.UserName,
-                AuthorStatus = t.Author.Status,
-                IsEvent = t.IsEvent,
-                Text = t.Text,
-                UsersFavouriteCount = t.UsersFavourite.Count,
-                RepliesCount = t.Reply.Count,
-                RetweetsCount = t.Retweets.Count,
-                DatePosted = t.DatePosted,
-                GroupId = t.GroupId,
-                ReplyList = t.Reply.Select(reply => new ReplyViewModel
-                {
-                    Text = reply.Content,
-                    Id = reply.Id,
-                    PublishTime = reply.PublishTime,
-                    Author = reply.AuthorName
-                }).ToList()
-            };
     }
 }

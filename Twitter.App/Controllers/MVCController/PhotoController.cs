@@ -25,7 +25,7 @@ namespace Twitter.App.Controllers
             var photos =
                 this.Data.Photo.All()
                     .OrderByDescending(p => p.DatePosted)
-                    .Where(p => !p.IsAvatarImage)
+                    .Where(p => p.PhotoType == PhotoType.Photo)
                     .Select(AsPhotoViewModel);
 
             return View(photos);
@@ -48,7 +48,7 @@ namespace Twitter.App.Controllers
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
                 Name = uploadedFile,
-                IsAvatarImage = false
+                PhotoType = PhotoType.Photo
             };
 
             this.Data.Photo.Add(photo);

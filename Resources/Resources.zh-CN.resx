@@ -273,4 +273,7 @@
   <data name="Group" xml:space="preserve">
     <value>兴趣小组</value>
   </data>
+  <data name="GroupIndex" xml:space="preserve">
+    <value>兴趣小组</value>
+  </data>
 </root>

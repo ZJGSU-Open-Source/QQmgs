@@ -390,7 +390,7 @@ namespace Twitter.App.Controllers
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
                 Name = uploadedFile,
-                IsAvatarImage = true
+                PhotoType = PhotoType.AvatarImage
             };
 
             this.Data.Photo.Add(photo);
@@ -404,7 +404,6 @@ namespace Twitter.App.Controllers
 
             return RedirectToAction("Index");
         }
-
 
         public ActionResult SetCulture(string culture)
         {

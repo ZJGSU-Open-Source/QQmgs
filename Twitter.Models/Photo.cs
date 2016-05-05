@@ -22,6 +22,13 @@ namespace Twitter.Models
 
         public virtual User Author { get; set; }
 
-        public bool IsAvatarImage { get; set; }
+        public PhotoType PhotoType { get; set; }
+    }
+
+    public enum PhotoType
+    {
+        Photo,
+        AvatarImage,
+        GroupImage
     }
 }
