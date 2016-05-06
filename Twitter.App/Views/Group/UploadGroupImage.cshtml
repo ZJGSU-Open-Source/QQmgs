@@ -1,18 +1,28 @@
 ﻿@model Twitter.App.Models.ViewModels.ChangeStatusViewModel
 @{
     ViewBag.Title = "Upload Group image";
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 <div class="container body-content">
     <h2>@ViewBag.Title.</h2>
-    @using (Html.BeginForm("UploadGroupImage", "Group", FormMethod.Post, new { enctype = "multipart/form-data", groupId = @ViewData["GroupId"] }))
+    @using (Html.BeginForm("UploadGroupImage", "Group", new { groupId=ViewData["GroupId"] }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <h4>Upload.</h4>
-        <hr />
-        <input type="file" name="file" />
-        <input class="waves-effect waves-light btn" type="submit" value="Post" />
+        <hr/>
+        <div class="row">
+            @*<div class="file-field input-field col s6">
+                <div class="btn">
+                    <span>选择图片</span>
+                    <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>*@
+
+            <input class="s6" type="file" name="file" />
+            <input class="waves-effect waves-light btn col s1" type="submit" value="Post" />    
+        </div>
     }
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

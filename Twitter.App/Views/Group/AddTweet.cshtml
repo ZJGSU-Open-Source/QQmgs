@@ -4,33 +4,49 @@
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+            <a href="@Url.Action("Get", new {groupId = 1, p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+            <a href="#" class="breadcrumb">发言</a>
+        </div>
+    </div>
+</nav>
+
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
+
+
         <h2>@ViewBag.Title.</h2>
-        @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(string.Empty, new { @class = "text-danger" })
+            @Html.ValidationSummary(string.Empty, new {@class = "text-danger"})
             <div class="row">
-                <div class="form-group col s4">
-                    @Html.LabelFor(t => t.Text, new { @class = "col-md-2 control-label" })
+                <div class="form-group col s10">
+                    @Html.LabelFor(t => t.Text, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.TextAreaFor(t => t.Text, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(t => t.Text, string.Empty, new { @class = "text-danger" })
+                        @Html.TextAreaFor(t => t.Text, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(t => t.Text, string.Empty, new {@class = "text-danger"})
                     </div>
                 </div>
                 <div class="form-group" style="display: none">
-                    @Html.LabelFor(t => t.GroupId, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(t => t.GroupId, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.TextBoxFor(t => t.GroupId, new { @class = "form-control", @Value = ViewData["GroupId"] })
+                        @Html.TextBoxFor(t => t.GroupId, new {@class = "form-control", @Value = ViewData["GroupId"]})
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col s4">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Send" class="btn btn-default" />
-                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                    @*<div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Send" class="btn btn-default"/>
+                    </div>*@
                 </div>
             </div>
         }

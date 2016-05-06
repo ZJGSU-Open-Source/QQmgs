@@ -194,6 +194,7 @@ namespace Twitter.App.Controllers
             var group = this.Data.Group.Find(groupId);
             group.HasImageOverview = true;
             group.ImageOverview = photo.Name;
+
             this.Data.Group.Update(group);
             this.Data.SaveChanges();
 
