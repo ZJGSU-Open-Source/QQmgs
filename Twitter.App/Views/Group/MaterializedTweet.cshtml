@@ -1,4 +1,5 @@
-﻿@model Twitter.App.Models.ViewModels.TweetViewModel
+﻿@using Twitter.App.Constants
+@model Twitter.App.Models.ViewModels.TweetViewModel
 
 @*<li class="collection-item avatar">
         <i class="material-icons circle green">insert_chart</i>
@@ -14,12 +15,19 @@
         <div class="card-panel grey lighten-5 z-depth-1">
             <div class="row valign-wrapper">
                 <div class="col s2">
-                    <img src="~/img/Uploads/Thumbnails/@Model.AvatarImageName" alt="" class="circle responsive-img">
+                    @if (Model.HasAvatarImage)
+                    {
+                        <img src="~/img/Uploads/Thumbnails/@Model.AvatarImageName" alt="" class="circle responsive-img">
+                    }
+                    else
+                    {
+                        <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img">
+                    }
                 </div>
                 <div class="col s10">
                     <span class="black-text" style="font-size: 20px">
                         <a style="font-family: GillSans, Calibri, Trebuchet, sans-serif; font-size: 26px">@Model.Author</a>
-                        <br/>
+                        <br />
                         @Model.Text <br />
                     </span>
                 </div>
@@ -31,16 +39,16 @@
     </div>
 </li>
 @*<li>
-    <div class="card-panel grey lighten-5 z-depth-1 hoverable">
-        <div class="card-content black-text">
-            <span class="card-title">@Model.Author</span>
-            <p>
-                @Model.Text <br />
-                @Model.DatePosted
-            </p>
+        <div class="card-panel grey lighten-5 z-depth-1 hoverable">
+            <div class="card-content black-text">
+                <span class="card-title">@Model.Author</span>
+                <p>
+                    @Model.Text <br />
+                    @Model.DatePosted
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})">View More</a>
+            </div>
         </div>
-        <div class="card-action">
-            <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})">View More</a>
-        </div>
-    </div>
-</li>*@
+    </li>*@

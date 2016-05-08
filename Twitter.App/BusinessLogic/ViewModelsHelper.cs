@@ -32,6 +32,8 @@ namespace Twitter.App.BusinessLogic
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
+                HasAvatarImage = t.Author.HasAvatarImage,
+                AvatarImageName = t.Author.HasAvatarImage ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" + t.Author.AvatarImageName : null,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,

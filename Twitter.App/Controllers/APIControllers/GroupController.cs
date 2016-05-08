@@ -70,7 +70,7 @@ namespace Twitter.App.Controllers.APIControllers
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
                 HasAvatarImage = t.Author.HasAvatarImage,
-                AvatarImageName = t.Author.AvatarImageName,
+                AvatarImageName = t.Author.HasAvatarImage ? new Uri(new Uri(Constants.Constants.WebHostPrefix + Constants.Constants.ImageThumbnailsPrefix) + t.Author.AvatarImageName).ToString() : null,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,

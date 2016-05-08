@@ -14,17 +14,32 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br>
+        @{
+            Html.RenderPartial("RecommandGroups");
+        }
 
-        <div class="row center">
-            <h5 class="header col s12 light grey-text">@Resources.GroupIndex</h5>
-        </div>
+        <div class="section">
+            <div class="row center">
+                <h5 class="header col s12 light grey-text">所有兴趣小组</h5>
+            </div>
 
-        <div class="collection" style="max-width: 700px; margin: auto">
-            @foreach (var group in Model)
+            <div class="collection" style="max-width: 700px; margin: auto">
+                @foreach (var group in Model)
             {
-                <a href="@Url.Action("Get", new { groupId = group.Id, p = 1 })" class="collection-item">@group.Name<span class="new badge">@group.TweetsCount</span></a>
-            }
+                    <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">@group.Name<span class="new badge">@group.TweetsCount</span></a>
+                }
+            </div>
+            <br />
+            <div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
+                <a class="btn-floating btn-large red" href="@Url.Action("Create", "Group")">
+                    <i class="large material-icons">add</i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                </ul>
+            </div>
         </div>
-        <br>
     </div>
 </div>

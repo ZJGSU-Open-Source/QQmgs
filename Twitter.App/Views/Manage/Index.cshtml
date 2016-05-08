@@ -1,4 +1,5 @@
-﻿@model Twitter.App.Models.ViewModels.IndexViewModel
+﻿@using Constants = Twitter.App.Constants.Constants
+@model Twitter.App.Models.ViewModels.IndexViewModel
 @{
     ViewBag.Title = "Manage";
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
@@ -28,10 +29,10 @@ if (c == culture)
                 }
                 else
                 {
-                    <img src="~/img/Uploads/Thumbnails/LA.jpg" alt="" />
+                    <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img">
                 }
                 [
-                @Html.ActionLink("Upload Aavatar image", "UploadAvatarImage")
+                @Html.ActionLink("上传用户头像", "UploadAvatarImage")
                 ]
             </dd>
             <dt>@Resources.Celebration:</dt>
