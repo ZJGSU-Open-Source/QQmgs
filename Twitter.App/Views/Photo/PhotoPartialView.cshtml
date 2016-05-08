@@ -12,9 +12,25 @@
         </div>
 
         <div id="photos" class="section scrollspy">
+            @{
+                var index = 0;
+                var photoList = Model.ToList();
+            }
             @foreach (var photo in Model)
             {
-                <div class="col photo-row">
+                if (index%2 != 0)
+                {
+                    <div class="row">
+                        <div class="col s6">
+                            <img class="materialboxed" data-caption="A picture our loved Zhejiang Gongshang Univ." width="450" src="~/img/Uploads/@photoList[index - 1].Name">
+                        </div>
+                        <div class="col s6">
+                            <img class="materialboxed" data-caption="A picture our loved Zhejiang Gongshang Univ." width="450" src="~/img/Uploads/@photoList[index].Name">
+                        </div>
+                    </div>
+                }
+                @*<img class="materialboxed" data-caption="A picture of some deer and tons of trees" width="450" src="~/img/Uploads/@photo.Name">*@
+                @*<div class="col photo-row">
                     <div class="card z-depth-2">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="~/img/Uploads/@photo.Name" alt="" style="max-height: 850px">
@@ -30,8 +46,9 @@
                             <p>Here is some more information about this product that is only revealed once clicked on.</p>
                         </div>
                     </div>
-                </div>
-                    <br />
+                </div>*@
+                ++index;
+                <br/>
             }
         </div>
 
