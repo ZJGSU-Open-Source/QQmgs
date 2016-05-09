@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <a class="mdl-navigation__link" href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a>
+    <a class="mdl-navigation__link" href="@Url.Action("Index", "Manage")">个人信息</a>
 
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {

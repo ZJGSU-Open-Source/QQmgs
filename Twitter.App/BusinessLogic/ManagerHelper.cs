@@ -52,7 +52,7 @@ namespace Twitter.App.BusinessLogic
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.AuthorName
+                    Author = reply.Author.RealName
                 }).ToList()
             };
     }

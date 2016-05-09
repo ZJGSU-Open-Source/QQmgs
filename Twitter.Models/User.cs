@@ -28,7 +28,13 @@
 
         public bool HasAvatarImage { get; set; }
 
+        public string RealName { get; set; }
+
         public string AvatarImageName { get; set; }
+
+        public override string PhoneNumber { get; set; }
+
+        public virtual ICollection<Reply> Replies { get; set; } 
 
         public virtual ICollection<Tweet> Tweets { get; set; }
 

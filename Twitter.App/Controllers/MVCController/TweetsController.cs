@@ -202,7 +202,6 @@ namespace Twitter.App.Controllers
             var reply = new Reply
             {
                 AuthorId = loggedUserId,
-                AuthorName = loggedUserUsername,
                 Content = model.Text,
                 PublishTime = DateTime.Now,
                 TweetId = model.Id
@@ -229,7 +228,7 @@ namespace Twitter.App.Controllers
                 {
                     PublishTime = reply.PublishTime,
                     Text = reply.Content,
-                    Author = loggedUserUsername
+                    Author = reply.Author.RealName
                 });
         }
 

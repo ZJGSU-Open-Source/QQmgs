@@ -412,6 +412,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Photo Sharing.
         /// </summary>
         public static string PhotoSharing {
@@ -435,6 +444,15 @@ namespace Resources {
         public static string QQmgscom {
             get {
                 return ResourceManager.GetString("QQmgscom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Name.
+        /// </summary>
+        public static string RealName {
+            get {
+                return ResourceManager.GetString("RealName", resourceCulture);
             }
         }
         

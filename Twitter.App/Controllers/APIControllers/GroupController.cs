@@ -76,7 +76,7 @@ namespace Twitter.App.Controllers.APIControllers
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.AuthorName
+                    Author = reply.Author.RealName
                 }).ToList()
             }).OrderByDescending(t => t.DatePosted).GetPagedResult(t => t.Id, pageNo, pageSize, SortDirection.Descending);
 

@@ -57,7 +57,7 @@ namespace Twitter.App.Models.ViewModels
     {
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "LoginUserNameRequired")]
-        [Display(Name = "UserName", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "PhoneNumber", ResourceType = typeof(Resources.Resources))]
         [StringLength(50, ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
         [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources),
@@ -80,12 +80,21 @@ namespace Twitter.App.Models.ViewModels
     {
         [Required(ErrorMessageResourceType = typeof (Resources.Resources),
             ErrorMessageResourceName = "UserNameRequired")]
-        [Display(Name = "UserName", ResourceType = typeof (Resources.Resources))]
+        [Display(Name = "PhoneNumber", ResourceType = typeof (Resources.Resources))]
         [StringLength(50, ErrorMessageResourceType = typeof (Resources.Resources),
             ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
         [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources), 
             ErrorMessageResourceName = "InvalidUserName")]
-        public string UserName { get; set; }
+        public string PhoneNumber { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "UserNameRequired")]
+        [Display(Name = "RealName", ResourceType = typeof(Resources.Resources))]
+        [StringLength(50, ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
+        [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "InvalidUserName")]
+        public string RealName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof (Resources.Resources),
             ErrorMessageResourceName = "EmailRequired")]

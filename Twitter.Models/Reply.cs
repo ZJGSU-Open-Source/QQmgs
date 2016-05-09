@@ -26,8 +26,7 @@ namespace Twitter.Models
         [Required]
         public string AuthorId { get; set; }
 
-        [Required]
-        public string AuthorName { get; set; }
+        public virtual User Author { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

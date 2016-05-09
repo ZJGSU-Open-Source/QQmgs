@@ -23,7 +23,7 @@ namespace Twitter.App.BusinessLogic
             t => new TweetViewModel
             {
                 Id = t.Id,
-                Author = t.Author.UserName,
+                Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
                 IsEvent = t.IsEvent,
                 Text = t.Text,
@@ -39,7 +39,7 @@ namespace Twitter.App.BusinessLogic
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.AuthorName
+                    Author = reply.Author.RealName
                 }).ToList()
             };
     }

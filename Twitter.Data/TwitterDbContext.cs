@@ -44,6 +44,12 @@ namespace Twitter.Data
                 .HasForeignKey(m => m.RecipientId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Reply>()
+                .HasRequired(r => r.Author)
+                .WithMany(u => u.Replies)
+                .HasForeignKey(r => r.AuthorId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Tweet>()
                 .HasRequired(t => t.Group)
                 .WithMany(u => u.Tweets)

@@ -53,7 +53,7 @@ namespace Twitter.App.Controllers
             var tweetsViewModel = tweets.Select(t => new TweetViewModel
             {
                 Id = t.Id,
-                Author = t.Author.UserName,
+                Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
                 IsEvent = t.IsEvent,
                 Text = t.Text,
@@ -69,7 +69,7 @@ namespace Twitter.App.Controllers
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.AuthorName
+                    Author = reply.Author.RealName
                 }).ToList()
             }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 

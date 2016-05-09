@@ -161,7 +161,8 @@
             {
                 var user = new User
                 {
-                    UserName = model.UserName,
+                    UserName = model.PhoneNumber,
+                    RealName = model.RealName,
                     Email = model.Email,
                     RegisteredTime = DateTime.Now,
                     Class = model.Class
