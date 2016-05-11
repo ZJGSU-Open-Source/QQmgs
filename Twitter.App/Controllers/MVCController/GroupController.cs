@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using Twitter.App.BusinessLogic;
@@ -199,6 +202,21 @@ namespace Twitter.App.Controllers
             this.Data.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public string GetDataFromServer()
+        {
+            string resp = string.Empty;
+            for (int i = 0; i <= 10; i++)
+            {
+                resp += "<p><span>" +
+                  "</span> This content is dynamically appended " +
+                  "to the existing content on scrolling.</p>";
+            }
+
+            return resp;
         }
     }
 }

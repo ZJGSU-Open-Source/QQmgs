@@ -24,18 +24,18 @@ namespace Twitter.App.Controllers
         {
         }
 
+        [Route("")]
         public ActionResult Index(int p = 1)
         {
             return RedirectToAction("Index", "Group");
+            //var recentTweets =
+            //    this.Data.Tweets.All()
+            //        .OrderByDescending(t => t.DatePosted)
+            //        .Select(ViewModelsHelper.AsTweetViewModel);
 
-            var recentTweets =
-                this.Data.Tweets.All()
-                    .OrderByDescending(t => t.DatePosted)
-                    .Select(ViewModelsHelper.AsTweetViewModel);
+            //var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
-            var pagedTweets = recentTweets.ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
-
-            return this.View(pagedTweets);
+            //return this.View(pagedTweets);
         }
 
         [AllowAnonymous]
