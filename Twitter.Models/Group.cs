@@ -31,6 +31,8 @@ namespace Twitter.Models
 
         public string ImageOverview { get; set; }
 
+        public string Description { get; set; }
+
         public virtual ICollection<Tweet> Tweets { get; set; }
     }
 }

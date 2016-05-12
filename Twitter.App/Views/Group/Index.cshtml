@@ -15,7 +15,8 @@
     <div class="container">
         <br>
         @{
-            Html.RenderPartial("RecommandGroups");
+            Html.RenderAction("GetUserRecommand");
+            //Html.RenderPartial("RecommandGroups");
         }
 
         <div class="section">
@@ -25,7 +26,7 @@
 
             <div class="collection" style="max-width: 700px; margin: auto">
                 @foreach (var group in Model)
-            {
+                {
                     <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">@group.Name<span class="new badge">@group.TweetsCount</span></a>
                 }
             </div>

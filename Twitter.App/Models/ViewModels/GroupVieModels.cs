@@ -16,5 +16,11 @@ namespace Twitter.App.Models.ViewModels
         public DateTime CreatedTime { get; set; }
 
         public int TweetsCount { get; set; }
+
+        public bool HasImageOverview { get; set; }
+
+        public string ImageOverview { get; set; }
+
+        public string Description { get; set; }
     }
 }

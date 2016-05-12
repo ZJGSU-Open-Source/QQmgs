@@ -60,7 +60,7 @@ namespace Twitter.App.Controllers.APIControllers
             var tweetsViewModel = tweets.Select(t => new TweetViewModel
             {
                 Id = t.Id,
-                Author = t.Author.UserName,
+                Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
                 IsEvent = t.IsEvent,
                 Text = t.Text,
@@ -70,7 +70,7 @@ namespace Twitter.App.Controllers.APIControllers
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
                 HasAvatarImage = t.Author.HasAvatarImage,
-                AvatarImageName = t.Author.HasAvatarImage ? new Uri(new Uri(Constants.Constants.WebHostPrefix + Constants.Constants.ImageThumbnailsPrefix) + t.Author.AvatarImageName).ToString() : null,
+                AvatarImageName = t.Author.HasAvatarImage ? new Uri(new Uri(Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/") + t.Author.AvatarImageName).ToString() : null,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,

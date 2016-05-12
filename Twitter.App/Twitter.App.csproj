@@ -258,6 +258,7 @@
     <Compile Include="Models\BindingModels\CreateGroupBindingModel.cs" />
     <Compile Include="Models\BindingModels\CreateLogBindingModel.cs" />
     <Compile Include="Models\BindingModels\CreateTweetBindingModel.cs" />
+    <Compile Include="Models\BindingModels\EditGroupBindingModel.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ViewModels\DevLogViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupVieModels.cs" />
@@ -363,8 +364,6 @@
     <Content Include="Scripts\MaterizeJS\materialize.js" />
     <Content Include="Scripts\MaterizeJS\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\qqmgs\jquery-1.6.2.min.js" />
-    <Content Include="Scripts\qqmgs\loadMore.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -434,9 +433,12 @@
     <Content Include="Views\Group\AddTweet.cshtml" />
     <Content Include="Views\Group\UploadGroupImage.cshtml" />
     <Content Include="Views\Group\RecommandGroups.cshtml" />
+    <Content Include="Views\Group\GetUserRecommand.cshtml" />
+    <Content Include="Views\Group\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\qqmgs\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Messages\" />
     <Folder Include="Views\Notifications\" />

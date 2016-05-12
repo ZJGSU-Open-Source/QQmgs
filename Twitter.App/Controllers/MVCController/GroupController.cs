@@ -26,7 +26,7 @@ namespace Twitter.App.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route]
         public ActionResult Index()
         {
             var recentLogs = Data.Group.All()
@@ -35,6 +35,18 @@ namespace Twitter.App.Controllers
                 .ToList();
 
             return this.View(recentLogs);
+        }
+
+        [HttpGet]
+        [Route("Recommand")]
+        public ActionResult GetUserRecommand()
+        {
+            var groupThrible = this.Data.Group.All()
+                .OrderByDescending(group => group.Tweets.Count)
+                .Select(ViewModelsHelper.AsGroupViewModel)
+                .Take(3).ToList();
+
+            return PartialView(groupThrible);
         }
 
         [HttpGet]
@@ -113,6 +125,7 @@ namespace Twitter.App.Controllers
                 var group = new Group
                 {
                     Name = model.Name,
+                    Description = model.Description,
                     CreatedTime = DateTime.Now,
                     CreaterId = loggedUserId
                 };
@@ -128,17 +141,45 @@ namespace Twitter.App.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        [HttpGet]
+        [Route("{groupId:int}/edit")]
+        public ActionResult Edit(int? groupId)
         {
-            return View();
+            if (groupId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var group = this.Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (group.CreaterId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(group);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EditGroupBindingModel group)
         {
             try
             {
-                // TODO: Add update logic here
+                var existedGroup = this.Data.Group.Find(group.Id);
+                if (existedGroup == null)
+                {
+                    return HttpNotFound();
+                }
+
+                existedGroup.Name = group.Name;
+                existedGroup.Description = group.Description;
+
+                Data.Group.Update(existedGroup);
+                Data.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -202,21 +243,6 @@ namespace Twitter.App.Controllers
             this.Data.SaveChanges();
 
             return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public string GetDataFromServer()
-        {
-            string resp = string.Empty;
-            for (int i = 0; i <= 10; i++)
-            {
-                resp += "<p><span>" +
-                  "</span> This content is dynamically appended " +
-                  "to the existing content on scrolling.</p>";
-            }
-
-            return resp;
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
+
+<div class="section hide-on-small-only">
+    <div class="row center">
+        <h5 class="header col s12 light grey-text">为您推荐的兴趣小组</h5>
+    </div>
+
+    <div class="row">
+        @foreach (var group in Model)
+        {
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        @if (group.HasImageOverview)
+                        {
+                            <img class="activator" src="~/img/Uploads/@group.ImageOverview" alt="">
+                        }
+                        else
+                        {
+                            // TODO: use default
+                            <img class="activator" src="~/img/Uploads/@group.ImageOverview" alt="">
+                        }
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">@group.Name<i class="material-icons right">more_vert</i></span>
+                        <p>
+                            <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})">进入讨论</a>
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">@group.Name<i class="material-icons right">close</i></span>
+                        <p>@group.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -6,8 +6,11 @@ using System.Web;
 
 namespace Twitter.App.Models.BindingModels
 {
-    public class CreateGroupBindingModel
+    public class EditGroupBindingModel
     {
+        // temp Id
+        public int Id { get; set; }
+
         [Required]
         [MinLength(1)]
         [MaxLength(60)]

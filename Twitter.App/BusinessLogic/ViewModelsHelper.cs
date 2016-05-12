@@ -11,12 +11,15 @@ namespace Twitter.App.BusinessLogic
     public class ViewModelsHelper
     {
         public static readonly Expression<Func<Group, GroupVieModels>> AsGroupViewModel =
-            t => new GroupVieModels
+            g => new GroupVieModels
             {
-                Id = t.Id,
-                CreatedTime = t.CreatedTime,
-                Name = t.Name,
-                TweetsCount = t.Tweets.Count
+                Id = g.Id,
+                CreatedTime = g.CreatedTime,
+                Name = g.Name,
+                HasImageOverview = g.HasImageOverview,
+                ImageOverview = g.ImageOverview,
+                Description = g.Description,
+                TweetsCount = g.Tweets.Count
             };
 
         public static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
