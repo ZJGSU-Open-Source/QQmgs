@@ -1,15 +1,6 @@
 ﻿@using Twitter.App.Constants
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
-@*<li class="collection-item avatar">
-        <i class="material-icons circle green">insert_chart</i>
-        <span class="title">@Model.Author</span>
-        <p>
-            @Model.Text <br />
-            @Model.DatePosted
-        </p>
-        <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>*@
 <li>
     <div class="col s12 m8 offset-m2 l6 offset-l3 hoverable">
         <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px">
@@ -35,22 +26,14 @@
                 </div>
             </div>
             <div class="card-action">
-                <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="float: right">View More</a>
+                <div>
+                    <a class="btn waves-effect waves-light hide-on-small-only" href="@Url.Action("GetTweet", "Tweets", new { tweetId = Model.Id })" style="font-size: 12px">
+                        View More
+                    </a>
+                    <a style="float: right">@Model.DatePosted</a>
+                </div>
+                @*<a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="float: right">View More</a>*@
             </div>
         </div>
     </div>
 </li>
-@*<li>
-        <div class="card-panel grey lighten-5 z-depth-1 hoverable">
-            <div class="card-content black-text">
-                <span class="card-title">@Model.Author</span>
-                <p>
-                    @Model.Text <br />
-                    @Model.DatePosted
-                </p>
-            </div>
-            <div class="card-action">
-                <a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})">View More</a>
-            </div>
-        </div>
-    </li>*@

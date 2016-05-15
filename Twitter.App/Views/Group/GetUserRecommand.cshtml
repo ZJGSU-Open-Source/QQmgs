@@ -9,16 +9,16 @@
         @foreach (var group in Model)
         {
             <div class="col s4">
-                <div class="card">
+                <div class="card" style="max-width: 300px;">
                     <div class="card-image waves-effect waves-block waves-light">
                         @if (group.HasImageOverview)
                         {
-                            <img class="activator" src="~/img/Uploads/Thumbnails/@group.ImageOverview" alt="">
+                            <img class="activator" src="~/img/Uploads/@group.ImageOverview" alt="">
                         }
                         else
                         {
                             // TODO: use default
-                            <img class="activator" src="http://qqmgs.com/img/Uploads/Thumbnails/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg" alt="">
+                            <img class="activator" src="http://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg" alt="">
                         }
                     </div>
                     <div class="card-content">

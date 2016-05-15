@@ -156,7 +156,6 @@ namespace Twitter.App.Controllers
             }
 
             var loggedUserId = this.User.Identity.GetUserId();
-            var loggedUserUsername = this.User.Identity.GetUserName();
 
             var group = Data.Group.Find(model.GroupId);
             if (group == null)
@@ -164,6 +163,10 @@ namespace Twitter.App.Controllers
                 this.Response.StatusCode = 400;
                 return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
             }
+
+            group.LastTweetUpdateTime = DateTime.Now;
+            this.Data.Group.Update(group);
+            this.Data.SaveChanges();
 
             var tweet = new Tweet
             {

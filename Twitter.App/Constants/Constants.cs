@@ -2,7 +2,7 @@
 {
     public class Constants
     {
-        public static int PageTweetsNumber = 22;
+        public static int PageTweetsNumber = 16;
 
         public static string WebHostPrefix = "http://www.qqmgs.com";
 

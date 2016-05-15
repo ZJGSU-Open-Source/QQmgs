@@ -30,7 +30,7 @@ namespace Twitter.App.Controllers
         public ActionResult Index()
         {
             var recentLogs = Data.Group.All()
-                .OrderByDescending(t => t.CreatedTime)
+                .OrderByDescending(t => t.LastTweetUpdateTime)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .ToList();
 

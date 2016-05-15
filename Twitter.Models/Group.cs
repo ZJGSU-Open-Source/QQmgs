@@ -27,6 +27,11 @@ namespace Twitter.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreatedTime { get; set; }
 
+        [Display(Name = "Update Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime LastTweetUpdateTime { get; set; }
+
         public bool HasImageOverview { get; set; }
 
         public string ImageOverview { get; set; }

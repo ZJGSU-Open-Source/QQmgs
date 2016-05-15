@@ -22,5 +22,7 @@ namespace Twitter.App.Models.ViewModels
         public string ImageOverview { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime LastTweetUpdateTime { get; set; }
     }
 }
