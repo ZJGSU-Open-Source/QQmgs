@@ -1,0 +1,58 @@
+Twitter.App - Web application & Web API
+	App_Start - .NET web app start step
+	BusinessLogic
+		FileUploadHelper.cs - upload file
+		ManagerHelper.cs - helper methods
+		ViewModelsHelper.cs - transform view model helpers
+	Common
+		Guard.cs - Guard check parameter for methods
+	Constants
+		Constants.cs - Constans variables
+	Content
+		- some files and directories about front-end development
+		- specifies bootstrap & materize as framework
+		- support 2 kinds font design in QQmgs
+	Controllers
+		/APIControllers
+			GroupController.cs
+			TweetsController.cs
+			TwitterApiController.cs
+		/MVCController
+			AccountController.cs
+			...
+	DataContracts
+		PagenationResult.cs - helper to pagenation
+	fonts - fonts for rendering
+	Helper
+		CutureHelper.cs - this helper can chenge current cutere info and set it to cookie
+	img - uploaded images
+	Models
+		/BindingModels - dialog binding models
+		/ViewModels - rendering view models
+	Scripts - JavaScript scripts
+	Views
+		/Acount
+		/Base
+		/Dev
+		/Group
+		...
+
+Twitter.Data - Database connection with SQL server
+	/Repositories
+		GenericEfRepository.cs
+		IRepository.cs
+	/UnitOfWork
+		ITwitterData.cs
+		TwitterData.cs
+	TwitterDbContext.cs - define database connection
+Twitter.Models - Data model defination
+	DevLog.cs
+	Group.cs
+	Message.cs
+	Notification.cs
+	Photo.cs
+	Reply.cs
+	Report.cs
+	Tweet.cs
+	user.cs
+Twitter.Tests - Unit tests
