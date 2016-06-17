@@ -3,13 +3,13 @@
 }
 
 <div id="index-banner" class="parallax-container">
+    
     <div class="section no-pad-bot">
         <div class="container">
-            <br><br>
-            <h1 class="header center text-lighten-2">全球某工商.com</h1>
+            <h1 class="header center text-lighten-2" style="text-shadow: 1px 1px 2px #ccc;">全球某工商.com</h1>
             @*<h1 class="header center teal-text text-lighten-2"></h1>*@
             <div class="row center">
-                <h5 class="header col s12 light">商大学子实名社交网络，公开测试ing</h5>
+                <h5 class="header col s12 light" style="text-shadow: 1px 1px 2px #ccc;">商大学子实名社交网络，公开测试ing</h5>
             </div>
             <div class="row center">
                 @if (Request.IsAuthenticated)
@@ -21,19 +21,33 @@
                     <a href="@Url.Action("Login", "Account")" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">@Resources.GetStarted</a>
                 }
             </div>
-            <br><br>
-
         </div>
     </div>
     <div class="parallax">
-        <img src="~/img/About/background1.jpg" alt="Unsplashed background img 1">
+        <div style="background-color: #000; opacity: 0.2; z-index: 10001; position: absolute; width: 100%; height: 100%;"></div>
+        <img src="~/img/About/2016061465418009.jpg" alt="Unsplashed background img 1">
     </div>
 </div>
 
-
-<div class="container">
+<div class="hide-on-large-only hide-on-med-only">
     <div class="section">
+        <!-- Icon Section -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text">
+                        <i class="material-icons">flash_on</i>
+                    </h2>
+                    <h5 class="center">Meet Interests</h5>
+                    <p class="light" style="text-align: center">全球某工商是一个社区，类似于 Twitter, 用户可以自由的在社区发言，参与大家的讨论</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container hide-on-small-only">
+    <div class="section">
         <!-- Icon Section -->
         <div class="row">
             <div class="col s12 m4">
@@ -45,7 +59,6 @@
                     <p class="light" style="text-align: center">@Resources.MeetInterestsDetail</p>
                 </div>
             </div>
-
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center brown-text">
@@ -55,7 +68,6 @@
                     <p class="light" style="text-align: center">@Resources.SharingDetail</p>
                 </div>
             </div>
-
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center brown-text">
@@ -66,12 +78,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 
-<div class="parallax-container valign-wrapper">
+<div class="parallax-container valign-wrapper hide-on-small-only">
     <div class="section no-pad-bot">
         <div class="container">
             <div class="row center">
@@ -80,11 +91,11 @@
         </div>
     </div>
     <div class="parallax">
-        <img src="~/img/About/background2.jpg" alt="Unsplashed background img 2">
+        <img src="~/img/About/2016052557563029.jpg" alt="Unsplashed background img 2">
     </div>
 </div>
 
-<div class="container">
+<div class="container hide-on-small-only">
     <div class="section">
         <div class="row">
             <div class="col s12 center">
