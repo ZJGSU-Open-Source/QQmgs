@@ -311,5 +311,13 @@ namespace Twitter.App.Controllers
 
             return "Delete Successfully";
         }
+
+        [AllowAnonymous]
+        public ActionResult GetDailyTweetPosts()
+        {
+            var tweetNumber = this.Data.Tweets.All().Count(tweet => tweet.DatePosted.Date == DateTime.Now.Date);
+
+            return PartialView(tweetNumber);
+        }
     }
 }

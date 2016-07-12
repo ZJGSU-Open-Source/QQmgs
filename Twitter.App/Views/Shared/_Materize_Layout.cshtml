@@ -91,8 +91,10 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
-                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号
+            <div class="container row">
+                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · @{
+                    Html.RenderAction("GetTotalUser", "Users");
+                } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");}
             </div>
         </div>
     </footer>

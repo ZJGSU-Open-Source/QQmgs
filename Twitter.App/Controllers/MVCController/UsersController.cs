@@ -36,5 +36,13 @@
 
             return !users.Any() ? this.View() : this.View(pagedUsers);
         }
+
+        [AllowAnonymous]
+        public ActionResult GetTotalUser()
+        {
+            var userNumber = this.Data.Users.All().Count();
+
+            return PartialView(userNumber);
+        }
     }
 }
