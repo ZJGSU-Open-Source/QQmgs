@@ -20,7 +20,8 @@ namespace Twitter.App.BusinessLogic
                 ImageOverview = g.ImageOverview,
                 Description = g.Description,
                 TweetsCount = g.Tweets.Count,
-                LastTweetUpdateTime = g.LastTweetUpdateTime
+                LastTweetUpdateTime = g.LastTweetUpdateTime,
+                IsDisplay = g.IsDisplay
             };
 
         public static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =

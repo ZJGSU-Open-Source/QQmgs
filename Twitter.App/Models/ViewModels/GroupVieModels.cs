@@ -24,5 +24,7 @@ namespace Twitter.App.Models.ViewModels
         public string Description { get; set; }
 
         public DateTime LastTweetUpdateTime { get; set; }
+
+        public bool IsDisplay { get; set; }
     }
 }

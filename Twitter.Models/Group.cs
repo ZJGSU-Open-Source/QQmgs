@@ -38,6 +38,8 @@ namespace Twitter.Models
 
         public string Description { get; set; }
 
+        public bool IsDisplay { get; set; }
+
         public virtual ICollection<Tweet> Tweets { get; set; }
     }
 }

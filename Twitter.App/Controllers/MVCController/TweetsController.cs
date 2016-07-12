@@ -105,7 +105,8 @@ namespace Twitter.App.Controllers
             var loggedUserId = this.User.Identity.GetUserId();
             var loggedUserUsername = this.User.Identity.GetUserName();
 
-            model.GroupId = 3; // for test
+            // for test
+            model.GroupId = 3; 
             var group = Data.Group.Find(model.GroupId);
             if (group == null)
             {
@@ -289,8 +290,8 @@ namespace Twitter.App.Controllers
                 tweet.AuthorId = loggedUserId;
                 tweet.DatePosted = DateTime.Now;
 
-                Data.Tweets.Update(tweet);
-                Data.SaveChanges();
+                this.Data.Tweets.Update(tweet);
+                this.Data.SaveChanges();
 
                 return RedirectToAction("GetTweet", "Tweets", new { tweetId = tweet.Id });
             }

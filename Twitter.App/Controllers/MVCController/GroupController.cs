@@ -1,11 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using Twitter.App.BusinessLogic;
@@ -32,6 +30,7 @@ namespace Twitter.App.Controllers
             var recentLogs = Data.Group.All()
                 .OrderByDescending(t => t.LastTweetUpdateTime)
                 .Select(ViewModelsHelper.AsGroupViewModel)
+                .Where(models => models.IsDisplay)
                 .ToList();
 
             return this.View(recentLogs);
@@ -41,6 +40,23 @@ namespace Twitter.App.Controllers
         [Route("Recommand")]
         public ActionResult GetUserRecommand()
         {
+            //var loggedUserId = this.User.Identity.GetUserId();
+
+            //var tweets = this.Data.Users.Find(loggedUserId).Tweets.ToList();
+            //var recordDictionary = new Dictionary<int, int>();
+            //foreach (var tweet in tweets)
+            //{
+            //    recordDictionary[tweet.GroupId]++;
+            //}
+            //var result = recordDictionary.Where(pair => pair.Key != 0)
+            //    .OrderBy(pair => pair.Value).Select(pair => pair.Key);
+
+            //foreach (var groupId in result)
+            //{
+            //    this.Data.Group.Find(groupId)
+            //}
+
+
             var groupThrible = this.Data.Group.All()
                 .OrderByDescending(group => group.Tweets.Count)
                 .Select(ViewModelsHelper.AsGroupViewModel)
@@ -119,26 +135,22 @@ namespace Twitter.App.Controllers
         public ActionResult Create(CreateGroupBindingModel model)
         {
             var loggedUserId = this.User.Identity.GetUserId();
+            var currentTime = DateTime.Now;
 
-            try
+            var group = new Group
             {
-                var group = new Group
-                {
-                    Name = model.Name,
-                    Description = model.Description,
-                    CreatedTime = DateTime.Now,
-                    CreaterId = loggedUserId
-                };
+                Name = model.Name,
+                Description = model.Description,
+                CreatedTime = currentTime,
+                CreaterId = loggedUserId,
+                LastTweetUpdateTime = currentTime,
+                IsDisplay = true
+            };
 
-                Data.Group.Add(group);
-                Data.SaveChanges();
+            this.Data.Group.Add(group);
+            this.Data.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -227,9 +239,9 @@ namespace Twitter.App.Controllers
             var photo = new Photo
             {
                 AuthorId = loggedUserId,
-                DatePosted = DateTime.Now,
                 Name = uploadedFile,
-                PhotoType = PhotoType.GroupImage
+                PhotoType = PhotoType.GroupImage,
+                DatePosted = DateTime.Now
             };
 
             this.Data.Photo.Add(photo);

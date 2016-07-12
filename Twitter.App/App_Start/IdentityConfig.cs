@@ -30,9 +30,11 @@ namespace Twitter.App
         {
             #region formatter
                 var text = $"Please click on this link to {message.Subject}: {message.Body}";
-                var html = "请点击此链接确认这是您的邮箱 <a href=\"" + message.Body + "\">here</a><br/><br/>";
 
-                html += HttpUtility.HtmlEncode("Or copy and paste the following link on the browser:\n\n" + message.Body) + "\n";
+                var html = "Hi,<br/>";
+                html += "请点击此链接确认这是您的邮箱 <a href=\"" + message.Body + "\">here</a><br/><br/>";
+                html += HttpUtility.HtmlEncode("或者复制以下链接至您的浏览器中打开:\n\n" + message.Body) + "\n";
+                html += "Cheers,<br/>Engineering team of QQmgs.com<br/>";
             #endregion
 
             var msg = new MailMessage { From = new MailAddress("Admin@qqmgs.com") };
