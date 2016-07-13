@@ -11428,3 +11428,43 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     font-size: 22px;
     font-weight: 400;
 }
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetReplyAuthor {
+        font-size: 12px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .groupTweetReplyAuthor {
+        font-size: 12px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetReplyAuthor {
+        font-size: 14px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .groupTweetReplyAuthor {
+        font-size: 16px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .groupTweetReplyAuthor {
+        font-size: 16px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}

@@ -3,7 +3,7 @@
 
 <li>
     <div class="col s12 m8 offset-m2 l6 offset-l3 hoverable">
-        <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px">
+        <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px; margin-bottom: 0px">
             <div class="row valign-wrapper">
                 <div class="groupTweetLeftPart">
                     <div style="max-width: 100px; float: left">
@@ -27,13 +27,38 @@
             </div>
             <div class="card-action">
                 <div>
-                    <a class="btn waves-effect waves-light hide-on-small-only" href="@Url.Action("GetTweet", "Tweets", new { tweetId = Model.Id })" style="font-size: 12px">
+
+                    @*<ul id="dropdown2" class="dropdown-content">
+                        <li><a href="#!">one<span class="badge">1</span></a></li>
+                        <li><a href="#!">two<span class="new badge">1</span></a></li>
+                        <li><a href="#!">three</a></li>
+                    </ul>
+                    <a class="btn waves-effect waves-light hide-on-small-only" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" data-activates="dropdown2" style="font-size: 12px">
+                        View More<i class="mdi-navigation-arrow-drop-down right"></i>
+                    </a>*@
+
+                    <a class="btn waves-effect waves-light hide-on-small-only" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="font-size: 12px">
                         View More
                     </a>
+
                     <a style="float: right">@Model.DatePosted</a>
                 </div>
-                @*<a href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="float: right">View More</a>*@
             </div>
+        </div>
+        <div class="collection" style="margin:0.1rem 0 0rem 0">
+            @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime).Take(3))
+            {
+                <div>
+                    <a href="#" class="collection-item" style="padding-bottom: 1.5px; padding-top: 5px; padding-left: 5px; padding-right: 3px">
+                        <div class="groupTweetReplyAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">
+                            <div class="chip" style="font-size: 16px">
+                                <img src="@Constants.Based64UserAvatarImage" alt="Contact Person">
+                                @reply.Author
+                            </div> @reply.Text
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
     </div>
 </li>

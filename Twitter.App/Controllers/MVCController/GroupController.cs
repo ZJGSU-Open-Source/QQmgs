@@ -65,6 +65,7 @@ namespace Twitter.App.Controllers
             return PartialView(groupThrible);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("{groupId:int}/details/{p:int}")]
         public ActionResult Get(int groupId, int p = 1)

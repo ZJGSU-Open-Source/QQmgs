@@ -60,7 +60,7 @@
 
         <div class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
              for="@($"TweetMenu{@Model.Id}")">
-            @if (User.Identity.Name == Model.Author)
+            @if (User.Identity.Name == Model.AuthorPhoneNumber)
             {
                 <button type="submit" class="mdl-button mdl-js-button" onclick="location.href = '@Url.Action("Edit", "Tweets", new {tweetId = Model.Id})'">
                     @Resources.Edit
@@ -146,7 +146,7 @@
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.InsertAfter,
-                UpdateTargetId = "NewReply" + Model.Id,
+                UpdateTargetId = "NewReply" + Model.Id
             },
                 new { @class = "navbar-form" }))
             {
@@ -155,7 +155,7 @@
 
                 <input id="@($"ReplyInput{@Model.Id}")" type="text" class="form-control" name="Text" placeholder="What's on your mind?"
                        style="width: 240px">
-                <button type="submit" class="btn btn-success" onclick="this.from.send(); this.form.reset();">Post</button>
+                <button type="submit" class="btn btn-success" onclick="refresh">Post</button>
             }
         </div>
     </div>

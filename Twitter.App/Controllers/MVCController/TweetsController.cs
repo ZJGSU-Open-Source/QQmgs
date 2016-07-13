@@ -315,7 +315,15 @@ namespace Twitter.App.Controllers
         [AllowAnonymous]
         public ActionResult GetDailyTweetPosts()
         {
-            var tweetNumber = this.Data.Tweets.All().Count(tweet => tweet.DatePosted.Date == DateTime.Now.Date);
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+            var currentDay = DateTime.Now.Day;
+            var tweetNumber =
+                this.Data.Tweets.All()
+                    .Count(
+                        tweet =>
+                            tweet.DatePosted.Year == currentYear && tweet.DatePosted.Month == currentMonth &&
+                            tweet.DatePosted.Day == currentDay);
 
             return PartialView(tweetNumber);
         }

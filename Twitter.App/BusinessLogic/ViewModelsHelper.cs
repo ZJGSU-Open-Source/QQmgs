@@ -30,6 +30,7 @@ namespace Twitter.App.BusinessLogic
                 Id = t.Id,
                 Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
+                AuthorPhoneNumber = t.Author.UserName,
                 IsEvent = t.IsEvent,
                 Text = t.Text,
                 UsersFavouriteCount = t.UsersFavourite.Count,
