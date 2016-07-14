@@ -106,7 +106,7 @@ namespace Twitter.App.Controllers
             var loggedUserUsername = this.User.Identity.GetUserName();
 
             // for test
-            model.GroupId = 3; 
+            model.GroupId = 3;
             var group = Data.Group.Find(model.GroupId);
             if (group == null)
             {
@@ -283,20 +283,21 @@ namespace Twitter.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tweet tweet)
         {
-            if (ModelState.IsValid)
+            var loggedUserId = this.User.Identity.GetUserId();
+            if (tweet.AuthorId != loggedUserId)
             {
-                var loggedUserId = this.User.Identity.GetUserId();
-
-                tweet.AuthorId = loggedUserId;
-                tweet.DatePosted = DateTime.Now;
-
-                this.Data.Tweets.Update(tweet);
-                this.Data.SaveChanges();
-
-                return RedirectToAction("GetTweet", "Tweets", new { tweetId = tweet.Id });
+                this.Response.StatusCode = 400;
+                return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
             }
 
-            return View(tweet);
+            tweet.DatePosted = DateTime.Now;
+
+            this.Data.Tweets.Update(tweet);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("GetTweet", "Tweets", new { tweetId = tweet.Id });
+
+            // return View(tweet);
         }
 
         [Route("delete")]
