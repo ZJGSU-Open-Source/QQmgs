@@ -28,7 +28,7 @@ namespace Twitter.App.Controllers
             var photos =
                 this.Data.Photo.All()
                     .OrderByDescending(p => p.DatePosted)
-                    .Where(p => p.PhotoType == PhotoType.Photo)
+                    .Where(p => p.PhotoType == PhotoType.Photo && p.IsSoftDelete != true)
                     .Select(AsPhotoViewModel)
                     .ToPagedList(pageNumber: pageNumber, pageSize: Constants.Constants.PagePhotosNumber);
 
@@ -55,7 +55,8 @@ namespace Twitter.App.Controllers
                     DatePosted = DateTime.Now,
                     Name = uploadedFile,
                     PhotoType = PhotoType.Photo,
-                    Descrption = model.Description
+                    Descrption = model.Description,
+                    IsSoftDelete = false
                 };
 
                 this.Data.Photo.Add(photo);

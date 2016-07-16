@@ -25,6 +25,8 @@ namespace Twitter.Models
         public virtual User Author { get; set; }
 
         public PhotoType PhotoType { get; set; }
+
+        public bool IsSoftDelete { get; set; }
     }
 
     public enum PhotoType
