@@ -1,22 +1,21 @@
-﻿using Twitter.App.BusinessLogic;
+﻿using Microsoft.AspNet.Identity;
+using PagedList;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Web.Mvc;
+
+using Twitter.App.Models.BindingModels;
+using Twitter.App.Models.ViewModels;
+using Twitter.Data.UnitOfWork;
+using Twitter.Models;
+using Twitter.App.BusinessLogic;
+
+using Constants = Twitter.App.Constants.Constants;
 
 namespace Twitter.App.Controllers
 {
-    using Microsoft.AspNet.Identity;
-    using PagedList;
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Net;
-    using System.Web.Mvc;
-
-    using Twitter.App.Models.BindingModels;
-    using Twitter.App.Models.ViewModels;
-    using Twitter.Data.UnitOfWork;
-    using Twitter.Models;
-
-    using Constants = App.Constants.Constants;
-
     [Authorize]
     [RoutePrefix("tweets")]
     public class TweetsController : TwitterBaseController

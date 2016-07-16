@@ -4,6 +4,8 @@
     {
         public static int PageTweetsNumber = 16;
 
+        public static int PagePhotosNumber = 6;
+
         public static string WebHostPrefix = "http://www.qqmgs.com";
 
         public static string ImageThumbnailsPrefix = "img/uploads/Thumbnails";

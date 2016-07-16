@@ -13,5 +13,8 @@ namespace Twitter.App.Models.ViewModels
 
         [JsonProperty("Author")]
         public string Author { get; set; }
+
+        [JsonProperty("Description")]
+        public string Description { get; set; }
     }
 }

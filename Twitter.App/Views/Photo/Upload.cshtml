@@ -2,8 +2,24 @@
 {
     using (Html.BeginForm("Upload", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <input type="file" name="file" />
-        <input class="waves-effect waves-light btn" type="submit" value="Post" />
+        <div class="row">
+            <div class="file-field input-field col s4">
+                <div class="btn">
+                    <span>File</span>
+                    <input type="file" name="File">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <div class="input-field col s4 hide-on-small-and-down">
+                <input id="description" type="text" class="validate" name="Description">
+                <label for="description">Description</label>
+            </div>
+            <div class="col s4">
+                <input class="waves-effect waves-light btn" type="submit" value="Post" />
+            </div>
+        </div>
     }
 }
 else

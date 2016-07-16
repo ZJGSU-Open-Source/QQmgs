@@ -20,6 +20,8 @@ namespace Twitter.Models
         [Required]
         public string AuthorId { get; set; }
 
+        public string Descrption { get; set; }
+
         public virtual User Author { get; set; }
 
         public PhotoType PhotoType { get; set; }

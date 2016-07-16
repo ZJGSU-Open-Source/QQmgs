@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Twitter.App.Models.ViewModels.PhotoViewModel>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<Twitter.App.Models.ViewModels.PhotoViewModel>
 
 <div class="row">
     <div class="col s12 m9 l10">
@@ -7,53 +9,59 @@
         </div>
 
         <div id="introduction" class="section scrollspy">
-            <h3>Here is Zhejiang Gongshang Univ.</h3>
-            <p class="flow-text">We provide the most beautiful photos here.</p>
+            <h3>Photo Sharing</h3>
+            <p class="flow-text">Feel free to share your photography HERE!</p>
         </div>
 
         <div id="photos" class="section scrollspy">
-            @{
-                var index = 0;
-                var photoList = Model.ToList();
-            }
-            @foreach (var photo in Model)
-            {
-                if (index%2 != 0)
+
+            <div class="hide-on-med-and-up show-on-small">
+                @foreach (var photo in Model)
                 {
                     <div class="row">
                         <div class="col s6">
-                            <img class="materialboxed" data-caption="A picture our loved Zhejiang Gongshang Univ." width="450" src="~/img/Uploads/@photoList[index - 1].Name">
-                        </div>
-                        <div class="col s6">
-                            <img class="materialboxed" data-caption="A picture our loved Zhejiang Gongshang Univ." width="450" src="~/img/Uploads/@photoList[index].Name">
+                            <div style="text-align: center; color: black">
+                                <img class="materialboxed" data-caption="@photo.Description" width="450" src="~/img/Uploads/@photo.Name" alt="">
+                                <a>@photo.Description By @photo.Author</a>
+                            </div>
                         </div>
                     </div>
                 }
-                @*<img class="materialboxed" data-caption="A picture of some deer and tons of trees" width="450" src="~/img/Uploads/@photo.Name">*@
-                @*<div class="col photo-row">
-                    <div class="card z-depth-2">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="~/img/Uploads/@photo.Name" alt="" style="max-height: 850px">
+            </div>
+
+            <div class="show-on-large show-on-medium hide-on-small-and-down">
+                @{
+                    var index = 0;
+                    var photoList = Model.ToList();
+                }
+                @foreach (var photo in Model)
+                {
+                    if (index % 2 != 0)
+                    {
+                        <div class="row">
+                            <div class="col s6">
+                                <div style="text-align: center; color: black">
+                                    <img class="materialboxed" data-caption="@photoList[index - 1].Description" width="450" src="~/img/Uploads/@photoList[index - 1].Name" alt="">
+                                    <a>@photoList[index - 1].Description By @photoList[index - 1].Author</a>
+                                </div>
+                            </div>
+                            <div class="col s6">
+                                <div style="text-align: center; color: black">
+                                    <img class="materialboxed" data-caption="@photoList[index].Description" width="450" src="~/img/Uploads/@photoList[index].Name" alt="">
+                                    <a>@photoList[index].Description By @photoList[index].Author</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Cherry Blossoms<i class="material-icons right">more_vert</i></span>
-                            <p>
-                                <a href="#">Photoed by photography Echo Jin</a>
-                            </p>
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Cherry blossoms near modern teaching building<i class="material-icons right">close</i></span>
-                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                        </div>
-                    </div>
-                </div>*@
-                ++index;
-                <br/>
-            }
+                    }
+                    ++index;
+                    <br />
+                }
+            </div>
+
         </div>
 
         <div id="End" class="section scrollspy">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.</p>
+            <p>照片分享还在测试中，欢迎您的任何建议 mail to shuaiyi@qqmgs.com.</p>
         </div>
     </div>
     <div class="col hide-on-small-only m3 l2" style="position: fixed; top: 12%; right: 5%;">
@@ -62,6 +70,14 @@
             <li><a href="#photos">Photos</a></li>
             <li><a href="#End">End</a></li>
         </ul>
+        <a style="color: black">See More</a>
+        <div class="paging">
+            <ul class="pagination">
+                @{
+                    var data = Model as IPagedList<Twitter.App.Models.ViewModels.PhotoViewModel>;
+                }
+                @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Index", new { pageNumber = page }))
+            </ul>
+        </div>
     </div>
 </div>
-

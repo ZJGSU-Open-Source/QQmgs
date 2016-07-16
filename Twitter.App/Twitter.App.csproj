@@ -313,6 +313,7 @@
     <Content Include="img\table-2-hover.jpg" />
     <Content Include="img\table-2.jpg" />
     <Content Include="img\table-3.jpg" />
+    <Compile Include="Models\BindingModels\UploadPhotoBindingModel.cs" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\mdl-v1.0.5\package.json" />
