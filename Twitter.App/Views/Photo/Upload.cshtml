@@ -2,13 +2,13 @@
 {
     using (Html.BeginForm("Upload", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div class="row">
+        <div class="row" style="margin-left: 10px">
             <div class="file-field input-field col s4">
                 <div class="btn">
                     <span>File</span>
                     <input type="file" name="File">
                 </div>
-                <div class="file-path-wrapper">
+                <div class="file-path-wrapper show-on-large show-on-medium hide-on-small-and-down">
                     <input class="file-path validate" type="text">
                 </div>
             </div>
@@ -16,7 +16,7 @@
                 <input id="description" type="text" class="validate" name="Description">
                 <label for="description">Description</label>
             </div>
-            <div class="col s4">
+            <div class="col s4" style="margin-top: 15px; margin-left: 30px">
                 <input class="waves-effect waves-light btn" type="submit" value="Post" />
             </div>
         </div>

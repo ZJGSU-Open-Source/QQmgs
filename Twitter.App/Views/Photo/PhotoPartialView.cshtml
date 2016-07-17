@@ -2,13 +2,17 @@
 @using PagedList.Mvc
 @model IEnumerable<Twitter.App.Models.ViewModels.PhotoViewModel>
 
-<div class="row">
+@{
+    var data = Model as IPagedList<Twitter.App.Models.ViewModels.PhotoViewModel>;
+}
+
+<div class="row" style="margin-bottom: 0px">
     <div class="col s12 m9 l10">
-        <div id="upload" class="section scrollspy">
+        <div id="upload" class="section scrollspy" style="padding-bottom: 0px">
             @{ Html.RenderPartial("Upload"); }
         </div>
 
-        <div id="introduction" class="section scrollspy">
+        <div id="introduction" class="section scrollspy show-on-large show-on-medium hide-on-small-and-down">
             <h3>Photo Sharing</h3>
             <p class="flow-text">Feel free to share your photography HERE!</p>
         </div>
@@ -21,7 +25,7 @@
                     <div class="row">
                         <div class="col s6">
                             <div style="text-align: center; color: black">
-                                <img class="materialboxed" data-caption="@photo.Description" width="450" src="~/img/Uploads/@photo.Name" alt="">
+                                <img class="materialboxed" data-caption="@photo.Description" width="340" src="~/img/Uploads/@photo.Name" alt="">
                                 <a>@photo.Description By @photo.Author</a>
                             </div>
                         </div>
@@ -60,7 +64,12 @@
 
         </div>
 
-        <div id="End" class="section scrollspy">
+        <div id="End" class="section scrollspy hide-on-med-and-up show-on-small" style="margin-bottom: 0px; padding: 0px">
+            <div class="paging">
+                <ul class="pagination">
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Index", new { pageNumber = page }))
+                </ul>
+            </div>
             <p>照片分享还在测试中，欢迎您的任何建议 mail to shuaiyi@qqmgs.com.</p>
         </div>
     </div>
@@ -73,9 +82,6 @@
         <a style="color: black">See More</a>
         <div class="paging">
             <ul class="pagination">
-                @{
-                    var data = Model as IPagedList<Twitter.App.Models.ViewModels.PhotoViewModel>;
-                }
                 @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Index", new { pageNumber = page }))
             </ul>
         </div>

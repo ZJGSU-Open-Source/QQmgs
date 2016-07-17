@@ -14,6 +14,7 @@ using Twitter.Models;
 
 namespace Twitter.App.Controllers
 {
+    [RoutePrefix("photo")]
     public class PhotoController : TwitterBaseController
     {
         public PhotoController()
