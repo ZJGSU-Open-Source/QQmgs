@@ -229,14 +229,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\Base64Security.cs" />
     <Compile Include="BusinessLogic\FileUploadHelper.cs" />
     <Compile Include="BusinessLogic\ManagerHelper.cs" />
+    <Compile Include="BusinessLogic\RsaSecurity.cs" />
     <Compile Include="BusinessLogic\ViewModelsHelper.cs" />
     <Compile Include="Common\Guard.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\APIControllers\GroupController.cs" />
     <Compile Include="Controllers\MVCController\AccountController.cs" />
     <Compile Include="Controllers\MVCController\BaseController.cs" />
+    <Compile Include="Controllers\MVCController\ConversationController.cs" />
     <Compile Include="Controllers\MVCController\GroupController.cs" />
     <Compile Include="Controllers\MVCController\DevController.cs" />
     <Compile Include="Controllers\MVCController\PhotoController.cs" />
@@ -437,6 +440,9 @@
     <Content Include="Views\Group\Edit.cshtml" />
     <Content Include="Views\Users\GetTotalUser.cshtml" />
     <Content Include="Views\Tweets\GetDailyTweetPosts.cshtml" />
+    <Content Include="Views\Conversation\GenerateChatting.cshtml" />
+    <Content Include="Views\Conversation\Chatting.cshtml" />
+    <Content Include="Views\Conversation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

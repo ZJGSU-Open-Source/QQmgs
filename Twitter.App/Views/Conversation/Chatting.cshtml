@@ -1,0 +1,39 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+    var sender = ViewData["sender"];
+    var receiver = ViewData["receiver"];
+}
+
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+        </div>
+    </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br>
+
+        <div class="row center">
+            <h5 class="header col s12 light grey-text">私聊 · @sender 和 @receiver</h5>
+        </div>
+
+        <div class="section">
+            <ul class="collection">
+                <li class="collection-item">@sender: Fuck?</li>
+                <li class="collection-item">@receiver: Fuck!</li>
+                <li class="collection-item">@sender: Fuck</li>
+                <li class="collection-item">@receiver: Fuck!</li>
+            </ul>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+
+    </div>
+</div>
