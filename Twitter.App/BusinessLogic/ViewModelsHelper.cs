@@ -48,5 +48,16 @@ namespace Twitter.App.BusinessLogic
                     Author = reply.Author.RealName
                 }).ToList()
             };
+
+        public static readonly Expression<Func<CourseReview, CourseReviewVideModel>> AsReviewModel =
+            r => new CourseReviewVideModel
+            {
+                Id = r.Id,
+                Comment = r.Comment,
+                Course = r.Course,
+                Teacher = r.Teacher,
+                DatePosted = r.DatePosted,
+                Author = r.Author.RealName
+            };
     }
 }

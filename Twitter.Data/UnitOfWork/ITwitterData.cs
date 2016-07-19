@@ -29,7 +29,9 @@
 
         IRepository<Group> Group { get; }
 
-        IRepository<Photo> Photo { get; } 
+        IRepository<Photo> Photo { get; }
+
+        IRepository<CourseReview> CourseReview { get; }
 
         void SaveChanges();
     }

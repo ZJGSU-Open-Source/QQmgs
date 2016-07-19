@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Twitter.App.Models.ViewModels.CourseReviewVideModel>
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+        </div>
+    </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br>
+
+        <div class="section">
+            <div class="row center">
+                <h5 class="header col s12 light grey-text">All the reviews</h5>
+            </div>
+
+            <div class="row" style="max-width: 700px; margin: auto">
+                @using (Html.BeginForm("Create", "CourseReview", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="input_course" type="text" length="20" name="Course">
+                                <label for="input_course">What's the course ...</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="input_teacher" type="text" length="20" name="Teacher">
+                                <label for="input_teacher">Who's the teacher ...</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="input_text" type="text" length="200" name="Comment">
+                                <label for="input_text">Say something ...</label>
+                            </div>
+
+                            <input style="float: right" class="waves-effect waves-light btn" type="submit" value="Post" />
+                        </div>
+                    </form>
+                }
+            </div>
+
+            <div class="section">
+                <ul class="collection" style="max-width: 700px; margin: auto">
+                    @foreach (var tweet in Model)
+                    {
+                        Html.RenderPartial("Review", tweet);
+                    }
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>

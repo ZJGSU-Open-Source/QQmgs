@@ -53,6 +53,8 @@
 
         public IRepository<Photo> Photo => this.GetRepository<Photo>();
 
+        public IRepository<CourseReview> CourseReview => this.GetRepository<CourseReview>();
+
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 
         public void SaveChanges()

@@ -40,6 +40,8 @@
 
         public virtual ICollection<Photo> Photos { get; set; } 
 
+        public virtual ICollection<CourseReview> CourseReviews { get; set; } 
+
         public virtual ICollection<User> FollowingUsers { get; set; }
 
         public virtual ICollection<User> Followers { get; set; }
