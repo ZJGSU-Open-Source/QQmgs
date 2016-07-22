@@ -8,7 +8,7 @@
     <div class="nav-wrapper container">
         <div class="col s12">
             <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
-            <a href="@Url.Action("Get", new {groupId = 1, p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+            <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
             <a href="#" class="breadcrumb">发言</a>
         </div>
     </div>
@@ -16,8 +16,6 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-
-
         <h2>@ViewBag.Title.</h2>
         @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
         {
