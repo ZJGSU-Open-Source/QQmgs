@@ -1,2 +1,29 @@
-﻿@model dynamic
+﻿@{
+    Layout = "";
+}
 
+<div class="row" style="max-width: 700px; margin: auto">
+    @using (Html.BeginForm("Create", "CourseReview", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="input_course" type="text" length="20" name="Course">
+                    <label for="input_course">What's the course ...</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="input_teacher" type="text" length="20" name="Teacher">
+                    <label for="input_teacher">Who's the teacher ...</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="input_text" type="text" length="200" name="Comment">
+                    <label for="input_text">Say something ...</label>
+                </div>
+
+                <input style="float: right" class="waves-effect waves-light btn" type="submit" value="Post" />
+            </div>
+        </form>
+    }
+</div>

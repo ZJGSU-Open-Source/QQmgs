@@ -7,6 +7,7 @@
     <div class="nav-wrapper container">
         <div class="col s12">
             <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+            <a href="#" class="breadcrumb">@ViewData["CourseName"]</a>
         </div>
     </div>
 </nav>
@@ -22,7 +23,7 @@
             </div>
 
             <div class="row" style="max-width: 300px; margin: auto">
-                @using (Html.BeginForm("Search", "CourseReview", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("Search", "CourseReview", FormMethod.Get, new {@class = "form-horizontal", role = "form"}))
                 {
                     @Html.AntiForgeryToken()
 
@@ -33,7 +34,7 @@
                                 <label for="input_text">Type the course to search</label>
                             </div>
                             <div class="input-field col s3">
-                                <input style="float: right; padding-left: 5px; padding-right: 5px; margin-left: 30px" class="waves-effect waves-light btn" type="submit" value="Serach" />
+                                <input style="float: right; padding-left: 5px; padding-right: 5px" class="waves-effect waves-light btn" type="submit" value="Serach"/>
                             </div>
                         </div>
                     </form>
@@ -41,7 +42,7 @@
             </div>
 
             <div class="row center">
-                <h5 class="header col s12 light grey-text">All the reviews</h5>
+                <h5 class="header col s12 light grey-text">All the reviews of '@ViewData["CourseName"]'</h5>
             </div>
 
             <div class="section">
@@ -52,16 +53,6 @@
                     }
                 </ul>
             </div>
-
-            <br/>
-
-            <div class="row center">
-                <h5 class="header col s12 light grey-text">Review course NOW</h5>
-            </div>
-
-            @{
-                Html.RenderAction("Create");
-            }
 
         </div>
 

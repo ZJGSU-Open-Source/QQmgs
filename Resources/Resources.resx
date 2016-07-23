@@ -282,4 +282,7 @@
   <data name="RealName" xml:space="preserve">
     <value>Real Name</value>
   </data>
+  <data name="ReviewCourse" xml:space="preserve">
+    <value>Review Course</value>
+  </data>
 </root>

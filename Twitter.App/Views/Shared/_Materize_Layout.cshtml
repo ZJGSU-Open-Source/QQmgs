@@ -30,7 +30,7 @@
                 @if (Request.IsAuthenticated)
                 {
                     <li>@*<a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a>*@</li>
-                    <li><a href="@Url.Action("index", "CourseReview")">商大点评</a></li>
+                    <li><a href="@Url.Action("index", "CourseReview")">@Resources.ReviewCourse</a></li>
                     <li><a href="@Url.Action("index", "Group")">@Resources.Group</a></li>
                     <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
                     <li><a href="#"><i class="material-icons">search</i></a></li>
@@ -48,7 +48,7 @@
             <ul id="nav-mobile" class="side-nav">
                 @if (Request.IsAuthenticated)
             {
-                    <li><a href="@Url.Action("index", "CourseReview")">商大点评</a></li>
+                    <li><a href="@Url.Action("index", "CourseReview")">@Resources.ReviewCourse</a></li>
                     <li><a href="@Url.Action("index", "Group")">@Resources.Group</a></li>
                     <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
                     <li><a href="@Url.Action("Index", "Manage")">@Resources.Hello @User.Identity.GetUserName() !</a></li>

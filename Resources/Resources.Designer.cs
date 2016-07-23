@@ -493,6 +493,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review Course.
+        /// </summary>
+        public static string ReviewCourse {
+            get {
+                return ResourceManager.GetString("ReviewCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send Tweet.
         /// </summary>
         public static string SendTweet {

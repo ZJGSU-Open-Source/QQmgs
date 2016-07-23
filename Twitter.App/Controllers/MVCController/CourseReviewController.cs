@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
+using Twitter.App.Common;
 using Twitter.App.Models.BindingModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
@@ -120,6 +121,22 @@ namespace Twitter.App.Controllers.MVCController
             {
                 return View();
             }
+        }
+
+        // GET: CourseReview/Search/courseName="Math"
+        [HttpGet]
+        public ActionResult Search(string courseName)
+        {
+            Guard.ArgumentNotNullOrEmpty(courseName, nameof(courseName));
+
+            var reviews = this.Data.CourseReview.All()
+                .Where(r => r.Course.Contains(courseName))
+                .OrderByDescending(r => r.DatePosted)
+                .Select(ViewModelsHelper.AsReviewModel);
+
+            ViewData["CourseName"] = courseName;
+
+            return View(reviews);
         }
     }
 }

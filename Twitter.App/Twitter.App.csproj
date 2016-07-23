@@ -449,6 +449,7 @@
     <Content Include="Views\CourseReview\Index.cshtml" />
     <Content Include="Views\CourseReview\Review.cshtml" />
     <Content Include="Views\CourseReview\Create.cshtml" />
+    <Content Include="Views\CourseReview\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -282,4 +282,7 @@
   <data name="RealName" xml:space="preserve">
     <value>真实姓名</value>
   </data>
+  <data name="ReviewCourse" xml:space="preserve">
+    <value>商大点评</value>
+  </data>
 </root>
