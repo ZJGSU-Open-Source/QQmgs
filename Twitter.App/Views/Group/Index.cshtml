@@ -22,16 +22,21 @@
 
         <div class="section hide-on-small-only">
             <div class="row center">
-                <h5 class="header col s12 light grey-text">热门讨论分类 (@Model.ToList().Count)</h5>
+                <h5 class="header col s12 light grey-text">热门讨论分类 </h5>
             </div>
             <div class="row">
-
                 @{
                     Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Interests});
                     Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Chatting});
                     Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Study});
                 }
-
+            </div>
+            <div class="row">
+                @{
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.Food });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.Association });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.School });
+                }
             </div>
         </div>
 

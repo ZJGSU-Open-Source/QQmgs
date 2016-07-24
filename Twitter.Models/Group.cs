@@ -52,6 +52,7 @@ namespace Twitter.Models
         Study,
         Association,
         Chatting,
-        Food
+        Food,
+        NotClear
     };
 }
