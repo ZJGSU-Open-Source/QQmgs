@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using Twitter.App.BusinessLogic;
+using Twitter.App.Common;
 using Twitter.App.Models.BindingModels;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
@@ -27,13 +28,29 @@ namespace Twitter.App.Controllers
         [Route]
         public ActionResult Index()
         {
-            var recentLogs = Data.Group.All()
+            var groups = this.Data.Group.All()
                 .OrderByDescending(t => t.LastTweetUpdateTime)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .Where(models => models.IsDisplay)
                 .ToList();
 
-            return this.View(recentLogs);
+            return this.View(groups);
+        }
+
+        public ActionResult GetClassificatedGroup(Classification classification)
+        {
+            Guard.ArgumentNotNull(classification, nameof(classification));
+
+            var groups = this.Data.Group.All()
+                .Where(group => group.Classification == classification)
+                .OrderByDescending(group => group.CreatedTime)
+                .Select(ViewModelsHelper.AsGroupViewModel)
+                .Where(models => models.IsDisplay)
+                .ToList();
+
+            ViewData["Classification"] = classification;
+
+            return PartialView(groups);
         }
 
         [HttpGet]

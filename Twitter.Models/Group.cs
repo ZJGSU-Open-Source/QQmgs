@@ -40,6 +40,18 @@ namespace Twitter.Models
 
         public bool IsDisplay { get; set; }
 
+        public Classification Classification { get; set; }
+
         public virtual ICollection<Tweet> Tweets { get; set; }
     }
+
+    public enum Classification
+    {
+        Interests,
+        School,
+        Study,
+        Association,
+        Chatting,
+        Food
+    };
 }

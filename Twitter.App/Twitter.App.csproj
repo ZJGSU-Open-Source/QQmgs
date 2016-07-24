@@ -306,6 +306,7 @@
     <Content Include="img\icon\guru-blue.png" />
     <Content Include="img\icon\heart-blue.png" />
     <Content Include="img\icon\weight-blue.png" />
+    <Content Include="img\Internet-group-chat.svg.png" />
     <Content Include="img\loader.gif" />
     <Content Include="img\logo-active.png" />
     <Content Include="img\logo.png" />
@@ -450,6 +451,7 @@
     <Content Include="Views\CourseReview\Review.cshtml" />
     <Content Include="Views\CourseReview\Create.cshtml" />
     <Content Include="Views\CourseReview\Search.cshtml" />
+    <Content Include="Views\Group\GetClassificatedGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

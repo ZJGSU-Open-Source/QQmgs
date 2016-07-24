@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
+﻿@using Twitter.App.Constants
+@using Twitter.Models
+@model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
 @{
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
@@ -18,6 +20,21 @@
             Html.RenderAction("GetUserRecommand");
         }
 
+        <div class="section hide-on-small-only">
+            <div class="row center">
+                <h5 class="header col s12 light grey-text">热门讨论分类 (@Model.ToList().Count)</h5>
+            </div>
+            <div class="row">
+
+                @{
+                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Interests});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Chatting});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Study});
+                }
+
+            </div>
+        </div>
+
         <div class="section">
             <div class="row center">
                 <h5 class="header col s12 light grey-text">所有兴趣小组 (@Model.ToList().Count)</h5>
@@ -35,22 +52,22 @@
                     </a>
                 }
             </div>
-            <br/>
+            <br />
             <div class="horizontal click-to-toggle center">
                 <a class="btn waves-effect waves-light" href="@Url.Action("Create", "Group")">
                     Customize your Group
                 </a>
             </div>
-            <br/>
-            <br/>
+            <br />
         </div>
 
         <div class="section">
             <div class="row center">
                 <h5 class="header col s12 light grey-text">更多功能...</h5>
             </div>
-
             <div class="center">请告诉我们你的意见和建议:)</div>
+            <br />
+            <br />
         </div>
     </div>
 </div>

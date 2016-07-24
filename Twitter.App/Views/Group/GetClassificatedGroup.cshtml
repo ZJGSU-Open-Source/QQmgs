@@ -1,0 +1,28 @@
+﻿@using Twitter.App.Constants
+@model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
+
+<div class="col s4 center-align">
+    <h5 class="header col s12 light grey-text">@ViewData["Classification"] (@Model.ToList().Count)</h5>
+    <div class="collection" style="max-width: 300px; margin: auto">
+        @foreach (var group in Model)
+        {
+            <div>
+                @if (group.HasImageOverview)
+                {
+                    <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.ImageOverview" alt="">
+                }
+                else
+                {
+                    <img style="max-width: 42px" class="left" src=@Constants.Based64GroupOverviewImage alt="">
+                }
+            </div>
+
+            <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">
+                <div>
+                    @group.Name
+                    <span class="badge">@group.TweetsCount</span>
+                </div>
+            </a>
+        }
+    </div>
+</div>
