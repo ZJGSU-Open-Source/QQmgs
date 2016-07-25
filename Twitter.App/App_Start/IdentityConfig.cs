@@ -62,6 +62,33 @@ namespace Twitter.App
 
             return Task.FromResult(0);
         }
+
+        public Task SendCustomizedMailAsync(string subject, string body, string destination)
+        {
+            var msg = new MailMessage { From = new MailAddress("Admin@qqmgs.com") };
+            msg.To.Add(new MailAddress(destination));
+            msg.Subject = subject;
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html));
+
+            var smtpClient = new SmtpClient("smtp.ym.163.com", Convert.ToInt32(25));
+            var credentials = new NetworkCredential(
+                ConfigurationManager.AppSettings["mailAccount"],
+                ConfigurationManager.AppSettings["mailPassword"]);
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+
+            try
+            {
+                smtpClient.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+                    ex.ToString());
+            }
+
+            return Task.FromResult(0);
+        }
     }
 
     public class SmsService : IIdentityMessageService
