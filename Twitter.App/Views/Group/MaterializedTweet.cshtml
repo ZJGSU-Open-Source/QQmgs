@@ -52,26 +52,27 @@
                                 {
                                     <img src=@Constants.Based64UserAvatarImage alt="Contact Person">
                                 }
-                                
+
                                 @reply.Author
                             </div> @reply.Text
                         </div>
                     </a>
                 </div>
             }
-            @using (Html.BeginForm("Reply", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            @using (Html.BeginForm("Reply", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
 
                 <form class="col s12">
                     <div class="row" style="margin-bottom: 0px">
-                        <div class="input-field col s12" style="margin-left: 10px">
+                        <div class="input-field col s10">
                             <i class="material-icons prefix">mode_edit</i>
                             <input placeholder="What's on your mind ?" id="input_text" type="text" length="200" name="Text">
                             <input id="hidden_group_id_property" type="text" name="Id" value="@Model.Id" style="display: none !important;">
-                            @*<label for="input_text">What's on your mind ?</label>*@
                         </div>
-                        <input style="display: none !important;" type="submit" value="Post"/>
+                        <div class="input-field col s2" style="padding-left: 7px; padding-right: 7px; padding-top: 6px; padding-bottom: 6px; font-size: 12px">
+                            <input class="btn btn-default" type="submit" value="Reply" />
+                        </div>
                     </div>
                 </form>
             }
