@@ -200,7 +200,6 @@ namespace Twitter.App.Controllers
             }
 
             var loggedUserId = this.User.Identity.GetUserId();
-            var loggedUserUsername = this.User.Identity.GetUserName();
 
             var reply = new Reply
             {
@@ -225,14 +224,16 @@ namespace Twitter.App.Controllers
                     });
             }
 
-            return PartialView(
-                "Reply",
-                new ReplyViewModel
-                {
-                    PublishTime = reply.PublishTime,
-                    Text = reply.Content,
-                    Author = reply.Author.RealName
-                });
+            return RedirectToAction("Get", "Group", new { groupId = tweet.GroupId, p = 1 });
+
+            //return PartialView(
+            //    "Reply",
+            //    new ReplyViewModel
+            //    {
+            //        PublishTime = reply.PublishTime,
+            //        Text = reply.Content,
+            //        Author = reply.Author.RealName
+            //    });
         }
 
         public int Favourite(int tweetId)

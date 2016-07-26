@@ -15,31 +15,43 @@
     </div>
 </nav>
 
+
+<div class="section no-pad-bot" id="index-banner0">
+    <div class="container">
+        <div class="row center">
+            <h5 class="header col s12 light grey-text">@Resources.Group · @ViewData["GroupName"]</h5>
+        </div>
+        <br />
+    </div>
+</div>
+
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-        <br>
-
         <div class="row center">
-            <h5 class="header col s12 light grey-text">@Resources.Group·@ViewData["GroupName"]</h5>
         </div>
-
-        <div class="row" style="max-width: 700px; margin: auto">
-            @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+        <div class="row hide-on-small-only" style="max-width: 700px; margin: auto">
+            @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
 
                 <form class="col s12">
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input id="input_text" type="text" length="200" name="Text">
+                        <div class="input-field col s10">
+                            <textarea class="materialize-textarea" id="input_text" type="text" length="200" name="Text"></textarea>
                             <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
-                            <label for="input_text">Say something ...</label>
+                            <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
                         </div>
-                        <input style="display: none !important;" type="submit" value="Post" />
+                        <div class="form-group col s2" style="margin-top: 35px">
+                            <input type="submit" value="Post" class="btn btn-default" />
+                        </div>
+                        @*<input style="display: none !important;" type="submit" value="Post" />*@
                     </div>
                 </form>
             }
+        </div>
 
+        <div class="row center">
+            <h5 class="header col s12 light grey-text">大家的发言</h5>
         </div>
 
         <div style="max-width: 700px; margin: auto">
@@ -61,8 +73,8 @@
         </div>
 
         <div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
-            <a class="btn-floating btn-large red" href="@Url.Action("AddTweet", "Group", new { groupId = $"{ViewData["GroupId"]}" })">
-            <i class="large material-icons">mode_edit</i>
+            <a class="btn-floating btn-large red" href="@Url.Action("AddTweet", "Group", new {groupId = $"{ViewData["GroupId"]}"})">
+                <i class="large material-icons">mode_edit</i>
             </a>
         </div>
 

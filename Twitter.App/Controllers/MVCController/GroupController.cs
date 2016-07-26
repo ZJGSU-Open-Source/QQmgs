@@ -118,7 +118,9 @@ namespace Twitter.App.Controllers
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.Author.RealName
+                    Author = reply.Author.RealName,
+                    AvatarImageName = reply.Author.AvatarImageName,
+                    HasAvatarImage = reply.Author.HasAvatarImage
                 }).ToList()
             }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 

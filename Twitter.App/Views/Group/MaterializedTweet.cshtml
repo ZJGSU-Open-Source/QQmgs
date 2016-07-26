@@ -28,16 +28,7 @@
             <div class="card-action">
                 <div>
 
-                    @*<ul id="dropdown2" class="dropdown-content">
-                        <li><a href="#!">one<span class="badge">1</span></a></li>
-                        <li><a href="#!">two<span class="new badge">1</span></a></li>
-                        <li><a href="#!">three</a></li>
-                    </ul>
-                    <a class="btn waves-effect waves-light hide-on-small-only" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" data-activates="dropdown2" style="font-size: 12px">
-                        View More<i class="mdi-navigation-arrow-drop-down right"></i>
-                    </a>*@
-
-                    <a class="btn waves-effect waves-light hide-on-small-only" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="font-size: 12px">
+                    <a class="btn tooltipped hide-on-small-only" data-position="top" data-delay="50" data-tooltip="Function in test" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="font-size: 12px">
                         View More
                     </a>
 
@@ -45,19 +36,44 @@
                 </div>
             </div>
         </div>
-        <div class="collection" style="margin:0.1rem 0 0rem 0">
-            @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime).Take(3))
+        <div class="collection" style="margin: 0.08rem 0 0rem 0">
+            @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime).Take(15))
             {
                 <div>
+                    <!-- Modal Trigger -->
                     <a href="#" class="collection-item" style="padding-bottom: 1.5px; padding-top: 5px; padding-left: 5px; padding-right: 3px">
                         <div class="groupTweetReplyAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">
-                            <div class="chip" style="font-size: 16px">
-                                <img src="@Constants.Based64UserAvatarImage" alt="Contact Person">
+                            <div class="chip" style="font-size: 16px; margin-right: 12px; background-color: #cce4e4">
+                                @if (reply.HasAvatarImage)
+                                {
+                                    <img src="~/img/Uploads/Thumbnails/@reply.AvatarImageName" alt="Contact Person">
+                                }
+                                else
+                                {
+                                    <img src=@Constants.Based64UserAvatarImage alt="Contact Person">
+                                }
+                                
                                 @reply.Author
                             </div> @reply.Text
                         </div>
                     </a>
                 </div>
+            }
+            @using (Html.BeginForm("Reply", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+
+                <form class="col s12">
+                    <div class="row" style="margin-bottom: 0px">
+                        <div class="input-field col s12" style="margin-left: 10px">
+                            <i class="material-icons prefix">mode_edit</i>
+                            <input placeholder="What's on your mind ?" id="input_text" type="text" length="200" name="Text">
+                            <input id="hidden_group_id_property" type="text" name="Id" value="@Model.Id" style="display: none !important;">
+                            @*<label for="input_text">What's on your mind ?</label>*@
+                        </div>
+                        <input style="display: none !important;" type="submit" value="Post"/>
+                    </div>
+                </form>
             }
         </div>
     </div>

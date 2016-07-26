@@ -21,5 +21,11 @@ namespace Twitter.App.Models.ViewModels
 
         [JsonProperty("publish_time")]
         public DateTime PublishTime { get; set; }
+
+        [JsonProperty("has_avatar_image")]
+        public bool HasAvatarImage { get; set; }
+
+        [JsonProperty("avatar_image_name")]
+        public string AvatarImageName { get; set; }
     }
 }
