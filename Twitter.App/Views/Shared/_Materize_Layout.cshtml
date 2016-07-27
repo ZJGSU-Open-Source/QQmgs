@@ -16,20 +16,12 @@
     <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 <body>
-    <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">three</a></li>
-    </ul>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
             <ul class="right hide-on-med-and-down">
                 @if (Request.IsAuthenticated)
                 {
-                    <li>@*<a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a>*@</li>
                     <li><a href="@Url.Action("index", "CourseReview")">@Resources.ReviewCourse</a></li>
                     <li><a href="@Url.Action("index", "Group")">@Resources.Group</a></li>
                     <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
