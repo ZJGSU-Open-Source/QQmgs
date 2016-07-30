@@ -8459,3 +8459,219 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em;
   }
 }
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .row .col.photo-row {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .row .col.photo-row {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .row .col.photo-row {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .row .col.photo-row {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .row .col.photo-row {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetAuthor {
+        font-size: 14px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .groupTweetAuthor {
+        font-size: 16px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetAuthor {
+        font-size: 18px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .groupTweetAuthor {
+        font-size: 20px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .groupTweetAuthor {
+        font-size: 20px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetLeftPart {
+        width: 20%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+        padding: 0 0.5rem 0 0rem;
+    }
+}
+@media (max-width: 767px) {
+    .groupTweetLeftPart {
+        width: 20%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+        padding: 0 0.5rem 0 0rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetLeftPart {
+        width: 20%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+        padding: 0 0.5rem 0 0rem;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .groupTweetLeftPart {
+        width: 20%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+        padding: 0 0.75rem;
+    }
+}
+@media (min-width: 1200px) {
+    .groupTweetLeftPart {
+        width: 20%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+        padding: 0 0.75rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetRightPart {
+        width: 80%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .groupTweetRightPart {
+        width: 80%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetRightPart {
+        width: 80%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .groupTweetRightPart {
+        width: 80%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .groupTweetRightPart {
+        width: 80%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+#download-button {
+    width: 260px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 22px;
+    font-weight: 400;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetReplyAuthor {
+        font-size: 12px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .groupTweetReplyAuthor {
+        font-size: 12px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .groupTweetReplyAuthor {
+        font-size: 14px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .groupTweetReplyAuthor {
+        font-size: 16px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .groupTweetReplyAuthor {
+        font-size: 16px;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+}
