@@ -298,6 +298,8 @@
     <Content Include="Content\mdl-v1.0.5\material.min.css" />
     <Content Include="Content\mdl-v1.0.5\material.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\particles.js\zh.css" />
+    <Content Include="Content\particles.js\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -378,6 +380,17 @@
     <Content Include="Scripts\MaterizeJS\materialize.js" />
     <Content Include="Scripts\MaterizeJS\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\particles.js\app.js" />
+    <Content Include="Scripts\particles.js\lib\stats.js" />
+    <Content Include="Scripts\particles.js\particles.js" />
+    <Content Include="Scripts\particles.js\particles.min.js" />
+    <Content Include="Scripts\particles.js\zh\base.131040a3.js" />
+    <Content Include="Scripts\particles.js\zh\common.e07f27cf.js" />
+    <Content Include="Scripts\particles.js\zh\ga.js" />
+    <Content Include="Scripts\particles.js\zh\instant.14757a4a.js" />
+    <Content Include="Scripts\particles.js\zh\page-index.114c1f31.js" />
+    <Content Include="Scripts\particles.js\zh\vendor.cb14a042.js" />
+    <Content Include="Scripts\particles.js\zh\za-0.1.1.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -462,6 +475,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\qqmgs\" />
+    <Folder Include="Views\Account\old\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Messages\" />
     <Folder Include="Views\Notifications\" />

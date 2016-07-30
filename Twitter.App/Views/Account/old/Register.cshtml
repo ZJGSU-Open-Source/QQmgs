@@ -1,0 +1,117 @@
+﻿@model Twitter.App.Models.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = @Resources.Register;
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@helper Selected(string c, string culture)
+{
+    if (c == culture)
+    {
+        @:checked="checked"
+    }
+}
+
+<div class="container body-content">
+
+    <h2>@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("SetCulture", "Account"))
+    {
+        <fieldset>
+            <h4>@Resources.ChooseYourLanguage</h4>
+            <hr/>
+
+            <div style="padding: 8px">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="en-us">
+                    <input type="radio" id="en-us" class="mdl-radio__button" name="culture" value="en-us" @Selected("en-us", culture)>
+                    <span class="mdl-radio__label">English</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="zh-cn">
+                    <input type="radio" id="zh-cn" class="mdl-radio__button" name="culture" value="zh-cn" @Selected("zh-cn", culture)>
+                    <span class="mdl-radio__label">中文</span>
+                </label>
+            </div>
+
+            @*<div class="control-group">
+                <div class="controls">
+                    <label for="en-us">
+                        <input name="culture" id="en-us" value="en-us" type="radio" @Selected("en-us", culture)/> English
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label for="zh-cn">
+                        <input name="culture" id="zh-cn" value="zh-cn" type="radio" @Selected("zh-cn", culture)/> 中文
+                    </label>
+                </div>
+            </div>*@
+        </fieldset>
+        <br/>
+    }
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        <h4>@Resources.CreateANewAccount</h4>
+        <hr/>
+        @Html.ValidationSummary(string.Empty, new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.RealName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.RealName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Class, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Class, new {@class = "form-control"})
+            </div>
+        </div>
+       <div class="form-group">
+            @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="@Resources.RegisterButton"/>
+            </div>
+        </div>
+    }
+    <br />
+    <br />
+    <br />
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        (function($) {
+            $("input[type = 'radio']").click(function() {
+                $(this).parents("form").submit(); // post form
+            });
+
+        })(jQuery);
+    </script>
+}

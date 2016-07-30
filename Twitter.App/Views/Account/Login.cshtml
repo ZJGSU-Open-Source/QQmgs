@@ -2,121 +2,95 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = "";
 }
-<br />
-<div class="container body-content">
-    <h4>@Resources.HomePageTitle</h4>
-    <section class="section section-padded">
-        <div class="container">
-            <div class="hidden-xs hidden-sm row services">
-                <div class="col-md-4">
-                    <div class="service">
-                        <div class="icon-holder">
-                            <img alt="" class="icon" src="~/img/icon/heart-blue.png">
-                        </div>
-                        <h4 class="heading">@Resources.MeetInterests</h4>
-                        <p class="description">It's freedom place, send twitter and tell others what you like! You will easily make friends here.</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Log in</title>
+    <meta name="description" content="qqmgs.com login page.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="~/Content/particles.js/style.css" rel="stylesheet" media="screen">
+    <link href="~/Content/particles.js/zh.css" rel="stylesheet" media="screen">
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+    <!-- particles.js container -->
+    <div id="particles-js" style="position: absolute; top: 0; z-index: 0; display: block; width: 100%; height: 100%"></div>
+
+    <div class="index-main" style="position: relative; z-index: 1">
+        <div class="index-main-body">
+            <div class="index-header">
+                @*<h1 class="logo hide-text">知乎</h1>*@
+                <h1 style="font-size: 60px">全球某工商</h1>
+                <h2 class="subtitle">连接每一位商大师生</h2>
+            </div>
+            <div class="desk-front sign-flow clearfix sign-flow-simple">
+                <div class="index-tab-navs">
+                    <div class="navs-slider" data-active-index="1">
+                        <a href="@Url.Action("Register")">注册</a>
+                        <a href="@Url.Action("Login")" class="active">登录</a>
+                        <span class="navs-slider-bar"></span>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="service">
-                        <div class="icon-holder">
-                            <img alt="" class="icon" src="~/img/icon/guru-blue.png">
-                        </div>
-                        <h4 class="heading">@Resources.ChatOnline</h4>
-                        <p class="description">Chatting on QQmgs.com, you will find much fun here.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service">
-                        <div class="icon-holder">
-                            <img alt="" class="icon" src="~/img/icon/weight-blue.png">
-                        </div>
-                        <h4 class="heading">@Resources.OnlyForZJSU</h4>
-                        <p class="description">QQmgs is the abbreviation of "全球某工商" where welcome all the students of ZJSU.</p>
+                <div class="view view-signin selected">
+
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form>
+                            <div class="group-inputs">
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="UserName" placeholder="手机号" id="first_name" type="text" style="margin-bottom: 0px;" class="validate">
+                                </div>
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="Password" placeholder="密码" id="password" type="password" style="margin-bottom: 0px; border-bottom: none" class="validate">
+                                </div>
+                            </div>
+                            <div class="button-wrapper command">
+                                <button class="sign-button submit" type="submit">登录</button>
+                            </div>
+                            <div class="signin-misc-wrapper clearfix">
+                                <label class="remember-me">
+                                    <input name="RememberMe" type="checkbox" id="remember-me-input" checked="checked" />
+                                    <label for="remember-me-input" style="font-size: 12px">记住我</label>
+                                </label>
+                                <a class="unable-login" href="@Url.Action("ForgotPassword")">忘记密码?</a>
+                            </div>
+                        </form>
+                    }
+                    <div class="QRCode">
+                        <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("About", "Home")'" type="button">
+                            <span class="sprite-global-icon-qrcode"></span>
+                            <span class="QRCode-toggleButtonText ">点击了解全球某工商.com</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
-                @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>@Resources.UseTwitterVAccountToLogIn</h4>
-                    <hr/>
-                    @Html.ValidationSummary(true, string.Empty, new {@class = "text-danger"})
-                    <a class="mdl-color-text--light-green-600">Notice: 16年5月9日前注册账户请使用社区昵称进行登陆</a>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.UserName, new {@class = "col-md-2 control-label"})
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(m => m.UserName, string.Empty, new {@class = "text-danger"})
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(m => m.Password, string.Empty, new {@class = "text-danger"})
-                        </div>
-                    </div>
-
-                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect col-md-10 col-md-offset-2" for="checkbox-1">
-                        <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
-                        <span class="mdl-checkbox__label">@Html.LabelFor(m => m.RememberMe)</span>
-                        <a style="padding-left: 17px">
-                            @Html.ActionLink(Resources.ForgetPassword, "ForgotPassword", "Account")
-                        </a>
-                    </label>
-
-                    @*<div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div>
-                    </div>*@
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-5">
-                            <br/>
-                            <input type="submit" value="@Resources.LogInButton" class="btn btn-primary"/>
-                            <input type="button" value="@Resources.RegisterButton" class="btn btn-primary col-md-offset-1" onclick="window.open('Register', '_self')"/>
-                        </div>
-                    </div>
-                    @*<p>
-                            @Html.ActionLink("Register as a new user", "Register")
-                        </p>*@
-
-                    @* Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>*@
-                }
-            </section>
-        </div>
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-                @Html.Partial("_IntroductionPartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
-                @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
-            </section>
-            <br/>
-            <section id="socialLoginFormMore">
-                @Html.Partial("_IntroductionMorePartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
-                @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
-            </section>
-        </div>
     </div>
-</div>
+    <div class="footer" style="position: relative; z-index: 1">
+        <span>2016 全球某工商</span>
+        <span class="dot">·</span>
+        <a href="@Url.Action("About", "Home")" class="footer-mobile-show">联系我们</a>
+        <span class="dot">·</span>
+        <a href="@Url.Action("About", "Home")">来全球某工商工作</a>
+        <span class="dot">·</span>
+        <a href="http://www.miibeian.gov.cn/" target="_blank">浙 ICP 备 15036767 号</a>
+        <span class="dot">·</span>
+        <span>浙公网安备 33011802000821 号</span>
+    </div>
 
-<br/>
+    <!-- martial scripts -->
+    <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/MaterizeJS/materialize.js"></script>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <!-- scripts -->
+    <script src="~/Scripts/particles.js/particles.js"></script>
+    <script src="~/Scripts/particles.js/app.js"></script>
+
+</body>
+</html>

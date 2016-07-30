@@ -58,8 +58,8 @@ namespace Twitter.App.Models.ViewModels
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "LoginUserNameRequired")]
         [Display(Name = "PhoneNumber", ResourceType = typeof(Resources.Resources))]
-        [StringLength(50, ErrorMessageResourceType = typeof(Resources.Resources),
-            ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
+        [StringLength(12, ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "UserNameLong", MinimumLength = 11)]
         [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "InvalidUserName")]
         public string UserName { get; set; }
@@ -72,8 +72,8 @@ namespace Twitter.App.Models.ViewModels
         [Display(Name = "Password", ResourceType = typeof(Resources.Resources))]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        [Display(Name = "RememberMe")]
+        public string RememberMe { get; set; }
     }
 
     public class RegisterViewModel

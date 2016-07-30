@@ -75,10 +75,13 @@
                 return this.View(model);
             }
 
+            // transform string value to bool value
+            var isRememberMe = string.Compare(model.RememberMe, "on", StringComparison.OrdinalIgnoreCase) == 0;
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result =
-                await this.SignInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
+                await this.SignInManager.PasswordSignInAsync(model.UserName, model.Password, isRememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
