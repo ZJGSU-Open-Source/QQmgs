@@ -304,6 +304,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone number is invalid, should be 11 numbers..
+        /// </summary>
+        public static string InvalidPhoneNumber {
+            get {
+                return ResourceManager.GetString("InvalidPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid user name, user name cannot contains white spce.
         /// </summary>
         public static string InvalidUserName {
@@ -327,6 +336,15 @@ namespace Resources {
         public static string LogInButton {
             get {
                 return ResourceManager.GetString("LogInButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number should be required..
+        /// </summary>
+        public static string LoginPhoneNumberRequired {
+            get {
+                return ResourceManager.GetString("LoginPhoneNumberRequired", resourceCulture);
             }
         }
         
@@ -417,6 +435,15 @@ namespace Resources {
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number should be 11 numbers long..
+        /// </summary>
+        public static string PhoneNumberLong {
+            get {
+                return ResourceManager.GetString("PhoneNumberLong", resourceCulture);
             }
         }
         

@@ -1,7 +1,7 @@
 ﻿@using Twitter.App.Models.ViewModels
-@model LoginViewModel
+@model RegisterViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "全球某工商 - 连接每一位商大师生";
     Layout = "";
 }
 
@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Log in</title>
+    <title>全球某工商 - 连接每一位商大师生</title>
     <meta name="description" content="qqmgs.com login page.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="~/Content/particles.js/style.css" rel="stylesheet" media="screen">
@@ -25,91 +25,63 @@
         <div class="index-main-body">
             <div class="index-header">
                 @*<h1 class="logo hide-text">知乎</h1>*@
-                <h1>QQmgs</h1>
-                <h2 class="subtitle">与世界分享你的知识、经验和见解</h2>
+                <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
+                <h2 class="subtitle">连接每一位商大师生</h2>
             </div>
             <div class="desk-front sign-flow clearfix sign-flow-simple">
                 <div class="index-tab-navs">
-                    <div class="navs-slider" data-active-index="1">
-                        <a href="@Url.Action("Register")">注册</a>
-                        <a href="@Url.Action("Login")" class="active">登录</a>
+                    <div class="navs-slider" data-active-index="0">
+                        <a href="@Url.Action("Register")" class="active">注册</a>
+                        <a href="@Url.Action("Login")">登录</a>
                         <span class="navs-slider-bar"></span>
                     </div>
                 </div>
-                <div class="view view-signin" data-za-module="SignInForm">
-                    <form novalidate="novalidate">
-                        <div class="group-inputs">
-                            <div class="email input-wrapper">
-                                <input type="text" name="account" aria-label="手机号或邮箱" placeholder="手机号或邮箱" required="">
-                            </div>
-                            <div class="input-wrapper">
-                                <input type="password" name="password" aria-label="密码" placeholder="密码" required="">
-                            </div>
-                            <div class="input-wrapper captcha-module" data-type="en">
-                                <input id="captcha" name="" placeholder="验证码" required="" data-rule-required="true" data-msg-required="请填写验证码" class="is-ignoreValidation">
-                                <div class="captcha-container">
-                                    <img class="js-refreshCaptcha captcha" width="120" height="30" data-tooltip="s$t$看不清楚？换一张" alt="验证码">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="button-wrapper command">
-                            <button class="sign-button submit" type="submit">登录</button>
-                        </div>
-                        <div class="signin-misc-wrapper clearfix">
-                            <label class="remember-me">
-                                <input type="checkbox" name="remember_me" checked="" value="true"> 记住我
-                            </label>
-                            <a class="unable-login" href="https://www.zhihu.com/#">无法登录?</a>
-                        </div>
-                    </form>
-                    <div class="QRCode">
-                        <button class="QRCode-toggleButton">
-                            <span class="sprite-global-icon-qrcode"></span>
-                            <span class="QRCode-toggleButtonText ">下载知乎 App</span>
-                        </button>
-                        <div class="QRCode-card">
-                            <div class="QRCode-image"></div>
-                            <div class="sprite-index-icon-arrow"></div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="view view-signup selected" data-za-module="SignUpForm">
-                    <form class="zu-side-login-box" action="https://www.zhihu.com/register/email" id="sign-form-1" autocomplete="off" novalidate="novalidate">
-                        <input type="password" hidden="">
-                        <input type="hidden" name="_xsrf" value="d0c1f221f9ab3aef498b631bb093274f">
-                        <div class="group-inputs">
-                            <div class="name input-wrapper">
-                                <input required="" type="text" name="fullname" aria-label="姓名" placeholder="姓名">
-                            </div>
-                            <div class="email input-wrapper">
-                                <input required="" type="text" class="account" name="phone_num" aria-label="手机号（仅支持中国大陆）" placeholder="手机号（仅支持中国大陆）">
-                            </div>
-                            <div class="input-wrapper">
-                                <input required="" type="password" name="password" aria-label="密码" placeholder="密码（不少于 6 位）" autocomplete="off">
-                            </div>
-                            <div class="Captcha input-wrapper" data-type="cn" data-za-module="Captcha">
-                                <div class="Captcha-operate">
-                                    <input type="hidden" name="captcha" required="" data-rule-required="true" data-msg-required="请点击图中倒立的文字" value="">
-                                    <input type="hidden" name="captcha_type" value="cn" required="">
-                                    <label class="Captcha-prompt">请点击图中倒立的文字</label>
-                                    <span class="Captcha-refresh js-refreshCaptcha sprite-index-icon-refresh"></span>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+
+                        <form>
+                            <div class="group-inputs">
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="RealName" value="@Model.RealName" placeholder="姓名" id="first_name" type="text" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
+                                </div>
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="PhoneNumber" value="@Model.PhoneNumber" placeholder="手机号" id="phone_number" type="text" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
+                                </div>
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="Password" value="@Model.Password" placeholder="密码 (不少于4位)" id="password" type="password" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
+                                </div>
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="ConfirmPassword" value="@Model.ConfirmPassword" placeholder="再次确认密码" id="confirm_password" type="password" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
+                                </div>
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="Email" value="@Model.Email" placeholder="电子邮箱" id="Email_address" type="Email" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
+                                </div>
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="Class" value="@Model.Class" placeholder="专业班级" id="major_class" type="text" style="margin-bottom: 0px; border-bottom: none; width: 95%; padding-left: 5%" class="validate">
                                 </div>
                             </div>
-                        </div>
-                        <div class="button-wrapper command">
-                            <button class="sign-button submit" type="submit">注册全球某工商</button>
-                        </div>
-                    </form>
+                            <div class="button-wrapper command" style="margin-top: 5px">
+                                <!-- Switch -->
+                                <div class="switch center">
+                                    <label>
+                                        中文版
+                                        <input type="checkbox" name="locale">
+                                        <span class="lever"></span>
+                                        International
+                                    </label>
+                                </div>
+                                <button class="sign-button submit" type="submit" style="margin-top: 10px">注册全球某工商</button>
+                            </div>
+                        </form>
+                    }
                     <div class="QRCode">
-                        <button class="QRCode-toggleButton">
+                        <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("About", "Home")'" type="button">
                             <span class="sprite-global-icon-qrcode"></span>
-                            <span class="QRCode-toggleButtonText ">下载全球某工商 App</span>
+                            <span class="QRCode-toggleButtonText ">点击了解全球某工商.com</span>
                         </button>
-                        <div class="QRCode-card">
-                            <div class="QRCode-image"></div>
-                            <div class="sprite-index-icon-arrow"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -118,9 +90,9 @@
     <div class="footer" style="position: relative; z-index: 1">
         <span>2016 全球某工商</span>
         <span class="dot">·</span>
-        <a href="https://www.zhihu.com/contact" class="footer-mobile-show">联系我们</a>
+        <a href="@Url.Action("About", "Home")" class="footer-mobile-show">联系我们</a>
         <span class="dot">·</span>
-        <a target="_blank" href="https://www.zhihu.com/careers">来全球某工商工作</a>
+        <a href="@Url.Action("About", "Home")">来全球某工商工作</a>
         <span class="dot">·</span>
         <a href="http://www.miibeian.gov.cn/" target="_blank">浙 ICP 备 15036767 号</a>
         <span class="dot">·</span>

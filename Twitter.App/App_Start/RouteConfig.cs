@@ -15,10 +15,10 @@ namespace Twitter.App
             routes.MapRoute(
                 name: "Default", 
                 url: "{controller}/{action}/{id}",
-                defaults: new {controller = "Home", action = "About", id = UrlParameter.Optional},
+                defaults: new {controller = "Account", action = "Register", id = UrlParameter.Optional},
                 namespaces: new[]
                 {
-                    "Twitter.App.HomeController"
+                    "Twitter.App.ManageController"
                 });
         }
     }

@@ -72,6 +72,11 @@
         {
             if (!this.ModelState.IsValid)
             {
+                var errors = ModelState.Values.SelectMany(state => state.Errors).ToList();
+                foreach (var error in errors)
+                {
+                    this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
+                }
                 return this.View(model);
             }
 
@@ -130,9 +135,9 @@
             var result =
                 await
                 this.SignInManager.TwoFactorSignInAsync(
-                    model.Provider, 
-                    model.Code, 
-                    model.RememberMe, 
+                    model.Provider,
+                    model.Code,
+                    model.RememberMe,
                     model.RememberBrowser);
             switch (result)
             {
@@ -151,7 +156,16 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return this.View();
+            // Redirect to about page if logged in
+            var isAuthenticated = this.User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                return RedirectToAction("About", "Home");
+            }
+
+            var model = new RegisterViewModel();
+
+            return this.View(model);
         }
 
         // POST: /Account/Register
@@ -160,33 +174,64 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                var user = new User
+                var errors = ModelState.Values.SelectMany(state => state.Errors).ToList();
+                foreach (var error in errors)
                 {
-                    UserName = model.PhoneNumber,
-                    RealName = model.RealName,
-                    Email = model.Email,
-                    RegisteredTime = DateTime.Now,
-                    Class = model.Class
-                };
-                var result = await this.UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await this.SignInManager.SignInAsync(user, false, false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url?.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "全球某工商注册确认【系统邮件】", callbackUrl);
-
-                    return View("DisplayEmail");
-                    //return this.RedirectToAction("Index", "Home");
+                    this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
-
-                this.AddErrors(result);
+                return this.View(model);
             }
+
+            // Resolve locale
+            var currentCulture = model.Locale == null ? "zh-cn" : "en-us";
+            var culture = CultureHelper.GetImplementedCulture(currentCulture);
+
+            // Save culture in a cookie
+            var cookie = Request.Cookies["_culture"];
+
+            if (cookie != null)
+            {
+                cookie.Value = culture; // update cookie value
+            }
+            else
+            {
+                cookie = new HttpCookie("_culture")
+                {
+                    Value = culture,
+                    Expires = DateTime.Now.AddYears(1)
+                };
+            }
+
+            Response.Cookies.Add(cookie);
+
+            // create new user
+            var user = new User
+            {
+                UserName = model.PhoneNumber,
+                RealName = model.RealName,
+                Email = model.Email,
+                RegisteredTime = DateTime.Now,
+                Class = model.Class
+            };
+
+            var result = await this.UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await this.SignInManager.SignInAsync(user, false, false);
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url?.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "全球某工商注册确认【系统邮件】", callbackUrl);
+
+                // return View("DisplayEmail");
+                return this.RedirectToAction("About", "Home");
+            }
+
+            this.AddErrors(result);
 
             // If we got this far, something failed, redisplay form
             return this.View(model);
@@ -296,7 +341,7 @@
         {
             // Request a redirect to the external login provider
             return new ChallengeResult(
-                provider, 
+                provider,
                 this.Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
@@ -336,7 +381,7 @@
             }
 
             return this.RedirectToAction(
-                "VerifyCode", 
+                "VerifyCode",
                 new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
         }
 
@@ -367,7 +412,7 @@
                     this.ViewBag.ReturnUrl = returnUrl;
                     this.ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return this.View(
-                        "ExternalLoginConfirmation", 
+                        "ExternalLoginConfirmation",
                         new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
@@ -377,7 +422,7 @@
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(
-            ExternalLoginConfirmationViewModel model, 
+            ExternalLoginConfirmationViewModel model,
             string returnUrl)
         {
             if (this.User.Identity.IsAuthenticated)

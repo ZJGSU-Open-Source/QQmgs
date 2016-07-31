@@ -285,4 +285,13 @@
   <data name="ReviewCourse" xml:space="preserve">
     <value>商大点评</value>
   </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>手机号码需要11位数字哦 (●'◡'●)</value>
+  </data>
+  <data name="LoginPhoneNumberRequired" xml:space="preserve">
+    <value>客官，请告诉我你的手机号码哦</value>
+  </data>
+  <data name="PhoneNumberLong" xml:space="preserve">
+    <value>手机号码需要11位数字哦 (●'◡'●)</value>
+  </data>
 </root>

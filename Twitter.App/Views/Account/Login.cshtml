@@ -1,7 +1,7 @@
 ﻿@using Twitter.App.Models.ViewModels
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "全球某工商 - 连接每一位商大师生";
     Layout = "";
 }
 
@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Log in</title>
+    <title>全球某工商 - 连接每一位商大师生</title>
     <meta name="description" content="qqmgs.com login page.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="~/Content/particles.js/style.css" rel="stylesheet" media="screen">
@@ -25,7 +25,7 @@
         <div class="index-main-body">
             <div class="index-header">
                 @*<h1 class="logo hide-text">知乎</h1>*@
-                <h1 style="font-size: 60px">全球某工商</h1>
+                <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
                 <h2 class="subtitle">连接每一位商大师生</h2>
             </div>
             <div class="desk-front sign-flow clearfix sign-flow-simple">
@@ -37,17 +37,18 @@
                     </div>
                 </div>
                 <div class="view view-signin selected">
-
                     @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+
                         <form>
                             <div class="group-inputs">
                                 <div class="input-field" style="margin-top: 0px">
-                                    <input name="UserName" placeholder="手机号" id="first_name" type="text" style="margin-bottom: 0px;" class="validate">
+                                    <input name="UserName" placeholder="手机号" id="first_name" type="text" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
                                 </div>
                                 <div class="input-field" style="margin-top: 0px">
-                                    <input name="Password" placeholder="密码" id="password" type="password" style="margin-bottom: 0px; border-bottom: none" class="validate">
+                                    <input name="Password" placeholder="密码" id="password" type="password" style="margin-bottom: 0px; border-bottom: none; width: 95%; padding-left: 5%" class="validate">
                                 </div>
                             </div>
                             <div class="button-wrapper command">

@@ -56,12 +56,12 @@ namespace Twitter.App.Models.ViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
-            ErrorMessageResourceName = "LoginUserNameRequired")]
+            ErrorMessageResourceName = "LoginPhoneNumberRequired")]
         [Display(Name = "PhoneNumber", ResourceType = typeof(Resources.Resources))]
-        [StringLength(12, ErrorMessageResourceType = typeof(Resources.Resources),
-            ErrorMessageResourceName = "UserNameLong", MinimumLength = 11)]
+        [StringLength(11, ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "PhoneNumberLong", MinimumLength = 11)]
         [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources),
-            ErrorMessageResourceName = "InvalidUserName")]
+            ErrorMessageResourceName = "InvalidPhoneNumber")]
         public string UserName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
@@ -79,18 +79,18 @@ namespace Twitter.App.Models.ViewModels
     public class RegisterViewModel
     {
         [Required(ErrorMessageResourceType = typeof (Resources.Resources),
-            ErrorMessageResourceName = "UserNameRequired")]
+            ErrorMessageResourceName = "LoginPhoneNumberRequired")]
         [Display(Name = "PhoneNumber", ResourceType = typeof (Resources.Resources))]
-        [StringLength(50, ErrorMessageResourceType = typeof (Resources.Resources),
-            ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
+        [StringLength(11, ErrorMessageResourceType = typeof (Resources.Resources),
+            ErrorMessageResourceName = "PhoneNumberLong", MinimumLength = 11)]
         [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources), 
-            ErrorMessageResourceName = "InvalidUserName")]
+            ErrorMessageResourceName = "InvalidPhoneNumber")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "UserNameRequired")]
         [Display(Name = "RealName", ResourceType = typeof(Resources.Resources))]
-        [StringLength(50, ErrorMessageResourceType = typeof(Resources.Resources),
+        [StringLength(10, ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "UserNameLong", MinimumLength = 2)]
         [RegularExpression(@"^[^ ]+$", ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "InvalidUserName")]
@@ -122,6 +122,9 @@ namespace Twitter.App.Models.ViewModels
         [System.ComponentModel.DataAnnotations.Compare("Password",
             ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = @"Locale")]
+        public string Locale { get; set; }
     }
 
     public class ResetPasswordViewModel

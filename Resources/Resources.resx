@@ -285,4 +285,13 @@
   <data name="ReviewCourse" xml:space="preserve">
     <value>Review Course</value>
   </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Phone number is invalid, should be 11 numbers.</value>
+  </data>
+  <data name="LoginPhoneNumberRequired" xml:space="preserve">
+    <value>Phone number should be required.</value>
+  </data>
+  <data name="PhoneNumberLong" xml:space="preserve">
+    <value>Phone number should be 11 numbers long.</value>
+  </data>
 </root>
