@@ -45,7 +45,7 @@ namespace Twitter.App.Controllers
         [HttpPost]
         public ActionResult Upload(UploadPhotoBindingModel model)
         {
-            var uploadedFile = FileUploadHelper.UploadFile(model.File);
+            var uploadedFile = FileUploadHelper.UploadFile(model.File, PhotoType.Photo);
             var loggedUserId = this.User.Identity.GetUserId();
 
             try

@@ -253,7 +253,7 @@ namespace Twitter.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UploadGroupImage(HttpPostedFileBase file, int groupId)
         {
-            var uploadedFile = FileUploadHelper.UploadFile(file);
+            var uploadedFile = FileUploadHelper.UploadFile(file, PhotoType.GroupImage);
             var loggedUserId = this.User.Identity.GetUserId();
 
             var photo = new Photo

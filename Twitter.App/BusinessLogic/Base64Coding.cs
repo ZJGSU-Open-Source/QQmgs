@@ -11,7 +11,7 @@ using Twitter.App.Common;
 
 namespace Twitter.App.BusinessLogic
 {
-    public static class Base64Security
+    public static class Base64Coding
     {
         public static string Encrption(string uid1, string uid2)
         {
@@ -19,6 +19,17 @@ namespace Twitter.App.BusinessLogic
             Guard.ArgumentNotNullOrEmpty(uid2, nameof(uid2));
 
             var stringValue = uid1 + "_" + uid2;
+            var bytes = Encoding.UTF8.GetBytes(stringValue);
+            var cypherString = Convert.ToBase64String(bytes);
+
+            return cypherString;
+        }
+
+        public static string Encrption(string uid)
+        {
+            Guard.ArgumentNotNullOrEmpty(uid, nameof(uid));
+        
+            var stringValue = uid;
             var bytes = Encoding.UTF8.GetBytes(stringValue);
             var cypherString = Convert.ToBase64String(bytes);
 

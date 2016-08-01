@@ -17,7 +17,7 @@ namespace Twitter.App.Controllers.MVCController
         // GET: Chatting
         public ActionResult Chatting(string cid)
         {
-            var userPair = Base64Security.Decrption(cid);
+            var userPair = Base64Coding.Decrption(cid);
             var users = userPair.Split('_');
 
             Guard.Argument(() => users.Length == 2, nameof(users));
@@ -37,7 +37,7 @@ namespace Twitter.App.Controllers.MVCController
         // GET: Chatting
         public ActionResult GenerateChatting(string user1, string user2)
         {
-            var cypherString = Base64Security.Encrption(user1, user2);
+            var cypherString = Base64Coding.Encrption(user1, user2);
             ViewData["string"] = cypherString;
 
             return View();

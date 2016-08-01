@@ -6,19 +6,22 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Glimpse.Core.Extensibility;
+using Twitter.Models;
 
 namespace Twitter.App.BusinessLogic
 {
     public static class FileUploadHelper
     {
-        public static char DirSeparator = System.IO.Path.DirectorySeparatorChar;
+        public static char DirSeparator = Path.DirectorySeparatorChar;
 
         public static string FilesPath =
             HttpContext.Current.Server.MapPath("~\\img" + DirSeparator + "Uploads" + DirSeparator);
 
         public static int DefaultResizeSize { get; } = 200;
 
-        public static string UploadFile(HttpPostedFileBase file)
+        public static int DefaultResizeRatio { get; } = 2;
+
+        public static string UploadFile(HttpPostedFileBase file, PhotoType photoType = PhotoType.AvatarImage)
         {
             // Check if we have a file
             if (null == file) return "";
@@ -26,10 +29,15 @@ namespace Twitter.App.BusinessLogic
             if (!(file.ContentLength > 0)) return "";
 
             // escapse invalid charaters and %
-            var encodedFileName = CleanFileName(file.FileName).Replace("%", "");
+            var encodedFileName = CleanFileName(file.FileName);
 
             string fileName = $"{Guid.NewGuid()}_{encodedFileName}";
-            string fileExt = Path.GetExtension(file.FileName);
+
+            var fileExt = Path.GetExtension(file.FileName);
+
+            // Issues happen when chinese charcters
+            //fileName = Base64Coding.Encrption(fileName);
+            //fileName += fileExt;
 
             // Make sure we were able to determine a proper extension
             if (null == fileExt) return "";
@@ -48,7 +56,7 @@ namespace Twitter.App.BusinessLogic
             file.SaveAs(Path.GetFullPath(path));
 
             // Save our thumbnail as well
-            ResizeImage(file, fileName, DefaultResizeSize, DefaultResizeSize);
+            ResizeImage(file, fileName, DefaultResizeSize, DefaultResizeSize, photoType);
 
             // Return the filename
             return fileName;
@@ -77,9 +85,9 @@ namespace Twitter.App.BusinessLogic
             }
         }
 
-        public static void ResizeImage(HttpPostedFileBase file, string fileName, int width, int height)
+        public static void ResizeImage(HttpPostedFileBase file, string fileName, int width, int height, PhotoType photoType)
         {
-            string thumbnailDirectory = $@"{FilesPath}{DirSeparator}{"Thumbnails"}";
+            string thumbnailDirectory = $@"{FilesPath}{DirSeparator}Thumbnails";
 
             // Check if the directory we are saving to exists
             if (!Directory.Exists(thumbnailDirectory))
@@ -94,7 +102,24 @@ namespace Twitter.App.BusinessLogic
             FileStream stream = new FileStream(Path.GetFullPath(imagePath), FileMode.OpenOrCreate);
 
             // Convert our uploaded file to an image
-            Image OrigImage = Image.FromStream(file.InputStream);
+            Image origImage = Image.FromStream(file.InputStream);
+
+            // resize algo
+            if (photoType == PhotoType.Photo)
+            {
+                var widthAfter = origImage.Width;
+                var heightAfter = origImage.Height;
+
+                while (widthAfter > 800 && heightAfter > 600)
+                {
+                    widthAfter /= DefaultResizeRatio;
+                    heightAfter /= DefaultResizeRatio;
+                }
+
+                width = widthAfter;
+                height = heightAfter;
+            }
+
             // Create a new bitmap with the size of our thumbnail
             Bitmap TempBitmap = new Bitmap(width, height);
 
@@ -106,22 +131,22 @@ namespace Twitter.App.BusinessLogic
 
             // Create a rectangle and draw the image
             Rectangle imageRectangle = new Rectangle(0, 0, width, height);
-            NewImage.DrawImage(OrigImage, imageRectangle);
+            NewImage.DrawImage(origImage, imageRectangle);
 
             // Save the final file
-            TempBitmap.Save(stream, OrigImage.RawFormat);
+            TempBitmap.Save(stream, origImage.RawFormat);
 
             // Clean up the resources
             NewImage.Dispose();
             TempBitmap.Dispose();
-            OrigImage.Dispose();
+            origImage.Dispose();
             stream.Close();
             stream.Dispose();
         }
 
         private static string CleanFileName(string fileName)
         {
-            return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+            return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty).Replace("%", ""));
         }
     }
 }
