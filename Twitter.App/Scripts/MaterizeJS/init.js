@@ -22,4 +22,12 @@ $(document).ready(function () {
 // load full image in photo view
 function loadFullImage(e) {
     e.src = e.src.replace('Thumbnails', '');
+
+    // remove all tooltips
+    $('.tooltipped').tooltip('remove');
+
+    // readd all tooltips
+    $(document).ready(function () {
+        $('.tooltipped').tooltip({ delay: 50 });
+    });
 }
