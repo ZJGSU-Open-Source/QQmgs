@@ -18,3 +18,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('.scrollspy').scrollSpy();
 });
+
+// load full image in photo view
+function loadFullImage(e) {
+    e.src = e.src.replace('Thumbnails', '');
+}
