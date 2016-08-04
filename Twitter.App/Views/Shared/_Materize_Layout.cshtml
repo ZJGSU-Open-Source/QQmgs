@@ -11,7 +11,8 @@
     <title>@Resources.QQmgscom</title>
 
     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
+    @*<link href="~/Content/GoogleIcons/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection">*@
     <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
@@ -72,8 +73,8 @@
                 <div class="col l3 s12">
                     <h5 class="white-text">链接</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">浙江工商大学官网</a></li>
-                        <li><a class="white-text" href="#!">信息学院官网</a></li>
+                        <li><a class="white-text" href="http://www.zjsu.edu.cn">浙江工商大学官网</a></li>
+                        <li><a class="white-text" href="http://cie.zjsu.edu.cn">信息学院官网</a></li>
                     </ul>
                 </div>
                 <div class="col l3 s12">
@@ -91,9 +92,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container row">
-                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号 · @{
-                    Html.RenderAction("GetTotalUser", "Users");
-                } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");}
+                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号 · @{ Html.RenderAction("GetTotalUser", "Users"); } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");}
             </div>
         </div>
     </footer>
