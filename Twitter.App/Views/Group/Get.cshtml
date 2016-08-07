@@ -20,8 +20,6 @@
         <div class="row center">
             <h5 class="header col s12 light grey-text">@Resources.Group · @ViewData["GroupName"]</h5>
         </div>
-        <br/>
-
         @*<div class="slider">
             <ul class="slides">
                 <li>
@@ -53,8 +51,6 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-        <div class="row center">
-        </div>
         <div class="row hide-on-small-only" style="max-width: 700px; margin: auto">
             @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
