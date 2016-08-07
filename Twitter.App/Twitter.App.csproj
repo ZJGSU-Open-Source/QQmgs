@@ -250,6 +250,7 @@
     <Compile Include="Controllers\MVCController\BaseController.cs" />
     <Compile Include="Controllers\MVCController\ConversationController.cs" />
     <Compile Include="Controllers\MVCController\CourseReviewController.cs" />
+    <Compile Include="Controllers\MVCController\CustomizedNameController.cs" />
     <Compile Include="Controllers\MVCController\GroupController.cs" />
     <Compile Include="Controllers\MVCController\DevController.cs" />
     <Compile Include="Controllers\MVCController\PhotoController.cs" />
@@ -482,6 +483,7 @@
     <Folder Include="Scripts\qqmgs\" />
     <Folder Include="Views\Account\old\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\CustomizedName\" />
     <Folder Include="Views\Messages\" />
     <Folder Include="Views\Notifications\" />
   </ItemGroup>
