@@ -272,6 +272,7 @@
     <Compile Include="Models\BindingModels\CreateGroupBindingModel.cs" />
     <Compile Include="Models\BindingModels\CreateLogBindingModel.cs" />
     <Compile Include="Models\BindingModels\CreateReviewBindingModel.cs" />
+    <Compile Include="Models\BindingModels\CreateSearchBindingModel.cs" />
     <Compile Include="Models\BindingModels\CreateTweetBindingModel.cs" />
     <Compile Include="Models\BindingModels\EditGroupBindingModel.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\PhotoViewModel.cs" />
     <Compile Include="Models\ViewModels\ReplyViewModel.cs" />
+    <Compile Include="Models\ViewModels\SearchResultViewModel.cs" />
     <Compile Include="Models\ViewModels\TweetViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

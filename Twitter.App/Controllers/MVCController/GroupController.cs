@@ -278,9 +278,39 @@ namespace Twitter.App.Controllers
         }
 
         [HttpGet]
-        public ActionResult Search()
+        [Route("SearchIndex")]
+        public ActionResult SearchIndex()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Search(CreateSearchBindingModel model, int p = 1)
+        {
+            var users = this.Data.Users.All()
+                .Where(user => user.RealName.Contains(model.SerachWords))
+                .Select(ViewModelsHelper.AsUserViewModel)
+                .ToList().Take(3);
+
+            var groups = this.Data.Group.All()
+                .Where(group => group.Name.Contains(model.SerachWords))
+                .Select(ViewModelsHelper.AsGroupViewModel)
+                .Where(models => models.IsDisplay)
+                .ToList().Take(5);
+
+            var tweets = this.Data.Tweets.All()
+                .Where(tweet => tweet.Text.Contains(model.SerachWords))
+                .Select(ViewModelsHelper.AsTweetViewModel)
+                .ToList().Take(10);
+
+            var searchResult = new SearchResultViewModel
+            {
+                Groups = groups,
+                Users = users,
+                Tweets = tweets
+            };
+
+            return this.View(searchResult);
         }
     }
 }

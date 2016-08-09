@@ -1,16 +1,68 @@
-﻿@{
+﻿@model Twitter.App.Models.ViewModels.SearchResultViewModel
+@{
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
 <div class="section no-pad-bot">
     <div class="container">
         <div class="row center">
-            <div class="input-field col s10">
-                <input type="text" id="autocomplete-input" class="autocomplete" placeholder="热门搜索： 商大单身狗">
-            </div>
-            <div class="input-field col s2">
-                <input class="btn btn-default" type="submit" value="搜索一下" />
-            </div>
+            @using (Html.BeginForm("Search", "Group", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="input-field col s9">
+                    <input name="SerachWords" type="text" id="autocomplete-input" class="autocomplete" placeholder="热门搜索： 商大单身狗">
+                </div>
+                <div class="input-field col s2">
+                    <input class="btn btn-default" type="submit" value="搜索一下" style="padding-right: 10px; padding-left: 10px"/>
+                </div>
+            }
+        </div>
+        
+        <div style="max-width: 700px; margin: auto">
+
+            @{
+                var index = 1;
+            }
+            @foreach (var user in Model.Users)
+            {
+                <div class="col s12 m5">
+                    <div class="card-panel teal">
+                        <span class="white-text">
+                            @index. 用户: @user.RealName From class @user.Class
+                        </span>
+                    </div>
+                </div>
+                ++index;
+            }
+
+            @{
+                index = 1;
+            }
+            @foreach (var group in Model.Groups)
+            {
+                <div class="col s12 m5">
+                    <div class="card-panel teal">
+                        <span class="white-text">
+                            @index. 兴趣小组: @group.Name: @group.Description
+                        </span>
+                    </div>
+                </div>
+                ++index;
+            }
+
+            @{
+                index = 1;
+            }
+            @foreach (var tweet in Model.Tweets)
+            {
+                <div class="col s12 m5">
+                    <div class="card-panel teal">
+                        <span class="white-text">
+                            @index. 发言: @tweet.Text By @tweet.Author
+                        </span>
+                    </div>
+                </div>
+                ++index;
+            }
         </div>
     </div>
 </div>

@@ -59,5 +59,13 @@ namespace Twitter.App.BusinessLogic
                 DatePosted = r.DatePosted,
                 Author = r.Author.RealName
             };
+
+        public static readonly Expression<Func<User, UserViewModel>> AsUserViewModel =
+            u => new UserViewModel
+            {
+                RealName = u.RealName,
+                Class = u.Class,
+                Status = u.Status
+            };
     }
 }

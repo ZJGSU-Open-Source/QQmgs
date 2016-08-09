@@ -16,26 +16,26 @@
         {
         }
 
-        [Route("search")]
-        public ActionResult SearchUser(string searchTerm, int p = 1)
-        {
-            ViewBag.searchTerm = searchTerm;
+        //[Route("search")]
+        //public ActionResult SearchUser(string searchTerm, int p = 1)
+        //{
+        //    //ViewBag.searchTerm = searchTerm;
 
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                return this.View();
-            }
+        //    //if (string.IsNullOrEmpty(searchTerm))
+        //    //{
+        //    //    return this.View();
+        //    //}
 
-            var users =
-                this.Data.Users.All()
-                    .Where(u => u.UserName.Contains(searchTerm))
-                    .OrderByDescending(u => u.UserName)
-                    .Select(u => new UserViewModel { Username = u.UserName, Email = u.Email });
+        //    //var users =
+        //    //    this.Data.Users.All()
+        //    //        .Where(u => u.UserName.Contains(searchTerm))
+        //    //        .OrderByDescending(u => u.UserName)
+        //    //        .Select(u => new UserViewModel { Username = u.UserName, Email = u.Email });
 
-            var pagedUsers = users.ToPagedList(pageNumber: p, pageSize: 6);
+        //    //var pagedUsers = users.ToPagedList(pageNumber: p, pageSize: 6);
 
-            return !users.Any() ? this.View() : this.View(pagedUsers);
-        }
+        //    return !users.Any() ? this.View() : this.View(pagedUsers);
+        //}
 
         [AllowAnonymous]
         public ActionResult GetTotalUser()
