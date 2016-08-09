@@ -278,28 +278,24 @@ namespace Twitter.App.Controllers
         }
 
         [HttpGet]
-        [Route("SearchIndex")]
-        public ActionResult SearchIndex()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult Search(CreateSearchBindingModel model, int p = 1)
         {
             var users = this.Data.Users.All()
                 .Where(user => user.RealName.Contains(model.SerachWords))
+                .OrderByDescending(user => user.RegisteredTime)
                 .Select(ViewModelsHelper.AsUserViewModel)
                 .ToList().Take(3);
 
             var groups = this.Data.Group.All()
                 .Where(group => group.Name.Contains(model.SerachWords))
+                .OrderByDescending(group => group.CreatedTime)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .Where(models => models.IsDisplay)
                 .ToList().Take(5);
 
             var tweets = this.Data.Tweets.All()
                 .Where(tweet => tweet.Text.Contains(model.SerachWords))
+                .OrderByDescending(tweet => tweet.DatePosted)
                 .Select(ViewModelsHelper.AsTweetViewModel)
                 .ToList().Take(10);
 
