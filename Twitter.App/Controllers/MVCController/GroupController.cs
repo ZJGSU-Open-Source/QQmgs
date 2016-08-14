@@ -127,6 +127,7 @@ namespace Twitter.App.Controllers
             // pass Group info to view
             ViewData["GroupName"] = group.Name;
             ViewData["GroupId"] = groupId;
+            ViewData["PageNumber"] = p;
 
             return this.View(tweetsViewModel);
         }
@@ -278,7 +279,7 @@ namespace Twitter.App.Controllers
         }
 
         [HttpGet]
-        public ActionResult Search(CreateSearchBindingModel model, int p = 1)
+        public ActionResult Search(CreateSearchBindingModel model)
         {
             var users = this.Data.Users.All()
                 .Where(user => user.RealName.Contains(model.SerachWords))
@@ -305,6 +306,8 @@ namespace Twitter.App.Controllers
                 Users = users,
                 Tweets = tweets
             };
+
+            ViewData["SearchWords"] = model.SerachWords;
 
             return this.View(searchResult);
         }

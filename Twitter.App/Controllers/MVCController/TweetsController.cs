@@ -187,16 +187,21 @@ namespace Twitter.App.Controllers
         [Route("reply")]
         public ActionResult Reply(ReplyViewModel model)
         {
-            if (string.IsNullOrEmpty(model.Text))
-            {
-                return this.PartialView("_Tweet");
-            }
-
             var tweet = Data.Tweets.Find(model.Id);
 
             if (tweet == null)
             {
                 return this.PartialView("_Tweet");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(state => state.Errors).ToList();
+                foreach (var error in errors)
+                {
+                    this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
+                }
+                return RedirectToAction("Get", "Group", new { groupId = tweet.GroupId, p = 1 });
             }
 
             var loggedUserId = this.User.Identity.GetUserId();
@@ -234,6 +239,25 @@ namespace Twitter.App.Controllers
             //        Text = reply.Content,
             //        Author = reply.Author.RealName
             //    });
+        }
+
+        public ActionResult Like(int tweetId, int group, int page = 1)
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            var tweet = this.Data.Tweets.Find(tweetId);
+
+            if (Data.Users.Find(loggedUserId).FavouriteTweets.Contains(tweet))
+            {
+                this.Data.Users.Find(loggedUserId).FavouriteTweets.Remove(tweet);
+                this.Data.SaveChanges();
+            }
+            else
+            {
+                this.Data.Users.Find(loggedUserId).FavouriteTweets.Add(tweet);
+                this.Data.SaveChanges();
+            }
+
+            return RedirectToAction("Get", "Group", new {groupId = group, p = page});
         }
 
         public int Favourite(int tweetId)

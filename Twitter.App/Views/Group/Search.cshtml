@@ -16,7 +16,16 @@
                 </div>
             }
         </div>
-        
+
+        @{
+            if (ViewData["SearchWords"] != null)
+            {
+                <div class="row center">
+                    <h5 class="header col s12 light grey-text">'@ViewData["SearchWords"]' 的搜索结果</h5>
+                </div>
+            }
+        }
+
         <div style="max-width: 700px; margin: auto">
 
             @{
@@ -27,7 +36,7 @@
                 <div class="col s12 m5">
                     <div class="card-panel teal">
                         <span class="white-text">
-                            @index. 用户: @user.RealName From class @user.Class
+                            @index. 用户: @user.RealName From @user.Class
                         </span>
                     </div>
                 </div>

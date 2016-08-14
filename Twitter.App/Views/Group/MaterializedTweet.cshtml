@@ -2,9 +2,9 @@
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
 <li>
-    <div class="col s12 m8 offset-m2 l6 offset-l3 hoverable">
-        <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px; margin-bottom: 0px">
-            <div class="row valign-wrapper">
+    <div class="col s12 m8 offset-m2 l6 offset-l3 hoverable" id="@($"Post{@Model.Id}")">
+        <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px; margin-bottom: 0px; padding-bottom: 1px">
+            <div class="row valign-wrapper" style="margin-bottom: auto">
                 <div class="groupTweetLeftPart">
                     <div style="max-width: 100px; float: left">
                         @if (Model.HasAvatarImage)
@@ -19,20 +19,35 @@
                 </div>
                 <div class="groupTweetRightPart">
                     <span class="black-text" style="font-size: 20px">
-                        <a class="groupTweetAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">@Model.Author</a>
+                        <a class="groupTweetAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">@Model.Author</a> <a style="font-size: 12px">@Model.AuthorStatus</a>
                         <br />
                         @Model.Text <br />
                     </span>
                 </div>
             </div>
             <div class="card-action">
-                <div>
+                <div class="row " style="margin-bottom: 0px">
+                    <div class="col s2 hide-on-small-only">
+                        <a class="btn" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="font-size: 12px;max-height: 110px">More</a>    
+                    </div>
 
-                    <a class="btn tooltipped hide-on-small-only" data-position="top" data-delay="50" data-tooltip="Function in test" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="font-size: 12px">
-                        View More
-                    </a>
+                    @*<div>
+                        <div class="chip" id="@($"FavouriteList{@Model.Id}")">
+                            <img src="http://materializecss.com/images/yuna.jpg" alt="Contact Person">
+                            Jane Doe
+                        </div>
+                    </div>*@
 
-                    <a style="float: right">@Model.DatePosted</a>
+                    <div class="col s4 hide-on-small-only">
+                        <a href="@Url.Action("Like", "Tweets", new {tweetId = Model.Id, group = Model.GroupId, page = ViewData["PageNumber"]})" class="btn" style="padding-left: 11px; padding-right: 11px;">
+                            赞<span id="@($"Favourites{Model.Id}")" class="badge" style="position: static; color: white">@Model.UsersFavouriteCount</span>
+                        </a>
+                    </div>
+
+                    <div>
+                        <a style="float: right; font-size: 12px">@Model.DatePosted.ToString("h:mm tt MMMM dd")</a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -43,7 +58,7 @@
                     <!-- Modal Trigger -->
                     <a href="#" class="collection-item" style="padding-bottom: 1.5px; padding-top: 5px; padding-left: 5px; padding-right: 3px">
                         <div class="groupTweetReplyAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">
-                            <div class="chip" style="font-size: 16px; margin-right: 12px; background-color: #cce4e4">
+                            <div class="chip" style="font-size: 12px; margin-right: 12px; background-color: #cce4e4">
                                 @if (reply.HasAvatarImage)
                                 {
                                     <img src="~/img/Uploads/Thumbnails/@reply.AvatarImageName" alt="Contact Person">
@@ -65,13 +80,13 @@
 
                 <form class="col s12">
                     <div class="row" style="margin-bottom: 0px">
-                        <div class="input-field col s9">
+                        <div class="input-field col s9" style="margin-top: 0px">
                             <i class="material-icons prefix">mode_edit</i>
-                            <input placeholder="What's on your mind ?" id="input_text" type="text" length="200" name="Text">
+                            <input placeholder="What's on your mind ?" id="input_text" type="text" length="200" name="Text" style="margin-bottom: 0px">
                             <input id="hidden_group_id_property" type="text" name="Id" value="@Model.Id" style="display: none !important;">
                         </div>
-                        <div class="input-field col s2" style="padding-left: 7px; padding-right: 7px; padding-top: 6px; padding-bottom: 6px; font-size: 11px">
-                            <input class="btn btn-default" type="submit" value="Reply" style="padding-left: 9px; padding-right: 9px"/>
+                        <div class="input-field col s2" style="padding-left: 7px; padding-right: 7px; padding-bottom: 6px; font-size: 11px">
+                            <input class="btn btn-default" type="submit" value="Reply" style="padding-left: 9px; padding-right: 9px" />
                         </div>
                     </div>
                 </form>
