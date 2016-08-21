@@ -47,12 +47,12 @@ namespace Twitter.Models
 
     public enum Classification
     {
-        Interests,
-        School,
-        Study,
-        Association,
-        Chatting,
-        Food,
-        NotClear
+        兴趣爱好,
+        学院组织,
+        我爱学习,
+        社团组织,
+        社交聊天,
+        吃货俱乐部,
+        未分类
     };
 }

@@ -27,9 +27,9 @@
             </div>
             <div class="card-action">
                 <div class="row " style="margin-bottom: 0px">
-                    <div class="col s2 hide-on-small-only">
+                    @*<div class="col s2 hide-on-small-only">
                         <a class="btn" href="@Url.Action("GetTweet", "Tweets", new {tweetId = Model.Id})" style="font-size: 12px;max-height: 110px">More</a>    
-                    </div>
+                    </div>*@
 
                     @*<div>
                         <div class="chip" id="@($"FavouriteList{@Model.Id}")">
@@ -38,11 +38,11 @@
                         </div>
                     </div>*@
 
-                    <div class="col s4 hide-on-small-only">
+                    @*<div class="col s4 hide-on-small-only">
                         <a href="@Url.Action("Like", "Tweets", new {tweetId = Model.Id, group = Model.GroupId, page = ViewData["PageNumber"]})" class="btn" style="padding-left: 11px; padding-right: 11px;">
                             赞<span id="@($"Favourites{Model.Id}")" class="badge" style="position: static; color: white">@Model.UsersFavouriteCount</span>
                         </a>
-                    </div>
+                    </div>*@
 
                     <div>
                         <a style="float: right; font-size: 12px">@Model.DatePosted.ToString("h:mm tt MMMM dd")</a>

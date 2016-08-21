@@ -77,7 +77,7 @@ namespace Twitter.App.Controllers
             var groupThrible = this.Data.Group.All()
                 .OrderByDescending(group => group.Tweets.Count)
                 .Select(ViewModelsHelper.AsGroupViewModel)
-                .Take(3).ToList();
+                .Take(4).ToList();
 
             return PartialView(groupThrible);
         }
@@ -165,7 +165,8 @@ namespace Twitter.App.Controllers
                 CreatedTime = currentTime,
                 CreaterId = loggedUserId,
                 LastTweetUpdateTime = currentTime,
-                IsDisplay = true
+                IsDisplay = true,
+                Classification = Classification.未分类
             };
 
             this.Data.Group.Add(group);

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
 
-<div class="section hide-on-small-only">
+<div class="section hide-on-small-only" style="padding-top: 0px; padding-bottom: 0px">
     <div class="row center">
         <h5 class="header col s12 light grey-text">为您推荐的兴趣小组</h5>
     </div>
@@ -8,8 +8,8 @@
     <div class="row">
         @foreach (var group in Model)
         {
-            <div class="col s4">
-                <div class="card" style="max-width: 300px;">
+            <div class="col s3">
+                <div class="card" style="max-width: 220px;">
                     <div class="card-image waves-effect waves-block waves-light">
                         @if (group.HasImageOverview)
                         {
@@ -21,7 +21,7 @@
                             <img class="activator" src="http://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg" alt="">
                         }
                     </div>
-                    <div class="card-content">
+                    <div class="card-content" style="padding-left: 12px; padding-right: 12px; padding-bottom: 12px; padding-top: 6px">
                         <span class="card-title activator grey-text text-darken-4">@group.Name<i class="material-icons right">more_vert</i></span>
                         <p>
                             <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})">进入讨论</a>

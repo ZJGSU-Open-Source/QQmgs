@@ -6,7 +6,7 @@
 }
 
 <nav style="background: #009688">
-    <div class="nav-wrapper container">
+    <div class="nav-wrapper container" style="padding-top: 0px">
         <div class="col s12">
             <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
         </div>
@@ -15,27 +15,26 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-        <br>
         @{
             Html.RenderAction("GetUserRecommand");
         }
 
         <div class="section hide-on-small-only">
-            <div class="row center">
+            @*<div class="row center">
                 <h5 class="header col s12 light grey-text">热门讨论分类 </h5>
-            </div>
+            </div>*@
             <div class="row">
                 @{
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Interests});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Chatting});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.Study});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.兴趣爱好});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.社交聊天});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.我爱学习});
                 }
             </div>
             <div class="row">
                 @{
-                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.Food });
-                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.Association });
-                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.School });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.吃货俱乐部 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社团组织});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.学院组织 });
                 }
             </div>
         </div>

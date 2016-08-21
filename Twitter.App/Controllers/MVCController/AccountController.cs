@@ -156,11 +156,11 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
-            // Redirect to about page if logged in
+            // Redirect to group index page if logged in
             var isAuthenticated = this.User.Identity.IsAuthenticated;
             if (isAuthenticated)
             {
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("Index", "Group");
             }
 
             var model = new RegisterViewModel();
