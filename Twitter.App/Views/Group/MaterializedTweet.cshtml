@@ -51,13 +51,13 @@
                 </div>
             </div>
         </div>
-        <div class="collection" style="margin: 0.08rem 0 0rem 0">
+        <div class="collection" style="margin: 0rem 0 0rem 0">
             @foreach (var reply in Model.ReplyList.OrderBy(r => r.PublishTime).Take(15))
             {
                 <div>
                     <!-- Modal Trigger -->
-                    <a href="#" class="collection-item" style="padding-bottom: 1.5px; padding-top: 5px; padding-left: 5px; padding-right: 3px">
-                        <div class="groupTweetReplyAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">
+                    <a href="#" class="collection-item" style="padding-bottom: 0px; padding-top: 0px; padding-left: 6px; padding-right: 0px">
+                        <div class="groupTweetReplyAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif; background-color: #f5f8fa">
                             <div class="chip" style="font-size: 12px; margin-right: 12px; background-color: #cce4e4">
                                 @if (reply.HasAvatarImage)
                                 {
