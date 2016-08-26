@@ -20,14 +20,14 @@
         }
 
         <div class="section hide-on-small-only">
-            <div class="row">
+            <div class="row" style="margin: auto">
                 @{
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.兴趣爱好 });
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社交聊天 });
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.我爱学习 });
                 }
             </div>
-            <div class="row">
+            <div class="row" style="margin: auto">
                 @{
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.吃货俱乐部 });
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社团组织 });
@@ -45,7 +45,7 @@
         </div>
 
         <div class="section">
-            <div class="row center">
+            <div class="row center" style="margin: auto">
                 <h5 class="header col s12 light grey-text">所有兴趣小组 (@Model.ToList().Count)</h5>
             </div>
 
