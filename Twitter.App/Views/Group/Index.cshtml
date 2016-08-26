@@ -20,21 +20,26 @@
         }
 
         <div class="section hide-on-small-only">
-            @*<div class="row center">
-                <h5 class="header col s12 light grey-text">热门讨论分类 </h5>
-            </div>*@
             <div class="row">
                 @{
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.兴趣爱好});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.社交聊天});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.我爱学习});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.兴趣爱好 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社交聊天 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.我爱学习 });
                 }
             </div>
             <div class="row">
                 @{
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.吃货俱乐部 });
-                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社团组织});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社团组织 });
                     Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.学院组织 });
+                }
+            </div>
+        </div>
+
+        <div class="section hide-on-small-only" style="padding: 0px">
+            <div class="row center" style="margin:auto">
+                @{
+                    Html.RenderAction("GetSearchGroup");
                 }
             </div>
         </div>

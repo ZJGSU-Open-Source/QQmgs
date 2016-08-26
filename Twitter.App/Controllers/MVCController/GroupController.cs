@@ -312,5 +312,31 @@ namespace Twitter.App.Controllers
 
             return this.View(searchResult);
         }
+
+        [HttpGet]
+        public ActionResult GetSearchGroup()
+        {
+            return this.PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult SearchGroup(CreateSearchBindingModel model)
+        {
+            var groups = this.Data.Group.All()
+                .Where(group => group.Name.Contains(model.SerachWords))
+                .OrderByDescending(group => group.CreatedTime)
+                .Select(ViewModelsHelper.AsGroupViewModel)
+                .Where(models => models.IsDisplay)
+                .ToList().Take(5);
+
+            var searchResult = new SearchResultViewModel
+            {
+                Groups = groups,
+            };
+
+            ViewData["SearchWords"] = model.SerachWords;
+
+            return this.View(searchResult);
+        }
     }
 }

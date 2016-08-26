@@ -480,6 +480,8 @@
     <Content Include="Views\CourseReview\Search.cshtml" />
     <Content Include="Views\Group\GetClassificatedGroup.cshtml" />
     <Content Include="Views\Group\Search.cshtml" />
+    <None Include="Views\Group\GetSearchGroup.cshtml" />
+    <None Include="Views\Group\SearchGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
