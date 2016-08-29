@@ -59,28 +59,13 @@ namespace Twitter.App.Controllers
                     Name = uploadedFile.Url,
                     PhotoType = PhotoType.Photo,
                     Descrption = model.Description,
-                    IsSoftDelete = false
+                    IsSoftDelete = false,
+                    OriginalHeight = uploadedFile.PhotoSize.Height,
+                    OriginalWidth = uploadedFile.PhotoSize.Width
                 };
 
                 this.Data.Photo.Add(photo);
                 this.Data.SaveChanges();
-
-                // update photo.json
-                var photoJsonItem = new JsonHelper.Photo
-                {
-                    Url = uploadedFile.Url,
-                    Height = uploadedFile.PhotoSize.Height,
-                    Width = uploadedFile.PhotoSize.Width
-                };
-
-                var dir = AppDomain.CurrentDomain.BaseDirectory;
-                var photoJsonDestination = $@"{dir}/img/photo/photo.json";
-
-                var photoJson = JsonHelper.LoadJson(photoJsonDestination);
-                photoJson.Add(photoJsonItem);
-
-                var jsonString = JsonHelper.ToJsonString(photoJson);
-                SaveFile(photoJsonDestination, jsonString);
 
                 return RedirectToAction("Index");
             }
@@ -98,12 +83,5 @@ namespace Twitter.App.Controllers
                 Name = t.Name,
                 Description = t.Descrption
             };
-
-        private static void SaveFile(string filename, string str)
-        {
-            StreamWriter streamWriter = new StreamWriter(filename, false, Encoding.UTF8);
-            streamWriter.WriteLine(str);
-            streamWriter.Close();
-        }
     }
 }

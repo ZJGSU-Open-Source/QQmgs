@@ -67,5 +67,16 @@ namespace Twitter.App.BusinessLogic
                 Class = u.Class,
                 Status = u.Status
             };
+
+        public static readonly Expression<Func<Photo, PhotoViewModel>> AsPhotoViewModel =
+            p => new PhotoViewModel
+            {
+                Description = p.Descrption,
+                Author = p.Author.RealName,
+                Name = p.Name,
+                DatePosted = p.DatePosted,
+                Height = p.OriginalHeight,
+                Width = p.OriginalWidth
+            };
     }
 }

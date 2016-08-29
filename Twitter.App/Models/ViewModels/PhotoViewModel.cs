@@ -11,10 +11,19 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("Author")]
+        [JsonProperty("author")]
         public string Author { get; set; }
 
-        [JsonProperty("Description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
+
+        [JsonProperty("date_posted")]
+        public DateTime DatePosted { get; set; }
+
+        [JsonProperty("width")]
+        public int Width { get; set; }
+
+        [JsonProperty("height")]
+        public int Height { get; set; }
     }
 }

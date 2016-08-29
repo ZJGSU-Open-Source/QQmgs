@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -45,6 +46,13 @@ namespace Twitter.App.BusinessLogic
 
                 return FromJsonString<List<Photo>>(json);
             }
+        }
+
+        private static void SaveFile(string filename, string str)
+        {
+            StreamWriter streamWriter = new StreamWriter(filename, false, Encoding.UTF8);
+            streamWriter.WriteLine(str);
+            streamWriter.Close();
         }
 
         public class Photo

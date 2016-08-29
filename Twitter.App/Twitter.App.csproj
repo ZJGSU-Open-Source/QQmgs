@@ -247,6 +247,7 @@
     <Compile Include="Common\Guard.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\APIControllers\GroupController.cs" />
+    <Compile Include="Controllers\APIControllers\PhotoController.cs" />
     <Compile Include="Controllers\MVCController\AccountController.cs" />
     <Compile Include="Controllers\MVCController\BaseController.cs" />
     <Compile Include="Controllers\MVCController\ConversationController.cs" />

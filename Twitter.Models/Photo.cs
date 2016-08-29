@@ -27,6 +27,10 @@ namespace Twitter.Models
         public PhotoType PhotoType { get; set; }
 
         public bool IsSoftDelete { get; set; }
+
+        public int OriginalWidth { get; set; }
+
+        public int OriginalHeight { get; set; }
     }
 
     public enum PhotoType

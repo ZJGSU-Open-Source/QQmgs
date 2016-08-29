@@ -12,12 +12,12 @@
         angular.module('App', []).controller('ImageLayout', ImageLayout);
 
         $url = window.location.href;
-        $jsonDestionation = $url.replace(/photo/i, 'img/Photo/photo.json');
+        $photoUrl = $url.replace(/photo/i, 'api/queries/photo');
 
         function ImageLayout($scope, $http) {
-            $http.get($jsonDestionation)
+            $http.get($photoUrl)
                 .success(function (imgs) {
-                    $scope.imgs = imgs;
+                    $scope.imgs = imgs.items;
                 });
         }
     </script>
@@ -44,9 +44,9 @@
         }
     </style>
     <section>
-        <div ng-repeat="img in imgs" style="width:{{img.Width*260/img.Height}}px;flex-grow:{{img.Width*260/img.Height}};margin: 2px; background-color: #f5f8fa; position: relative;">
-            <i style="padding-bottom:{{img.Height/img.Width*100}}%"></i>
-            <img src="{{img.Url}}" alt="">
+        <div ng-repeat="img in imgs" style="width:{{img.width*260/img.height}}px;flex-grow:{{img.width*260/img.height}};margin: 2px; background-color: #f5f8fa; position: relative;">
+            <i style="padding-bottom:{{img.height/img.width*100}}%"></i>
+            <img src="{{img.name}}" alt="">
         </div>
     </section>
 </body>
