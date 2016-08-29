@@ -1,21 +1,18 @@
-﻿@model IEnumerable<Twitter.App.Models.ViewModels.PhotoViewModel>
-
+﻿<!DOCTYPE html>
 <html ng-app="App">
 <head>
-    <script src="~/Scripts/qqmgs/angular.min.js"></script>
+    <script src="https://www.qqmgs.com/Scripts/qqmgs/angular.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <base href="~/img/Uploads/Thumbnails/">
+    <title>JS Bin</title>
+    <base href="https://xieranmaya.github.io/images/cats/">
 </head>
 <body ng-controller="ImageLayout">
     <script language="javascript">
         angular.module('App', []).controller('ImageLayout', ImageLayout);
 
-        $url = window.location.href;
-        $jsonDestionation = $url.replace(/photo/i, 'img/Photo/photo.json');
-
         function ImageLayout($scope, $http) {
-            $http.get($jsonDestionation)
+            $http.get('https://xieranmaya.github.io/images/cats/cats.json')
                 .success(function (imgs) {
                     $scope.imgs = imgs;
                 });
@@ -27,9 +24,15 @@
             flex-wrap: wrap;
         }
 
-        section::after {
-            content: '';
-            flex-grow: 999999999;
+            section::after {
+                content: '';
+                flex-grow: 999999999;
+            }
+
+        div {
+            margin: 2px;
+            background-color: violet;
+            position: relative;
         }
 
         i {
@@ -44,9 +47,9 @@
         }
     </style>
     <section>
-        <div ng-repeat="img in imgs" style="width:{{img.Width*260/img.Height}}px;flex-grow:{{img.Width*260/img.Height}};margin: 2px; background-color: #f5f8fa; position: relative;">
-            <i style="padding-bottom:{{img.Height/img.Width*100}}%"></i>
-            <img src="{{img.Url}}" alt="">
+        <div ng-repeat="img in imgs" style="width:{{img.width*200/img.height}}px;flex-grow:{{img.width*200/img.height}}">
+            <i style="padding-bottom:{{img.height/img.width*100}}%"></i>
+            <img src="{{img.url}}" alt="">
         </div>
     </section>
 </body>

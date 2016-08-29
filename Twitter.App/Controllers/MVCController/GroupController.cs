@@ -261,7 +261,7 @@ namespace Twitter.App.Controllers
             var photo = new Photo
             {
                 AuthorId = loggedUserId,
-                Name = uploadedFile,
+                Name = uploadedFile.Url,
                 PhotoType = PhotoType.GroupImage,
                 DatePosted = DateTime.Now
             };

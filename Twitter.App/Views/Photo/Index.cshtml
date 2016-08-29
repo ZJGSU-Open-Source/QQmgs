@@ -4,16 +4,24 @@
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
-<div class="container body-content-index-tweet">
+<div class="body-content-index-tweet" >
 
     <div class="row" style="padding-top: 5px; margin-bottom: 0px">
-        <div class="col s12">
+        <div class="col s3"></div>
+        <div class="col s6">
             <ul class="tabs">
-                <li class="tab col s3"><a class="active" href="#test1">Special Today</a></li>
-                <li class="tab col s3"><a href="#test4">My Photos</a></li>
+                <li class="tab col s3"><a class="active" style="color: #71767a;" href="#test1">POPULAR</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#test4">EDITORS</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#">UPCOMING</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#">FRESH</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#">GALLERIES</a></li>
             </ul>
         </div>
-        <div id="test1" class="col s12">@{ Html.RenderPartial("PhotoPartialView"); }</div>
+        <div class="col s3"></div>
+        <div id="test1" class="col s12" style="background-color: #f5f8fa">
+            <br />
+            @{ Html.RenderPartial("PhotoPartialView"); }
+        </div>
         <div id="test4" class="col s12">My Photos</div>
     </div>    
     

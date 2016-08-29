@@ -21,12 +21,14 @@ namespace Twitter.App.BusinessLogic
 
         public static int DefaultResizeRatio { get; } = 2;
 
-        public static string UploadFile(HttpPostedFileBase file, PhotoType photoType = PhotoType.AvatarImage)
+        public static Photo UploadFile(HttpPostedFileBase file, PhotoType photoType = PhotoType.AvatarImage)
         {
+            var photo = new Photo();
+
             // Check if we have a file
-            if (null == file) return "";
+            if (null == file) return photo;
             // Make sure the file has content
-            if (!(file.ContentLength > 0)) return "";
+            if (!(file.ContentLength > 0)) return photo;
 
             // escapse invalid charaters and %
             var encodedFileName = CleanFileName(file.FileName);
@@ -40,7 +42,7 @@ namespace Twitter.App.BusinessLogic
             //fileName += fileExt;
 
             // Make sure we were able to determine a proper extension
-            if (null == fileExt) return "";
+            if (null == fileExt) return photo;
 
             // Check if the directory we are saving to exists
             if (!Directory.Exists(FilesPath))
@@ -56,10 +58,12 @@ namespace Twitter.App.BusinessLogic
             file.SaveAs(Path.GetFullPath(path));
 
             // Save our thumbnail as well
-            ResizeImage(file, fileName, DefaultResizeSize, DefaultResizeSize, photoType);
+            var size = ResizeImage(file, fileName, DefaultResizeSize, DefaultResizeSize, photoType);
 
-            // Return the filename
-            return fileName;
+            photo.Url = fileName;
+            photo.PhotoSize = size;
+
+            return photo;
         }
 
         public static void DeleteFile(string fileName)
@@ -85,7 +89,7 @@ namespace Twitter.App.BusinessLogic
             }
         }
 
-        public static void ResizeImage(HttpPostedFileBase file, string fileName, int width, int height, PhotoType photoType)
+        public static PhotoSize ResizeImage(HttpPostedFileBase file, string fileName, int width, int height, PhotoType photoType)
         {
             string thumbnailDirectory = $@"{FilesPath}{DirSeparator}Thumbnails";
 
@@ -142,11 +146,30 @@ namespace Twitter.App.BusinessLogic
             origImage.Dispose();
             stream.Close();
             stream.Dispose();
+
+            return new PhotoSize
+            {
+                Width = width,
+                Height = height
+            };
         }
 
         private static string CleanFileName(string fileName)
         {
             return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty).Replace("%", ""));
+        }
+
+        public class Photo
+        {
+            public string Url;
+
+            public PhotoSize PhotoSize;
+        }
+
+        public class PhotoSize
+        {
+            public int Width;
+            public int Height;
         }
     }
 }

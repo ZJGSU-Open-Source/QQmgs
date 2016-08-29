@@ -389,7 +389,7 @@ namespace Twitter.App.Controllers
             {
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
-                Name = uploadedFile,
+                Name = uploadedFile.Url,
                 PhotoType = PhotoType.AvatarImage
             };
 

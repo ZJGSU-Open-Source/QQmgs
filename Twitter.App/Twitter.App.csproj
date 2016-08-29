@@ -240,6 +240,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\Base64Coding.cs" />
     <Compile Include="BusinessLogic\FileUploadHelper.cs" />
+    <Compile Include="BusinessLogic\JsonHelper.cs" />
     <Compile Include="BusinessLogic\ManagerHelper.cs" />
     <Compile Include="BusinessLogic\RsaSecurity.cs" />
     <Compile Include="BusinessLogic\ViewModelsHelper.cs" />
@@ -399,9 +400,11 @@
     <Content Include="Scripts\particles.js\zh\page-index.114c1f31.js" />
     <Content Include="Scripts\particles.js\zh\vendor.cb14a042.js" />
     <Content Include="Scripts\particles.js\zh\za-0.1.1.min.js" />
+    <Content Include="Scripts\qqmgs\angular.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Photo\HtmlPage1.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -485,7 +488,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\qqmgs\" />
     <Folder Include="Views\Account\old\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\CustomizedName\" />

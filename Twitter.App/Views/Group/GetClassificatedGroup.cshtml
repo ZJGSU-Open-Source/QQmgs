@@ -18,9 +18,10 @@
             </div>
 
             <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">
-                <div>
+                <div style="text-align: left; margin-left: 30px; ">
+                    
                     @group.Name
-                    <span class="badge">@group.TweetsCount</span>
+                    <span class="badge">@group.TweetsCount 条讨论</span>
                 </div>
             </a>
         }
