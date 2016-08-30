@@ -66,7 +66,7 @@
                     <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">
                         <div style="text-align: left; margin-left: 30px; ">
                             @group.Name
-                            <small> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
+                            <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
                             <span class="new badge">@group.TweetsCount</span>
                         </div>
                     </a>
