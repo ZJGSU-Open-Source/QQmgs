@@ -299,8 +299,13 @@
     <Content Include="Content\cardio\cardio.css" />
     <Content Include="Content\font\material-design-icons\LICENSE.txt" />
     <Content Include="Content\font\material-design-icons\Material-Design-Icons.svg" />
+    <Content Include="Content\job-500px\creativity.jpg" />
+    <Content Include="Content\job-500px\empathy.jpg" />
+    <Content Include="Content\job-500px\excellence.jpg" />
+    <Content Include="Content\job-500px\fun.jpg" />
     <Content Include="Content\job-500px\styles.css" />
     <Content Include="Content\job-500px\style_guide.css" />
+    <Content Include="Content\job-500px\transparency.jpg" />
     <Content Include="Content\material.indigo-pink.min.css" />
     <Content Include="Content\materizeCss\materialize.css" />
     <Content Include="Content\materizeCss\materialize.min.css" />

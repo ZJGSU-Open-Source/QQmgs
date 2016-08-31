@@ -74,12 +74,12 @@ namespace Twitter.App.Controllers
             //}
 
 
-            var groupThrible = this.Data.Group.All()
+            var groupQuard = this.Data.Group.All()
                 .OrderByDescending(group => group.Tweets.Count)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .Take(4).ToList();
 
-            return PartialView(groupThrible);
+            return PartialView(groupQuard);
         }
 
         [AllowAnonymous]
@@ -190,10 +190,11 @@ namespace Twitter.App.Controllers
                 return HttpNotFound();
             }
 
-            if (group.CreaterId != User.Identity.GetUserId())
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            //// temp delete
+            //if (group.CreaterId != User.Identity.GetUserId())
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
 
             return View(group);
         }
