@@ -5,11 +5,12 @@
 
 <div class="section no-pad-bot">
     <div class="container">
-        <div class="row center">
+        <div class="row">
             @using (Html.BeginForm("Search", "Group", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
             {
                 <div class="input-field col s9">
-                    <input name="SerachWords" type="text" id="autocomplete-input" class="autocomplete" placeholder="热门搜索： 商大单身狗">
+                    <input name="SerachWords" type="text" id="autocomplete-input" class="autocomplete">
+                    <label for="autocomplete-input">Autocomplete</label>
                 </div>
                 <div class="input-field col s2">
                     <input class="btn btn-default" type="submit" value="搜索一下" style="padding-right: 10px; padding-left: 10px"/>
