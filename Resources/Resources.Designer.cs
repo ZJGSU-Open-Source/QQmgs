@@ -432,6 +432,15 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Phone Number.
         /// </summary>
+        public static string Phone_Number {
+            get {
+                return ResourceManager.GetString("Phone_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);

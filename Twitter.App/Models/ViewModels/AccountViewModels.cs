@@ -151,7 +151,7 @@ namespace Twitter.App.Models.ViewModels
     public class ForgotPasswordViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(ResourceType = typeof(Resources.Resources), Name = "Phone_Number")]
         public string UserName { get; set; }
     }
 }

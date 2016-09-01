@@ -294,4 +294,7 @@
   <data name="PhoneNumberLong" xml:space="preserve">
     <value>手机号码需要11位数字哦 (●'◡'●)</value>
   </data>
+  <data name="Phone_Number" xml:space="preserve">
+    <value>电话号码</value>
+  </data>
 </root>

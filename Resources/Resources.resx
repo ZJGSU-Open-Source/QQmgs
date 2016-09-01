@@ -294,4 +294,7 @@
   <data name="PhoneNumberLong" xml:space="preserve">
     <value>Phone number should be 11 numbers long.</value>
   </data>
+  <data name="Phone_Number" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
 </root>
