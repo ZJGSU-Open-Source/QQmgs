@@ -39,17 +39,61 @@
             vertical-align: bottom;
         }
 
-        .single-img {
+        .img-box {
+            position: static;
+            height: 5rem;
+            width: 5rem;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
         }
 
-            .single-img:hover {
-                margin: 3px
+            .img-box img {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                vertical-align: bottom;
             }
+
+            .img-box:hover .fade {
+                top: 0;
+                opacity: 0.65;
+            }
+
+            .img-box .fade {
+                position: absolute;
+                top: 100%;
+                opacity: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.8);
+                height: 18%;
+                width: 100%;
+                color: #fff;
+                text-align: center;
+                padding-top: 1rem;
+                box-sizing: border-box;
+                line-height: 1rem;
+                transition: all ease 0.5s;
+            }
+
+                .img-box .fade .text {
+                    font-size: 12px;
+                }
+
+                .img-box .fade .sub {
+                    font-size: 10px;
+                }
     </style>
     <section>
         <div ng-repeat="img in imgs" style="width:{{img.width*260/img.height}}px;flex-grow:{{img.width*260/img.height}};margin: 2px; background-color: #f5f8fa; position: relative;">
-            <i style="padding-bottom:{{img.height/img.width*100}}%;display: block;"></i>
-            <img class="single-img" src="{{img.name}}" alt="">
+            <div class="img-box">
+                <i style="padding-bottom:{{img.height/img.width*100}}%;display: block;"></i>
+                <img src="{{img.name}}" alt="">
+                <div class="fade">
+                    <div class="text">{{img.description}}</div>
+                    <div class="sub">{{img.author}} posted on {{img.date_posted}}</div>
+                </div>
+            </div>
         </div>
     </section>
 </body>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -74,7 +75,6 @@ namespace Twitter.App.BusinessLogic
                 Description = p.Descrption,
                 Author = p.Author.RealName,
                 Name = p.Name,
-                DatePosted = p.DatePosted,
                 Height = p.OriginalHeight,
                 Width = p.OriginalWidth
             };

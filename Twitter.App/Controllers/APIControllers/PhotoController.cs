@@ -31,10 +31,19 @@ namespace Twitter.App.Controllers.APIControllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "pageNo and pageSize should be both grater than 0.");
             }
 
-            var recentPhotos = this.Data.Photo.All()
+            var photos = this.Data.Photo.All()
                 .OrderByDescending(t => t.DatePosted)
-                .Where(photo => photo.OriginalWidth != 0 && photo.OriginalHeight != 0 && !photo.IsSoftDelete)
-                .Select(ViewModelsHelper.AsPhotoViewModel).ToList();
+                .Where(photo => photo.OriginalWidth != 0 && photo.OriginalHeight != 0 && !photo.IsSoftDelete);
+
+            var photoList = photos.ToList();    
+            var recentPhotos = photos.Select(ViewModelsHelper.AsPhotoViewModel).ToList();
+
+            // Workaround: temporary convert format
+            // TODO: should format like: http://stackoverflow.com/questions/17950075/convert-c-sharp-datetime-to-javascript-date
+            for (var i = 0; i < photos.Count(); i++)
+            {
+                recentPhotos[i].DatePosted = photoList[i].DatePosted.ToString("M");
+            }
 
             var pagedPhotos = recentPhotos.GetPagedResult(t => t.DatePosted, pageNo, pageSize, SortDirection.Descending);
 

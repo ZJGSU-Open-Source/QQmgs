@@ -18,7 +18,7 @@ namespace Twitter.App.Models.ViewModels
         public string Description { get; set; }
 
         [JsonProperty("date_posted")]
-        public DateTime DatePosted { get; set; }
+        public string DatePosted { get; set; }
 
         [JsonProperty("width")]
         public int Width { get; set; }
