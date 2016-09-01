@@ -30,6 +30,11 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Index", "Group");
         }
 
+        public ActionResult Question()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public ActionResult About()
         {

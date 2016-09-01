@@ -337,6 +337,7 @@
     <Content Include="img\logo-active.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\Photo\FlowerInZJSU.jpg" />
+    <Content Include="img\Photo\left_view.jpg" />
     <Content Include="img\Photo\Sun_Flower_in_ZJSU.jpg" />
     <Content Include="img\popup.jpg" />
     <Content Include="img\pricing1.jpg" />
@@ -495,6 +496,7 @@
     <Content Include="Views\Group\GetSearchGroup.cshtml" />
     <Content Include="Views\Group\SearchGroup.cshtml" />
     <Content Include="Views\Home\Job.cshtml" />
+    <Content Include="Views\Home\Question.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
