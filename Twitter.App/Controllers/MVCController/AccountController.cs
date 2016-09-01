@@ -1,4 +1,6 @@
-﻿namespace Twitter.App.Controllers
+﻿using Twitter.Data.UnitOfWork;
+
+namespace Twitter.App.Controllers
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -13,17 +15,17 @@
     using Twitter.Models;
 
     [Authorize]
-    public class AccountController : BaseController
+    public class AccountController : TwitterBaseController
     {
         private ApplicationSignInManager _signInManager;
 
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController() : base(new TwitterData())
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(new TwitterData())
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
@@ -61,6 +63,7 @@
         public ActionResult Login(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
+
             return this.View();
         }
 
@@ -70,6 +73,14 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            var userLoginTrace = new UserLoginTrace
+            {
+                DatePosted = DateTime.Now,
+                IpAddress = GetIpAddress(),
+                LoggedUserPhoneNumber = model.UserName,
+                IsLoggedSucceeded = false
+            };
+
             if (!this.ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(state => state.Errors).ToList();
@@ -77,6 +88,10 @@
                 {
                     this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
+
+                this.Data.UserLoginTrace.Add(userLoginTrace);
+                this.Data.SaveChanges();
+
                 return this.View(model);
             }
 
@@ -87,6 +102,15 @@
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result =
                 await this.SignInManager.PasswordSignInAsync(model.UserName, model.Password, isRememberMe, false);
+
+            if (result == SignInStatus.Success)
+            {
+                userLoginTrace.IsLoggedSucceeded = true;
+            }
+
+            this.Data.UserLoginTrace.Add(userLoginTrace);
+            this.Data.SaveChanges();
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -156,9 +180,7 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
-            // Redirect to group index page if logged in
-            var isAuthenticated = this.User.Identity.IsAuthenticated;
-            if (isAuthenticated)
+            if (RedirectToHomepage())
             {
                 return RedirectToAction("Index", "Group");
             }
@@ -550,6 +572,28 @@
             }
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        private bool RedirectToHomepage()
+        {
+            return this.User.Identity.IsAuthenticated;
+        }
+
+        protected string GetIpAddress()
+        {
+            var context = System.Web.HttpContext.Current;
+            var ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                var addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    return addresses[0];
+                }
+            }
+
+            return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

@@ -11,7 +11,6 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using Twitter.Data;
-    using Twitter.Data.UnitOfWork;
     using Twitter.Models;
 
     public class TwitterData : ITwitterData
@@ -54,6 +53,8 @@
         public IRepository<Photo> Photo => this.GetRepository<Photo>();
 
         public IRepository<CourseReview> CourseReview => this.GetRepository<CourseReview>();
+
+        public IRepository<UserLoginTrace> UserLoginTrace => this.GetRepository<UserLoginTrace>();
 
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 

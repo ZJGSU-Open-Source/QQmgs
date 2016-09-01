@@ -69,6 +69,7 @@
     <Compile Include="Report.cs" />
     <Compile Include="Tweet.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserLoginTrace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
