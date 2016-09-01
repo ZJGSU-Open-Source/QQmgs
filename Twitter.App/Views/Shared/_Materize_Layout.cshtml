@@ -61,7 +61,7 @@
         @RenderBody()
     </main>
 
-    <footer class="page-footer teal">
+    <footer class="page-footer teal" style="padding-top: 0px">
         <div class="container hide-on-small-and-down">
             <div class="row">
                 <div class="col l6 s12">
@@ -80,19 +80,19 @@
                 <div class="col l3 s12">
                     <h5 class="white-text">广告赞助</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">shuaiyi@@qqmgs.com</a></li>
+                        <li><a class="white-text" href="#">联系邮箱: shuaiyi@@qqmgs.com</a></li>
                     </ul>
 
                     <h5 class="white-text">加入全球某工商</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">recurit@@qqmgs.com</a></li>
+                        <li><a class="white-text" href="@Url.Action("Job", "Home")">工作机会</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <div class="container row">
-                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号 · @{ Html.RenderAction("GetTotalUser", "Users"); } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");}
+        <div class="footer-copyright center">
+            <div class="container row" style="width: 100%">
+                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号 · @{ Html.RenderAction("GetTotalUser", "Users"); } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");} · @{Html.RenderAction("GetDailyUserLogins", "Account");}
             </div>
         </div>
     </footer>

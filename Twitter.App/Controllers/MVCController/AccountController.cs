@@ -523,6 +523,22 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Register");
         }
 
+        [AllowAnonymous]
+        public ActionResult GetDailyUserLogins()
+        {
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+            var currentDay = DateTime.Now.Day;
+            var loginCounts =
+                this.Data.UserLoginTrace.All()
+                    .Count(
+                        login =>
+                            login.DatePosted.Year == currentYear && login.DatePosted.Month == currentMonth &&
+                            login.DatePosted.Day == currentDay);
+
+            return PartialView(loginCounts);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

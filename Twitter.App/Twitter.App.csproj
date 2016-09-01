@@ -497,6 +497,7 @@
     <Content Include="Views\Group\SearchGroup.cshtml" />
     <Content Include="Views\Home\Job.cshtml" />
     <Content Include="Views\Home\Question.cshtml" />
+    <Content Include="Views\Account\GetDailyUserLogins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
