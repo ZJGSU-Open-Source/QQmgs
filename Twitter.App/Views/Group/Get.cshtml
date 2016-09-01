@@ -15,38 +15,38 @@
     </div>
 </nav>
 
-@*
-        <div class="section no-pad-bot" id="index-banner0" >
-            <div class="container">
-                <div class="slider">
-                    <ul class="slides">
-                        <li>
-                            <img src="http://qqmgs.com/img/Uploads/43c0033c-0a86-4896-b32c-5ccdac99fc09_IMG_1969.jpg"> <!-- random image -->
-                            <div class="caption center-align">
-                                <h3>生日快乐!</h3>
-                                <h5 class="light grey-text text-lighten-3">周磊，克林姆林工作室 CEO，执行董事长.</h5>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="http://qqmgs.com/img/Uploads/7b913773-2cf0-4b16-a5ef-22d899db1345_IMG_5536.jpg"> <!-- random image -->
-                            <div class="caption left-align">
-                                <h3>岁岁有今日</h3>
-                                <h5 class="light grey-text text-lighten-3">全球某工商为克林姆林工作室100%持有股份.</h5>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="http://qqmgs.com/img/Uploads/ebdca3cb-06db-4b99-a856-94e410b018ad_IMG_3055.jpg"> <!-- random image -->
-                            <div class="caption right-align">
-                                <h3>年年有今朝</h3>
-                                <h5 class="light grey-text text-lighten-3">祝福周先生，Happy Birthday ! </h5>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
 
+<div class="section no-pad-bot" id="index-banner0" style="background-color: #f5f8fa">
+    <div class="container">
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="https://qqmgs.com/img/Uploads/Thumbnails/43c0033c-0a86-4896-b32c-5ccdac99fc09_IMG_1969.jpg"> <!-- random image -->
+                    <div class="caption center-align">
+                        <h3>生日快乐!</h3>
+                        <h5 class="light grey-text text-lighten-3">冯诗文童鞋，全球某工商忠实粉丝，9月2日生日快乐.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://qqmgs.com/img/Uploads/Thumbnails/7b913773-2cf0-4b16-a5ef-22d899db1345_IMG_5536.jpg"> <!-- random image -->
+                    <div class="caption left-align">
+                        <h3>岁岁有今日</h3>
+                        <h5 class="light grey-text text-lighten-3">感谢你的支持，全球某工商因你而精彩.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://qqmgs.com/img/Uploads/ebdca3cb-06db-4b99-a856-94e410b018ad_IMG_3055.jpg"> <!-- random image -->
+                    <div class="caption right-align">
+                        <h3>年年有今朝</h3>
+                        <h5 class="light grey-text text-lighten-3">祝福诗文，18 岁生日快乐</h5>
+                    </div>
+                </li>
+            </ul>
         </div>
+
     </div>
-*@
+</div>
+
 
 <div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
     <div class="container">
@@ -54,7 +54,7 @@
             <h5 class="header col s12 light grey-text">@Resources.Group · @ViewData["GroupName"]</h5>
         </div>
         <div class="row hide-on-small-only" style="max-width: 700px; margin: auto">
-            @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -66,7 +66,7 @@
                             <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
                         </div>
                         <div class="form-group col s2" style="margin-top: 35px">
-                            <input type="submit" value="Post" class="awesome-button"/>
+                            <input type="submit" value="Post" class="awesome-button" />
                         </div>
                         @*<input style="display: none !important;" type="submit" value="Post" />*@
                     </div>
@@ -91,7 +91,7 @@
                     @{
                         var data = Model as IPagedList<TweetViewModel>;
                     }
-                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new {p = page}))
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
                 </ul>
             </div>
         </div>
