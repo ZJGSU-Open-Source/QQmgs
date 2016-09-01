@@ -77,7 +77,7 @@ namespace Twitter.App.Controllers
             {
                 DatePosted = DateTime.Now,
                 IpAddress = GetIpAddress(),
-                LoggedUserPhoneNumber = model.UserName,
+                LoggedUserPhoneNumber = model.UserName ?? "00000000000",
                 IsLoggedSucceeded = false
             };
 
