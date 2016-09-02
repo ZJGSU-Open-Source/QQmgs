@@ -20,10 +20,10 @@ namespace Twitter.App.Controllers.MVCController
 
         // temp hot topic
         [HttpGet]
-        [Route("ShangKeyuan")]
+        [Route("Zhexiaoshang")]
         public ActionResult Redirect()
         {
-            return RedirectToAction("Get", "Group", new {groupId = 42, p = 1});
+            return RedirectToAction("Question", "Home");
         }
 
         // GET: CustomizedName
