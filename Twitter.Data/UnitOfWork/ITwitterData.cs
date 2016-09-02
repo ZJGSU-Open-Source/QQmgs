@@ -33,6 +33,8 @@
 
         IRepository<CourseReview> CourseReview { get; }
 
+        IRepository<UserLogTrace> UserLogTrace { get; }
+
         void SaveChanges();
     }
 }

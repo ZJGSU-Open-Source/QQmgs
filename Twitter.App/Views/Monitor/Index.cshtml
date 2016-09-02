@@ -29,7 +29,7 @@
                 <th data-field="name">Name</th>
                 <th data-field="ga">Geography Address</th>
                 <th data-field="cf">Confidence</th>
-                <th data-field="phone">Phone Number</th>
+                <th data-field="phone">Contact Phone Number</th>
                 <th data-field="at">Active timestamp</th>
             </tr>
         </thead>
@@ -39,11 +39,21 @@
             {
                 <tr>
                     <td>@item.IpAddress</td>
-                    <td>@item.Id</td>
-                    <td>@item.IpAddress</td>
-                    <td>@item.IpAddress</td>
-                    <td>@item.IpAddress</td>
-                    <td>@item.IpAddress</td>
+                    <td>@item.LoggedUserName</td>
+                    <td>
+                        @if (item.HighAccIpLocation.Content != null)
+                        {
+                            @item.HighAccIpLocation.Content.FormattedAddress
+                        }
+                    </td>
+                    <td>
+                        @if (item.HighAccIpLocation.Content != null)
+                        {
+                            @item.HighAccIpLocation.Content.Confidence
+                        }
+                    </td>
+                    <td>@item.LoggedUserPhoneNumber</td>
+                    <td>@item.DatePosted.ToString("g")</td>
                 </tr>
             }
         </tbody>

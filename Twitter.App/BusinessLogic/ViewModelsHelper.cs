@@ -90,8 +90,7 @@ namespace Twitter.App.BusinessLogic
                 Id = u.TraceId,
                 IpAddress = u.IpAddress,
                 IsLoggedSucceeded = u.IsLoggedSucceeded,
-                LoggedUserPhoneNumber = u.PhoneNumber,
-                LoggedUserName = u.RealName
+                LoggedUserPhoneNumber = u.PhoneNumber
             };
     }
 }

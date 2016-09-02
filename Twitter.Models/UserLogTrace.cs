@@ -16,8 +16,6 @@ namespace Twitter.Models
 
         public DateTime DatePosted { get; set; }
 
-        public string RealName { get; set; }
-
         public string PhoneNumber { get; set; }
         
         public bool IsLoggedSucceeded { get; set; }

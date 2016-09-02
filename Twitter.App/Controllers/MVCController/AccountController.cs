@@ -78,7 +78,8 @@ namespace Twitter.App.Controllers
             {
                 DatePosted = DateTime.Now,
                 IpAddress = GetIpAddress(),
-                IsLoggedSucceeded = false
+                IsLoggedSucceeded = false,
+                PhoneNumber = model.UserName ?? "00000000000"
             };
 
             if (!this.ModelState.IsValid)
@@ -89,8 +90,8 @@ namespace Twitter.App.Controllers
                     this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
 
-                //this.Data.UserLoginTrace.Add(userLoginTrace);
-                //this.Data.SaveChanges();
+                this.Data.UserLogTrace.Add(userLoginTrace);
+                this.Data.SaveChanges();
 
                 return this.View(model);
             }
@@ -103,15 +104,13 @@ namespace Twitter.App.Controllers
             var result =
                 await this.SignInManager.PasswordSignInAsync(model.UserName, model.Password, isRememberMe, false);
 
-            //if (result == SignInStatus.Success)
-            //{
-            //    var loggedUserId = this.User.Identity.GetUserId();
-            //    userLoginTrace.UserId = loggedUserId;
-            //    userLoginTrace.IsLoggedSucceeded = true;
-            //}
+            if (result == SignInStatus.Success)
+            {
+                userLoginTrace.IsLoggedSucceeded = true;
+            }
 
-            //this.Data.UserLoginTrace.Add(userLoginTrace);
-            //this.Data.SaveChanges();
+            this.Data.UserLogTrace.Add(userLoginTrace);
+            this.Data.SaveChanges();
 
             switch (result)
             {
@@ -525,21 +524,21 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Register");
         }
 
-        //[AllowAnonymous]
-        //public ActionResult GetDailyUserLogins()
-        //{
-        //    var currentYear = DateTime.Now.Year;
-        //    var currentMonth = DateTime.Now.Month;
-        //    var currentDay = DateTime.Now.Day;
-        //    var loginCounts =
-        //        this.Data.UserLoginTrace.All()
-        //            .Count(
-        //                login =>
-        //                    login.DatePosted.Year == currentYear && login.DatePosted.Month == currentMonth &&
-        //                    login.DatePosted.Day == currentDay);
+        [AllowAnonymous]
+        public ActionResult GetDailyUserLogins()
+        {
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+            var currentDay = DateTime.Now.Day;
+            var loginCounts =
+                this.Data.UserLogTrace.All()
+                    .Count(
+                        login =>
+                            login.DatePosted.Year == currentYear && login.DatePosted.Month == currentMonth &&
+                            login.DatePosted.Day == currentDay);
 
-        //    return PartialView(loginCounts);
-        //}
+            return PartialView(loginCounts);
+        }
 
         protected override void Dispose(bool disposing)
         {

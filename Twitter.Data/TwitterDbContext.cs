@@ -74,11 +74,7 @@ namespace Twitter.Data
                 .HasForeignKey(t => t.AuthorId)
                 .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<UserLogTrace>()
-            //    .HasRequired(u => u.User)
-            //    .WithMany(user => user.UserLoginTraces)
-            //    .HasForeignKey(u => u.UserId)
-            //    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<UserLogTrace>();
 
             modelBuilder.Entity<Tweet>()
                 .HasMany(t => t.Replies)
