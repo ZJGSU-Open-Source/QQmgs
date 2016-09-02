@@ -30,7 +30,26 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Index", "Group");
         }
 
-        public ActionResult Question()
+        [AllowAnonymous]
+        public ActionResult Question(int q = 0)
+        {
+            return View(q);
+        }
+
+        [AllowAnonymous]
+        public ActionResult NextQuestion(int cur)
+        {
+            var nxt = 0;
+            if (cur >= 0 && cur < 4)
+            {
+                nxt = cur + 1;
+            }
+
+            return RedirectToAction("Question", new {q = nxt});
+        }
+
+        [AllowAnonymous]
+        public ActionResult QuestionSubmit()
         {
             return View();
         }
