@@ -67,9 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reply.cs" />
     <Compile Include="Report.cs" />
+    <Compile Include="Trace\HighAccLocationByIpResult.cs" />
     <Compile Include="Tweet.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserLogTrace.cs" />
+    <Compile Include="Trace\UserLogTrace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

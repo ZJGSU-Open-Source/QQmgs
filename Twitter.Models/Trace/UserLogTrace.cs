@@ -19,5 +19,7 @@ namespace Twitter.Models
         public string PhoneNumber { get; set; }
         
         public bool IsLoggedSucceeded { get; set; }
+
+        public bool IsCached { get; set; }
     }
 }

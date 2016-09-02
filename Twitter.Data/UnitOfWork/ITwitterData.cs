@@ -1,4 +1,6 @@
-﻿namespace Twitter.Data.UnitOfWork
+﻿using Twitter.Models.Trace;
+
+namespace Twitter.Data.UnitOfWork
 {
     using Twitter.Data.Repositories;
 
@@ -34,6 +36,8 @@
         IRepository<CourseReview> CourseReview { get; }
 
         IRepository<UserLogTrace> UserLogTrace { get; }
+
+        IRepository<HighAccLocationByIpResult> HighAccLocationByIpResult { get; }
 
         void SaveChanges();
     }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Twitter.App.BusinessLogic;
 using Twitter.App.DataContracts;
 using Twitter.Data.UnitOfWork;
+using Twitter.Models.Trace;
 
 namespace Twitter.App.Controllers.MVCController
 {
@@ -20,11 +22,24 @@ namespace Twitter.App.Controllers.MVCController
         public ActionResult Index()
         {
             var items = this.Data.UserLogTrace.All()
-                .OrderByDescending(trace => trace.DatePosted)
-                .Select(ViewModelsHelper.AsUserLoginTraceVideModel)
-                .ToList();
-            
-            foreach (var item in items)
+                .Where(trace => !trace.IsCached)
+                .OrderByDescending(trace => trace.DatePosted);
+
+            var traces = items.Select(ViewModelsHelper.AsUserLoginTraceVideModel).ToList();
+
+            var tarceItems = items.ToList();
+
+            // flag cache
+            foreach (var item in tarceItems)
+            {
+                var trace = this.Data.UserLogTrace.Find(item.TraceId);
+                trace.IsCached = true;
+                this.Data.UserLogTrace.Update(trace);
+                this.Data.SaveChanges();
+            }
+
+            // cache data
+            foreach (var item in traces)
             {
                 var phoneNumber = item.LoggedUserPhoneNumber;
                 if (phoneNumber != null && phoneNumber != "00000000000")
@@ -34,12 +49,50 @@ namespace Twitter.App.Controllers.MVCController
                     item.LoggedUserName = user?.RealName;
                 }
 
-                var result = HighAccIpLocationClient.Query(item.IpAddress);
+                if (item.LoggedUserName == null)
+                {
+                    item.LoggedUserName = "Failed Login Try";
+                }
 
-                item.HighAccIpLocation = result;
+                var queryResult = HighAccIpLocationClient.Query(item.IpAddress);
+                item.HighAccIpLocation = queryResult;
+
+                var highAccLocationByIpResult = new HighAccLocationByIpResult
+                {
+                    FormattedAddress = item.HighAccIpLocation?.Content?.FormattedAddress,
+                    Confidence = item.HighAccIpLocation?.Content?.Confidence,
+                    AdminAreaCode = item.HighAccIpLocation?.Content?.AddressComponent?.AdminAreaCode,
+                    City = item.HighAccIpLocation?.Content?.AddressComponent?.City,
+                    Country = item.HighAccIpLocation?.Content?.AddressComponent?.Country,
+                    District = item.HighAccIpLocation?.Content?.AddressComponent?.District,
+                    Province = item.HighAccIpLocation?.Content?.AddressComponent?.Province,
+                    Street = item.HighAccIpLocation?.Content?.AddressComponent?.Street,
+                    StreetNumber = item.HighAccIpLocation?.Content?.AddressComponent?.StreetNumber,
+                    Business = item.HighAccIpLocation?.Content?.Business,
+                    LocId = item.HighAccIpLocation?.Content?.LocId,
+                    Lat = item.HighAccIpLocation?.Content?.Location?.Lat,
+                    Lng = item.HighAccIpLocation?.Content?.Location?.Lng,
+                    Radius = item.HighAccIpLocation?.Content?.Radius,
+                    Error = item.HighAccIpLocation?.Result?.Error,
+                    LocalTime = item.HighAccIpLocation?.Result?.LocalTime,
+                    LoggedUserName = item.LoggedUserName,
+                    DatePosted = item.DatePosted,
+                    IpAddress = item.IpAddress,
+                    LoggedUserPhoneNumber = item.LoggedUserPhoneNumber,
+                    Id = item.Id,
+                    IsLoggedSucceeded = item.IsLoggedSucceeded
+                };
+
+                this.Data.HighAccLocationByIpResult.Add(highAccLocationByIpResult);
+                this.Data.SaveChanges();
             }
 
-            return View(items);
+            var cachedData = this.Data.HighAccLocationByIpResult.All()
+                .OrderByDescending(trace => trace.DatePosted)
+                .Select(ViewModelsHelper.AsUserLoginTraceViewModel)
+                .ToList();
+
+            return View(cachedData);
         }
     }
 }

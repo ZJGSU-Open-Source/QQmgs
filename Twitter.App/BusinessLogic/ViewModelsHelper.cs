@@ -4,8 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using Twitter.App.DataContracts;
 using Twitter.App.Models.ViewModels;
 using Twitter.Models;
+using Twitter.Models.Trace;
 
 namespace Twitter.App.BusinessLogic
 {
@@ -91,6 +93,48 @@ namespace Twitter.App.BusinessLogic
                 IpAddress = u.IpAddress,
                 IsLoggedSucceeded = u.IsLoggedSucceeded,
                 LoggedUserPhoneNumber = u.PhoneNumber
+            };
+
+        public static readonly Expression<Func<HighAccLocationByIpResult, UserLoginTraceViewModel>>
+            AsUserLoginTraceViewModel = u => new UserLoginTraceViewModel
+            {
+                DatePosted = u.DatePosted,
+                Id = u.Id,
+                IpAddress = u.IpAddress,
+                IsLoggedSucceeded = u.IsLoggedSucceeded,
+                LoggedUserName = u.LoggedUserName,
+                LoggedUserPhoneNumber = u.LoggedUserPhoneNumber,
+                HighAccIpLocation = new HighAccIpLocation
+                {
+                    Content = new Content
+                    {
+                        FormattedAddress = u.FormattedAddress,
+                        Confidence = u.Confidence ?? 0.0,
+                        AddressComponent = new AddressComponent
+                        {
+                            AdminAreaCode = u.AdminAreaCode ?? 0,
+                            City = u.City,
+                            Country = u.Country,
+                            District = u.District,
+                            Province = u.Province,
+                            Street = u.Street,
+                            StreetNumber = u.StreetNumber
+                        },
+                        Business = u.Business,
+                        LocId = u.LocId,
+                        Location = new Location
+                        {
+                            Lat = u.Lat ?? 0.0,
+                            Lng = u.Lng ?? 0.0
+                        },
+                        Radius = u.Radius ?? 0.0
+                    },
+                    Result = new Result
+                    {
+                        Error = u.Error ?? 0,
+                        LocalTime = u.LocalTime
+                    }
+                }
             };
     }
 }

@@ -1,3 +1,5 @@
+using Twitter.Models.Trace;
+
 namespace Twitter.Data
 {
     using System.Data.Entity;
@@ -75,6 +77,8 @@ namespace Twitter.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserLogTrace>();
+
+            modelBuilder.Entity<HighAccLocationByIpResult>();
 
             modelBuilder.Entity<Tweet>()
                 .HasMany(t => t.Replies)
