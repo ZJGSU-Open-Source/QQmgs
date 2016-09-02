@@ -1,4 +1,5 @@
-﻿using Twitter.Data.UnitOfWork;
+﻿using Twitter.App.BusinessLogic;
+using Twitter.Data.UnitOfWork;
 
 namespace Twitter.App.Controllers
 {
@@ -73,11 +74,10 @@ namespace Twitter.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            
             var userLoginTrace = new UserLogTrace
             {
                 DatePosted = DateTime.Now,
-                IpAddress = GetIpAddress(),
+                IpAddress = IPAddressHelper.GetIpAddress(),
                 IsLoggedSucceeded = false,
                 PhoneNumber = model.UserName ?? "00000000000"
             };
@@ -594,23 +594,6 @@ namespace Twitter.App.Controllers
         private bool RedirectToHomepage()
         {
             return this.User.Identity.IsAuthenticated;
-        }
-
-        protected string GetIpAddress()
-        {
-            var context = System.Web.HttpContext.Current;
-            var ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-
-            if (!string.IsNullOrEmpty(ipAddress))
-            {
-                var addresses = ipAddress.Split(',');
-                if (addresses.Length != 0)
-                {
-                    return addresses[0];
-                }
-            }
-
-            return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

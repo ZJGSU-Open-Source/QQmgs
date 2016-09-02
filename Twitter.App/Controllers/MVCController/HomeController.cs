@@ -33,6 +33,20 @@ namespace Twitter.App.Controllers
         [AllowAnonymous]
         public ActionResult Question(int q = 0)
         {
+            if (q == 0)
+            {
+                var userLoginTrace = new UserLogTrace
+                {
+                    DatePosted = DateTime.Now,
+                    IpAddress = IPAddressHelper.GetIpAddress(),
+                    IsLoggedSucceeded = false,
+                    PhoneNumber = "00000000000"
+                };
+
+                this.Data.UserLogTrace.Add(userLoginTrace);
+                this.Data.SaveChanges();
+            }
+
             return View(q);
         }
 
