@@ -250,7 +250,7 @@ namespace Twitter.App.Controllers
                 await UserManager.SendEmailAsync(user.Id, "全球某工商注册确认【系统邮件】", callbackUrl);
 
                 // return View("DisplayEmail");
-                return this.RedirectToAction("About", "Home");
+                return this.RedirectToAction("Question", "Home");
             }
 
             this.AddErrors(result);

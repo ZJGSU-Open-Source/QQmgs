@@ -117,11 +117,11 @@ namespace Twitter.App.Models.ViewModels
         [Display(Name = "Password", ResourceType = typeof (Resources.Resources))]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "ConfirmPassword", ResourceType = typeof (Resources.Resources))]
-        [System.ComponentModel.DataAnnotations.Compare("Password",
-            ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        //[DataType(DataType.Password)]
+        //[Display(Name = "ConfirmPassword", ResourceType = typeof (Resources.Resources))]
+        //[System.ComponentModel.DataAnnotations.Compare("Password",
+        //    ErrorMessage = "The password and confirmation password do not match.")]
+        //public string ConfirmPassword { get; set; }
 
         [Display(Name = @"Locale")]
         public string Locale { get; set; }

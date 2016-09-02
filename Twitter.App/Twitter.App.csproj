@@ -336,6 +336,7 @@
     <Content Include="img\loader.gif" />
     <Content Include="img\logo-active.png" />
     <Content Include="img\logo.png" />
+    <Content Include="img\Photo\avatar.png" />
     <Content Include="img\Photo\FlowerInZJSU.jpg" />
     <Content Include="img\Photo\left_view.jpg" />
     <Content Include="img\Photo\Sun_Flower_in_ZJSU.jpg" />

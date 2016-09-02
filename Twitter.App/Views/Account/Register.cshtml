@@ -53,9 +53,9 @@
                                 <div class="input-field" style="margin-top: 0px">
                                     <input name="Password" value="@Model.Password" placeholder="密码 (不少于4位)" id="password" type="password" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
                                 </div>
-                                <div class="input-field" style="margin-top: 0px">
+                                @*<div class="input-field" style="margin-top: 0px">
                                     <input name="ConfirmPassword" value="@Model.ConfirmPassword" placeholder="再次确认密码" id="confirm_password" type="password" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
-                                </div>
+                                </div>*@
                                 <div class="input-field" style="margin-top: 0px">
                                     <input name="Email" value="@Model.Email" placeholder="电子邮箱" id="Email_address" type="Email" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
                                 </div>
@@ -77,7 +77,7 @@
                             </div>
                         </form>
                     }
-                    <div class="QRCode">
+                    <div class="QRCode" style="margin-top: 28px">
                         <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("About", "Home")'" type="button">
                             <span class="sprite-global-icon-qrcode"></span>
                             <span class="QRCode-toggleButtonText ">点击了解全球某工商.com</span>
