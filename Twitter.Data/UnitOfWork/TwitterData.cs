@@ -54,8 +54,6 @@
 
         public IRepository<CourseReview> CourseReview => this.GetRepository<CourseReview>();
 
-        public IRepository<UserLoginTrace> UserLoginTrace => this.GetRepository<UserLoginTrace>();
-
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 
         public void SaveChanges()

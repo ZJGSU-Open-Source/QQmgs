@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Twitter.Models
 {
-    public class UserLoginTrace
+    public class UserLogTrace
     {
         [Key]
-        public int Id { get; set; }
+        public int TraceId { get; set; }
 
         public string IpAddress { get; set; }
 
-        [Required]
         public DateTime DatePosted { get; set; }
 
-        [Required]
-        public string LoggedUserPhoneNumber { get; set; }
+        public string RealName { get; set; }
 
+        public string PhoneNumber { get; set; }
+        
         public bool IsLoggedSucceeded { get; set; }
     }
 }

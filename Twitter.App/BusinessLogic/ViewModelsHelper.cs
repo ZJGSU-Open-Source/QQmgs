@@ -40,7 +40,11 @@ namespace Twitter.App.BusinessLogic
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
                 HasAvatarImage = t.Author.HasAvatarImage,
-                AvatarImageName = t.Author.HasAvatarImage ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" + t.Author.AvatarImageName : null,
+                AvatarImageName =
+                    t.Author.HasAvatarImage
+                        ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" +
+                          t.Author.AvatarImageName
+                        : null,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,
@@ -77,6 +81,17 @@ namespace Twitter.App.BusinessLogic
                 Name = p.Name,
                 Height = p.OriginalHeight,
                 Width = p.OriginalWidth
+            };
+
+        public static readonly Expression<Func<UserLogTrace, UserLoginTraceViewModel>> AsUserLoginTraceVideModel =
+            u => new UserLoginTraceViewModel
+            {
+                DatePosted = u.DatePosted,
+                Id = u.TraceId,
+                IpAddress = u.IpAddress,
+                IsLoggedSucceeded = u.IsLoggedSucceeded,
+                LoggedUserPhoneNumber = u.PhoneNumber,
+                LoggedUserName = u.RealName
             };
     }
 }
