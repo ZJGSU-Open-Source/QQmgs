@@ -93,7 +93,7 @@
                 }
     </style>
     <section>
-        <div ng-repeat="img in imgs" style="width:{{img.width*260/img.height}}px;flex-grow:{{img.width*260/img.height}};margin: 2px; background-color: #f5f8fa; position: relative;">
+        <div ng-repeat="img in imgs" style="width:{{img.width*260/img.height}}px;flex-grow:{{img.width*260/img.height}};margin: 2px; background-color: #f5f8fa; position: relative; overflow: hidden;">
             <div class="img-box">
                 <i style="padding-bottom:{{img.height/img.width*100}}%;display: block;"></i>
                 <img src="{{img.name}}" alt="">
