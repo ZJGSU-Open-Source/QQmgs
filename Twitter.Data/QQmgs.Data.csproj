@@ -63,7 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericEfRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="TwitterDbContext.cs" />
+    <Compile Include="QQmgsDbContext.cs" />
     <Compile Include="UnitOfWork\QQmgsData.cs" />
     <Compile Include="UnitOfWork\IQQmgsData.cs" />
   </ItemGroup>

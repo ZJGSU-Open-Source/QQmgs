@@ -112,7 +112,7 @@ namespace Twitter.App
             IdentityFactoryOptions<ApplicationUserManager> options, 
             IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<TwitterDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<QQmgsDbContext>()));
 
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User>(manager)

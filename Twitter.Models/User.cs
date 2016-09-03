@@ -53,6 +53,8 @@
 
         public virtual ICollection<Tweet> FavouriteTweets { get; set; }
 
+        public virtual ICollection<Photo> FavouritePhotos { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

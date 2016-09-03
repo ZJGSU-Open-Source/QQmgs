@@ -76,6 +76,32 @@ namespace Twitter.App.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Favourite(int photoId)
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            var photo = this.Data.Photo.Find(photoId);
+
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (Data.Users.Find(loggedUserId).FavouritePhotos.Contains(photo))
+            {
+                this.Data.Users.Find(loggedUserId).FavouritePhotos.Remove(photo);
+                this.Data.SaveChanges();
+            }
+            else
+            {
+                this.Data.Users.Find(loggedUserId).FavouritePhotos.Add(photo);
+                this.Data.SaveChanges();
+            }
+
+            return View();
+        }
+
+
         private static readonly Expression<Func<Photo, PhotoViewModel>> AsPhotoViewModel =
             t => new PhotoViewModel
             {

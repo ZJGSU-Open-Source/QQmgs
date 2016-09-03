@@ -24,7 +24,7 @@ namespace Twitter.Data.UnitOfWork
         private IUserStore<User> _userStore;
 
         public QQmgsData()
-            : this(new TwitterDbContext())
+            : this(new QQmgsDbContext())
         {
         }
 

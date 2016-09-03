@@ -2,7 +2,7 @@ namespace Twitter.Data.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TwitterDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<QQmgsDbContext>
     {
         public Configuration()
         {
@@ -10,7 +10,7 @@ namespace Twitter.Data.Migrations
             this.AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(TwitterDbContext context)
+        protected override void Seed(QQmgsDbContext context)
         {
         }
     }

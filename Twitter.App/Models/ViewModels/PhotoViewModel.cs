@@ -8,6 +8,9 @@ namespace Twitter.App.Models.ViewModels
 {
     public class PhotoViewModel
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 

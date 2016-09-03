@@ -22,4 +22,11 @@
 
         public NotificationType Type { get; set; }
     }
+
+    public enum NotificationType
+    {
+        Retweet,
+        FavouriteTweet,
+        NewFollower
+    }
 }

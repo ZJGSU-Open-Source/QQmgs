@@ -9,12 +9,12 @@ namespace Twitter.Data
     using Twitter.Data.Migrations;
     using Twitter.Models;
 
-    public class TwitterDbContext : IdentityDbContext<User>
+    public class QQmgsDbContext : IdentityDbContext<User>
     {
-        public TwitterDbContext()
+        public QQmgsDbContext()
             : base("name=TwitterDbContext")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TwitterDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<QQmgsDbContext, Configuration>());
         }
 
         public IDbSet<Tweet> Tweets { get; set; }
@@ -27,9 +27,9 @@ namespace Twitter.Data
 
         public IDbSet<DevLog> DevLogs { get; set; }
 
-        public static TwitterDbContext Create()
+        public static QQmgsDbContext Create()
         {
-            return new TwitterDbContext();
+            return new QQmgsDbContext();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -99,6 +99,16 @@ namespace Twitter.Data
                    m.MapRightKey("TweetId");
                    m.ToTable("UsersFavouriteTweets");
                });
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.FavouritePhotos)
+                .WithMany(p => p.UsersFavourite)
+                .Map(m =>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("PhotoId");
+                    m.ToTable("UsersFavouritePhotos");
+                });
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.FollowingUsers)

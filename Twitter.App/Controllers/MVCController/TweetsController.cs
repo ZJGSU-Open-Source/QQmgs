@@ -241,25 +241,7 @@ namespace Twitter.App.Controllers
             //    });
         }
 
-        public ActionResult Like(int tweetId, int group, int page = 1)
-        {
-            var loggedUserId = this.User.Identity.GetUserId();
-            var tweet = this.Data.Tweets.Find(tweetId);
-
-            if (Data.Users.Find(loggedUserId).FavouriteTweets.Contains(tweet))
-            {
-                this.Data.Users.Find(loggedUserId).FavouriteTweets.Remove(tweet);
-                this.Data.SaveChanges();
-            }
-            else
-            {
-                this.Data.Users.Find(loggedUserId).FavouriteTweets.Add(tweet);
-                this.Data.SaveChanges();
-            }
-
-            return RedirectToAction("Get", "Group", new {groupId = group, p = page});
-        }
-
+        [HttpGet]
         public int Favourite(int tweetId)
         {
             var loggedUserId = this.User.Identity.GetUserId();

@@ -19,7 +19,6 @@ namespace Twitter.App.Controllers.APIControllers
         public PhotoController()
             : base(new QQmgsData())
         {
-
         }
 
         [HttpGet]

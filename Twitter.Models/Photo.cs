@@ -9,6 +9,11 @@ namespace Twitter.Models
 {
     public class Photo
     {
+        public Photo()
+        {
+            this.UsersFavourite = new HashSet<User>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -31,6 +36,8 @@ namespace Twitter.Models
         public int OriginalWidth { get; set; }
 
         public int OriginalHeight { get; set; }
+
+        public virtual ICollection<User> UsersFavourite { get; set; }
     }
 
     public enum PhotoType

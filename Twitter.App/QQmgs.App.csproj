@@ -511,6 +511,7 @@
     <Content Include="Views\Home\QuestionSubmit.cshtml" />
     <Content Include="Views\Monitar\Index.cshtml" />
     <Content Include="Views\Monitor\Index.cshtml" />
+    <Content Include="Views\Photo\Favourite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
