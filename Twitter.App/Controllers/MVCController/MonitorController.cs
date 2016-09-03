@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
 using Twitter.App.DataContracts;
 using Twitter.Data.UnitOfWork;
@@ -19,8 +21,15 @@ namespace Twitter.App.Controllers.MVCController
         }
 
         // GET: Monitar
+        [Route("")]
         public ActionResult Index()
         {
+            var userName = this.User.Identity.GetUserName();
+            if (userName != "13588201467")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Permision denied");
+            }
+
             var items = this.Data.UserLogTrace.All()
                 .Where(trace => !trace.IsCached)
                 .OrderByDescending(trace => trace.DatePosted);
