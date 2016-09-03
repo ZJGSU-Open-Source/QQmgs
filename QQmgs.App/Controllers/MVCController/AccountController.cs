@@ -487,7 +487,7 @@ namespace Twitter.App.Controllers
         public ActionResult LogOff()
         {
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Login", "Account");
         }
 
         // GET: /Account/ExternalLoginFailure

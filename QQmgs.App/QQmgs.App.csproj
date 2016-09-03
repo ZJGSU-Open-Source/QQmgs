@@ -337,13 +337,11 @@
     <Content Include="img\icon\guru-blue.png" />
     <Content Include="img\icon\heart-blue.png" />
     <Content Include="img\icon\weight-blue.png" />
-    <Content Include="img\Internet-group-chat.svg.png" />
     <Content Include="img\loader.gif" />
     <Content Include="img\logo-active.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\Photo\avatar.png" />
     <Content Include="img\Photo\FlowerInZJSU.jpg" />
-    <Content Include="img\Photo\left_view.jpg" />
     <Content Include="img\Photo\Sun_Flower_in_ZJSU.jpg" />
     <Content Include="img\popup.jpg" />
     <Content Include="img\pricing1.jpg" />
