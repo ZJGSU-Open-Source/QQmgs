@@ -72,7 +72,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Twitter.Models\QQmgs.Models.csproj">
+    <ProjectReference Include="..\QQmgs.Models\QQmgs.Models.csproj">
       <Project>{528fc2a9-6816-4e42-9289-74ab1c0e6d3a}</Project>
       <Name>QQmgs.Models</Name>
     </ProjectReference>

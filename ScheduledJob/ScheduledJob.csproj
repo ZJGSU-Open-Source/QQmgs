@@ -86,15 +86,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Twitter.App\QQmgs.App.csproj">
+    <ProjectReference Include="..\QQmgs.App\QQmgs.App.csproj">
       <Project>{D1CA52F5-32D3-4E51-A85C-BE8DE2F9A5C4}</Project>
       <Name>QQmgs.App</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitter.Data\QQmgs.Data.csproj">
+    <ProjectReference Include="..\QQmgs.Data\QQmgs.Data.csproj">
       <Project>{706706ec-2170-4f48-950d-965fba814a45}</Project>
       <Name>QQmgs.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitter.Models\QQmgs.Models.csproj">
+    <ProjectReference Include="..\QQmgs.Models\QQmgs.Models.csproj">
       <Project>{528FC2A9-6816-4E42-9289-74AB1C0E6D3A}</Project>
       <Name>QQmgs.Models</Name>
     </ProjectReference>
