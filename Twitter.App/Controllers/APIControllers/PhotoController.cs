@@ -17,7 +17,7 @@ namespace Twitter.App.Controllers.APIControllers
     public class PhotoController : TwitterApiController
     {
         public PhotoController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
 
         }

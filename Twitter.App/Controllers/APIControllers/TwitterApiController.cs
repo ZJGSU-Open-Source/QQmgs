@@ -5,12 +5,12 @@ namespace Twitter.App.Controllers.APIControllers
 {
     public class TwitterApiController : ApiController
     {
-        protected TwitterApiController(ITwitterData data)
+        protected TwitterApiController(IQQmgsData data)
         {
             this.Data = data;
         }
 
-        protected ITwitterData Data { get; set; }
+        protected IQQmgsData Data { get; set; }
 
         protected const int DefaultPageNo = 1;
 

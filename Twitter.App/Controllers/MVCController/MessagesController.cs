@@ -5,7 +5,7 @@
     public class MessagesController : TwitterBaseController
     {
         public MessagesController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
     }

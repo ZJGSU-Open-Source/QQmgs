@@ -5,7 +5,7 @@
     public class NotificationsController : TwitterBaseController
     {
         public NotificationsController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 

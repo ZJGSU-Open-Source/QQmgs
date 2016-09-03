@@ -22,11 +22,11 @@ namespace Twitter.App.Controllers
 
         private ApplicationUserManager _userManager;
 
-        public AccountController() : base(new TwitterData())
+        public AccountController() : base(new QQmgsData())
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(new TwitterData())
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(new QQmgsData())
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;

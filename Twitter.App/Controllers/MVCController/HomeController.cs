@@ -20,7 +20,7 @@ namespace Twitter.App.Controllers
     public class HomeController : TwitterBaseController
     {
         public HomeController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 

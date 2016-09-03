@@ -14,7 +14,7 @@ namespace Twitter.App.Controllers.MVCController
     public class CustomizedNameController : TwitterBaseController
     {
         public CustomizedNameController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 

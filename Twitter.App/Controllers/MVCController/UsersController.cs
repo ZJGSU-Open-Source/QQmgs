@@ -12,7 +12,7 @@
     public class UsersController : TwitterBaseController
     {
         public UsersController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 

@@ -1,10 +1,9 @@
-﻿@model IEnumerable<Twitter.App.Models.ViewModels.PhotoViewModel>
-@{
+﻿@{
     ViewBag.Title = "PhotoView";
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
-<div class="body-content-index-tweet" >
+<div class="body-content-index-tweet">
 
     <div class="row" style="padding-top: 5px; margin-bottom: 0px">
         <div class="col s3"></div>
@@ -13,7 +12,7 @@
                 <li class="tab col s3"><a class="active" style="color: #71767a;" href="#layout1">近期热门</a></li>
                 <li class="tab col s3"><a style="color: #71767a;" href="#layout2">校内新闻</a></li>
                 <li class="tab col s3"><a style="color: #71767a;" href="#layout3">我的商大</a></li>
-                <li class="tab col s3"><a style="color: #71767a;" href="#layout4">更多</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#layout4">上传照片</a></li>
             </ul>
         </div>
         <div class="col s3"></div>
@@ -23,8 +22,11 @@
         </div>
         <div id="layout2" class="col s12">During contruction</div>
         <div id="layout3" class="col s12">During contruction</div>
-        <div id="layout4" class="col s12">During contruction</div>
-    </div>    
-    
+        <div id="layout4" class="col s12">
+            <br />
+            @{ Html.RenderPartial("Upload");}
+        </div>
+    </div>
+
 
 </div>

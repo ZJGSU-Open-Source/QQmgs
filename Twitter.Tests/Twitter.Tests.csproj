@@ -79,13 +79,13 @@
     <Compile Include="V2TweetsController.UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Twitter.App\Twitter.App.csproj">
+    <ProjectReference Include="..\Twitter.App\QQmgs.App.csproj">
       <Project>{D1CA52F5-32D3-4E51-A85C-BE8DE2F9A5C4}</Project>
-      <Name>Twitter.App</Name>
+      <Name>QQmgs.App</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitter.Data\Twitter.Data.csproj">
+    <ProjectReference Include="..\Twitter.Data\QQmgs.Data.csproj">
       <Project>{706706EC-2170-4F48-950D-965FBA814A45}</Project>
-      <Name>Twitter.Data</Name>
+      <Name>QQmgs.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

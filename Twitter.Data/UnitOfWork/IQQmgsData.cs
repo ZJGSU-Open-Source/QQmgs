@@ -9,7 +9,7 @@ namespace Twitter.Data.UnitOfWork
 
     using Twitter.Models;
 
-    public interface ITwitterData
+    public interface IQQmgsData
     {
         IRepository<Tweet> Tweets { get; }
 

@@ -17,7 +17,7 @@ namespace Twitter.App.Controllers.MVCController
     public class CourseReviewController : TwitterBaseController
     {
         public CourseReviewController() 
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 

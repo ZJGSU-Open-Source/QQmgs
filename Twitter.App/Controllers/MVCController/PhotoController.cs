@@ -20,7 +20,7 @@ namespace Twitter.App.Controllers
     public class PhotoController : TwitterBaseController
     {
         public PhotoController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 
@@ -28,14 +28,14 @@ namespace Twitter.App.Controllers
         [Route("")]
         public ActionResult Index(int pageNumber = 1)
         {
-            var photos =
-                this.Data.Photo.All()
-                    .OrderByDescending(p => p.DatePosted)
-                    .Where(p => p.PhotoType == PhotoType.Photo && p.IsSoftDelete != true)
-                    .Select(AsPhotoViewModel)
-                    .ToPagedList(pageNumber: pageNumber, pageSize: Constants.Constants.PagePhotosNumber);
+            //var photos =
+            //    this.Data.Photo.All()
+            //        .OrderByDescending(p => p.DatePosted)
+            //        .Where(p => p.PhotoType == PhotoType.Photo && p.IsSoftDelete != true)
+            //        .Select(AsPhotoViewModel)
+            //        .ToPagedList(pageNumber: pageNumber, pageSize: Constants.Constants.PagePhotosNumber);
 
-            return View(photos);
+            return View();
         }
 
         [HttpGet]

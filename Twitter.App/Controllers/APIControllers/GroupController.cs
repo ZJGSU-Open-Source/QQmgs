@@ -18,7 +18,7 @@ namespace Twitter.App.Controllers.APIControllers
     public class GroupController : TwitterApiController
     {
         public GroupController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
             
         }

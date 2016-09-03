@@ -15,7 +15,7 @@ namespace Twitter.Data.UnitOfWork
     using Twitter.Data;
     using Twitter.Models;
 
-    public class TwitterData : ITwitterData
+    public class QQmgsData : IQQmgsData
     {
         private readonly DbContext _dbContext;
 
@@ -23,12 +23,12 @@ namespace Twitter.Data.UnitOfWork
 
         private IUserStore<User> _userStore;
 
-        public TwitterData()
+        public QQmgsData()
             : this(new TwitterDbContext())
         {
         }
 
-        public TwitterData(DbContext dbContext)
+        public QQmgsData(DbContext dbContext)
         {
             this._dbContext = dbContext;
             this._repositories = new Dictionary<Type, object>();

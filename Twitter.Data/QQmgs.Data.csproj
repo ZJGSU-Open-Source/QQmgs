@@ -64,17 +64,17 @@
     <Compile Include="Repositories\GenericEfRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="TwitterDbContext.cs" />
-    <Compile Include="UnitOfWork\TwitterData.cs" />
-    <Compile Include="UnitOfWork\ITwitterData.cs" />
+    <Compile Include="UnitOfWork\QQmgsData.cs" />
+    <Compile Include="UnitOfWork\IQQmgsData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Twitter.Models\Twitter.Models.csproj">
+    <ProjectReference Include="..\Twitter.Models\QQmgs.Models.csproj">
       <Project>{528fc2a9-6816-4e42-9289-74ab1c0e6d3a}</Project>
-      <Name>Twitter.Models</Name>
+      <Name>QQmgs.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

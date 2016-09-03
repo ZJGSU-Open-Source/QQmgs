@@ -533,13 +533,13 @@
       <Project>{a1cc41c4-1033-49b2-92d1-a5af57913171}</Project>
       <Name>Resources</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitter.Data\Twitter.Data.csproj">
+    <ProjectReference Include="..\Twitter.Data\QQmgs.Data.csproj">
       <Project>{706706ec-2170-4f48-950d-965fba814a45}</Project>
-      <Name>Twitter.Data</Name>
+      <Name>QQmgs.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitter.Models\Twitter.Models.csproj">
+    <ProjectReference Include="..\Twitter.Models\QQmgs.Models.csproj">
       <Project>{528fc2a9-6816-4e42-9289-74ab1c0e6d3a}</Project>
-      <Name>Twitter.Models</Name>
+      <Name>QQmgs.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

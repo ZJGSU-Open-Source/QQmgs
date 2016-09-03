@@ -13,10 +13,11 @@ using Twitter.Models.Trace;
 
 namespace Twitter.App.Controllers.MVCController
 {
+    [RoutePrefix("monitor")]
     public class MonitorController : TwitterBaseController
     {
         public MonitorController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 
@@ -24,6 +25,7 @@ namespace Twitter.App.Controllers.MVCController
         [Route("")]
         public ActionResult Index()
         {
+            // permision check
             var userName = this.User.Identity.GetUserName();
             if (userName != "13588201467")
             {

@@ -21,7 +21,7 @@ namespace Twitter.App.Controllers
     public class TweetsController : TwitterBaseController
     {
         public TweetsController()
-            : base(new TwitterData())
+            : base(new QQmgsData())
         {
         }
 

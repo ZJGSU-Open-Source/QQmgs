@@ -4,11 +4,11 @@
 
     public class TwitterBaseController : BaseController
     {
-        protected TwitterBaseController(ITwitterData data)
+        protected TwitterBaseController(IQQmgsData data)
         {
             this.Data = data;
         }
 
-        protected ITwitterData Data { get; }
+        protected IQQmgsData Data { get; }
     }
 }
