@@ -16,5 +16,7 @@ namespace Twitter.App.Models.BindingModels
         [MinLength(0)]
         [MaxLength(100)]
         public string Description { get; set; }
+
+        public string IsPrivate { get; set; }
     }
 }

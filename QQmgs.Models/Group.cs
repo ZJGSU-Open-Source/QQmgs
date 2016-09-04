@@ -12,6 +12,7 @@ namespace Twitter.Models
         public Group()
         {
             this.Tweets = new HashSet<Tweet>();
+            this.Users = new HashSet<User>();
         }
 
         [Key]
@@ -40,9 +41,14 @@ namespace Twitter.Models
 
         public bool IsDisplay { get; set; }
 
+        public bool IsPrivate { get; set; }
+
         public Classification Classification { get; set; }
 
         public virtual ICollection<Tweet> Tweets { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
+
     }
 
     public enum Classification

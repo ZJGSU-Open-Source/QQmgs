@@ -12,6 +12,7 @@ using Twitter.App.Models.BindingModels;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using WebGrease.Css.Extensions;
 
 namespace Twitter.App.Controllers
 {
@@ -93,6 +94,19 @@ namespace Twitter.App.Controllers
                 return HttpNotFound($"Group with id {groupId} not found");
             }
 
+            // check private group
+            if (group.IsPrivate)
+            {
+                var loggedUserId = this.User.Identity.GetUserId();
+
+                var foundUser = group.Users.Any(user => user.Id == loggedUserId);
+                if (foundUser == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                }
+            }
+
             var tweets = group.Tweets;
             if (tweets == null)
             {
@@ -151,12 +165,15 @@ namespace Twitter.App.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public ActionResult Create(CreateGroupBindingModel model)
         {
             var loggedUserId = this.User.Identity.GetUserId();
             var currentTime = DateTime.Now;
+
+            // transform string value to bool value
+            var isPrivate = string.Compare(model.IsPrivate, "on", StringComparison.OrdinalIgnoreCase) == 0;
 
             var group = new Group
             {
@@ -166,8 +183,20 @@ namespace Twitter.App.Controllers
                 CreaterId = loggedUserId,
                 LastTweetUpdateTime = currentTime,
                 IsDisplay = true,
-                Classification = Classification.未分类
+                Classification = Classification.未分类,
+                IsPrivate = isPrivate
             };
+
+            if (isPrivate)
+            {
+                var user = this.Data.Users.Find(loggedUserId);
+                if (user == null)
+                {
+                    return HttpNotFound($"User with id {loggedUserId} not found");
+                }
+
+                group.Users.Add(user);
+            }
 
             this.Data.Group.Add(group);
             this.Data.SaveChanges();
@@ -338,6 +367,57 @@ namespace Twitter.App.Controllers
             ViewData["SearchWords"] = model.SerachWords;
 
             return this.View(searchResult);
+        }
+
+        [HttpGet]
+        public ActionResult GetAllGroups()
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(loggedUserId);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var groups = user.Groups.Select(group => new GroupVieModels
+            {
+                Id = group.Id,
+                Description = group.Description,
+                Name = group.Name,
+                CreatedTime = group.CreatedTime,
+                CreaterId = group.CreaterId,
+                HasImageOverview = group.HasImageOverview,
+                ImageOverview = group.ImageOverview,
+                IsDisplay = group.IsDisplay,
+                LastTweetUpdateTime = group.LastTweetUpdateTime,
+                TweetsCount = group.Tweets.Count
+            });
+
+            return View(groups);
+        }
+
+        [HttpPost]
+        public ActionResult JoinGroup(int groupId)
+        {
+            var group = this.Data.Group.Find(groupId);
+
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            var loggedUserId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(loggedUserId);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            user.Groups.Add(group);
+            this.Data.Users.Update(user);
+            this.Data.SaveChanges();
+            
+            return View();
         }
     }
 }

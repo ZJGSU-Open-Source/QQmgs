@@ -80,6 +80,16 @@ namespace Twitter.Data
 
             modelBuilder.Entity<HighAccLocationByIpResult>();
 
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.Users)
+                .WithMany(u => u.Groups)
+                .Map(m =>
+                {
+                    m.ToTable("UsersInGroups");
+                    m.MapLeftKey("GroupId");
+                    m.MapRightKey("UserId");
+                });
+
             modelBuilder.Entity<Tweet>()
                 .HasMany(t => t.Replies)
                 .WithMany()

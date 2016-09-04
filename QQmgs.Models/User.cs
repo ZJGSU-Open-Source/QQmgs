@@ -19,6 +19,7 @@
             this.Photos = new HashSet<Photo>();
             this.CourseReviews = new HashSet<CourseReview>();
             this.UserLoginTraces = new HashSet<UserLogTrace>();
+            this.Groups = new HashSet<Group>();
         }
 
         public DateTime RegisteredTime { get; set; }
@@ -40,6 +41,8 @@
         public virtual ICollection<Reply> Replies { get; set; } 
 
         public virtual ICollection<Tweet> Tweets { get; set; }
+
+        public virtual ICollection<Group> Groups { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; } 
 

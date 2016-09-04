@@ -510,6 +510,8 @@
     <Content Include="Views\Monitar\Index.cshtml" />
     <Content Include="Views\Monitor\Index.cshtml" />
     <Content Include="Views\Photo\Favourite.cshtml" />
+    <Content Include="Views\Group\GetAllGroups.cshtml" />
+    <Content Include="Views\Group\JoinGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
