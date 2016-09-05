@@ -248,7 +248,8 @@ namespace Twitter.App.Controllers
                 // Send an email with this link
                 var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url?.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "全球某工商注册确认【系统邮件】", callbackUrl);
+
+                await UserManager.SendEmailAsync(user.Id, "全球某工商 注册确认【系统邮件】", callbackUrl);
 
                 // return View("DisplayEmail");
                 return this.RedirectToAction("Question", "Home");
