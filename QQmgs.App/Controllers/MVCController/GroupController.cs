@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PagedList;
@@ -103,7 +104,6 @@ namespace Twitter.App.Controllers
                 if (foundUser == false)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
                 }
             }
 
@@ -142,6 +142,7 @@ namespace Twitter.App.Controllers
             ViewData["GroupName"] = group.Name;
             ViewData["GroupId"] = groupId;
             ViewData["PageNumber"] = p;
+            ViewData["IsPrivate"] = group.IsPrivate ? "true" : "false";
 
             return this.View(tweetsViewModel);
         }
@@ -165,7 +166,7 @@ namespace Twitter.App.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult Create(CreateGroupBindingModel model)
         {
@@ -201,7 +202,7 @@ namespace Twitter.App.Controllers
             this.Data.Group.Add(group);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Get", new {groupId = group.Id, p = 1});
         }
 
         [HttpGet]
@@ -391,33 +392,103 @@ namespace Twitter.App.Controllers
                 IsDisplay = group.IsDisplay,
                 LastTweetUpdateTime = group.LastTweetUpdateTime,
                 TweetsCount = group.Tweets.Count
-            });
+            }).OrderByDescending(models => models.LastTweetUpdateTime);
 
-            return View(groups);
+            return PartialView(groups);
         }
 
-        [HttpPost]
-        public ActionResult JoinGroup(int groupId)
+        [HttpGet]
+        [Route("{groupId:int}/members")]
+        public ActionResult GetGroupMembers(int? groupId)
         {
-            var group = this.Data.Group.Find(groupId);
+            // check groupId
+            if (groupId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            // check group
+            var group = this.Data.Group.Find(groupId);
             if (group == null)
             {
                 return HttpNotFound();
             }
 
+            // check user permission
             var loggedUserId = this.User.Identity.GetUserId();
-            var user = this.Data.Users.Find(loggedUserId);
-            if (user == null)
+            if (group.Users.All(user1 => user1.Id != loggedUserId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var users = group.Users.Select(user => new UserViewModel
+            {
+                RealName = user.RealName,
+                Class = user.Class,
+                Status = user.Status,
+                AvatarImageName = user.AvatarImageName,
+                HasAvatarImage = user.HasAvatarImage
+            });
+
+            return PartialView(users);
+        }
+
+        [HttpGet]
+        public ActionResult InviteUserToGroup(int? groupId)
+        {
+            // check groupId
+            if (groupId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // check group
+            var group = this.Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["GroupId"] = groupId;
+
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult InviteUserToGroup(InviteUserToGroupBindingModel model)
+        {
+            // check user permission
+            var loggedUserId = this.User.Identity.GetUserId();
+            var group = this.Data.Group.Find(model.GroupId);
+
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{model.GroupId} not found");
+            }
+
+            if (group.Users.All(u => u.Id != loggedUserId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"User with id {loggedUserId} don't have the permission to invite others");
+            }
+
+            // check invite user
+            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == model.UserPhoneNumber);
+            if (user == null)
+            {
+                return HttpNotFound($"User with phone number:{model.UserPhoneNumber} not found");
+            }
+
+            // check target user group
+            if (user.Groups.Any(g => g.Id == model.GroupId))
+            {
+                return RedirectToAction("Get", new {groupId = model.GroupId, p = 1});
             }
 
             user.Groups.Add(group);
             this.Data.Users.Update(user);
             this.Data.SaveChanges();
-            
-            return View();
+
+            return RedirectToAction("Get", new { groupId = model.GroupId, p = 1 });
         }
     }
 }

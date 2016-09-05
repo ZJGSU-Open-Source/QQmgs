@@ -50,6 +50,26 @@
 
 <div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
     <div class="container">
+
+        @if (string.Compare(ViewData["IsPrivate"].ToString(), "true", StringComparison.Ordinal) == 0)
+        {
+            <div class="row center hide-on-small-only">
+                <h5 class="header col s12 light grey-text">私密成员列表</h5>
+            </div>
+            <div class="row" style="max-width: 700px; margin: auto">
+                    <div class="hide-on-small-only">
+                        @{
+                            Html.RenderAction("GetGroupMembers", new {groupId = (int) ViewData["GroupId"]});
+                        }
+                    </div>
+                    <div class="hide-on-small-only">
+                        @{
+                            Html.RenderAction("InviteUserToGroup");
+                        }
+                    </div>
+            </div>
+        }
+
         <div class="row center hide-on-small-only">
             <h5 class="header col s12 light grey-text">@Resources.Group · @ViewData["GroupName"]</h5>
         </div>

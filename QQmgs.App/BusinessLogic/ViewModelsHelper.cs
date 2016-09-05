@@ -24,7 +24,8 @@ namespace Twitter.App.BusinessLogic
                 Description = g.Description,
                 TweetsCount = g.Tweets.Count,
                 LastTweetUpdateTime = g.LastTweetUpdateTime,
-                IsDisplay = g.IsDisplay
+                IsDisplay = g.IsDisplay,
+                IsPrivate = g.IsPrivate
             };
 
         public static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =

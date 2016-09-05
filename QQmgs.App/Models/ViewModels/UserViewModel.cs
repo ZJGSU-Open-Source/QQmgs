@@ -7,5 +7,9 @@
         public string Class { get; set; }
 
         public string RealName { get; set; }
+
+        public bool HasAvatarImage { get; set; }
+
+        public string AvatarImageName { get; set; }
     }
 }

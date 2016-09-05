@@ -1,0 +1,17 @@
+﻿@using Twitter.App.Constants
+@model System.Collections.Generic.IEnumerable<Twitter.App.Models.ViewModels.UserViewModel>
+
+@foreach (var user in Model)
+{
+    <div class="chip">
+        @if (user.HasAvatarImage)
+        {
+            <img src="~/img/Uploads/Thumbnails/@user.AvatarImageName" alt="Contact Person" class="circle responsive-img" />
+        }
+        else
+        {
+            <img src=@Constants.Based64UserAvatarImage alt="Contact Person" class="circle responsive-img">
+        }
+        @user.RealName
+    </div>
+}
