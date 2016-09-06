@@ -18,14 +18,7 @@
         <div style="text-align: left; margin-left: 30px; ">
             @group.Name
             <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
-            @if (group.IsPrivate)
-            {
-                <span class="new badge" data-badge-caption="条讨论">私密 @group.TweetsCount</span>
-            }
-            else
-            {
-                <span class="new badge" data-badge-caption="条讨论">@group.TweetsCount</span>
-            }
+            <span class="new badge" data-badge-caption="条讨论">@group.TweetsCount</span>
         </div>
     </a>
 }

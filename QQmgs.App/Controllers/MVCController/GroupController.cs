@@ -391,7 +391,8 @@ namespace Twitter.App.Controllers
                 ImageOverview = group.ImageOverview,
                 IsDisplay = group.IsDisplay,
                 LastTweetUpdateTime = group.LastTweetUpdateTime,
-                TweetsCount = group.Tweets.Count
+                TweetsCount = group.Tweets.Count,
+                IsPrivate = group.IsPrivate
             }).OrderByDescending(models => models.LastTweetUpdateTime);
 
             return PartialView(groups);
@@ -502,7 +503,7 @@ namespace Twitter.App.Controllers
 
             // check user permission
             var loggedUserId = this.User.Identity.GetUserId();
-            if (CheckGroupOwner(group, loggedUserId))
+            if (CheckGroupMember(group, loggedUserId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"User with id {loggedUserId} is not the owner of the group with id {groupId}");
             }
