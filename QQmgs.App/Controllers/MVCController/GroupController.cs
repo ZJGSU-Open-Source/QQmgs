@@ -416,7 +416,7 @@ namespace Twitter.App.Controllers
 
             // check user permission
             var loggedUserId = this.User.Identity.GetUserId();
-            if (group.Users.All(user1 => user1.Id != loggedUserId))
+            if (CheckGroupMember(group, loggedUserId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -489,6 +489,56 @@ namespace Twitter.App.Controllers
             this.Data.SaveChanges();
 
             return RedirectToAction("Get", new { groupId = model.GroupId, p = 1 });
+        }
+
+        [HttpGet]
+        public ActionResult SetGroupVisibility(int groupId)
+        {
+            var group = this.Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{groupId} not found");
+            }
+
+            // check user permission
+            var loggedUserId = this.User.Identity.GetUserId();
+            if (CheckGroupOwner(group, loggedUserId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"User with id {loggedUserId} is not the owner of the group with id {groupId}");
+            }
+
+            var isDisplay = group.IsDisplay;
+
+            ViewData["GroupId"] = groupId;
+
+            return PartialView(isDisplay);
+        }
+
+        [HttpPost]
+        public ActionResult SetGroupVisibility(SetGroupVisibilityBindingModel model)
+        {
+            var isDisplay = string.Compare(model.IsDisplay, "on", StringComparison.OrdinalIgnoreCase) == 0;
+            var group = this.Data.Group.Find(model.GroupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{model.GroupId} not found");
+            }
+
+            group.IsDisplay = isDisplay;
+            this.Data.Group.Update(group);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Get", new { groupId = model.GroupId, p = 1 });
+        }
+
+        private static bool CheckGroupMember(Group group, string userId)
+        {
+            return group.Users.All(user => user.Id != userId);
+        }
+
+        private static bool CheckGroupOwner(Group group, string userId)
+        {
+            return group.CreaterId != userId;
         }
     }
 }

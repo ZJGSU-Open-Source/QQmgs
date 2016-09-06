@@ -105,7 +105,7 @@ namespace Twitter.App.Controllers
             var loggedUserUsername = this.User.Identity.GetUserName();
 
             // for test
-            model.GroupId = 3;
+            model.GroupId = 1;
             var group = Data.Group.Find(model.GroupId);
             if (group == null)
             {
@@ -164,6 +164,7 @@ namespace Twitter.App.Controllers
                 return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
             }
 
+            // update group last tweet update time
             group.LastTweetUpdateTime = DateTime.Now;
             this.Data.Group.Update(group);
             this.Data.SaveChanges();

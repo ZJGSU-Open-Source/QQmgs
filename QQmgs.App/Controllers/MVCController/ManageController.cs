@@ -431,6 +431,29 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public string GetAvatarImage()
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(loggedUserId);
+
+            var urlPrefix = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
+                                (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+
+            // local debug
+            if (urlPrefix.Contains("localhost"))
+            {
+                urlPrefix += "/QQmgs.App";
+            }
+
+            if (user.HasAvatarImage)
+            {
+                return urlPrefix + "/img/Uploads/Thumbnails/" + user.AvatarImageName;
+            }
+
+            return urlPrefix + "/img/Photo/avatar.png";
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && this._userManager != null)
