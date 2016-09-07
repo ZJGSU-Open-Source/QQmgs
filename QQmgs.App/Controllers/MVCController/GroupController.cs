@@ -417,7 +417,7 @@ namespace Twitter.App.Controllers
 
             // check user permission
             var loggedUserId = this.User.Identity.GetUserId();
-            if (CheckGroupMember(group, loggedUserId))
+            if (IsNotGroupMember(group, loggedUserId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -428,8 +428,14 @@ namespace Twitter.App.Controllers
                 Class = user.Class,
                 Status = user.Status,
                 AvatarImageName = user.AvatarImageName,
-                HasAvatarImage = user.HasAvatarImage
+                HasAvatarImage = user.HasAvatarImage,
+                UserId = user.Id
             });
+
+            var isGroupOwner = !IswNotGroupOwner(group, loggedUserId);
+
+            ViewData["GroupId"] = groupId;
+            ViewData["IsGroupOwner"] = isGroupOwner;
 
             return PartialView(users);
         }
@@ -473,10 +479,32 @@ namespace Twitter.App.Controllers
             }
 
             // check invite user
-            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == model.UserPhoneNumber);
-            if (user == null)
+            var users =
+                this.Data.Users.All()
+                    .Where(u => u.RealName == model.UserName && u.Groups.All(g => g.Id != model.GroupId));
+
+            User user;
+            switch (users.Count())
             {
-                return HttpNotFound($"User with phone number:{model.UserPhoneNumber} not found");
+                case 0:
+                    return HttpNotFound($"User with name:{model.UserName} not found");
+                case 1:
+                    user = users.FirstOrDefault();
+
+                    if (user == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                    }
+
+                    break;
+                default:
+                    var usersViewModel = users.Select(ViewModelsHelper.AsUserViewModel).ToList();
+
+                    ViewData["GroupId"] = model.GroupId;
+                    ViewData["GroupName"] = group.Name;
+                    ViewData["UserName"] = model.UserName;
+
+                    return View("InviteFriendView", usersViewModel);
             }
 
             // check target user group
@@ -503,14 +531,17 @@ namespace Twitter.App.Controllers
 
             // check user permission
             var loggedUserId = this.User.Identity.GetUserId();
-            if (CheckGroupMember(group, loggedUserId))
+            if (IsNotGroupMember(group, loggedUserId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"User with id {loggedUserId} is not the owner of the group with id {groupId}");
             }
 
+            var isOwner = !IswNotGroupOwner(group, loggedUserId);
+
             var isDisplay = group.IsDisplay;
 
             ViewData["GroupId"] = groupId;
+            ViewData["IsOwner"] = isOwner;
 
             return PartialView(isDisplay);
         }
@@ -532,12 +563,78 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Get", new { groupId = model.GroupId, p = 1 });
         }
 
-        private static bool CheckGroupMember(Group group, string userId)
+        public ActionResult InviteFriendToGroup(int groupId, string userId)
+        {
+            // check user permission
+            var loggedUserId = this.User.Identity.GetUserId();
+            var group = this.Data.Group.Find(groupId);
+
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{groupId} not found");
+            }
+
+            if (group.Users.All(u => u.Id != loggedUserId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"User with id {loggedUserId} don't have the permission to invite others");
+            }
+
+            // check invite user
+            var user = this.Data.Users.Find(userId);
+            if (user == null)
+            {
+                return HttpNotFound($"User with id:{userId} not found");
+            }
+
+            // check target user group
+            if (user.Groups.Any(g => g.Id == groupId))
+            {
+                return RedirectToAction("Get", new { groupId = groupId, p = 1 });
+            }
+
+            user.Groups.Add(group);
+            this.Data.Users.Update(user);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Get", new { groupId = groupId, p = 1 });
+        }
+
+        public ActionResult DeleteGroupmember(string userId, int groupId)
+        {
+            // check user permission
+            var loggedUserId = this.User.Identity.GetUserId();
+            var group = this.Data.Group.Find(groupId);
+
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{groupId} not found");
+            }
+
+            if (group.Users.All(u => u.Id != loggedUserId) || IswNotGroupOwner(group, loggedUserId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"User with id {loggedUserId} don't have the permission to delete member in group {groupId}");
+            }
+
+            // check user to delete
+            var user = this.Data.Users.Find(userId);
+            if (user == null)
+            {
+                return HttpNotFound($"User with id:{userId} not found");
+            }
+
+            group.Users.Remove(user);
+            this.Data.Group.Update(group);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Get", new { groupId = groupId, p = 1 });
+        }
+
+        private static bool IsNotGroupMember(Group group, string userId)
         {
             return group.Users.All(user => user.Id != userId);
         }
 
-        private static bool CheckGroupOwner(Group group, string userId)
+        private static bool IswNotGroupOwner(Group group, string userId)
         {
             return group.CreaterId != userId;
         }

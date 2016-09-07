@@ -2,6 +2,8 @@
 {
     public class UserViewModel
     {
+        public string UserId { get; set; }
+
         public string Status { get; set; }
 
         public string Class { get; set; }

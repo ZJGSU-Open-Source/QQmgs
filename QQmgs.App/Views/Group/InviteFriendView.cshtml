@@ -1,0 +1,48 @@
+﻿@using Twitter.App.Constants
+@model IEnumerable<Twitter.App.Models.ViewModels.UserViewModel>
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+            <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+            <a href="#" class="breadcrumb">找到多位叫'@ViewData["UserName"]'的用户</a>
+        </div>
+    </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
+    <div class="container">
+        <div class="row" style="max-width: 700px; margin: auto">
+            @foreach (var user in Model)
+            {
+                    <div class="card horizontal">
+                        <div class="card-image">
+                            @if (user.HasAvatarImage)
+                {
+                                <img src="~/img/Uploads/Thumbnails/@user.AvatarImageName">
+                            }
+                            else
+                            {
+                                <img src=@Constants.Based64UserAvatarImage alt="">
+                            }
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <p>姓名: @user.RealName</p>
+                                <p>专业: @user.Class</p>
+                                <p>签名: @user.Status</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="@Url.Action("InviteFriendToGroup", new {UserId = user.UserId, GroupId = ViewData["GroupId"] })">邀请TA</a>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+

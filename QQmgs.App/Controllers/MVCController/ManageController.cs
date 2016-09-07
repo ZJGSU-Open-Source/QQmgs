@@ -431,7 +431,6 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
         public string GetAvatarImage()
         {
             var loggedUserId = this.User.Identity.GetUserId();

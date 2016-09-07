@@ -8,12 +8,20 @@ if (isDisplay)
     }
 }
 
+@helper Disabled()
+{
+if (!(bool)ViewData["IsOwner"])
+{
+        @:disabled="disabled"
+    }
+}
+
 @using (Html.BeginForm("SetGroupVisibility", "Group", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
     <form>
-        <input class="displayCheck" type="checkbox" id="isDisplay" @Selected(Model) name="IsDisplay" onclick="this.form.submit();">
+        <input class="displayCheck" type="checkbox" id="isDisplay" @Selected(Model) @Disabled() name="IsDisplay" onclick="this.form.submit();">
         <label for="isDisplay">公开展示兴趣小组</label>
         <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
     </form>

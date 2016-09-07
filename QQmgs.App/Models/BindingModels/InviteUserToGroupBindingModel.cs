@@ -9,7 +9,7 @@ namespace Twitter.App.Models.BindingModels
     public class InviteUserToGroupBindingModel
     {
         [Required]
-        public string UserPhoneNumber { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         public int GroupId { get; set; }

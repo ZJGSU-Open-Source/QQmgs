@@ -73,7 +73,10 @@ namespace Twitter.App.BusinessLogic
             {
                 RealName = u.RealName,
                 Class = u.Class,
-                Status = u.Status
+                Status = u.Status,
+                UserId = u.Id,
+                HasAvatarImage = u.HasAvatarImage,
+                AvatarImageName = u.AvatarImageName
             };
 
         public static readonly Expression<Func<Photo, PhotoViewModel>> AsPhotoViewModel =

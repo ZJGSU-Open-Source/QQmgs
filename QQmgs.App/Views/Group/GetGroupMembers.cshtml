@@ -13,5 +13,9 @@
             <img src=@Constants.Based64UserAvatarImage alt="Contact Person" class="circle responsive-img">
         }
         @user.RealName
+        @if ((bool)ViewData["IsGroupOwner"])
+        {
+            <i class="close material-icons" onclick="location.href = '@Url.Action("DeleteGroupmember", "Group", new {userId = user.UserId, groupId = ViewData["GroupId"] })'">close</i>
+        }
     </div>
 }
