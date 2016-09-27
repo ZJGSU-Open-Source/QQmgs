@@ -70,6 +70,12 @@ namespace Twitter.Data
                 .HasForeignKey(t => t.AuthorId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Activity>()
+                .HasRequired(a => a.Creator)
+                .WithMany(u => u.Activities)
+                .HasForeignKey(a => a.CreatorId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<CourseReview>()
                 .HasRequired(t => t.Author)
                 .WithMany(u => u.CourseReviews)
@@ -80,6 +86,7 @@ namespace Twitter.Data
 
             modelBuilder.Entity<HighAccLocationByIpResult>();
 
+            // more to more mapping relation
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.Users)
                 .WithMany(u => u.Groups)
@@ -88,6 +95,14 @@ namespace Twitter.Data
                     m.ToTable("UsersInGroups");
                     m.MapLeftKey("GroupId");
                     m.MapRightKey("UserId");
+                });
+
+            modelBuilder.Entity<Activity>()
+                .HasMany(a => a.Participations)
+                .WithMany(u => u.Activities)
+                .Map(m =>
+                {
+                    m.ToTable("UsersInAvtivities");
                 });
 
             modelBuilder.Entity<Tweet>()

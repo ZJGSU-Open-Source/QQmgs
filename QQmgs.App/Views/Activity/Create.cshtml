@@ -1,0 +1,29 @@
+﻿@model dynamic
+
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<div class="row center" style="max-width: 700px; margin: auto">
+    @using (Html.BeginForm("Create", "Activity", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s9" style="margin-top: 0px">
+                    <input id="input_text_1" type="text" length="200" name="Name">
+                </div>
+                <div class="input-field col s9" style="margin-top: 0px">
+                    <input id="input_text_1" type="text" length="200" name="Description">
+                </div>
+                <div class="input-field col s9" style="margin-top: 0px">
+                    <input id="input_text_1" type="text" length="200" name="Place">
+                </div>
+                <div class="form-group col s2" style="margin-top: 35px">
+                    <input type="submit" value="Post" class="awesome-button" />
+                </div>
+            </div>
+        </form>
+    }
+</div>

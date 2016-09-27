@@ -39,6 +39,8 @@ namespace Twitter.Data.UnitOfWork
 
         IRepository<HighAccLocationByIpResult> HighAccLocationByIpResult { get; }
 
+        IRepository<Activity> Activity { get; }
+
         void SaveChanges();
     }
 }

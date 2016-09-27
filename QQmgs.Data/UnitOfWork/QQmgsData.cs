@@ -60,6 +60,8 @@ namespace Twitter.Data.UnitOfWork
 
         public IRepository<HighAccLocationByIpResult> HighAccLocationByIpResult => this.GetRepository<HighAccLocationByIpResult>();
 
+        public IRepository<Activity> Activity => this.GetRepository<Activity>();
+
         public IUserStore<User> UserStore => this._userStore ?? (this._userStore = new UserStore<User>(this._dbContext));
 
         public void SaveChanges()

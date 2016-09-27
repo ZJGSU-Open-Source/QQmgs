@@ -100,6 +100,32 @@ namespace Twitter.App.BusinessLogic
                 LoggedUserPhoneNumber = u.PhoneNumber
             };
 
+        public static readonly Expression<Func<Activity, ActivityViewModel>> AsActivictyViewModel =
+            a => new ActivityViewModel
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Classficiation = a.Classficiation.ToString(),
+                AvatarImage = 
+                    a.Creator.HasAvatarImage
+                        ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" +
+                          a.Creator.AvatarImageName
+                        : null,
+                CreatorId = a.CreatorId,
+                Description = a.Description,
+                EndTime = a.EndTime,
+                StartTime = a.StartTime,
+                Place = a.Place,
+                PublishTime = a.PublishTime,
+                //Participations = a.Participations.Select(participant => new ParticipationViewModel
+                //{
+                //    Id = participant.Id,
+                //    Name = participant.RealName,
+                //    AvatarImage = participant.AvatarImageName,
+                //    HasAvatarImage = participant.HasAvatarImage
+                //}).ToList()
+            };
+
         public static readonly Expression<Func<HighAccLocationByIpResult, UserLoginTraceViewModel>>
             AsUserLoginTraceViewModel = u => new UserLoginTraceViewModel
             {

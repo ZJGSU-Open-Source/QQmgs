@@ -1,0 +1,10 @@
+﻿@model IEnumerable <Twitter.App.Models.ViewModels.ActivityViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+@foreach (var activity in Model)
+{
+    <h1>@activity.Name</h1>
+}

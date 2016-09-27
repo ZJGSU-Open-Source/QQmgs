@@ -1,56 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Twitter.App.BusinessLogic;
 using Twitter.App.Models.BindingModels;
-using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 
-namespace Twitter.App.Controllers
+namespace Twitter.App.Controllers.MVCController
 {
-    [RoutePrefix("dev")]
-    public class DevController : TwitterBaseController
+    [RoutePrefix("Activity")]
+    public class ActivityController : TwitterBaseController
     {
-        public DevController() 
+        public ActivityController() 
             : base(new QQmgsData())
         {
         }
-    
-        // GET: DevLog
+
+        // GET: Activity
         public ActionResult Index()
         {
-            var recentLogs = Data.DevLog.All()
-                .OrderByDescending(t => t.PublishedTime)
-                .Select(AsDevLogViewModel)
+            var activities = this.Data.Activity.All()
+                .OrderByDescending(activity => activity.PublishTime)
+                .Select(ViewModelsHelper.AsActivictyViewModel)
                 .ToList();
 
-            return this.View(recentLogs);
+            return View(activities);
         }
-        
-        // GET: DevLog/Create
+
+        // GET: Activity/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: Activity/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DevLog/Create
+        // POST: Activity/Create
         [HttpPost]
-        public ActionResult Create(CreateLogBindingModel model)
+        public ActionResult Create(CreateActivityBindingModel model)
         {
             try
             {
-                var devLog = new DevLog
+                var activity = new Activity
                 {
-                    Log = model.Log,
-                    PublishedTime = DateTime.Now
+                    CreatorId = this.User.Identity.GetUserId(),
+                    Name = model.Name,
+                    Description = model.Description,
+                    PublishTime = DateTime.Now,
+                    Classficiation = ActivityClassficiation.其他,
+                    Place = model.Place,
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now
                 };
 
-                Data.DevLog.Add(devLog);
-                Data.SaveChanges();
+                this.Data.Activity.Add(activity);
+                this.Data.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -60,13 +71,13 @@ namespace Twitter.App.Controllers
             }
         }
 
-        // GET: DevLog/Edit/5
+        // GET: Activity/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: DevLog/Edit/5
+        // POST: Activity/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -82,13 +93,13 @@ namespace Twitter.App.Controllers
             }
         }
 
-        // GET: DevLog/Delete/5
+        // GET: Activity/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: DevLog/Delete/5
+        // POST: Activity/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -103,13 +114,5 @@ namespace Twitter.App.Controllers
                 return View();
             }
         }
-
-        private static readonly Expression<Func<DevLog, DevLogViewModel>> AsDevLogViewModel =
-            t => new DevLogViewModel
-            {
-                Id = t.Id,
-                PublishedTime = t.PublishedTime,
-                Log = t.Log
-            };
     }
 }

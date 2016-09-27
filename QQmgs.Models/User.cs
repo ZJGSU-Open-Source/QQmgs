@@ -17,6 +17,7 @@
             this.Followers = new HashSet<User>();
             this.FollowingUsers = new HashSet<User>();
             this.Photos = new HashSet<Photo>();
+            this.Activities = new HashSet<Activity>();
             this.CourseReviews = new HashSet<CourseReview>();
             this.UserLoginTraces = new HashSet<UserLogTrace>();
             this.Groups = new HashSet<Group>();
@@ -45,6 +46,8 @@
         public virtual ICollection<Group> Groups { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; } 
+
+        public virtual ICollection<Activity> Activities { get; set; }
 
         public virtual ICollection<CourseReview> CourseReviews { get; set; } 
 
