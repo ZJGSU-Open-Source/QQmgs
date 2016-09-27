@@ -240,6 +240,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\Base64Coding.cs" />
     <Compile Include="BusinessLogic\FileUploadHelper.cs" />
+    <Compile Include="BusinessLogic\GPACalculator.cs" />
     <Compile Include="BusinessLogic\GroupManager.cs" />
     <Compile Include="BusinessLogic\IPAddressHelper.cs" />
     <Compile Include="BusinessLogic\JsonHelper.cs" />
