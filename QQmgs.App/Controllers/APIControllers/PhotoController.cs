@@ -31,7 +31,6 @@ namespace Twitter.App.Controllers.APIControllers
             }
 
             var photos = this.Data.Photo.All()
-                .OrderByDescending(t => t.DatePosted)
                 .Where(photo => photo.OriginalWidth != 0 && photo.OriginalHeight != 0 && !photo.IsSoftDelete);
 
             var photoList = photos.ToList();    
@@ -44,7 +43,7 @@ namespace Twitter.App.Controllers.APIControllers
                 recentPhotos[i].DatePosted = photoList[i].DatePosted.ToString("M");
             }
 
-            var pagedPhotos = recentPhotos.GetPagedResult(t => t.DatePosted, pageNo, pageSize, SortDirection.Descending);
+            var pagedPhotos = recentPhotos.GetPagedResult(t => t.Id, pageNo, pageSize, SortDirection.Descending);
 
             return Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<PhotoViewModel>(pagedPhotos, pageNo, pageSize, recentPhotos.Count));
         }
