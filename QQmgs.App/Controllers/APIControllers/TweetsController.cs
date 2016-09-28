@@ -44,7 +44,6 @@ namespace Twitter.App.Controllers.APIControllers
         public HttpResponseMessage Get([FromUri] int tweetId)
         {
             var tweet = Data.Tweets.All()
-                .OrderByDescending(t => t.DatePosted)
                 .Where(t => t.Id == tweetId)
                 .Select(ViewModelsHelper.AsTweetViewModel)
                 .FirstOrDefault();

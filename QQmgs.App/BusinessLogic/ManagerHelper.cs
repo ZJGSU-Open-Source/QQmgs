@@ -10,7 +10,7 @@ using Twitter.Models;
 
 namespace Twitter.App.BusinessLogic
 {
-    public static class ManagerHelper
+    public static class PaginitionHelper
     {
         public static IReadOnlyList<TSource> GetPagedResult<TSource, TKey>(
             this IEnumerable<TSource> source,
@@ -33,27 +33,5 @@ namespace Twitter.App.BusinessLogic
                     .Take(pageSize)
                     .ToList();
         }
-
-        public static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
-            t => new TweetViewModel
-            {
-                Id = t.Id,
-                Author = t.Author.UserName,
-                AuthorStatus = t.Author.Status,
-                IsEvent = t.IsEvent,
-                Text = t.Text,
-                UsersFavouriteCount = t.UsersFavourite.Count,
-                RepliesCount = t.Reply.Count,
-                RetweetsCount = t.Retweets.Count,
-                DatePosted = t.DatePosted,
-                GroupId = t.GroupId,
-                ReplyList = t.Reply.Select(reply => new ReplyViewModel
-                {
-                    Text = reply.Content,
-                    Id = reply.Id,
-                    PublishTime = reply.PublishTime,
-                    Author = reply.Author.RealName
-                }).ToList()
-            };
     }
 }

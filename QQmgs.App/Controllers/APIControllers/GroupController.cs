@@ -20,7 +20,6 @@ namespace Twitter.App.Controllers.APIControllers
         public GroupController()
             : base(new QQmgsData())
         {
-            
         }
 
         [HttpGet]
@@ -34,7 +33,8 @@ namespace Twitter.App.Controllers.APIControllers
 
             var recentTweets = this.Data.Group.All()
                 .OrderByDescending(t => t.CreatedTime)
-                .Select(ViewModelsHelper.AsGroupViewModel).ToList();
+                .Select(ViewModelsHelper.AsGroupViewModel)
+                .ToList();
 
             var pagedGroups = recentTweets.GetPagedResult(t => t.Id, pageNo, pageSize, SortDirection.Descending);
 

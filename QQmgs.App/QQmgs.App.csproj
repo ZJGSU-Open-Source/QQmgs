@@ -251,6 +251,7 @@
     <Compile Include="BusinessLogic\ViewModelsHelper.cs" />
     <Compile Include="Common\Guard.cs" />
     <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Controllers\APIControllers\ActivityController.cs" />
     <Compile Include="Controllers\APIControllers\GroupController.cs" />
     <Compile Include="Controllers\APIControllers\PhotoController.cs" />
     <Compile Include="Controllers\MVCController\AccountController.cs" />
