@@ -70,12 +70,6 @@ namespace Twitter.Data
                 .HasForeignKey(t => t.AuthorId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Activity>()
-                .HasRequired(a => a.Creator)
-                .WithMany(u => u.Activities)
-                .HasForeignKey(a => a.CreatorId)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<CourseReview>()
                 .HasRequired(t => t.Author)
                 .WithMany(u => u.CourseReviews)
@@ -98,11 +92,13 @@ namespace Twitter.Data
                 });
 
             modelBuilder.Entity<Activity>()
-                .HasMany(a => a.Participations)
+                .HasMany(a => a.Participents)
                 .WithMany(u => u.Activities)
                 .Map(m =>
                 {
-                    m.ToTable("UsersInAvtivities");
+                    m.ToTable("UsersInActivities");
+                    m.MapLeftKey("ActivityId");
+                    m.MapRightKey("UserId");
                 });
 
             modelBuilder.Entity<Tweet>()

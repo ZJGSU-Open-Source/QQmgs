@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Twitter.Models
     {
         public Activity()
         {
-            this.Participations = new HashSet<User>();
+            this.Participents = new HashSet<User>();
         }
             
         [Key]
@@ -19,8 +20,6 @@ namespace Twitter.Models
 
         [Required]
         public string CreatorId { get; set; }
-
-        public virtual User Creator { get; set; }
 
         [MaxLength(50)]
         public string Name { get; set; }
@@ -39,7 +38,7 @@ namespace Twitter.Models
 
         public string AvatarImage { get; set; }
 
-        public virtual ICollection<User> Participations { get; set; }
+        public virtual ICollection<User> Participents { get; set; }
 
         public ActivityClassficiation Classficiation { get; set; }
     }

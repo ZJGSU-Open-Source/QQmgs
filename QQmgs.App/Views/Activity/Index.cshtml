@@ -1,10 +1,52 @@
-﻿@model IEnumerable <Twitter.App.Models.ViewModels.ActivityViewModel>
+﻿@model IEnumerable<Twitter.App.Models.ViewModels.ActivityViewModel>
 
 @{
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
+<div class="container">
 
-@foreach (var activity in Model)
-{
-    <h1>@activity.Name</h1>
-}
+    <table class="striped">
+        <thead>
+            <tr>
+                <th data-field="1">ID</th>
+                <th data-field="2">Creator ID</th>
+                <th data-field="3">Name</th>
+                <th data-field="4">Description</th>
+                <th data-field="5">Start time</th>
+                <th data-field="6">End time</th>
+                <th data-field="7">Place</th>
+                <th data-field="8">Publish time</th>
+                <th data-field="9">Classcification</th>
+                <th data-field="10">Avatar image</th>
+                <th data-field="11">participents</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var activity in Model)
+            {
+                <tr>
+                    <td>@activity.Id</td>
+                    <td>@activity.CreatorId</td>
+                    <td>@activity.Name</td>
+                    <td>@activity.Description</td>
+                    <td>@activity.StartTime</td>
+                    <td>@activity.EndTime</td>
+                    <td>@activity.Place</td>
+                    <td>@activity.PublishTime</td>
+                    <td>@activity.Classficiation</td>
+                    <td>@activity.AvatarImage</td>
+                    <td>
+                        @*@foreach (var people in activity.Participations)
+                            {
+                                <p>
+                                    @people.Name,
+                                </p>
+                            }*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

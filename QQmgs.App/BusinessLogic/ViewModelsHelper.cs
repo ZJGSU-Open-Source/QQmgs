@@ -103,14 +103,10 @@ namespace Twitter.App.BusinessLogic
         public static readonly Expression<Func<Activity, ActivityViewModel>> AsActivictyViewModel =
             a => new ActivityViewModel
             {
-                Id = a.Id,
+                Id = a.Id.ToString(),
                 Name = a.Name,
                 Classficiation = a.Classficiation.ToString(),
-                AvatarImage = 
-                    a.Creator.HasAvatarImage
-                        ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" +
-                          a.Creator.AvatarImageName
-                        : null,
+                AvatarImage = null,
                 CreatorId = a.CreatorId,
                 Description = a.Description,
                 EndTime = a.EndTime,

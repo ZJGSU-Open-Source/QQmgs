@@ -17,10 +17,10 @@
             this.Followers = new HashSet<User>();
             this.FollowingUsers = new HashSet<User>();
             this.Photos = new HashSet<Photo>();
-            this.Activities = new HashSet<Activity>();
             this.CourseReviews = new HashSet<CourseReview>();
             this.UserLoginTraces = new HashSet<UserLogTrace>();
             this.Groups = new HashSet<Group>();
+            this.Activities = new HashSet<Activity>();
         }
 
         public DateTime RegisteredTime { get; set; }
