@@ -27,6 +27,12 @@ namespace Twitter.App.Controllers.MVCController
                 .Select(ViewModelsHelper.AsActivictyViewModel)
                 .ToList();
 
+            // get each creator name from DB
+            activities.ForEach(model =>
+            {
+                model.Creator = this.Data.Users.Find(model.CreatorId).RealName;
+            });
+
             return View(activities);
         }
 
@@ -54,7 +60,7 @@ namespace Twitter.App.Controllers.MVCController
                     Name = model.Name,
                     Description = model.Description,
                     PublishTime = DateTime.Now,
-                    Classficiation = ActivityClassficiation.其他,
+                    Classficiation = (ActivityClassficiation)model.Classfication,
                     Place = model.Place,
                     StartTime = DateTime.Now,
                     EndTime = DateTime.Now

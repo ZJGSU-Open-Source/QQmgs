@@ -22,6 +22,7 @@
             <ul class="right hide-on-med-and-down">
                 @if (Request.IsAuthenticated)
                 {
+                    <li><a style="color: rgb(82, 146, 0);font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Activity")">活动</a></li>
                     <li><a style="color: #0F959D;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "CourseReview")">点评</a></li>
                     <li><a style="color: #F7A54C;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Group")">小组</a></li>
                     <li><a style="color: #61ABDB;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Photo")">摄影</a></li>

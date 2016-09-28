@@ -22,6 +22,7 @@ namespace Twitter.Models
         public string CreatorId { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string Name { get; set; }
 
         [MaxLength(300)]

@@ -1,29 +1,51 @@
-﻿@model dynamic
+﻿@using Twitter.Models
+@model dynamic
 
 @{
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
+<br />
+<br />
 <div class="row center" style="max-width: 700px; margin: auto">
-    @using (Html.BeginForm("Create", "Activity", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Create", "Activity", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
     {
         @Html.AntiForgeryToken()
 
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s9" style="margin-top: 0px">
-                    <input placeholder="Name" type="text" length="200" name="Name">
+                    <input placeholder="活动名称" type="text" length="50" name="Name">
                 </div>
                 <div class="input-field col s9" style="margin-top: 0px">
-                    <input placeholder="Description" type="text" length="200" name="Description">
+                    <input placeholder="活动描述" type="text" length="50" name="Description">
                 </div>
                 <div class="input-field col s9" style="margin-top: 0px">
-                    <input placeholder="Place" type="text" length="200" name="Place">
+                    <input placeholder="活动地点" type="text" length="50" name="Place">
                 </div>
+                <div class="input-field col s9" style="margin-top: 0px">
+                    <input placeholder="活动开始时间 (Not available)" type="text" name="StartTime" disabled>
+                </div>
+                <div class="input-field col s9" style="margin-top: 0px">
+                    <input placeholder="活动结束时间 (Not available)" type="text" name="EndTime" disabled>
+                </div>
+
+                <div class="input-field col s9">
+                    <select class="browser-default" name="Classfication">>
+                        <option value="" disabled selected>选择活动分类</option>
+                        <option value="1">@ActivityClassficiation.社交</option>
+                        <option value="3">@ActivityClassficiation.学习</option>
+                        <option value="4">@ActivityClassficiation.运动</option>
+                        <option value="2">@ActivityClassficiation.兴趣</option>
+                        <option value="0">@ActivityClassficiation.其他</option>
+                    </select>
+                </div>
+
                 <div class="form-group col s2" style="margin-top: 35px">
-                    <input type="submit" value="Post" class="awesome-button" />
+                    <input type="submit" value="Post" class="awesome-button"/>
                 </div>
             </div>
         </form>
     }
 </div>
+<br/>
