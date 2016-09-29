@@ -58,6 +58,7 @@ namespace Twitter.App.Controllers
                     DatePosted = DateTime.Now,
                     Name = uploadedFile.Url,
                     PhotoType = PhotoType.Photo,
+                    PhotoClasscification = (PhotoClasscification)model.Classcification,
                     Descrption = model.Description,
                     IsSoftDelete = false,
                     OriginalHeight = uploadedFile.PhotoSize.Height,

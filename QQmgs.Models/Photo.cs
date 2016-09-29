@@ -31,6 +31,8 @@ namespace Twitter.Models
 
         public PhotoType PhotoType { get; set; }
 
+        public PhotoClasscification PhotoClasscification { get; set; }
+
         public bool IsSoftDelete { get; set; }
 
         public int OriginalWidth { get; set; }
@@ -45,5 +47,14 @@ namespace Twitter.Models
         Photo,
         AvatarImage,
         GroupImage
+    }
+
+    public enum PhotoClasscification
+    {
+        其他 = 0,
+        风景 = 1,
+        美食 = 2,
+        人像 = 3,
+        艺术 = 4
     }
 }
