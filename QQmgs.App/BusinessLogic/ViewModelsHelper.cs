@@ -87,7 +87,9 @@ namespace Twitter.App.BusinessLogic
                 Name = p.Name,
                 Height = p.OriginalHeight,
                 Width = p.OriginalWidth,
-                Id = p.Id
+                Id = p.Id,
+                HasAvatarImage = p.Author.HasAvatarImage,
+                AvatarImageName = p.Author.AvatarImageName
             };
 
         public static readonly Expression<Func<UserLogTrace, UserLoginTraceViewModel>> AsUserLoginTraceVideModel =

@@ -6,16 +6,14 @@
 <div class="body-content-index-tweet">
 
     <div class="row" style="padding-top: 5px; margin-bottom: 0px">
-        <div class="col s3"></div>
-        <div class="col s6">
+        <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s3"><a class="active" style="color: #71767a;" href="#layout1">近期热门</a></li>
-                <li class="tab col s3"><a style="color: #71767a;" href="#layout2">校内新闻</a></li>
-                <li class="tab col s3"><a style="color: #71767a;" href="#layout3">我的商大</a></li>
+                <li class="tab col s3"><a class="active" style="color: #71767a;" href="#layout1">最近上传</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#layout2">照片分类</a></li>
+                <li class="tab col s3"><a style="color: #71767a;" href="#layout3">我的照片</a></li>
                 <li class="tab col s3"><a style="color: #71767a;" href="#layout4">上传照片</a></li>
             </ul>
         </div>
-        <div class="col s3"></div>
         <div id="layout1" class="col s12" style="background-color: #f5f8fa">
             <br />
             @{ Html.RenderPartial("PhotoPartialView"); }

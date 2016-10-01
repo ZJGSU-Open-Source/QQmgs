@@ -17,6 +17,12 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("author")]
         public string Author { get; set; }
 
+        [JsonProperty("has_avatar_image")]
+        public bool HasAvatarImage { get; set; }
+
+        [JsonProperty("avatar_image_name")]
+        public string AvatarImageName { get; set; }
+
         [JsonProperty("description")]
         public string Description { get; set; }
 
