@@ -41,6 +41,11 @@ namespace Twitter.App.Controllers.APIControllers
             for (var i = 0; i < photos.Count(); i++)
             {
                 recentPhotos[i].DatePosted = photoList[i].DatePosted.ToString("M");
+
+                if (recentPhotos[i].Description == null)
+                {
+                    recentPhotos[i].Description = "无名";
+                }
             }
 
             var pagedPhotos = recentPhotos.GetPagedResult(t => t.Id, pageNo, pageSize, SortDirection.Descending);
