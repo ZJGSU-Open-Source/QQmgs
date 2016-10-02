@@ -46,10 +46,10 @@ namespace Twitter.Models
 
     public enum ActivityClassficiation
     {
-        其他,
-        社交,
-        兴趣,
-        学习,
-        运动
+        Other,
+        Interest,
+        Study,
+        Recurit,
+        Sports
     }
 }

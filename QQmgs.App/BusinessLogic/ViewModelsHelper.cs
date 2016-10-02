@@ -108,20 +108,21 @@ namespace Twitter.App.BusinessLogic
                 Id = a.Id.ToString(),
                 Name = a.Name,
                 Classficiation = a.Classficiation.ToString(),
-                AvatarImage = null,
+                AvatarImage = a.AvatarImage ?? string.Empty,
                 CreatorId = a.CreatorId,
                 Description = a.Description,
                 EndTime = a.EndTime,
                 StartTime = a.StartTime,
                 Place = a.Place,
                 PublishTime = a.PublishTime,
-                //Participations = a.Participations.Select(participant => new ParticipationViewModel
-                //{
-                //    Id = participant.Id,
-                //    Name = participant.RealName,
-                //    AvatarImage = participant.AvatarImageName,
-                //    HasAvatarImage = participant.HasAvatarImage
-                //}).ToList()
+                Creator = string.Empty,
+                Participations = a.Participents.Select(participant => new ParticipationViewModel
+                {
+                    Id = participant.Id,
+                    Name = participant.RealName,
+                    AvatarImage = participant.AvatarImageName,
+                    HasAvatarImage = participant.HasAvatarImage
+                }).ToList()
             };
 
         public static readonly Expression<Func<HighAccLocationByIpResult, UserLoginTraceViewModel>>

@@ -81,23 +81,29 @@
             <h5 class="header col s12 light grey-text">@Resources.Group · @ViewData["GroupName"]</h5>
         </div>
         <div class="row hide-on-small-only" style="max-width: 700px; margin: auto">
-            @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            <div class="col s4">
+                <img style="max-width: 200px" src="~/img/Photo/friday_party.gif" alt=""/>
+            </div>
+            <div class="col s8" style="margin-top: 30px">
+                @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s10">
-                            <textarea class="materialize-textarea" id="input_text" type="text" length="200" name="Text"></textarea>
-                            <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
-                            <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10">
+                                <textarea style="font-size: 30px" class="materialize-textarea" id="input_text" type="text" length="200" name="Text"></textarea>
+                                <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
+                                <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
+                            </div>
+                            <div class="form-group col s2" style="margin-top: 35px">
+                                <input type="submit" value="Post" class="awesome-button" />
+                            </div>
                         </div>
-                        <div class="form-group col s2" style="margin-top: 35px">
-                            <input type="submit" value="Post" class="awesome-button" />
-                        </div>
-                    </div>
-                </form>
-            }
+                    </form>
+                }
+            </div>
+
         </div>
 
         <div class="row center">
