@@ -61,5 +61,29 @@ namespace Twitter.App.Controllers.APIControllers
                 ? Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Cannot find activities with classcification {classcification}")
                 : Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<ActivityViewModel>(pagedActivities, pageNo, pageSize, activities.Count));
         }
+
+        [HttpGet]
+        [Route("~/api/queries/hotActivity")]
+        public HttpResponseMessage GetHotActivities([FromUri] string classcification = null, [FromUri] int pageNo = DefaultPageNo, [FromUri] int pageSize = DefaultPageSize)
+        {
+            if (pageNo <= 0 || pageSize <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "pageNo and pageSize should be both grater than 0.");
+            }
+
+            var activities = this.Data.Activity.All()
+                .Select(ViewModelsHelper.AsActivictyViewModel)
+                .Where(
+                    model =>
+                        model.Classficiation == classcification && classcification != null || classcification == null)
+                .Take(2) // TODO: take top 2 activities if available
+                .ToList();
+
+            var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
+
+            return pagedActivities.Count == 0
+                ? Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Cannot find activities with classcification {classcification}")
+                : Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<ActivityViewModel>(pagedActivities, pageNo, pageSize, activities.Count));
+        }
     }
 }
