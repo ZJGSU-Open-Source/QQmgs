@@ -34,9 +34,19 @@ namespace Twitter.App.Controllers.APIControllers
                 .Select(ViewModelsHelper.AsActivictyViewModel)
                 .FirstOrDefault();
 
-            return activity == null
-                ? Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}")
-                : Request.CreateResponse(HttpStatusCode.OK, activity);
+            if (activity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
+            }
+
+            // retrieve creator data
+            var creator = this.Data.Users.Find(activity.CreatorId);
+
+            activity.Creator = creator.RealName;
+            activity.CreatorAvatarImage = $"{HttpContext.Current.Request.Url.Host}/img/Uploads/Thumbnails/{creator.AvatarImageName}";
+            activity.HasCreatorAvatarImage = creator.HasAvatarImage;
+
+            return Request.CreateResponse(HttpStatusCode.OK, activity);
         }
 
         [HttpGet]
@@ -54,6 +64,16 @@ namespace Twitter.App.Controllers.APIControllers
                     model =>
                         model.Classficiation == classcification && classcification != null || classcification == null)
                 .ToList();
+
+            // retrieve creators data
+            var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
+
+            for (var i = 0; i < activities.Count; ++i)
+            {
+                activities[i].Creator = creators[i].RealName;
+                activities[i].CreatorAvatarImage = $"{HttpContext.Current.Request.Url.Host}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
+                activities[i].HasCreatorAvatarImage = creators[i].HasAvatarImage;
+            }
 
             var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
 
@@ -78,6 +98,16 @@ namespace Twitter.App.Controllers.APIControllers
                         model.Classficiation == classcification && classcification != null || classcification == null)
                 .Take(2) // TODO: take top 2 activities if available
                 .ToList();
+
+            // retrieve creators data
+            var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
+
+            for (var i = 0; i < activities.Count; ++i)
+            {
+                activities[i].Creator = creators[i].RealName;
+                activities[i].CreatorAvatarImage = $"{HttpContext.Current.Request.Url.Host}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
+                activities[i].HasCreatorAvatarImage = creators[i].HasAvatarImage;
+            }
 
             var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
 
