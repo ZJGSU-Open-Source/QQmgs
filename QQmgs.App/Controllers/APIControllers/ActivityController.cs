@@ -42,8 +42,10 @@ namespace Twitter.App.Controllers.APIControllers
             // retrieve creator data
             var creator = this.Data.Users.Find(activity.CreatorId);
 
+            var urlPrefix = $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+
             activity.Creator = creator.RealName;
-            activity.CreatorAvatarImage = $"{HttpContext.Current.Request.Url.Host}/img/Uploads/Thumbnails/{creator.AvatarImageName}";
+            activity.CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creator.AvatarImageName}";
             activity.HasCreatorAvatarImage = creator.HasAvatarImage;
 
             return Request.CreateResponse(HttpStatusCode.OK, activity);
@@ -68,10 +70,12 @@ namespace Twitter.App.Controllers.APIControllers
             // retrieve creators data
             var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
 
+            var urlPrefix = $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+
             for (var i = 0; i < activities.Count; ++i)
             {
                 activities[i].Creator = creators[i].RealName;
-                activities[i].CreatorAvatarImage = $"{HttpContext.Current.Request.Url.Host}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
+                activities[i].CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
                 activities[i].HasCreatorAvatarImage = creators[i].HasAvatarImage;
             }
 
@@ -102,10 +106,12 @@ namespace Twitter.App.Controllers.APIControllers
             // retrieve creators data
             var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
 
+            var urlPrefix = $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+
             for (var i = 0; i < activities.Count; ++i)
             {
                 activities[i].Creator = creators[i].RealName;
-                activities[i].CreatorAvatarImage = $"{HttpContext.Current.Request.Url.Host}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
+                activities[i].CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
                 activities[i].HasCreatorAvatarImage = creators[i].HasAvatarImage;
             }
 
