@@ -20,7 +20,7 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("creator_avatar_image")]
         public string CreatorAvatarImage { get; set; }
 
-        [JsonProperty("has_creator_avator_image")]
+        [JsonProperty("has_creator_avatar_image")]
         public bool HasCreatorAvatarImage { get; set; }
 
         [JsonProperty("name")]

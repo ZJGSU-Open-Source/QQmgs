@@ -41,8 +41,7 @@ namespace Twitter.App.Controllers.APIControllers
 
             // retrieve creator data
             var creator = this.Data.Users.Find(activity.CreatorId);
-
-            var urlPrefix = $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+            var urlPrefix = HTTPHelper.GetUrlPrefix();
 
             activity.Creator = creator.RealName;
             activity.CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creator.AvatarImageName}";
@@ -69,8 +68,7 @@ namespace Twitter.App.Controllers.APIControllers
 
             // retrieve creators data
             var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
-
-            var urlPrefix = $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+            var urlPrefix = HTTPHelper.GetUrlPrefix();
 
             for (var i = 0; i < activities.Count; ++i)
             {
@@ -105,8 +103,7 @@ namespace Twitter.App.Controllers.APIControllers
 
             // retrieve creators data
             var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
-
-            var urlPrefix = $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+            var urlPrefix = HTTPHelper.GetUrlPrefix();
 
             for (var i = 0; i < activities.Count; ++i)
             {

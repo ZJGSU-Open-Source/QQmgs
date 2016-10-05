@@ -7,6 +7,9 @@
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            
+            //TODO: apply HTTPS strictly
+            //filters.Add(new RequireHttpsAttribute());
         }
     }
 }
