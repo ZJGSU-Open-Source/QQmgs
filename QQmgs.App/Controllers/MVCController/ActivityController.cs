@@ -60,7 +60,7 @@ namespace Twitter.App.Controllers.MVCController
                     Name = model.Name,
                     Description = model.Description,
                     PublishTime = DateTime.Now,
-                    Classficiation = (ActivityClassficiation)model.Classfication,
+                    Classficiation = EnumUtils.Parse<ActivityClassficiation>(model.Classfication ?? ActivityClassficiation.Other.ToString()),
                     Place = model.Place,
                     StartTime = DateTime.Now,
                     EndTime = DateTime.Now

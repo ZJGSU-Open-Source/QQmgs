@@ -41,7 +41,7 @@ namespace Twitter.Models
 
         public virtual ICollection<User> Participents { get; set; }
 
-        public ActivityClassficiation Classficiation { get; set; }
+        public ActivityClassficiation? Classficiation { get; set; }
     }
 
     public enum ActivityClassficiation

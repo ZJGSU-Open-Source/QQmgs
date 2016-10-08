@@ -16,6 +16,6 @@ namespace Twitter.App.Models.BindingModels
 
         public string Place { get; set; }
 
-        public int Classfication { get; set; }
+        public string Classfication { get; set; }
     }
 }

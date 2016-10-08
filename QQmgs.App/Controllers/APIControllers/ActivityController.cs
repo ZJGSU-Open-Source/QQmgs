@@ -9,6 +9,7 @@ using System.Web.Http;
 using Twitter.App.BusinessLogic;
 using Twitter.App.Common;
 using Twitter.App.DataContracts;
+using Twitter.App.Models.BindingModels;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
@@ -117,6 +118,32 @@ namespace Twitter.App.Controllers.APIControllers
             return pagedActivities.Count == 0
                 ? Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Cannot find activities with classcification {classcification}")
                 : Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<ActivityViewModel>(pagedActivities, pageNo, pageSize, activities.Count));
+        }
+
+        [HttpPut]
+        [Route("{activityId:int}")]
+        public HttpResponseMessage Update([FromUri] int activityId, [FromBody] CreateActivityBindingModel model)
+        {
+            Guard.ArgumentNotNull(activityId, nameof(activityId));
+
+            var activity = Data.Activity
+                .All()
+                .FirstOrDefault(t => t.Id == activityId);
+
+            if (activity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
+            }
+
+            activity.Name = model.Name;
+            activity.Description = model.Description;
+            activity.Place = model.Place;
+            activity.Classficiation = EnumUtils.Parse<ActivityClassficiation>(model.Classfication);
+
+            this.Data.Activity.Update(activity);
+            this.Data.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }
