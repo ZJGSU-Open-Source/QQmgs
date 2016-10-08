@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
 using Twitter.App.Common;
 using Twitter.App.DataContracts;
@@ -135,6 +136,11 @@ namespace Twitter.App.Controllers.APIControllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
             }
 
+            if (activity.CreatorId != this.User.Identity.GetUserId())
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Only creator {activity.CreatorId} can update the activity");
+            }
+
             activity.Name = model.Name;
             activity.Description = model.Description;
             activity.Place = model.Place;
@@ -143,7 +149,57 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.Activity.Update(activity);
             this.Data.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, activity);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public HttpResponseMessage Create([FromBody] CreateActivityBindingModel model)
+        {
+            var activity = new Activity
+            {
+                CreatorId = this.User.Identity.GetUserId(),
+                Name = model.Name,
+                Description = model.Description,
+                PublishTime = DateTime.Now,
+                Classficiation =
+                    EnumUtils.Parse<ActivityClassficiation>(model.Classfication ??
+                                                            ActivityClassficiation.Other.ToString()),
+                Place = model.Place,
+                StartTime = DateTime.Now,
+                EndTime = DateTime.Now
+            };
+
+            this.Data.Activity.Add(activity);
+            this.Data.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK, activity);
+        }
+
+        [HttpDelete]
+        [Route("{activityId:int}")]
+        public HttpResponseMessage Delete([FromUri] int activityId)
+        {
+            Guard.ArgumentNotNull(activityId, nameof(activityId));
+
+            var activity = Data.Activity
+                .All()
+                .FirstOrDefault(t => t.Id == activityId);
+
+            if (activity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
+            }
+
+            if (activity.CreatorId != this.User.Identity.GetUserId())
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Only creator {activity.CreatorId} can update the activity");
+            }
+
+            this.Data.Activity.Remove(activity);
+            this.Data.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK, activity);
         }
     }
 }
