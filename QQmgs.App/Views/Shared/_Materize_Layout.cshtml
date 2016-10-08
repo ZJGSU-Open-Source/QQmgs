@@ -79,18 +79,20 @@
                 </div>*@
                 <div class="col l4 s12">
                     <h6 style="font-size: 17px" class="white-text">加入全球某工商</h6>
-                    <ul>
-                        <li>
-                            <a style="font-size: 14px" class="white-text" href="@Url.Action("Job", "Home")">
-                                工作机会 (有兴趣加入我们吗(●'◡'●))
-                            </a>
-                        </li>
-                    </ul>
+                    <a style="font-size: 14px" class="white-text" href="@Url.Action("Job", "Home")">
+                        工作机会 (有兴趣加入我们吗(●'◡'●))
+                    </a>
+                    <br />
+                    <br />
+                    <a style="color: #fffff0" href="~/Downloads/Android.Version-0.0.1.apk">点击下载安卓Android手机 App</a>
                 </div>
             </div>
         </div>
         <div class="footer-copyright center">
-            <div class="container row" style="width: 100%">
+            <div class="container row show-on-small hide-on-med-and-up" style="width: 100%">
+                <a style="color: #fffff0" href="~/Downloads/Android.Version-0.0.1.apk">点击下载安卓Android手机 App</a>
+            </div>
+            <div class="container row hide-on-small-and-down" style="width: 100%">
                 全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号 · @{ Html.RenderAction("GetTotalUser", "Users"); } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");} · @{Html.RenderAction("GetDailyUserLogins", "Account");}
             </div>
         </div>
