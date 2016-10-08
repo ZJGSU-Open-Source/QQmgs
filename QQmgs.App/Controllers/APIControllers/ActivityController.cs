@@ -127,6 +127,12 @@ namespace Twitter.App.Controllers.APIControllers
         public HttpResponseMessage Update([FromUri] int activityId, [FromBody] CreateActivityBindingModel model)
         {
             Guard.ArgumentNotNull(activityId, nameof(activityId));
+            Guard.ArgumentNotNullOrEmpty(model.Name, $"{model}.{model.Name}");
+            Guard.ArgumentNotNullOrEmpty(model.Description, $"{model}.{model.Description}");
+            Guard.ArgumentNotNullOrEmpty(model.Place, $"{model}.{model.Place}");
+            Guard.ArgumentNotNullOrEmpty(model.StartTime, $"{model}.{model.StartTime}");
+            Guard.ArgumentNotNullOrEmpty(model.EndTime, $"{model}.{model.EndTime}");
+            Guard.ArgumentNotNullOrEmpty(model.Classfication, $"{model}.{model.Classfication}");
 
             var activity = Data.Activity
                 .All()
@@ -147,6 +153,8 @@ namespace Twitter.App.Controllers.APIControllers
             activity.Description = model.Description;
             activity.Place = model.Place;
             activity.Classficiation = EnumUtils.Parse<ActivityClassficiation>(model.Classfication);
+            activity.StartTime = DateTime.Parse(model.StartTime);
+            activity.EndTime = DateTime.Parse(model.EndTime);
 
             this.Data.Activity.Update(activity);
             this.Data.SaveChanges();
@@ -158,6 +166,13 @@ namespace Twitter.App.Controllers.APIControllers
         [Route("")]
         public HttpResponseMessage Create([FromBody] CreateActivityBindingModel model)
         {
+            Guard.ArgumentNotNullOrEmpty(model.Name, $"{model}.{model.Name}");
+            Guard.ArgumentNotNullOrEmpty(model.Description, $"{model}.{model.Description}");
+            Guard.ArgumentNotNullOrEmpty(model.Place, $"{model}.{model.Place}");
+            Guard.ArgumentNotNullOrEmpty(model.StartTime, $"{model}.{model.StartTime}");
+            Guard.ArgumentNotNullOrEmpty(model.EndTime, $"{model}.{model.EndTime}");
+            Guard.ArgumentNotNullOrEmpty(model.Classfication, $"{model}.{model.Classfication}");
+
             var activity = new Activity
             {
                 CreatorId = this.User.Identity.GetUserId(),
@@ -168,8 +183,8 @@ namespace Twitter.App.Controllers.APIControllers
                     EnumUtils.Parse<ActivityClassficiation>(model.Classfication ??
                                                             ActivityClassficiation.Other.ToString()),
                 Place = model.Place,
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now
+                StartTime = DateTime.Parse(model.StartTime),
+                EndTime = DateTime.Parse(model.EndTime)
             };
 
             this.Data.Activity.Add(activity);

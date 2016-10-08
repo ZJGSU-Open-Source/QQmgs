@@ -260,7 +260,7 @@
     <Compile Include="Controllers\APIControllers\ActivityController.cs" />
     <Compile Include="Controllers\APIControllers\GroupController.cs" />
     <Compile Include="Controllers\APIControllers\PhotoController.cs" />
-    <Compile Include="Controllers\APIControllers\ValueController.cs" />
+    <Compile Include="Controllers\APIControllers\PingController.cs" />
     <Compile Include="Controllers\MVCController\AccountController.cs" />
     <Compile Include="Controllers\MVCController\ActivityController.cs" />
     <Compile Include="Controllers\MVCController\BaseController.cs" />

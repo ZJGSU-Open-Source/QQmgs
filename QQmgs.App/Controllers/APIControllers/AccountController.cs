@@ -29,12 +29,14 @@ namespace Twitter.App.Controllers.APIControllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
-        public AccountController() : base(new QQmgsData())
+        public AccountController()
+            : base(new QQmgsData())
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(new QQmgsData())
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            : base(new QQmgsData())
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
@@ -53,7 +55,6 @@ namespace Twitter.App.Controllers.APIControllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-
 
         // POST api/Account/Register
         [AllowAnonymous]

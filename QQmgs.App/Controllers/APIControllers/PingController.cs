@@ -7,14 +7,15 @@ using System.Web.Http;
 
 namespace Twitter.App.Controllers.APIControllers
 {
-    [Authorize]
-    public class ValuesController : ApiController
+    [RoutePrefix("api/ping")]
+    [AllowAnonymous]
+    public class PingController : ApiController
     {
-        // GET api/values
+        // GET api/ping
+        [Route("")]
         public string Get()
         {
-            var userName = this.RequestContext.Principal.Identity.Name;
-            return $"Hello, {userName}.";
+            return $"Hello, QQmgs.";
         }
     }
 }
