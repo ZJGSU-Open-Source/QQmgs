@@ -61,31 +61,30 @@
         @RenderBody()
     </main>
 
-    <footer class="page-footer teal" style="padding-top: 0px">
+    <footer class="page-footer teal" style="padding-top: 5px">
         <div class="container hide-on-small-and-down">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">全球某工商简介</h5>
-                    <p class="grey-text text-lighten-4">
-                        实时社交网络，现在有类似 Twitter 的发 Tweet 功能，大家可以在各个兴趣小组的板块下自由交流。全球某工商旨在帮助大家寻找在校内志同道合的朋友，解决大家打球时找不到球友，跑步时一个人太无聊的尴尬场面。
+            <div class="row" style="margin: auto">
+                <div class="col l8 s12">
+                    <h6 style="font-size: 17px" class="white-text">全球某工商简介</h6>
+                    <p style="font-size: 14px" class="grey-text text-lighten-4">
+                        实时社交网络。大家可以在各个兴趣小组的板块下自由交流，同时可以创建自己的兴趣小组。全球某工商旨在帮助大家寻找在校内志同道合的朋友，解决大家打球时找不到球友，跑步时一个人太无聊的尴尬场面。
                     </p>
                 </div>
-                <div class="col l3 s12">
+                @*<div class="col l4 s12">
                     <h5 class="white-text">链接</h5>
                     <ul>
                         <li><a class="white-text" href="http://www.zjsu.edu.cn">浙江工商大学官网</a></li>
                         <li><a class="white-text" href="http://cie.zjsu.edu.cn">信息学院官网</a></li>
                     </ul>
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">广告赞助</h5>
+                </div>*@
+                <div class="col l4 s12">
+                    <h6 style="font-size: 17px" class="white-text">加入全球某工商</h6>
                     <ul>
-                        <li><a class="white-text" href="#">联系邮箱: shuaiyi@@qqmgs.com</a></li>
-                    </ul>
-
-                    <h5 class="white-text">加入全球某工商</h5>
-                    <ul>
-                        <li><a class="white-text" href="@Url.Action("Job", "Home")">工作机会</a></li>
+                        <li>
+                            <a style="font-size: 14px" class="white-text" href="@Url.Action("Job", "Home")">
+                                工作机会 (有兴趣加入我们吗(●'◡'●))
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
