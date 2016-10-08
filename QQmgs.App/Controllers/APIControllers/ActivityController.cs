@@ -18,6 +18,7 @@ using Twitter.Models;
 namespace Twitter.App.Controllers.APIControllers
 {
     [RoutePrefix("api/activity")]
+    [Authorize]
     public class ActivityController : TwitterApiController
     {
         public ActivityController() 
@@ -136,6 +137,7 @@ namespace Twitter.App.Controllers.APIControllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
             }
 
+            // Check ownership
             if (activity.CreatorId != this.User.Identity.GetUserId())
             {
                 return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Only creator {activity.CreatorId} can update the activity");
@@ -191,6 +193,7 @@ namespace Twitter.App.Controllers.APIControllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
             }
 
+            // Check ownership
             if (activity.CreatorId != this.User.Identity.GetUserId())
             {
                 return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Only creator {activity.CreatorId} can update the activity");
