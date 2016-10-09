@@ -83,7 +83,7 @@ namespace Twitter.App.Controllers.APIControllers
             var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
 
             return pagedActivities.Count == 0
-                ? Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Cannot find activities with classcification {classcification}")
+                ? Request.CreateErrorResponse(HttpStatusCode.NoContent, $"No activity was found under classcification {classcification}")
                 : Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<ActivityViewModel>(pagedActivities, pageNo, pageSize, activities.Count));
         }
 
@@ -118,7 +118,7 @@ namespace Twitter.App.Controllers.APIControllers
             var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
 
             return pagedActivities.Count == 0
-                ? Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Cannot find activities with classcification {classcification}")
+                ? Request.CreateErrorResponse(HttpStatusCode.NoContent, $"No activity was found under classcification {classcification}")
                 : Request.CreateResponse(HttpStatusCode.OK, new PaginationResult<ActivityViewModel>(pagedActivities, pageNo, pageSize, activities.Count));
         }
 
