@@ -11,7 +11,7 @@ using Twitter.Models.Trace;
 
 namespace Twitter.App.BusinessLogic
 {
-    public class ViewModelsHelper
+    public static class ViewModelsHelper
     {
         public static readonly Expression<Func<Group, GroupVieModels>> AsGroupViewModel =
             g => new GroupVieModels
@@ -166,5 +166,87 @@ namespace Twitter.App.BusinessLogic
                     }
                 }
             };
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                RealName = user.RealName,
+                Class = user.Class,
+                Status = user.Status,
+                UserId = user.Id,
+                PhoneNumber = user.PhoneNumber,
+                HasAvatarImage = user.HasAvatarImage,
+                AvatarImageName =
+                    user.HasAvatarImage
+                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
+                        : string.Empty,
+                JoinedGroups = user.Groups.Select(group => new GroupVieModels
+                {
+                    Id = group.Id,
+                    CreatedTime = group.CreatedTime,
+                    Name = group.Name,
+                    HasImageOverview = group.HasImageOverview,
+                    ImageOverview = group.ImageOverview,
+                    Description = group.Description,
+                    TweetsCount = group.Tweets.Count,
+                    LastTweetUpdateTime = group.LastTweetUpdateTime,
+                    IsDisplay = group.IsDisplay,
+                    IsPrivate = group.IsPrivate
+                }),
+                PostedTweets = user.Tweets.Select(tweet => new TweetViewModel
+                {
+                    Id = tweet.Id,
+                    Author = tweet.Author.RealName,
+                    AuthorStatus = tweet.Author.Status,
+                    AuthorPhoneNumber = tweet.Author.UserName,
+                    IsEvent = tweet.IsEvent,
+                    Text = tweet.Text,
+                    UsersFavouriteCount = tweet.UsersFavourite.Count,
+                    RepliesCount = tweet.Reply.Count,
+                    RetweetsCount = tweet.Retweets.Count,
+                    DatePosted = tweet.DatePosted,
+                    GroupId = tweet.GroupId,
+                    HasAvatarImage = tweet.Author.HasAvatarImage,
+                    AvatarImageName =
+                        tweet.Author.HasAvatarImage
+                            ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" +
+                              tweet.Author.AvatarImageName
+                            : null
+                }),
+                JoinedActivities = user.Activities.Select(activity => new ActivityViewModel
+                {
+                    Id = activity.Id.ToString(),
+                    Name = activity.Name,
+                    Classficiation = activity.Classficiation.ToString(),
+                    AvatarImage = activity.AvatarImage ?? string.Empty,
+                    CreatorId = activity.CreatorId,
+                    Description = activity.Description,
+                    EndTime = activity.EndTime,
+                    StartTime = activity.StartTime,
+                    Place = activity.Place,
+                    PublishTime = activity.PublishTime,
+                    Creator = string.Empty,
+                    Participations = activity.Participents.Select(participant => new ParticipationViewModel
+                    {
+                        Id = participant.Id,
+                        Name = participant.RealName,
+                        AvatarImage = participant.AvatarImageName,
+                        HasAvatarImage = participant.HasAvatarImage
+                    }).ToList()
+                }),
+                PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
+                {
+                    Description = photo.Descrption,
+                    Author = photo.Author.RealName,
+                    Name = photo.Name,
+                    Height = photo.OriginalHeight,
+                    Width = photo.OriginalWidth,
+                    Id = photo.Id,
+                    HasAvatarImage = photo.Author.HasAvatarImage,
+                    AvatarImageName = photo.Author.AvatarImageName
+                })
+            };
+        }
     }
 }
