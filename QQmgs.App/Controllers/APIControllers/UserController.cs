@@ -40,10 +40,10 @@ namespace Twitter.App.Controllers.APIControllers
         }
 
         [HttpGet]
-        [Route("{userId:string}")]
-        public HttpResponseMessage Who([FromUri] string userId)
+        [Route("{userId:guid}")]
+        public HttpResponseMessage Who([FromUri] Guid userId)
         {
-            var user = this.Data.Users.Find(userId);
+            var user = this.Data.Users.Find(userId.ToString());
 
             if (user == null)
             {
