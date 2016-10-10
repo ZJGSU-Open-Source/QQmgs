@@ -22,7 +22,7 @@
                         <a class="groupTweetAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">@Model.Author</a> <a style="font-size: 12px; color: gray; padding-left: 6px">@Model.AuthorStatus</a>
                         <br/>
                         <div class="flow-text">
-                            @Model.Text <br />
+                            @Model.Text <br/>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
             {
                 <div>
                     <!-- Modal Trigger -->
-                    <a href="#" class="collection-item" style="padding-bottom: 0px; padding-top: 0px; padding-left: 6px; padding-right: 0px">
+                    <a class="collection-item" style="padding-bottom: 0px; padding-top: 0px; padding-left: 6px; padding-right: 0px">
                         <div class="groupTweetReplyAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif; background-color: #f5f8fa">
                             <div class="chip" style="font-size: 12px; margin-right: 12px; background-color: #cce4e4">
                                 @if (reply.HasAvatarImage)
@@ -76,23 +76,25 @@
                     </a>
                 </div>
             }
-            @using (Html.BeginForm("Reply", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Reply", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
 
                 <form class="col s12">
                     <div class="row" style="margin-bottom: 0px">
                         <div class="input-field col s9" style="margin-top: 0px">
-                            <i class="material-icons prefix">mode_edit</i>
-                            <input placeholder="What's on your mind ?" id="input_text" type="text" length="200" name="Text" style="margin-bottom: 0px">
+                            @*<i class="material-icons prefix">mode_edit</i>*@
+                            <input placeholder="点击参与评论" id="input_text" type="text" name="Text" style="margin-bottom: 0px; margin-left: 10px">
                             <input id="hidden_group_id_property" type="text" name="Id" value="@Model.Id" style="display: none !important;">
                         </div>
                         <div class="input-field col s2" style="padding-left: 7px; padding-right: 7px; padding-bottom: 6px; font-size: 11px">
-                            <input class="btn btn-default" type="submit" value="Reply" style="padding-left: 9px; padding-right: 9px" />
+                            <input class="btn btn-default" type="submit" value="Reply" style="padding-left: 9px; padding-right: 9px"/>
                         </div>
                     </div>
                 </form>
             }
         </div>
     </div>
+
+    <br/>
 </li>

@@ -26,12 +26,12 @@ namespace Twitter.App.Controllers
         }
 
         // GET /tweets/create
-        [HttpGet]
-        [Route("create")]
-        public ActionResult NewTweetForm()
-        {
-            return this.PartialView("_NewTweetModal");
-        }
+        //[HttpGet]
+        //[Route("create")]
+        //public ActionResult NewTweetForm()
+        //{
+        //    return this.PartialView("_NewTweetModal");
+        //}
 
         // GET /tweets/MyTweets
         [HttpGet]
@@ -145,14 +145,34 @@ namespace Twitter.App.Controllers
                 });
         }
 
+        [HttpGet]
+        [Route("create")]
+        public ActionResult CreateTweet(int groupId)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
+            // pass Group info to view
+            ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
+
+            return View();
+        }
+
         [HttpPost]
         [Route("create")]
         public ActionResult CreateTweet(CreateTweetBindingModel model)
         {
+            // pass Group info to view
+            ViewData["GroupName"] = "";
+            ViewData["GroupId"] = model.GroupId;
+
             if (!this.ModelState.IsValid)
             {
-                this.Response.StatusCode = 400;
-                return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+                return this.View(model);
             }
 
             var loggedUserId = this.User.Identity.GetUserId();
@@ -229,6 +249,18 @@ namespace Twitter.App.Controllers
                         Text = "Reply should not be empty or less than 250 words."
                     });
             }
+
+            var group = Data.Group.Find(tweet.GroupId);
+            if (group == null)
+            {
+                this.Response.StatusCode = 400;
+                return this.Json(this.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+            }
+
+            // update group last tweet update time
+            group.LastTweetUpdateTime = DateTime.Now;
+            this.Data.Group.Update(group);
+            this.Data.SaveChanges();
 
             return RedirectToAction("Get", "Group", new { groupId = tweet.GroupId, p = 1 });
 

@@ -147,21 +147,6 @@ namespace Twitter.App.Controllers
             return this.View(tweetsViewModel);
         }
 
-        public ActionResult AddTweet(int groupId)
-        {
-            var group = Data.Group.Find(groupId);
-            if (group == null)
-            {
-                return HttpNotFound($"Group with id {groupId} not found");
-            }
-
-            // pass Group info to view
-            ViewData["GroupName"] = group.Name;
-            ViewData["GroupId"] = groupId;
-
-            return View();
-        }
-
         public ActionResult Create()
         {
             return View();
@@ -170,6 +155,11 @@ namespace Twitter.App.Controllers
         [HttpPost]
         public ActionResult Create(CreateGroupBindingModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             var loggedUserId = this.User.Identity.GetUserId();
             var currentTime = DateTime.Now;
 

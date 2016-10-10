@@ -54,5 +54,69 @@ namespace Twitter.App.Controllers.APIControllers
 
             return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
         }
+
+        [HttpGet]
+        [Route("{userId:guid}/tweet")]
+        public HttpResponseMessage UserPostedTweet([FromUri] Guid userId)
+        {
+            var user = this.Data.Users.Find(userId.ToString());
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            var userViewModel = user.ToUserPostedTweetViewModel();
+
+            return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
+
+        [HttpGet]
+        [Route("{userId:guid}/photo")]
+        public HttpResponseMessage UserPostedPhoto([FromUri] Guid userId)
+        {
+            var user = this.Data.Users.Find(userId.ToString());
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            var userViewModel = user.ToUserPostedPhotosViewModel();
+
+            return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
+
+        [HttpGet]
+        [Route("{userId:guid}/group")]
+        public HttpResponseMessage UserJoinedGroup([FromUri] Guid userId)
+        {
+            var user = this.Data.Users.Find(userId.ToString());
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            var userViewModel = user.ToUserJoinedGroupsViewModel();
+
+            return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
+
+        [HttpGet]
+        [Route("{userId:guid}/activity")]
+        public HttpResponseMessage UserJoinedActivity([FromUri] Guid userId)
+        {
+            var user = this.Data.Users.Find(userId.ToString());
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            var userViewModel = user.ToUserJoinedActivitiesViewModel();
+
+            return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
     }
 }
