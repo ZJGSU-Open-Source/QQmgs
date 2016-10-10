@@ -357,6 +357,7 @@ namespace Twitter.App.BusinessLogic
                 PostedPhotos = new List<PhotoViewModel>()
             };
         }
+
         public static UserViewModel ToUserJoinedActivitiesViewModel(this User user)
         {
             return new UserViewModel
@@ -392,6 +393,27 @@ namespace Twitter.App.BusinessLogic
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList()
                 }),
+                PostedTweets = new List<TweetViewModel>(),
+                PostedPhotos = new List<PhotoViewModel>(),
+                JoinedGroups = new List<GroupVieModels>()
+            };
+        }
+
+        public static UserViewModel ToUserBioViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                RealName = user.RealName,
+                Class = user.Class,
+                Status = user.Status,
+                UserId = user.Id,
+                PhoneNumber = user.UserName,
+                HasAvatarImage = user.HasAvatarImage,
+                AvatarImageName =
+                    user.HasAvatarImage
+                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
+                        : string.Empty,
+                JoinedActivities = new List<ActivityViewModel>(),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
                 JoinedGroups = new List<GroupVieModels>()
