@@ -8,10 +8,9 @@ namespace Twitter.App
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            // Configure Web API to use only bearer token authentication.
-            // TODO: temp remove
-            //config.SuppressDefaultHostAuthentication();
-            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            // Configure Web API to use only Bearer token authentication.
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             config.MapHttpAttributeRoutes();
 

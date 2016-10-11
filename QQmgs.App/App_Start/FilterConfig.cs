@@ -8,7 +8,7 @@
         {
             filters.Add(new HandleErrorAttribute());
             
-            //TODO: apply HTTPS strictly
+            // TODO: apply HTTPS strictly
             //filters.Add(new RequireHttpsAttribute());
         }
     }
