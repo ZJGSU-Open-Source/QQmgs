@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -15,11 +16,7 @@ namespace Twitter.App.BusinessLogic
         public static char DirSeparator = Path.DirectorySeparatorChar;
 
         public static string FilesPath =
-            HttpContext.Current.Server.MapPath("~\\img" + DirSeparator + "Uploads" + DirSeparator);
-
-        public static int DefaultResizeSize { get; } = 200;
-
-        public static int DefaultResizeRatio { get; } = 2;
+            HttpContext.Current.Server.MapPath(Constants.Constants.PhotoLocation);
 
         public static Photo UploadFile(HttpPostedFileBase file, PhotoType photoType = PhotoType.AvatarImage)
         {
@@ -58,7 +55,7 @@ namespace Twitter.App.BusinessLogic
             file.SaveAs(Path.GetFullPath(path));
 
             // Save our thumbnail as well
-            var size = ResizeImage(file, fileName, DefaultResizeSize, DefaultResizeSize, photoType);
+            var size = ResizeImage(file, fileName, Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, photoType);
 
             photo.Url = fileName;
             photo.PhotoSize = size;
@@ -89,7 +86,7 @@ namespace Twitter.App.BusinessLogic
             }
         }
 
-        public static PhotoSize ResizeImage(HttpPostedFileBase file, string fileName, int width, int height, PhotoType photoType)
+        private static string GetThumbnailDirectory()
         {
             string thumbnailDirectory = $@"{FilesPath}{DirSeparator}Thumbnails";
 
@@ -100,8 +97,15 @@ namespace Twitter.App.BusinessLogic
                 Directory.CreateDirectory(thumbnailDirectory);
             }
 
+            return thumbnailDirectory;
+        }
+
+        public static PhotoSize ResizeImage(HttpPostedFileBase file, string fileName, int width, int height, PhotoType photoType)
+        {
             // Final path we will save our thumbnail
+            var thumbnailDirectory = GetThumbnailDirectory();
             string imagePath = $@"{thumbnailDirectory}{DirSeparator}{fileName}";
+
             // Create a stream to save the file to when we're done resizing
             FileStream stream = new FileStream(Path.GetFullPath(imagePath), FileMode.OpenOrCreate);
 
@@ -116,8 +120,8 @@ namespace Twitter.App.BusinessLogic
 
                 while (widthAfter > 800 && heightAfter > 600)
                 {
-                    widthAfter /= DefaultResizeRatio;
-                    heightAfter /= DefaultResizeRatio;
+                    widthAfter /= Constants.Constants.DefaultResizeRatio;
+                    heightAfter /= Constants.Constants.DefaultResizeRatio;
                 }
 
                 width = widthAfter;
@@ -151,6 +155,101 @@ namespace Twitter.App.BusinessLogic
             {
                 Width = width,
                 Height = height
+            };
+        }
+
+        public static PhotoSize ResizeImage(int newWidth, int newHeight, string stPhotoPath, string photoName, PhotoType photoType)
+        {
+            // Final path we will save our thumbnail
+            var thumbnailDirectory = GetThumbnailDirectory();
+            string imagePath = $@"{thumbnailDirectory}{DirSeparator}{photoName}";
+
+            // Create a stream to save the file to when we're done resizing
+            FileStream stream = new FileStream(Path.GetFullPath(imagePath), FileMode.OpenOrCreate);
+
+            Image imgPhoto = Image.FromFile(stPhotoPath);
+
+            // resize algo
+            if (photoType == PhotoType.AvatarImage)
+            {
+                var widthAfter = imgPhoto.Width;
+                var heightAfter = imgPhoto.Height;
+
+                while (widthAfter > 300 && heightAfter > 200)
+                {
+                    widthAfter /= Constants.Constants.DefaultResizeRatio;
+                    heightAfter /= Constants.Constants.DefaultResizeRatio;
+                }
+
+                newWidth = widthAfter;
+                newHeight = heightAfter;
+            }
+
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+
+            //Consider vertical pics
+            if (sourceWidth < sourceHeight)
+            {
+                int buff = newWidth;
+
+                newWidth = newHeight;
+                newHeight = buff;
+            }
+
+            int sourceX = 0, sourceY = 0, destX = 0, destY = 0;
+            float nPercent = 0, nPercentW = 0, nPercentH = 0;
+
+            nPercentW = ((float)newWidth / (float)sourceWidth);
+            nPercentH = ((float)newHeight / (float)sourceHeight);
+            if (nPercentH < nPercentW)
+            {
+                nPercent = nPercentH;
+                destX = System.Convert.ToInt16((newWidth -
+                          (sourceWidth * nPercent)) / 2);
+            }
+            else
+            {
+                nPercent = nPercentW;
+                destY = System.Convert.ToInt16((newHeight -
+                          (sourceHeight * nPercent)) / 2);
+            }
+
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
+
+
+            Bitmap bmPhoto = new Bitmap(newWidth, newHeight,
+                          PixelFormat.Format24bppRgb);
+
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution,
+                         imgPhoto.VerticalResolution);
+
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.Clear(Color.Black);
+            grPhoto.InterpolationMode =
+                System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+            grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX, destY, destWidth, destHeight),
+                new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
+                GraphicsUnit.Pixel);
+
+            
+            // Save the final file
+            bmPhoto.Save(stream, imgPhoto.RawFormat);
+
+            // Dispose
+            grPhoto.Dispose();
+            imgPhoto.Dispose();
+            stream.Close();
+            stream.Dispose();
+            bmPhoto.Dispose();
+
+            return new PhotoSize
+            {
+                Width = newWidth,
+                Height = newHeight
             };
         }
 

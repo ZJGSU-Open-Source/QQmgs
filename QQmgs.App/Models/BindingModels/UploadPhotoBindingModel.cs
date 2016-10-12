@@ -14,6 +14,6 @@ namespace Twitter.App.Models.BindingModel
         [MaxLength(30)]
         public string Description { get; set; }
 
-        public int Classcification { get; set; }
+        public string Classcification { get; set; }
     }
 }

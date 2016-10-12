@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
@@ -10,8 +15,10 @@ using Twitter.App.Common;
 using Twitter.App.Models.BindingModel.WebApiModel;
 using Twitter.App.Models.BindingModels.WebApiModels;
 using Twitter.App.Models.ViewModels;
+using Twitter.App.Provider;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.App.Constants;
 
 namespace Twitter.App.Controllers.APIControllers
 {
@@ -156,6 +163,58 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.SaveChanges();
 
             return Request.CreateResponse(HttpStatusCode.OK, model);
+        }
+
+        [HttpPost]
+        [Route("avatarImage")]
+        public async Task<HttpResponseMessage> AvatarImage()
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            var root = HttpContext.Current.Server.MapPath(Constants.Constants.PhotoLocation);
+            var provider = new CustomMultipartFormDataStreamProvider(root);
+
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the file names.
+                foreach (var file in provider.FileData)
+                {
+                    var fileName = file.LocalFileName.Split(Path.DirectorySeparatorChar).Last();
+
+                    var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.AvatarImage);
+
+                    var photo = new Photo
+                    {
+                        AuthorId = loggedUserId,
+                        DatePosted = DateTime.Now,
+                        Name = fileName,
+                        PhotoType = PhotoType.AvatarImage,
+                        PhotoClasscification = PhotoClasscification.Ohter,
+                        Descrption = string.Empty,
+                        IsSoftDelete = false,
+                        OriginalHeight = uploadedFile.Height,
+                        OriginalWidth = uploadedFile.Width
+                    };
+
+                    this.Data.Photo.Add(photo);
+                    this.Data.SaveChanges();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
     }
 }

@@ -9,7 +9,14 @@ namespace Twitter.App.BusinessLogic
     {
         public static string GetUrlPrefix()
         {
-            return $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+            var url =  $"{HttpContext.Current.Request.Url.Scheme}://{HttpContext.Current.Request.Url.Host}";
+
+            if (HttpContext.Current.Request.Url.Host.Contains("localhost"))
+            {
+                url += "/QQmgs.App";
+            }
+
+            return url;
         }
     }
 }
