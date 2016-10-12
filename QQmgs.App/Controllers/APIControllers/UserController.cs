@@ -7,6 +7,8 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
 using Twitter.App.Common;
+using Twitter.App.Models.BindingModel.WebApiModel;
+using Twitter.App.Models.BindingModels.WebApiModels;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
@@ -133,6 +135,27 @@ namespace Twitter.App.Controllers.APIControllers
             var userViewModel = user.ToUserBioViewModel();
 
             return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
+
+        [HttpPut]
+        [Route("status")]
+        public HttpResponseMessage UpdateStatus([FromBody] UpdateUserStatusBindingModel model)
+        {
+            Guard.ArgumentNotNull(model.Status, $"{model}.{model.Status}");
+
+            var userId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(userId);
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            user.Status = model.Status;
+            this.Data.Users.Update(user);
+            this.Data.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK, model);
         }
     }
 }

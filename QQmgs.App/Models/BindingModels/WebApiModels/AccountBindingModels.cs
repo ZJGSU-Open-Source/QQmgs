@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Twitter.App.Models.BindingModels.WebApiModels
+namespace Twitter.App.Models.BindingModel.WebApiModel
 {
     public class AddExternalLoginBindingModel
     {

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Web.Mvc;
 
-using Twitter.App.Models.BindingModels;
+using Twitter.App.Models.BindingModel;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;

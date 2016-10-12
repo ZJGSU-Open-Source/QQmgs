@@ -1,4 +1,4 @@
-﻿namespace Twitter.App.Models.BindingModels
+﻿namespace Twitter.App.Models.BindingModel
 {
     using System.ComponentModel.DataAnnotations;
 

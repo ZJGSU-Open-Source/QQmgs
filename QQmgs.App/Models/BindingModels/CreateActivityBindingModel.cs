@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace Twitter.App.Models.BindingModels
+namespace Twitter.App.Models.BindingModel
 {
     public class CreateActivityBindingModel
     {

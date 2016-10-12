@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Twitter.App.Models.BindingModels.WebApiModels;
+using Twitter.App.Models.BindingModel.WebApiModel;
 using Twitter.App.Models.ViewModels;
 using Twitter.App.Provider;
 using Twitter.App.Results;

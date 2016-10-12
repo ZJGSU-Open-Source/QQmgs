@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
-using Twitter.App.Models.BindingModels;
+using Twitter.App.Models.BindingModel;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 

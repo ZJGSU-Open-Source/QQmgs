@@ -299,6 +299,7 @@
     <Compile Include="Models\BindingModels\InviteUserToGroupBindingModel.cs" />
     <Compile Include="Models\BindingModels\SetGroupVisibilityBindingModel.cs" />
     <Compile Include="Models\BindingModels\WebApiModels\AccountBindingModels.cs" />
+    <Compile Include="Models\BindingModels\WebApiModels\UpdateUserStatusBindingModel.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ViewModels\ActivityViewModel.cs" />
