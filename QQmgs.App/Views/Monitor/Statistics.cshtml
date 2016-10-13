@@ -1,0 +1,80 @@
+﻿@model List<Twitter.App.Models.ViewModels.UserStatisticsViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="refresh" content="60">
+
+    <title>Real-time monitoring system</title>
+
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/Site.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body style="background-color: black">
+
+    <h5 class="center" style="color: white">Daily user statistics</h5>
+    <h6 class="center" style="color: white">Last data retrieving timestamp: @DateTime.Now.ToString("G")</h6>
+
+    <br />
+    <br />
+
+    <table class="centered responsive-table" style="color: white">
+        <thead>
+            <tr>
+                <th data-field="dt">Date</th>
+                <th data-field="name">New user</th>
+                <th data-field="ui">User increasing</th>
+                <th data-field="au">Active user</th>
+                <th data-field="na">New activities</th>
+                <th data-field="np">New posts</th>
+                <th data-field="nr">New replies</th>
+                <th data-field="np">New photos</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var data in Model)
+            {
+                <tr>
+                    <td>@data.Date.ToString("d")</td>
+                    <td>
+                        <a style="font-size: 18px">@data.NewUserNumber</a> registered
+                    </td>
+                    <td>
+                        <a style="font-size: 18px">@data.UserIncreasingRatio%</a> (up/down)
+                    </td>
+                    <td>
+                        @*<a style="font-size: 18px">@data.ActiveUserNumber</a> actived*@
+                        UNKNOW
+                    </td>
+                    <td>
+                        <a style="font-size: 18px">@data.NewActivities</a> posted
+                    </td>
+                    <td>
+                        <a style="font-size: 18px">@data.NewPosts</a> posted
+                    </td>
+                    <td>
+                        <a style="font-size: 18px">@data.NewReplies</a> posted
+                    </td>
+                    <td>
+                        <a style="font-size: 18px">@data.NewPosts</a> posted
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

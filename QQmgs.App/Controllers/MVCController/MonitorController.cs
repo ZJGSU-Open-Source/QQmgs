@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
 using Twitter.App.DataContracts;
+using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models.Trace;
 
@@ -29,7 +30,7 @@ namespace Twitter.App.Controllers.MVCController
             var userName = this.User.Identity.GetUserName();
             if (userName != "13588201467")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Permision denied");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied, current user phone number is {userName}");
             }
 
             var items = this.Data.UserLogTrace.All()
@@ -104,6 +105,85 @@ namespace Twitter.App.Controllers.MVCController
                 .ToList();
 
             return View(cachedData);
+        }
+
+        // GET: Monitar
+        [Route("user")]
+        public ActionResult Statistics()
+        {
+            var result = new List<UserStatisticsViewModel>();
+
+            for (var dateTime = DateTime.Now; dateTime.Month != DateTime.Now.AddMonths(-6).Month; dateTime = dateTime.AddDays(-1))
+            {
+                var newUserNumber =
+                this.Data.Users.All()
+                    .Count(
+                        user => user.RegisteredTime.Month == dateTime.Month && user.RegisteredTime.Day == dateTime.Day);
+
+                var dateTimeLastDay = dateTime.AddDays(-1);
+
+                var lastDayUserNumber =
+                    (double)
+                        this.Data.Users.All()
+                            .Count(
+                                user =>
+                                    user.RegisteredTime.Month == dateTimeLastDay.Month &&
+                                    user.RegisteredTime.Day == dateTimeLastDay.Day);
+
+                double userIncreasingRatio;
+                if (Math.Abs(lastDayUserNumber) < 1e-6)
+                {
+                    userIncreasingRatio = 0;
+                }
+                else
+                {
+                    userIncreasingRatio = (double)newUserNumber /
+                                          (double)
+                                              this.Data.Users.All()
+                                                  .Count(
+                                                      user =>
+                                                          user.RegisteredTime.Month == dateTimeLastDay.Month &&
+                                                          user.RegisteredTime.Day == dateTimeLastDay.Day);
+
+                    userIncreasingRatio = (userIncreasingRatio - 1.0) * 100;
+                }
+
+                var activeUserNumber = 1;
+
+                var newActivities =
+                    this.Data.Activity.All()
+                        .Count(
+                            activity =>
+                                activity.PublishTime.Month == dateTime.Month && activity.PublishTime.Day == dateTime.Day);
+
+                var newPosts =
+                    this.Data.Tweets.All()
+                        .Count(tweet => tweet.DatePosted.Month == dateTime.Month && tweet.DatePosted.Day == dateTime.Day);
+
+                var newReplies =
+                    this.Data.Reply.All()
+                        .Count(reply => reply.PublishTime.Month == dateTime.Month && reply.PublishTime.Day == dateTime.Day);
+
+                var newPhotos =
+                    this.Data.Photo.All()
+                        .Count(photo => photo.DatePosted.Month == dateTime.Month && photo.DatePosted.Day == dateTime.Day);
+
+                var userStatisticsViewModel = new UserStatisticsViewModel
+                {
+                    Date = dateTime,
+                    ActiveUserNumber = activeUserNumber,
+                    NewActivities = newActivities,
+                    NewPhotos = newPhotos,
+                    NewPosts = newPosts,
+                    NewReplies = newReplies,
+                    NewUserNumber = newUserNumber,
+                    UserIncreasingRatio = userIncreasingRatio
+                };
+
+                result.Add(userStatisticsViewModel);
+            }
+
+            return View(result);
         }
     }
 }
