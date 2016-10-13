@@ -22,7 +22,6 @@ namespace Twitter.App.Controllers.MVCController
         {
         }
 
-        // GET: Monitar
         [Route("")]
         public ActionResult Index()
         {
@@ -107,13 +106,38 @@ namespace Twitter.App.Controllers.MVCController
             return View(cachedData);
         }
 
-        // GET: Monitar
+        [Route("bio")]
+        public ActionResult Bio()
+        {
+
+            var totalActivityNumber = this.Data.Activity.All().Count();
+            var totalPhotoNumber = this.Data.Photo.All().Count();
+            var totalReplyNumber = this.Data.Reply.All().Count();
+            var totalReviewNumber = this.Data.CourseReview.All().Count();
+            var totalTweetNumber = this.Data.Tweets.All().Count();
+            var totalUserNumber = this.Data.Users.All().Count();
+            var totalGroupNumber = this.Data.Group.All().Count();
+
+            var result = new UserBioStatisticsViewModel
+            {
+                TotalActivityNumber = totalActivityNumber,
+                TotalPhotoNumber =  totalPhotoNumber,
+                TotalReplyNumber =  totalReplyNumber,
+                TotalReviewNumber =  totalReviewNumber,
+                TotalTweetNumber =  totalTweetNumber,
+                TotalUserNumber =  totalUserNumber,
+                TotalGroupNumber = totalGroupNumber
+            };
+
+            return PartialView(result);
+        }
+
         [Route("user")]
         public ActionResult Statistics()
         {
             var result = new List<UserStatisticsViewModel>();
 
-            for (var dateTime = DateTime.Now; dateTime.Month != DateTime.Now.AddMonths(-6).Month; dateTime = dateTime.AddDays(-1))
+            for (var dateTime = DateTime.Now; dateTime.Month != DateTime.Now.AddMonths(-3).Month; dateTime = dateTime.AddDays(-1))
             {
                 var newUserNumber =
                 this.Data.Users.All()

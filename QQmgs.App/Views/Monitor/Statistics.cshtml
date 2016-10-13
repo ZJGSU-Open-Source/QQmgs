@@ -26,6 +26,11 @@
     <h6 class="center" style="color: white">Last data retrieving timestamp: @DateTime.Now.ToString("G")</h6>
 
     <br />
+
+    @{
+        Html.RenderAction("Bio");
+    }
+
     <br />
 
     <table class="centered responsive-table" style="color: white">
@@ -48,26 +53,32 @@
                 <tr>
                     <td>@data.Date.ToString("d")</td>
                     <td>
-                        <a style="font-size: 18px">@data.NewUserNumber</a> registered
+                        <a style="font-size: 18px">@data.NewUserNumber</a>
+                        <a style="font-weight: lighter; color: white">registered</a> 
                     </td>
                     <td>
-                        <a style="font-size: 18px">@data.UserIncreasingRatio%</a> (up/down)
+                        <a style="font-size: 18px">@data.UserIncreasingRatio%</a>
+                        <a style="font-weight: lighter; color: white">(up/down)</a>
                     </td>
                     <td>
                         @*<a style="font-size: 18px">@data.ActiveUserNumber</a> actived*@
                         UNKNOW
                     </td>
                     <td>
-                        <a style="font-size: 18px">@data.NewActivities</a> posted
+                        <a style="font-size: 18px">@data.NewActivities</a>
+                        <a style="font-weight: lighter; color: white">posted</a>
                     </td>
                     <td>
-                        <a style="font-size: 18px">@data.NewPosts</a> posted
+                        <a style="font-size: 18px">@data.NewPosts</a>
+                        <a style="font-weight: lighter; color: white">posted</a>
                     </td>
                     <td>
-                        <a style="font-size: 18px">@data.NewReplies</a> posted
+                        <a style="font-size: 18px">@data.NewReplies</a>
+                        <a style="font-weight: lighter; color: white">posted</a>
                     </td>
                     <td>
-                        <a style="font-size: 18px">@data.NewPosts</a> posted
+                        <a style="font-size: 18px">@data.NewPosts</a>
+                        <a style="font-weight: lighter; color: white">posted</a>
                     </td>
                 </tr>
             }

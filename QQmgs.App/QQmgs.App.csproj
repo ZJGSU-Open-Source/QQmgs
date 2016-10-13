@@ -311,6 +311,7 @@
     <Compile Include="Models\ViewModels\ReplyViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchResultViewModel.cs" />
     <Compile Include="Models\ViewModels\TweetViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserBioStatisticsViewModel.cs" />
     <Compile Include="Models\ViewModels\UserLoginTraceViewModel.cs" />
     <Compile Include="Models\ViewModels\UserStatisticsViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
@@ -548,6 +549,7 @@
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\Tweets\CreateTweet.cshtml" />
     <Content Include="Views\Monitor\Statistics.cshtml" />
+    <Content Include="Views\Monitor\Bio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,40 @@
+﻿@model Twitter.App.Models.ViewModels.UserBioStatisticsViewModel
+
+<hr style="margin: auto" />
+<table class="centered responsive-table" style="color: white">
+    <thead>
+    <tr>
+        <th data-field="dt" style="font-weight: normal">
+            Biography statistics
+        </th>
+        <th data-field="dt">
+            User:
+            <a style="font-size: 18px">@Model.TotalUserNumber</a>
+        </th>
+        <th data-field="na">
+            Group:
+            <a style="font-size: 18px">@Model.TotalGroupNumber</a>
+        </th>
+        <th data-field="np">
+            Tweet:
+            <a style="font-size: 18px">@Model.TotalTweetNumber</a>
+        </th>
+        <th data-field="nr">
+            Activity:
+            <a style="font-size: 18px">@Model.TotalActivityNumber</a>
+        </th>
+        <th data-field="np">
+            Photo:
+            <a style="font-size: 18px">@Model.TotalPhotoNumber</a>
+        </th>
+        <th data-field="np">
+            Reply:
+            <a style="font-size: 18px">@Model.TotalReplyNumber</a>
+        </th>
+        <th data-field="np">
+            Review:
+            <a style="font-size: 18px">@Model.TotalReviewNumber</a>
+        </th>
+    </tr>
+    </thead>
+</table>
