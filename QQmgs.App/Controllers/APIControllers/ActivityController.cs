@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -12,6 +14,7 @@ using Twitter.App.Common;
 using Twitter.App.DataContracts;
 using Twitter.App.Models.BindingModel;
 using Twitter.App.Models.ViewModels;
+using Twitter.App.Provider;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 
@@ -21,7 +24,7 @@ namespace Twitter.App.Controllers.APIControllers
     [Authorize]
     public class ActivityController : TwitterApiController
     {
-        public ActivityController() 
+        public ActivityController()
             : base(new QQmgsData())
         {
         }
@@ -218,6 +221,140 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.SaveChanges();
 
             return Request.CreateResponse(HttpStatusCode.OK, activity);
+        }
+
+        [HttpPost]
+        [Route("{activityId:int}/activityImage")]
+        public async Task<HttpResponseMessage> ActivityImage([FromUri] int activityId)
+        {
+            Guard.ArgumentNotNull(activityId, nameof(activityId));
+
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            var activity = Data.Activity
+                .All()
+                .FirstOrDefault(t => t.Id == activityId);
+
+            if (activity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
+            }
+
+            // Check ownership
+            var loggedUserId = this.User.Identity.GetUserId();
+            if (activity.CreatorId != loggedUserId)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Only creator {activity.CreatorId} can update the activity");
+            }
+
+            var root = HttpContext.Current.Server.MapPath(Constants.Constants.PhotoLocation);
+            var provider = new CustomMultipartFormDataStreamProvider(root);
+
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the file names.
+                foreach (var file in provider.FileData)
+                {
+                    var fileName = file.LocalFileName.Split(Path.DirectorySeparatorChar).Last();
+
+                    var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.AvatarImage);
+
+                    var photo = new Photo
+                    {
+                        AuthorId = loggedUserId,
+                        DatePosted = DateTime.Now,
+                        Name = fileName,
+                        PhotoType = PhotoType.ActivityImage,
+                        PhotoClasscification = PhotoClasscification.Ohter,
+                        Descrption = string.Empty,
+                        IsSoftDelete = false,
+                        OriginalHeight = uploadedFile.Height,
+                        OriginalWidth = uploadedFile.Width
+                    };
+
+                    this.Data.Photo.Add(photo);
+                    this.Data.SaveChanges();
+
+                    activity.ActivityImage = fileName;
+                    this.Data.Activity.Update(activity);
+                    this.Data.SaveChanges();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpPost]
+        [Route("{activityId:int}/Join")]
+        public HttpResponseMessage JoinActivity([FromUri] int activityId)
+        {
+            Guard.ArgumentNotNull(activityId, nameof(activityId));
+
+            var activity = Data.Activity
+                .All()
+                .FirstOrDefault(t => t.Id == activityId);
+
+            if (activity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
+            }
+
+            var loggedUserId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(loggedUserId);
+
+            if (activity.Participents.Contains(user))
+            {
+                return Request.CreateResponse(HttpStatusCode.Created,
+                    $"User {loggedUserId} already joined the activity {activityId}");
+            }
+
+            activity.Participents.Add(user);
+            this.Data.Activity.Update(activity);
+            this.Data.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpDelete]
+        [Route("{activityId:int}/Join")]
+        public HttpResponseMessage LeaveActivity([FromUri] int activityId)
+        {
+            Guard.ArgumentNotNull(activityId, nameof(activityId));
+
+            var activity = Data.Activity
+                .All()
+                .FirstOrDefault(t => t.Id == activityId);
+
+            if (activity == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
+            }
+
+            var loggedUserId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(loggedUserId);
+
+            if (!activity.Participents.Contains(user))
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest,
+                    $"User {loggedUserId} haven't joined the activity {activityId}");
+            }
+
+            activity.Participents.Remove(user);
+            this.Data.Activity.Update(activity);
+            this.Data.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

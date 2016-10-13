@@ -37,7 +37,7 @@ namespace Twitter.Models
 
         public DateTime PublishTime { get; set; }
 
-        public string AvatarImage { get; set; }
+        public string ActivityImage { get; set; }
 
         public virtual ICollection<User> Participents { get; set; }
 

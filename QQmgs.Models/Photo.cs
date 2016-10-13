@@ -44,9 +44,10 @@ namespace Twitter.Models
 
     public enum PhotoType
     {
-        Photo,
-        AvatarImage,
-        GroupImage
+        Photo = 0,
+        AvatarImage = 1,
+        GroupImage = 2,
+        ActivityImage = 3
     }
 
     public enum PhotoClasscification

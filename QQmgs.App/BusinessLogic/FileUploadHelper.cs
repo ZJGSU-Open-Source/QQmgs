@@ -184,6 +184,21 @@ namespace Twitter.App.BusinessLogic
                 newWidth = widthAfter;
                 newHeight = heightAfter;
             }
+            else if (photoType == PhotoType.ActivityImage)
+            {
+                var widthAfter = imgPhoto.Width;
+                var heightAfter = imgPhoto.Height;
+
+                // keep 16 : 9
+                while (widthAfter > 600 && heightAfter > 338)
+                {
+                    widthAfter /= Constants.Constants.DefaultResizeRatio;
+                    heightAfter /= Constants.Constants.DefaultResizeRatio;
+                }
+
+                newWidth = widthAfter;
+                newHeight = heightAfter;
+            }
 
             int sourceWidth = imgPhoto.Width;
             int sourceHeight = imgPhoto.Height;

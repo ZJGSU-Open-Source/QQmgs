@@ -207,6 +207,12 @@ namespace Twitter.App.Controllers.APIControllers
 
                     this.Data.Photo.Add(photo);
                     this.Data.SaveChanges();
+
+                    var user = this.Data.Users.Find(loggedUserId);
+                    user.AvatarImageName = fileName;
+                    user.HasAvatarImage = true;
+                    this.Data.Users.Update(user);
+                    this.Data.SaveChanges();
                 }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
