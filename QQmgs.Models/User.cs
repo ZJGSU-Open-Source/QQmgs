@@ -61,6 +61,7 @@
 
         public virtual ICollection<Photo> FavouritePhotos { get; set; }
 
+        // MVC Web App
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -70,6 +71,7 @@
             return userIdentity;
         }
 
+        // Web APIs
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
