@@ -113,6 +113,23 @@ namespace Twitter.App.Controllers.APIControllers
         }
 
         [HttpGet]
+        [Route("{userId:guid}/createdGroup")]
+        public HttpResponseMessage UserCreatedGroup()
+        {
+            var userId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(userId);
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            var userViewModel = user.ToUserCreatedGroupsViewModel();
+
+            return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
+
+        [HttpGet]
         [Route("{userId:guid}/activity")]
         public HttpResponseMessage UserJoinedActivity([FromUri] Guid userId)
         {

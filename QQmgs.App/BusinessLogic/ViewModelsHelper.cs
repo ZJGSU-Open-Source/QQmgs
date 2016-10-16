@@ -221,7 +221,8 @@ namespace Twitter.App.BusinessLogic
                     AvatarImageName =
                         tweet.Author.HasAvatarImage
                             ? tweet.Author.AvatarImageName.GetPhotoThumbnails()
-                            : string.Empty
+                            : string.Empty,
+                    ReplyList = new List<ReplyViewModel>()
                 }),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
                 {
@@ -290,8 +291,8 @@ namespace Twitter.App.BusinessLogic
                     HasAvatarImage = photo.Author.HasAvatarImage,
                     AvatarImageName = photo.Author.HasAvatarImage
                         ? photo.Author.AvatarImageName.GetPhotoThumbnails()
-                        : string.Empty
-
+                        : string.Empty,
+                    DatePosted = photo.DatePosted.ToString(CultureInfo.InvariantCulture)
                 })
             };
         }
@@ -332,7 +333,9 @@ namespace Twitter.App.BusinessLogic
                 }),
                 JoinedActivities = new List<ActivityViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
-                JoinedGroups = new List<GroupVieModels>()
+                JoinedGroups = new List<GroupVieModels>(),
+                CreatedActivities = new List<ActivityViewModel>(),
+                CreatedGroups = new List<GroupVieModels>()
             };
         }
 
@@ -363,7 +366,9 @@ namespace Twitter.App.BusinessLogic
                 }),
                 JoinedActivities = new List<ActivityViewModel>(),
                 JoinedGroups = new List<GroupVieModels>(),
-                PostedTweets = new List<TweetViewModel>()
+                PostedTweets = new List<TweetViewModel>(),
+                CreatedActivities = new List<ActivityViewModel>(),
+                CreatedGroups = new List<GroupVieModels>()
             };
         }
 
@@ -396,7 +401,44 @@ namespace Twitter.App.BusinessLogic
                 }),
                 JoinedActivities = new List<ActivityViewModel>(),
                 PostedTweets = new List<TweetViewModel>(),
-                PostedPhotos = new List<PhotoViewModel>()
+                PostedPhotos = new List<PhotoViewModel>(),
+                CreatedActivities = new List<ActivityViewModel>(),
+                CreatedGroups = new List<GroupVieModels>()
+            };
+        }
+
+        public static UserViewModel ToUserCreatedGroupsViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                RealName = user.RealName,
+                Class = user.Class,
+                Status = user.Status,
+                UserId = user.Id,
+                PhoneNumber = user.UserName,
+                HasAvatarImage = user.HasAvatarImage,
+                AvatarImageName =
+                    user.HasAvatarImage
+                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
+                        : string.Empty,
+                CreatedGroups = user.Groups.Select(group => new GroupVieModels
+                {
+                    Id = group.Id,
+                    CreatedTime = group.CreatedTime,
+                    Name = group.Name,
+                    HasImageOverview = group.HasImageOverview,
+                    ImageOverview = group.ImageOverview,
+                    Description = group.Description,
+                    TweetsCount = group.Tweets.Count,
+                    LastTweetUpdateTime = group.LastTweetUpdateTime,
+                    IsDisplay = group.IsDisplay,
+                    IsPrivate = group.IsPrivate
+                }),
+                JoinedActivities = new List<ActivityViewModel>(),
+                PostedTweets = new List<TweetViewModel>(),
+                PostedPhotos = new List<PhotoViewModel>(),
+                CreatedActivities = new List<ActivityViewModel>(),
+                JoinedGroups = new List<GroupVieModels>()
             };
         }
 
@@ -437,7 +479,9 @@ namespace Twitter.App.BusinessLogic
                 }),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
-                JoinedGroups = new List<GroupVieModels>()
+                JoinedGroups = new List<GroupVieModels>(),
+                CreatedActivities = new List<ActivityViewModel>(),
+                CreatedGroups = new List<GroupVieModels>()
             };
         }
 
@@ -458,7 +502,9 @@ namespace Twitter.App.BusinessLogic
                 JoinedActivities = new List<ActivityViewModel>(),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
-                JoinedGroups = new List<GroupVieModels>()
+                JoinedGroups = new List<GroupVieModels>(),
+                CreatedActivities = new List<ActivityViewModel>(),
+                CreatedGroups = new List<GroupVieModels>()
             };
         }
 

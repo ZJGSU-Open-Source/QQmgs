@@ -30,6 +30,9 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("joined_groups")]
         public IEnumerable<GroupVieModels> JoinedGroups { get; set; }
 
+        [JsonProperty("created_groups")]
+        public IEnumerable<GroupVieModels> CreatedGroups { get; set; }
+
         [JsonProperty("posted_tweets")]
         public IEnumerable<TweetViewModel> PostedTweets { get; set; }
 
