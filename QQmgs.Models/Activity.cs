@@ -21,6 +21,8 @@ namespace Twitter.Models
         [Required]
         public string CreatorId { get; set; }
 
+        public virtual User Creator { get; set; }
+
         [MaxLength(50)]
         [Required]
         public string Name { get; set; }

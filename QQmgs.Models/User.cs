@@ -20,7 +20,8 @@
             this.CourseReviews = new HashSet<CourseReview>();
             this.UserLoginTraces = new HashSet<UserLogTrace>();
             this.Groups = new HashSet<Group>();
-            this.Activities = new HashSet<Activity>();
+            this.JoinedActivities = new HashSet<Activity>();
+            this.CreatedActivities = new HashSet<Activity>();
         }
 
         public DateTime RegisteredTime { get; set; }
@@ -47,7 +48,9 @@
 
         public virtual ICollection<Photo> Photos { get; set; } 
 
-        public virtual ICollection<Activity> Activities { get; set; }
+        public virtual ICollection<Activity> CreatedActivities { get; set; }
+
+        public virtual ICollection<Activity> JoinedActivities { get; set; }
 
         public virtual ICollection<CourseReview> CourseReviews { get; set; } 
 

@@ -117,14 +117,16 @@ namespace Twitter.App.BusinessLogic
                 StartTime = a.StartTime,
                 Place = a.Place,
                 PublishTime = a.PublishTime,
-                Creator = string.Empty,
+                Creator = a.Creator.RealName,
                 Participations = a.Participents.Select(participant => new ParticipationViewModel
                 {
                     Id = participant.Id,
                     Name = participant.RealName,
                     AvatarImage = participant.AvatarImageName,
                     HasAvatarImage = participant.HasAvatarImage
-                }).ToList()
+                }).ToList(),
+                CreatorAvatarImage = a.Creator.AvatarImageName,
+                HasCreatorAvatarImage = a.Creator.HasAvatarImage
             };
 
         public static readonly Expression<Func<HighAccLocationByIpResult, UserLoginTraceViewModel>>
@@ -184,15 +186,18 @@ namespace Twitter.App.BusinessLogic
                 HasAvatarImage = user.HasAvatarImage,
                 AvatarImageName =
                     user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
+                        ? user.AvatarImageName.GetPhotoThumbnails()
                         : string.Empty,
                 JoinedGroups = user.Groups.Select(group => new GroupVieModels
                 {
                     Id = group.Id,
+                    CreaterId = group.CreaterId,
                     CreatedTime = group.CreatedTime,
                     Name = group.Name,
                     HasImageOverview = group.HasImageOverview,
-                    ImageOverview = group.ImageOverview,
+                    ImageOverview = group.HasImageOverview 
+                        ? group.ImageOverview.GetPhotoThumbnails()
+                        : string.Empty,
                     Description = group.Description,
                     TweetsCount = group.Tweets.Count,
                     LastTweetUpdateTime = group.LastTweetUpdateTime,
@@ -215,11 +220,39 @@ namespace Twitter.App.BusinessLogic
                     HasAvatarImage = tweet.Author.HasAvatarImage,
                     AvatarImageName =
                         tweet.Author.HasAvatarImage
-                            ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" +
-                              tweet.Author.AvatarImageName
-                            : null
+                            ? tweet.Author.AvatarImageName.GetPhotoThumbnails()
+                            : string.Empty
                 }),
-                JoinedActivities = user.Activities.Select(activity => new ActivityViewModel
+                JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
+                {
+                    Id = activity.Id.ToString(),
+                    Name = activity.Name,
+                    Classficiation = activity.Classficiation.ToString(),
+                    AvatarImage = activity.ActivityImage == null
+                        ? activity.ActivityImage.GetPhotoThumbnails()
+                        : string.Empty,
+                    CreatorId = activity.CreatorId,
+                    Description = activity.Description,
+                    EndTime = activity.EndTime,
+                    StartTime = activity.StartTime,
+                    Place = activity.Place,
+                    PublishTime = activity.PublishTime,
+                    Creator = activity.Creator.RealName,
+                    Participations = activity.Participents.Select(participant => new ParticipationViewModel
+                    {
+                        Id = participant.Id,
+                        Name = participant.RealName,
+                        AvatarImage = participant.HasAvatarImage
+                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
+                            : string.Empty,
+                        HasAvatarImage = participant.HasAvatarImage
+                    }).ToList(),
+                    CreatorAvatarImage = activity.Creator.HasAvatarImage
+                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
+                            : string.Empty,
+                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage
+                }),
+                CreatedActivities = user.CreatedActivities.Select(activity => new ActivityViewModel
                 {
                     Id = activity.Id.ToString(),
                     Name = activity.Name,
@@ -231,14 +264,20 @@ namespace Twitter.App.BusinessLogic
                     StartTime = activity.StartTime,
                     Place = activity.Place,
                     PublishTime = activity.PublishTime,
-                    Creator = string.Empty,
+                    Creator = activity.Creator.RealName,
                     Participations = activity.Participents.Select(participant => new ParticipationViewModel
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = participant.AvatarImageName,
+                        AvatarImage = participant.HasAvatarImage
+                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
+                            : string.Empty,
                         HasAvatarImage = participant.HasAvatarImage
-                    }).ToList()
+                    }).ToList(),
+                    CreatorAvatarImage = activity.Creator.HasAvatarImage
+                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
+                            : string.Empty,
+                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage
                 }),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
                 {
@@ -249,7 +288,10 @@ namespace Twitter.App.BusinessLogic
                     Width = photo.OriginalWidth,
                     Id = photo.Id,
                     HasAvatarImage = photo.Author.HasAvatarImage,
-                    AvatarImageName = photo.Author.AvatarImageName
+                    AvatarImageName = photo.Author.HasAvatarImage
+                        ? photo.Author.AvatarImageName.GetPhotoThumbnails()
+                        : string.Empty
+
                 })
             };
         }
@@ -372,7 +414,7 @@ namespace Twitter.App.BusinessLogic
                     user.HasAvatarImage
                         ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
                         : string.Empty,
-                JoinedActivities = user.Activities.Select(activity => new ActivityViewModel
+                JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
                 {
                     Id = activity.Id.ToString(),
                     Name = activity.Name,

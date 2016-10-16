@@ -8,7 +8,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Twitter.App.Models.Identity;
 
 namespace Twitter.App.Provider
 {

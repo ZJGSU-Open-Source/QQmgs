@@ -36,6 +36,9 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("joined_activities")]
         public IEnumerable<ActivityViewModel> JoinedActivities { get; set; }
 
+        [JsonProperty("created_activities")]
+        public IEnumerable<ActivityViewModel> CreatedActivities { get; set; }
+
         [JsonProperty("posted_photos")]
         public IEnumerable<PhotoViewModel> PostedPhotos { get; set; }
     }

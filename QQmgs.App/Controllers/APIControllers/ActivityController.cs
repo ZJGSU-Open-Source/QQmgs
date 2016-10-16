@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
 using Twitter.App.Common;
@@ -45,13 +46,14 @@ namespace Twitter.App.Controllers.APIControllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
             }
 
-            // retrieve creator data
-            var creator = this.Data.Users.Find(activity.CreatorId);
+            // assign avatar image full url
             var urlPrefix = HTTPHelper.GetUrlPrefix();
 
-            activity.Creator = creator.RealName;
-            activity.CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creator.AvatarImageName}";
-            activity.HasCreatorAvatarImage = creator.HasAvatarImage;
+            activity.CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{activity.CreatorAvatarImage}";
+            foreach (var participation in activity.Participations)
+            {
+                participation.AvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{participation.AvatarImage}";
+            }
 
             return Request.CreateResponse(HttpStatusCode.OK, activity);
         }

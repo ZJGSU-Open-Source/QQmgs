@@ -184,6 +184,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -300,7 +304,6 @@
     <Compile Include="Models\BindingModels\SetGroupVisibilityBindingModel.cs" />
     <Compile Include="Models\BindingModels\WebApiModels\AccountBindingModels.cs" />
     <Compile Include="Models\BindingModels\WebApiModels\UpdateUserStatusBindingModel.cs" />
-    <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ViewModels\ActivityViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseReviewVideModel.cs" />

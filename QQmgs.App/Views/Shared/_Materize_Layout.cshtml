@@ -9,12 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <title>@Resources.QQmgscom</title>
 
-    <!-- CSS  -->
+    <!-- JavaScript Baidu Analytics -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?a6245c7118c12f7de3692c2972eb41b6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="~/Content/Site.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
+
 <body>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
@@ -43,6 +55,7 @@
                     <li><a href="@Url.Action("index", "CourseReview")">@Resources.ReviewCourse</a></li>
                     <li><a href="@Url.Action("index", "Group")">@Resources.Group</a></li>
                     <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
+                    <li><a href="@Url.Action("index", "Activity")">商大活动</a></li>
                     <li><a href="@Url.Action("Search", "Group")">搜索</a></li>
                     <li><a href="@Url.Action("Index", "Manage")">设置</a></li>
                 }
@@ -71,12 +84,12 @@
                     </p>
                 </div>
                 @*<div class="col l4 s12">
-                    <h5 class="white-text">链接</h5>
-                    <ul>
-                        <li><a class="white-text" href="http://www.zjsu.edu.cn">浙江工商大学官网</a></li>
-                        <li><a class="white-text" href="http://cie.zjsu.edu.cn">信息学院官网</a></li>
-                    </ul>
-                </div>*@
+                        <h5 class="white-text">链接</h5>
+                        <ul>
+                            <li><a class="white-text" href="http://www.zjsu.edu.cn">浙江工商大学官网</a></li>
+                            <li><a class="white-text" href="http://cie.zjsu.edu.cn">信息学院官网</a></li>
+                        </ul>
+                    </div>*@
                 <div class="col l4 s12">
                     <h6 style="font-size: 17px" class="white-text">加入全球某工商</h6>
                     <a style="font-size: 14px" class="white-text" href="@Url.Action("Job", "Home")">
