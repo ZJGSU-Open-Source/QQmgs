@@ -107,7 +107,7 @@ namespace Twitter.App.BusinessLogic
         public static readonly Expression<Func<Activity, ActivityViewModel>> AsActivictyViewModel =
             a => new ActivityViewModel
             {
-                Id = a.Id.ToString(),
+                Id = a.Id,
                 Name = a.Name,
                 Classficiation = a.Classficiation.ToString(),
                 AvatarImage = a.ActivityImage ?? string.Empty,
@@ -179,7 +179,7 @@ namespace Twitter.App.BusinessLogic
         {
             return new ActivityViewModel
             {
-                Id = a.Id.ToString(),
+                Id = a.Id,
                 Name = a.Name,
                 Classficiation = a.Classficiation.ToString(),
                 AvatarImage = a.ActivityImage.RetrievePhotoThumnails(),
@@ -198,7 +198,9 @@ namespace Twitter.App.BusinessLogic
                     HasAvatarImage = participant.HasAvatarImage
                 }).ToList(),
                 CreatorAvatarImage = a.Creator.AvatarImageName,
-                HasCreatorAvatarImage = a.Creator.HasAvatarImage
+                HasCreatorAvatarImage = a.Creator.HasAvatarImage,
+                IsDisplay = a.IsDisplay,
+                Organizer = a.Organizer
             };
         }
 
@@ -258,7 +260,7 @@ namespace Twitter.App.BusinessLogic
                 }),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
                 {
-                    Id = activity.Id.ToString(),
+                    Id = activity.Id,
                     Name = activity.Name,
                     Classficiation = activity.Classficiation.ToString(),
                     AvatarImage = activity.ActivityImage.RetrievePhotoThumnails(),
@@ -281,7 +283,7 @@ namespace Twitter.App.BusinessLogic
                 }),
                 CreatedActivities = user.CreatedActivities.Select(activity => new ActivityViewModel
                 {
-                    Id = activity.Id.ToString(),
+                    Id = activity.Id,
                     Name = activity.Name,
                     Classficiation = activity.Classficiation.ToString(),
                     AvatarImage = activity.ActivityImage ?? string.Empty,
@@ -460,7 +462,7 @@ namespace Twitter.App.BusinessLogic
                 AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
                 {
-                    Id = activity.Id.ToString(),
+                    Id = activity.Id,
                     Name = activity.Name,
                     Classficiation = activity.Classficiation.ToString(),
                     AvatarImage = activity.ActivityImage ?? string.Empty,

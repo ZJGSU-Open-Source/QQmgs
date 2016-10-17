@@ -14,6 +14,7 @@ using Twitter.App.BusinessLogic;
 using Twitter.App.Common;
 using Twitter.App.DataContracts;
 using Twitter.App.Models.BindingModel;
+using Twitter.App.Models.BindingModels;
 using Twitter.App.Models.ViewModels;
 using Twitter.App.Provider;
 using Twitter.Data.UnitOfWork;
@@ -189,7 +190,9 @@ namespace Twitter.App.Controllers.APIControllers
                                                             ActivityClassficiation.Other.ToString()),
                 Place = model.Place,
                 StartTime = DateTime.Parse(model.StartTime),
-                EndTime = DateTime.Parse(model.EndTime)
+                EndTime = DateTime.Parse(model.EndTime),
+                IsDisplay = model.IsDisplay,
+                Organizer = model.Organizer
             };
 
             this.Data.Activity.Add(activity);

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Twitter.App.Models.BindingModel
+namespace Twitter.App.Models.BindingModels
 {
     public class CreateActivityBindingModel
     {
@@ -33,5 +29,11 @@ namespace Twitter.App.Models.BindingModel
         [Required]
         [JsonProperty("end_time")]
         public string EndTime { get; set; }
+
+        [JsonProperty("organizer")]
+        public string Organizer { get; set; }
+
+        [JsonProperty("is_display")]
+        public bool IsDisplay { get; set; }
     }
 }

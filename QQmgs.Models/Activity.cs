@@ -44,6 +44,11 @@ namespace Twitter.Models
         public virtual ICollection<User> Participents { get; set; }
 
         public ActivityClassficiation? Classficiation { get; set; }
+
+        [MaxLength(50)]
+        public string Organizer { get; set; }
+
+        public bool IsDisplay { get; set; }
     }
 
     public enum ActivityClassficiation

@@ -9,7 +9,7 @@ namespace Twitter.App.Models.ViewModels
     public class ActivityViewModel
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("creator_id")]
         public string CreatorId { get; set; }
@@ -49,6 +49,12 @@ namespace Twitter.App.Models.ViewModels
 
         [JsonProperty("participations")]
         public IList<ParticipationViewModel> Participations { get; set; }
+
+        [JsonProperty("organizer")]
+        public string Organizer { get; set; }
+
+        [JsonProperty("is_display")]
+        public bool IsDisplay { get; set; }
     }
 
     public class ParticipationViewModel
