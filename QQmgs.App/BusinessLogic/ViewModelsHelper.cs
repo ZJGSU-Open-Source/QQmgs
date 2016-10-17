@@ -173,7 +173,38 @@ namespace Twitter.App.BusinessLogic
 
         #endregion
 
-        #region To View Model
+        #region User View Model
+
+        public static ActivityViewModel ToActivityViewModel(this Activity a)
+        {
+            return new ActivityViewModel
+            {
+                Id = a.Id.ToString(),
+                Name = a.Name,
+                Classficiation = a.Classficiation.ToString(),
+                AvatarImage = a.ActivityImage.RetrievePhotoThumnails(),
+                CreatorId = a.CreatorId,
+                Description = a.Description,
+                EndTime = a.EndTime,
+                StartTime = a.StartTime,
+                Place = a.Place,
+                PublishTime = a.PublishTime,
+                Creator = a.Creator.RealName,
+                Participations = a.Participents.Select(participant => new ParticipationViewModel
+                {
+                    Id = participant.Id,
+                    Name = participant.RealName,
+                    AvatarImage = participant.AvatarImageName,
+                    HasAvatarImage = participant.HasAvatarImage
+                }).ToList(),
+                CreatorAvatarImage = a.Creator.AvatarImageName,
+                HasCreatorAvatarImage = a.Creator.HasAvatarImage
+            };
+        }
+
+        #endregion
+
+        #region User View Model
 
         public static UserViewModel ToUserViewModel(this User user)
         {
@@ -215,7 +246,15 @@ namespace Twitter.App.BusinessLogic
                     GroupId = tweet.GroupId,
                     HasAvatarImage = tweet.Author.HasAvatarImage,
                     AvatarImageName = tweet.Author.AvatarImageName.RetrievePhotoThumnails(tweet.Author.HasAvatarImage),
-                    ReplyList = new List<ReplyViewModel>()
+                    ReplyList = tweet.Reply.Select(reply => new ReplyViewModel
+                    {
+                        Text = reply.Content,
+                        Id = reply.Id,
+                        PublishTime = reply.PublishTime,
+                        Author = reply.Author.RealName,
+                        HasAvatarImage = reply.Author.HasAvatarImage,
+                        AvatarImageName = reply.Author.AvatarImageName.RetrievePhotoThumnails(reply.Author.HasAvatarImage)
+                    }).ToList()
                 }),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
                 {
@@ -274,7 +313,8 @@ namespace Twitter.App.BusinessLogic
                     HasAvatarImage = photo.Author.HasAvatarImage,
                     AvatarImageName = photo.Author.AvatarImageName.RetrievePhotoThumnails(photo.Author.HasAvatarImage),
                     DatePosted = photo.DatePosted.ToString(CultureInfo.InvariantCulture)
-                })
+                }),
+                CreatedGroups = new List<GroupVieModels>()
             };
         }
 

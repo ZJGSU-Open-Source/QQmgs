@@ -164,7 +164,7 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.Activity.Update(activity);
             this.Data.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK, activity);
+            return Request.CreateResponse(HttpStatusCode.OK, activity.ToActivityViewModel());
         }
 
         [HttpPost]
@@ -195,7 +195,7 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.Activity.Add(activity);
             this.Data.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK, activity);
+            return Request.CreateResponse(HttpStatusCode.OK, activity.ToActivityViewModel());
         }
 
         [HttpDelete]
@@ -222,7 +222,7 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.Activity.Remove(activity);
             this.Data.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK, activity);
+            return Request.CreateResponse(HttpStatusCode.OK, activity.ToActivityViewModel());
         }
 
         [HttpPost]
