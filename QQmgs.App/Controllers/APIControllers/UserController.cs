@@ -146,6 +146,22 @@ namespace Twitter.App.Controllers.APIControllers
         }
 
         [HttpGet]
+        [Route("{userId:guid}/createdActivity")]
+        public HttpResponseMessage UserCreatedActivity([FromUri] Guid userId)
+        {
+            var user = this.Data.Users.Find(userId.ToString());
+
+            if (user == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"User with ID {userId} is not found");
+            }
+
+            var userViewModel = user.ToUserCreatedActivitiesViewModel();
+
+            return Request.CreateResponse(HttpStatusCode.OK, userViewModel);
+        }
+
+        [HttpGet]
         [Route("{userId:guid}/bio")]
         public HttpResponseMessage Bio([FromUri] Guid userId)
         {

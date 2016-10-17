@@ -175,7 +175,7 @@ namespace Twitter.App.BusinessLogic
 
         #endregion
 
-        #region User View Model
+        #region Activity View Model
 
         public static ActivityViewModel ToActivityViewModel(this Activity a)
         {
@@ -478,7 +478,7 @@ namespace Twitter.App.BusinessLogic
                     StartTime = activity.StartTime,
                     Place = activity.Place,
                     PublishTime = activity.PublishTime,
-                    Creator = string.Empty,
+                    Creator = activity.Creator.RealName,
                     Participations = activity.Participents.Select(participant => new ParticipationViewModel
                     {
                         Id = participant.Id,
@@ -486,6 +486,8 @@ namespace Twitter.App.BusinessLogic
                         AvatarImage = participant.AvatarImageName,
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
+                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
+                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
                     Organizer = activity.Organizer
                 }),
@@ -493,6 +495,50 @@ namespace Twitter.App.BusinessLogic
                 PostedPhotos = new List<PhotoViewModel>(),
                 JoinedGroups = new List<GroupVieModels>(),
                 CreatedActivities = new List<ActivityViewModel>(),
+                CreatedGroups = new List<GroupVieModels>()
+            };
+        }
+
+        public static UserViewModel ToUserCreatedActivitiesViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                RealName = user.RealName,
+                Class = user.Class,
+                Status = user.Status,
+                UserId = user.Id,
+                PhoneNumber = user.UserName,
+                HasAvatarImage = user.HasAvatarImage,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
+                CreatedActivities = user.CreatedActivities.Select(activity => new ActivityViewModel
+                {
+                    Id = activity.Id,
+                    Name = activity.Name,
+                    Classficiation = activity.Classficiation.ToString(),
+                    AvatarImage = activity.ActivityImage ?? string.Empty,
+                    CreatorId = activity.CreatorId,
+                    Description = activity.Description,
+                    EndTime = activity.EndTime,
+                    StartTime = activity.StartTime,
+                    Place = activity.Place,
+                    PublishTime = activity.PublishTime,
+                    Creator = activity.Creator.RealName,
+                    Participations = activity.Participents.Select(participant => new ParticipationViewModel
+                    {
+                        Id = participant.Id,
+                        Name = participant.RealName,
+                        AvatarImage = participant.AvatarImageName,
+                        HasAvatarImage = participant.HasAvatarImage
+                    }).ToList(),
+                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
+                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
+                    IsDisplay = activity.IsDisplay,
+                    Organizer = activity.Organizer
+                }),
+                PostedTweets = new List<TweetViewModel>(),
+                PostedPhotos = new List<PhotoViewModel>(),
+                JoinedGroups = new List<GroupVieModels>(),
+                JoinedActivities = new List<ActivityViewModel>(),
                 CreatedGroups = new List<GroupVieModels>()
             };
         }
