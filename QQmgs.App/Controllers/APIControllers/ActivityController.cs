@@ -161,6 +161,8 @@ namespace Twitter.App.Controllers.APIControllers
             activity.Classficiation = EnumUtils.Parse<ActivityClassficiation>(model.Classfication);
             activity.StartTime = DateTime.Parse(model.StartTime);
             activity.EndTime = DateTime.Parse(model.EndTime);
+            activity.IsDisplay = model.IsDisplay;
+            activity.Organizer = model.Organizer;
 
             this.Data.Activity.Update(activity);
             this.Data.SaveChanges();
@@ -198,7 +200,7 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.Activity.Add(activity);
             this.Data.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK, activity.ToActivityViewModel());
+            return Request.CreateResponse(HttpStatusCode.OK, activity);
         }
 
         [HttpDelete]

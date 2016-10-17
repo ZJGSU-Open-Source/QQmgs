@@ -96,18 +96,18 @@ namespace Twitter.App.Models.ViewModels
             ErrorMessageResourceName = "InvalidUserName")]
         public string RealName { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof (Resources.Resources),
-            ErrorMessageResourceName = "EmailRequired")]
-        [EmailAddress]
-        [Display(Name = "Email", ResourceType = typeof (Resources.Resources))]
-        public string Email { get; set; }
+        //[Required(ErrorMessageResourceType = typeof (Resources.Resources),
+        //    ErrorMessageResourceName = "EmailRequired")]
+        //[EmailAddress]
+        //[Display(Name = "Email", ResourceType = typeof (Resources.Resources))]
+        //public string Email { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof (Resources.Resources),
-            ErrorMessageResourceName = "ClassRequired")]
-        [StringLength(30, ErrorMessageResourceType = typeof (Resources.Resources),
-            ErrorMessageResourceName = "ClassLong", MinimumLength = 1)]
-        [Display(Name = "ClassOrDeparment", ResourceType = typeof (Resources.Resources))]
-        public string Class { get; set; }
+        //[Required(ErrorMessageResourceType = typeof (Resources.Resources),
+        //    ErrorMessageResourceName = "ClassRequired")]
+        //[StringLength(30, ErrorMessageResourceType = typeof (Resources.Resources),
+        //    ErrorMessageResourceName = "ClassLong", MinimumLength = 1)]
+        //[Display(Name = "ClassOrDeparment", ResourceType = typeof (Resources.Resources))]
+        //public string Class { get; set; }
 
         [Required(ErrorMessageResourceType = typeof (Resources.Resources),
             ErrorMessageResourceName = "PasswordRequired")]

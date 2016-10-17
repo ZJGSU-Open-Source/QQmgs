@@ -71,10 +71,11 @@ namespace Twitter.App.Controllers.APIControllers
             var user = new User
             {
                 UserName = model.PhoneNumber,
-                Email = model.Email,
                 RealName = model.RealName,
                 RegisteredTime = currentTime,
-                Class = model.Class
+                Email = $"{Guid.NewGuid()}@qqmgs.com"
+                //Email = model.Email,
+                //Class = model.Class
             };
 
             var result = await UserManager.CreateAsync(user, model.Password);

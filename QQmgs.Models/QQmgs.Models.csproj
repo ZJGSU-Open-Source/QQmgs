@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Activity.cs" />
     <Compile Include="CourseReview.cs" />
+    <Compile Include="DataAnnotations\CustomRequiredEmail.cs" />
     <Compile Include="DevLog.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Message.cs" />

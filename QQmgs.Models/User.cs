@@ -1,4 +1,6 @@
-﻿namespace Twitter.Models
+﻿using Twitter.Models.DataAnnotations;
+
+namespace Twitter.Models
 {
     using System;
     using System.Collections.Generic;
@@ -25,6 +27,10 @@
         }
 
         public DateTime RegisteredTime { get; set; }
+
+        // Not required filed
+        [CustomRequiredEmail]
+        public override string Email { get; set; }
 
         [MaxLength(30)]
         public string Class { get; set; }

@@ -126,7 +126,9 @@ namespace Twitter.App.BusinessLogic
                     HasAvatarImage = participant.HasAvatarImage
                 }).ToList(),
                 CreatorAvatarImage = a.Creator.AvatarImageName,
-                HasCreatorAvatarImage = a.Creator.HasAvatarImage
+                HasCreatorAvatarImage = a.Creator.HasAvatarImage,
+                IsDisplay = a.IsDisplay,
+                Organizer = a.Organizer
             };
 
         public static readonly Expression<Func<HighAccLocationByIpResult, UserLoginTraceViewModel>>
@@ -279,7 +281,9 @@ namespace Twitter.App.BusinessLogic
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
-                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage
+                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
+                    IsDisplay = activity.IsDisplay,
+                    Organizer = activity.Organizer
                 }),
                 CreatedActivities = user.CreatedActivities.Select(activity => new ActivityViewModel
                 {
@@ -302,7 +306,9 @@ namespace Twitter.App.BusinessLogic
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
-                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage
+                    HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
+                    IsDisplay = activity.IsDisplay,
+                    Organizer = activity.Organizer
                 }),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
                 {
@@ -479,7 +485,9 @@ namespace Twitter.App.BusinessLogic
                         Name = participant.RealName,
                         AvatarImage = participant.AvatarImageName,
                         HasAvatarImage = participant.HasAvatarImage
-                    }).ToList()
+                    }).ToList(),
+                    IsDisplay = activity.IsDisplay,
+                    Organizer = activity.Organizer
                 }),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
