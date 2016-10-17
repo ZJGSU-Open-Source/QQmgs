@@ -174,6 +174,7 @@ namespace Twitter.App.BusinessLogic
         #endregion
 
         #region To View Model
+
         public static UserViewModel ToUserViewModel(this User user)
         {
             return new UserViewModel
@@ -184,10 +185,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? user.AvatarImageName.GetPhotoThumbnails()
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 JoinedGroups = user.Groups.Select(group => new GroupVieModels
                 {
                     Id = group.Id,
@@ -195,9 +193,7 @@ namespace Twitter.App.BusinessLogic
                     CreatedTime = group.CreatedTime,
                     Name = group.Name,
                     HasImageOverview = group.HasImageOverview,
-                    ImageOverview = group.HasImageOverview 
-                        ? group.ImageOverview.GetPhotoThumbnails()
-                        : string.Empty,
+                    ImageOverview = group.ImageOverview.RetrievePhotoThumnails(group.HasImageOverview),
                     Description = group.Description,
                     TweetsCount = group.Tweets.Count,
                     LastTweetUpdateTime = group.LastTweetUpdateTime,
@@ -218,10 +214,7 @@ namespace Twitter.App.BusinessLogic
                     DatePosted = tweet.DatePosted,
                     GroupId = tweet.GroupId,
                     HasAvatarImage = tweet.Author.HasAvatarImage,
-                    AvatarImageName =
-                        tweet.Author.HasAvatarImage
-                            ? tweet.Author.AvatarImageName.GetPhotoThumbnails()
-                            : string.Empty,
+                    AvatarImageName = tweet.Author.AvatarImageName.RetrievePhotoThumnails(tweet.Author.HasAvatarImage),
                     ReplyList = new List<ReplyViewModel>()
                 }),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
@@ -229,9 +222,7 @@ namespace Twitter.App.BusinessLogic
                     Id = activity.Id.ToString(),
                     Name = activity.Name,
                     Classficiation = activity.Classficiation.ToString(),
-                    AvatarImage = activity.ActivityImage == null
-                        ? activity.ActivityImage.GetPhotoThumbnails()
-                        : string.Empty,
+                    AvatarImage = activity.ActivityImage.RetrievePhotoThumnails(),
                     CreatorId = activity.CreatorId,
                     Description = activity.Description,
                     EndTime = activity.EndTime,
@@ -243,14 +234,10 @@ namespace Twitter.App.BusinessLogic
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = participant.HasAvatarImage
-                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
-                            : string.Empty,
+                        AvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
-                    CreatorAvatarImage = activity.Creator.HasAvatarImage
-                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
-                            : string.Empty,
+                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage
                 }),
                 CreatedActivities = user.CreatedActivities.Select(activity => new ActivityViewModel
@@ -270,14 +257,10 @@ namespace Twitter.App.BusinessLogic
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = participant.HasAvatarImage
-                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
-                            : string.Empty,
+                        AvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
-                    CreatorAvatarImage = activity.Creator.HasAvatarImage
-                            ? activity.Creator.AvatarImageName.GetPhotoThumbnails()
-                            : string.Empty,
+                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage
                 }),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
@@ -289,9 +272,7 @@ namespace Twitter.App.BusinessLogic
                     Width = photo.OriginalWidth,
                     Id = photo.Id,
                     HasAvatarImage = photo.Author.HasAvatarImage,
-                    AvatarImageName = photo.Author.HasAvatarImage
-                        ? photo.Author.AvatarImageName.GetPhotoThumbnails()
-                        : string.Empty,
+                    AvatarImageName = photo.Author.AvatarImageName.RetrievePhotoThumnails(photo.Author.HasAvatarImage),
                     DatePosted = photo.DatePosted.ToString(CultureInfo.InvariantCulture)
                 })
             };
@@ -307,10 +288,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 PostedTweets = user.Tweets.Select(tweet => new TweetViewModel
                 {
                     Id = tweet.Id,
@@ -325,11 +303,7 @@ namespace Twitter.App.BusinessLogic
                     DatePosted = tweet.DatePosted,
                     GroupId = tweet.GroupId,
                     HasAvatarImage = tweet.Author.HasAvatarImage,
-                    AvatarImageName =
-                        tweet.Author.HasAvatarImage
-                            ? Constants.Constants.WebHostPrefix + "/" + Constants.Constants.ImageThumbnailsPrefix + "/" +
-                              tweet.Author.AvatarImageName
-                            : null
+                    AvatarImageName = tweet.Author.AvatarImageName.RetrievePhotoThumnails(tweet.Author.HasAvatarImage)
                 }),
                 JoinedActivities = new List<ActivityViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
@@ -349,10 +323,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
                 {
                     Description = photo.Descrption,
@@ -382,10 +353,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 JoinedGroups = user.Groups.Select(group => new GroupVieModels
                 {
                     Id = group.Id,
@@ -417,10 +385,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 CreatedGroups = user.Groups.Select(group => new GroupVieModels
                 {
                     Id = group.Id,
@@ -452,10 +417,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
                 {
                     Id = activity.Id.ToString(),
@@ -495,10 +457,7 @@ namespace Twitter.App.BusinessLogic
                 UserId = user.Id,
                 PhoneNumber = user.UserName,
                 HasAvatarImage = user.HasAvatarImage,
-                AvatarImageName =
-                    user.HasAvatarImage
-                        ? $"{HTTPHelper.GetUrlPrefix()}/img/Uploads/Thumbnails/{user.AvatarImageName}"
-                        : string.Empty,
+                AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 JoinedActivities = new List<ActivityViewModel>(),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),

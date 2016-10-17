@@ -18,10 +18,5 @@ namespace Twitter.App.BusinessLogic
 
             return url;
         }
-
-        public static string GetPhotoThumbnails(this string fileName)
-        {
-            return $"{GetUrlPrefix()}/{Constants.Constants.ImageThumbnailsPrefix}/{fileName}";
-        }
     }
 }
