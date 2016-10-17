@@ -255,6 +255,7 @@
     <Compile Include="BusinessLogic\IPAddressHelper.cs" />
     <Compile Include="BusinessLogic\JsonHelper.cs" />
     <Compile Include="BusinessLogic\ManagerHelper.cs" />
+    <Compile Include="BusinessLogic\PhotoHelper.cs" />
     <Compile Include="BusinessLogic\QueryRealAddress.cs" />
     <Compile Include="BusinessLogic\RsaSecurity.cs" />
     <Compile Include="BusinessLogic\ViewModelsHelper.cs" />
