@@ -128,7 +128,8 @@ namespace Twitter.App.BusinessLogic
                 CreatorAvatarImage = a.Creator.AvatarImageName,
                 HasCreatorAvatarImage = a.Creator.HasAvatarImage,
                 IsDisplay = a.IsDisplay,
-                Organizer = a.Organizer
+                Organizer = a.Organizer,
+                CreatorStatus = a.Creator.Status
             };
 
         public static readonly Expression<Func<HighAccLocationByIpResult, UserLoginTraceViewModel>>
@@ -202,7 +203,8 @@ namespace Twitter.App.BusinessLogic
                 CreatorAvatarImage = a.Creator.AvatarImageName,
                 HasCreatorAvatarImage = a.Creator.HasAvatarImage,
                 IsDisplay = a.IsDisplay,
-                Organizer = a.Organizer
+                Organizer = a.Organizer,
+                CreatorStatus = a.Creator.Status
             };
         }
 
@@ -283,7 +285,8 @@ namespace Twitter.App.BusinessLogic
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
-                    Organizer = activity.Organizer
+                    Organizer = activity.Organizer,
+                    CreatorStatus = activity.Creator.Status
                 }),
                 CreatedActivities = user.CreatedActivities.Select(activity => new ActivityViewModel
                 {
@@ -308,7 +311,8 @@ namespace Twitter.App.BusinessLogic
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
-                    Organizer = activity.Organizer
+                    Organizer = activity.Organizer,
+                    CreatorStatus = activity.Creator.Status
                 }),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
                 {
@@ -489,7 +493,8 @@ namespace Twitter.App.BusinessLogic
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
-                    Organizer = activity.Organizer
+                    Organizer = activity.Organizer,
+                    CreatorStatus = activity.Creator.Status
                 }),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),
@@ -533,7 +538,8 @@ namespace Twitter.App.BusinessLogic
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
-                    Organizer = activity.Organizer
+                    Organizer = activity.Organizer,
+                    CreatorStatus = activity.Creator.Status
                 }),
                 PostedTweets = new List<TweetViewModel>(),
                 PostedPhotos = new List<PhotoViewModel>(),

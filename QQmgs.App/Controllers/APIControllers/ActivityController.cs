@@ -48,12 +48,11 @@ namespace Twitter.App.Controllers.APIControllers
             }
 
             // assign avatar image full url
-            var urlPrefix = HTTPHelper.GetUrlPrefix();
-
-            activity.CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{activity.CreatorAvatarImage}";
+            activity.CreatorAvatarImage = activity.CreatorAvatarImage.RetrievePhotoThumnails();
             foreach (var participation in activity.Participations)
             {
-                participation.AvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{participation.AvatarImage}";
+                participation.AvatarImage =
+                    participation.AvatarImage.RetrievePhotoThumnails(participation.HasAvatarImage);
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, activity);
@@ -76,14 +75,14 @@ namespace Twitter.App.Controllers.APIControllers
                 .ToList();
 
             // retrieve creators data
-            var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
-            var urlPrefix = HTTPHelper.GetUrlPrefix();
-
-            for (var i = 0; i < activities.Count; ++i)
+            foreach (var activity in activities)
             {
-                activities[i].Creator = creators[i].RealName;
-                activities[i].CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
-                activities[i].HasCreatorAvatarImage = creators[i].HasAvatarImage;
+                activity.CreatorAvatarImage = activity.CreatorAvatarImage.RetrievePhotoThumnails();
+                foreach (var participation in activity.Participations)
+                {
+                    participation.AvatarImage =
+                        participation.AvatarImage.RetrievePhotoThumnails(participation.HasAvatarImage);
+                }
             }
 
             var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
@@ -111,14 +110,14 @@ namespace Twitter.App.Controllers.APIControllers
                 .ToList();
 
             // retrieve creators data
-            var creators = activities.Select(activity => this.Data.Users.Find(activity.CreatorId)).ToList();
-            var urlPrefix = HTTPHelper.GetUrlPrefix();
-
-            for (var i = 0; i < activities.Count; ++i)
+            foreach (var activity in activities)
             {
-                activities[i].Creator = creators[i].RealName;
-                activities[i].CreatorAvatarImage = $"{urlPrefix}/img/Uploads/Thumbnails/{creators[i].AvatarImageName}";
-                activities[i].HasCreatorAvatarImage = creators[i].HasAvatarImage;
+                activity.CreatorAvatarImage = activity.CreatorAvatarImage.RetrievePhotoThumnails();
+                foreach (var participation in activity.Participations)
+                {
+                    participation.AvatarImage =
+                        participation.AvatarImage.RetrievePhotoThumnails(participation.HasAvatarImage);
+                }
             }
 
             var pagedActivities = activities.GetPagedResult(t => t.PublishTime, pageNo, pageSize, SortDirection.Descending);
@@ -227,7 +226,7 @@ namespace Twitter.App.Controllers.APIControllers
             this.Data.Activity.Remove(activity);
             this.Data.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK, activity.ToActivityViewModel());
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [HttpPost]

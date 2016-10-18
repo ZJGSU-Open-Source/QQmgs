@@ -17,6 +17,9 @@ namespace Twitter.App.Models.ViewModels
         [JsonProperty("creator")]
         public string Creator { get; set; }
 
+        [JsonProperty("creator_status")]
+        public string CreatorStatus { get; set; }
+
         [JsonProperty("creator_avatar_image")]
         public string CreatorAvatarImage { get; set; }
 
