@@ -5,6 +5,10 @@
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @helper Selected(string c, string culture)
 {
 if (c == culture)
