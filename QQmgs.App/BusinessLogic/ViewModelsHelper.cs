@@ -197,7 +197,7 @@ namespace Twitter.App.BusinessLogic
                 {
                     Id = participant.Id,
                     Name = participant.RealName,
-                    AvatarImage = participant.AvatarImageName,
+                    AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                     HasAvatarImage = participant.HasAvatarImage
                 }).ToList(),
                 CreatorAvatarImage = a.Creator.AvatarImageName,
@@ -300,7 +300,7 @@ namespace Twitter.App.BusinessLogic
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
+                        AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
@@ -326,7 +326,7 @@ namespace Twitter.App.BusinessLogic
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
+                        AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
@@ -508,7 +508,7 @@ namespace Twitter.App.BusinessLogic
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = participant.AvatarImageName,
+                        AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
@@ -553,7 +553,7 @@ namespace Twitter.App.BusinessLogic
                     {
                         Id = participant.Id,
                         Name = participant.RealName,
-                        AvatarImage = participant.AvatarImageName,
+                        AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
                     CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
