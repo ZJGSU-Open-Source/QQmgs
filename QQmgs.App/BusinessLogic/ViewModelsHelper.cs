@@ -212,6 +212,27 @@ namespace Twitter.App.BusinessLogic
 
         #region User View Model
 
+        public static GroupVieModels ToGroupVieModel(this Group g)
+        {
+            return new GroupVieModels
+            {
+                Id = g.Id,
+                CreatedTime = g.CreatedTime,
+                Name = g.Name,
+                HasImageOverview = g.HasImageOverview,
+                ImageOverview = g.ImageOverview,
+                Description = g.Description,
+                TweetsCount = g.Tweets.Count,
+                LastTweetUpdateTime = g.LastTweetUpdateTime,
+                IsDisplay = g.IsDisplay,
+                IsPrivate = g.IsPrivate
+            };
+        }
+
+        #endregion
+
+        #region User View Model
+
         public static UserViewModel ToUserViewModel(this User user)
         {
             return new UserViewModel

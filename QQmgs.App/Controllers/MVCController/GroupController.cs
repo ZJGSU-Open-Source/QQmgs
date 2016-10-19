@@ -84,6 +84,31 @@ namespace Twitter.App.Controllers
             return PartialView(groupQuard);
         }
 
+        [HttpGet]
+        [Route("ParticipatedGroups")]
+        public ActionResult GetParticipatedGroups()
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+
+            // get posted tweets
+            var tweets = Data.Users.Find(loggedUserId).Tweets;
+            var groupIds = tweets.Select(tweet => tweet.GroupId).Distinct().ToList();
+            
+            // get posted replies
+            var replies = Data.Users.Find(loggedUserId).Replies;
+            var tweetIds = replies.Select(reply => reply.TweetId).Distinct();
+            groupIds.AddRange(tweetIds.Select(id => Data.Tweets.Find(id).GroupId).Distinct());
+
+            groupIds = groupIds.Distinct().ToList();
+
+            // get detailed groups
+            var groups =
+                groupIds.Select(id => Data.Group.Find(id).ToGroupVieModel())
+                    .OrderByDescending(models => models.LastTweetUpdateTime).ToList();
+
+            return PartialView(groups);
+        }
+
         [AllowAnonymous]
         [HttpGet]
         [Route("{groupId:int}/details/{p:int}")]
