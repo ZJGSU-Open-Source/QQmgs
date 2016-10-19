@@ -6,6 +6,13 @@
         <h5 class="header col s12 light grey-text">参与的兴趣小组 (@Model.ToList().Count)</h5>
     </div>
 
+    @{
+        if (!Model.Any())
+        {
+            <h6 class="header col s12 light grey-text" style="text-align: center">尚未加入任何兴趣小组，赶快参与感兴趣的话题吧!</h6>
+        }
+    }
+
     <div class="collection" style="max-width: 700px; margin: auto">
         @foreach (var group in Model)
         {
