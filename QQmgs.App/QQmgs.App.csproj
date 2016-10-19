@@ -418,7 +418,7 @@
     <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.woff2" />
-    <None Include="Downloads\Android.Version-0.0.1.apk" />
+    <Content Include="Downloads\Android.Version-0.0.1.apk" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cardio\main.js" />
