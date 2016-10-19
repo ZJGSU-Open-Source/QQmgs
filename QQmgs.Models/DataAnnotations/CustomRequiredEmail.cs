@@ -12,21 +12,19 @@ namespace Twitter.Models.DataAnnotations
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            return null;
-
             ValidationResult validationResult = null;
 
-            // Check if Model is WorkphoneViewModel, if so, activate validation
-            if (validationContext.ObjectInstance is string
-             && string.IsNullOrWhiteSpace((string)value))
-            {
-                this.ErrorMessage = "Phone is required";
-                validationResult = new ValidationResult(this.ErrorMessage);
-            }
-            else
-            {
-                validationResult = ValidationResult.Success;
-            }
+            // Check if Email is string, if so, activate validation
+            //if (validationContext.ObjectInstance is string
+            // && string.IsNullOrWhiteSpace((string)value))
+            //{
+            //    this.ErrorMessage = "Phone is required";
+            //    validationResult = new ValidationResult(this.ErrorMessage);
+            //}
+            //else
+            //{
+            //    validationResult = ValidationResult.Success;
+            //}
 
             return validationResult;
         }

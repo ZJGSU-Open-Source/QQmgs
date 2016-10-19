@@ -12,11 +12,14 @@ namespace Twitter.App.Controllers.APIControllers
     public class PingController : ApiController
     {
         // GET api/ping
+        //[Authorize(Roles = "Admin")]
         [Route("")]
-        [Authorize(Roles = "Admin")]
         public string Get()
         {
             var roles = Roles.GetAllRoles();
+
+            var p = Roles.Provider;
+            var n = p.ApplicationName;
 
             //Roles.CreateRole("Admin");
             //Roles.AddUserToRole(User.Identity.Name, "Admin");
