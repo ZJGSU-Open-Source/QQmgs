@@ -268,8 +268,8 @@ namespace Twitter.App.Controllers.APIControllers
                 // This illustrates how to get the file names.
                 foreach (var file in provider.FileData)
                 {
-                    var fileName = file.LocalFileName.Split(Path.DirectorySeparatorChar).Last();
-
+                    var fileName = file.LocalFileName.Split(Path.DirectorySeparatorChar).Last().Trim('\"');
+                    
                     var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.AvatarImage);
 
                     var photo = new Photo

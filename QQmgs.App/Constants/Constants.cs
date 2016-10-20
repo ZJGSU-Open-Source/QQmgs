@@ -21,6 +21,18 @@ namespace Twitter.App.Constants
 
         public static string ImageThumbnailsPrefix = "img/uploads/Thumbnails";
 
+        public static string[] ReceiveableExtensions = { ".jpg", ".jpeg", ".gif", ".bmp", ".png" };
+
+        #endregion
+
+        #region User Role
+
+        public enum UserRoles
+        {
+            QQmgsUser,
+            QQmgsAdmin
+        }
+
         #endregion
 
         public static string Based64UserAvatarImage =

@@ -8,21 +8,20 @@ using System.Web.Security;
 
 namespace Twitter.App.Controllers.APIControllers
 {
+    [Authorize]
     [RoutePrefix("api/ping")]
     public class PingController : ApiController
     {
         // GET api/ping
-        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "QQmgsAdmin")]
         [Route("")]
         public string Get()
         {
-            var roles = Roles.GetAllRoles();
+            var s = Constants.Constants.UserRoles.QQmgsAdmin.ToString();
+            Roles.CreateRole(s);
+            Roles.AddUserToRole("13500000007", s);
 
-            var p = Roles.Provider;
-            var n = p.ApplicationName;
-
-            //Roles.CreateRole("Admin");
-            //Roles.AddUserToRole(User.Identity.Name, "Admin");
+            //var s = Roles.IsUserInRole("QQmgs_admin");
 
             //var users = Roles.GetUsersInRole("Admin");
             //var sss = Roles.GetRolesForUser(User.Identity.Name);
