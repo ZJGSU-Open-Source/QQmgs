@@ -1,6 +1,13 @@
 ﻿@using Twitter.App.Constants
 @model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
 
+@{
+    if (!Model.Any())
+    {
+        <h6 class="header col s12 light grey-text" style="text-align: center">尚未加入任何私密小组(●'◡'●)</h6>
+    }
+}
+
 @foreach (var group in Model)
 {
     <div>
