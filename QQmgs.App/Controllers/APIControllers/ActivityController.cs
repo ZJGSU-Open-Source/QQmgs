@@ -47,8 +47,10 @@ namespace Twitter.App.Controllers.APIControllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
             }
 
-            // assign avatar image full url
+            // assign avatar image full url & activity avatar image
+            activity.AvatarImage = activity.AvatarImage.RetrievePhotoThumnails();
             activity.CreatorAvatarImage = activity.CreatorAvatarImage.RetrievePhotoThumnails();
+
             foreach (var participation in activity.Participations)
             {
                 participation.AvatarImage =
@@ -74,10 +76,12 @@ namespace Twitter.App.Controllers.APIControllers
                         model.Classficiation == classcification && classcification != null || classcification == null)
                 .ToList();
 
-            // retrieve creators data
+            // retrieve creators data & activity avatar image
             foreach (var activity in activities)
             {
+                activity.AvatarImage = activity.AvatarImage.RetrievePhotoThumnails();
                 activity.CreatorAvatarImage = activity.CreatorAvatarImage.RetrievePhotoThumnails();
+
                 foreach (var participation in activity.Participations)
                 {
                     participation.AvatarImage =

@@ -644,6 +644,57 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Get", new { groupId = groupId, p = 1 });
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{groupId:int}/plugin/displaywall/{p:int}")]
+        public ActionResult PluginDisplayWall(int groupId, int p = 1)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
+            var tweets = group.Tweets;
+            if (tweets == null)
+            {
+                return HttpNotFound($"There's no tweet in the group with id {groupId}");
+            }
+
+            var tweetsViewModel = tweets.Select(t => new TweetViewModel
+            {
+                Id = t.Id,
+                Author = t.Author.RealName,
+                AuthorStatus = t.Author.Status,
+                IsEvent = t.IsEvent,
+                Text = t.Text,
+                UsersFavouriteCount = t.UsersFavourite.Count,
+                RepliesCount = t.Reply.Count,
+                RetweetsCount = t.Retweets.Count,
+                DatePosted = t.DatePosted,
+                GroupId = t.GroupId,
+                HasAvatarImage = t.Author.HasAvatarImage,
+                AvatarImageName = t.Author.AvatarImageName,
+                ReplyList = t.Reply.Select(reply => new ReplyViewModel
+                {
+                    Text = reply.Content,
+                    Id = reply.Id,
+                    PublishTime = reply.PublishTime,
+                    Author = reply.Author.RealName,
+                    AvatarImageName = reply.Author.AvatarImageName,
+                    HasAvatarImage = reply.Author.HasAvatarImage
+                }).ToList()
+            }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: 3);
+
+            // pass Group info to view
+            ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
+            ViewData["PageNumber"] = p;
+            ViewData["IsPrivate"] = group.IsPrivate ? "true" : "false";
+
+            return View(tweetsViewModel);
+        }
+
         private static bool IsNotGroupMember(Group group, string userId)
         {
             return group.Users.All(user => user.Id != userId);

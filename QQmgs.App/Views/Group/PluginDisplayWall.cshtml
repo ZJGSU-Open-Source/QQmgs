@@ -1,0 +1,83 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model PagedList.IPagedList<Twitter.App.Models.ViewModels.TweetViewModel>
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>全球某工商墙</title>
+
+    <!-- JavaScript Baidu Analytics -->
+    @*<script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?a6245c7118c12f7de3692c2972eb41b6";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>*@
+
+    <!-- CSS -->
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+    <div style="background-size: 100% auto; background-repeat: no-repeat; background-image: url(http://picview.info/download/20150302/abstract-code-black-programming-technology-computer-1024x768.jpg);">
+        @*<img src="~/img/Photo/pro.jpg" style="width:100%; height:100%; " alt="" />*@
+        <div>
+            <h2 style="text-align: center; margin: auto; color: white">信息学院迎新晚会 · 全球某工商墙</h2>
+
+            <br/>
+
+            @foreach (var tweet in Model)
+            {
+                <div class="row">
+                    <div class="col s3" style="text-align: center">
+                        <div class="row">
+                            <img style="max-width: 150px; vertical-align: middle" src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" >
+                        </div>
+                        <div class="row">
+                            <span class="white-text" style="font-size: 40px; text-shadow: 1px 1px 2px #ccc;">
+                                @tweet.Author
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col s7" style="text-align: left">
+                        <span class="white-text" style="font-size: 120px; text-shadow: 1px 1px 2px #ccc;">
+                            @tweet.Text
+                        </span>
+                    </div>
+                    <div class="col s1" style="text-align: left">
+                        <span class="white-text" style="font-size: 60px; text-shadow: 1px 1px 2px #ccc;">
+                            @tweet.DatePosted.ToString("t")
+                        </span>
+                    </div>
+                </div>
+            }
+
+            @*<div class="paging">
+                <ul class="pagination" style="margin: auto; padding-bottom: 20px">
+                    @{
+                        var data = Model as IPagedList<TweetViewModel>;
+                    }
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+                </ul>
+            </div>*@
+            <br />
+            <br />
+            <br />
+
+        </div>
+    </div>
+
+
+</body>
+</html>

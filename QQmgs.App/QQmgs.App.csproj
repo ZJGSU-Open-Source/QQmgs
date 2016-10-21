@@ -374,7 +374,9 @@
     <Content Include="img\Photo\avatar.png" />
     <Content Include="img\Photo\FlowerInZJSU.jpg" />
     <Content Include="img\Photo\friday_party.gif" />
+    <Content Include="img\Photo\geek.jpeg" />
     <Content Include="img\Photo\huang.gif" />
+    <Content Include="img\Photo\pro.jpg" />
     <Content Include="img\Photo\Sun_Flower_in_ZJSU.jpg" />
     <Content Include="img\popup.jpg" />
     <Content Include="img\pricing1.jpg" />
@@ -558,6 +560,7 @@
     <Content Include="Views\Activity\MobileIndex.cshtml" />
     <Content Include="Views\M\Activity.cshtml" />
     <Content Include="Views\Group\GetParticipatedGroups.cshtml" />
+    <Content Include="Views\Group\PluginDisplayWall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
