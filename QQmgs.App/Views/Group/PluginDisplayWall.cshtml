@@ -1,5 +1,6 @@
 ﻿@using PagedList
 @using PagedList.Mvc
+@using Twitter.App.Constants
 @using Twitter.App.Models.ViewModels
 @model PagedList.IPagedList<Twitter.App.Models.ViewModels.TweetViewModel>
 
@@ -30,33 +31,47 @@
 </head>
 
 <body>
+
+    <style type="text/css">
+        .DisplayContent {
+        }
+    </style>
+
     <div style="background-size: 100% auto; background-repeat: no-repeat; background-image: url(http://picview.info/download/20150302/abstract-code-black-programming-technology-computer-1024x768.jpg);">
         @*<img src="~/img/Photo/pro.jpg" style="width:100%; height:100%; " alt="" />*@
         <div>
             <h2 style="text-align: center; margin: auto; color: white">信息学院迎新晚会 · 全球某工商墙</h2>
 
-            <br/>
+            <br />
+            <br />
 
             @foreach (var tweet in Model)
             {
                 <div class="row">
                     <div class="col s3" style="text-align: center">
                         <div class="row">
-                            <img style="max-width: 150px; vertical-align: middle" src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" >
+                            @if (tweet.HasAvatarImage)
+                            {
+                                <img src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" style="max-width: 150px; vertical-align: middle">
+                            }
+                            else
+                            {
+                                <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img" style="max-width: 150px; vertical-align: middle">
+                            }
                         </div>
                         <div class="row">
-                            <span class="white-text" style="font-size: 40px; text-shadow: 1px 1px 2px #ccc;">
+                            <span class="white-text" style="font-size: 2.5em; text-shadow: 1px 1px 2px #ccc;">
                                 @tweet.Author
                             </span>
                         </div>
                     </div>
-                    <div class="col s7" style="text-align: left">
-                        <span class="white-text" style="font-size: 120px; text-shadow: 1px 1px 2px #ccc;">
+                    <div class="col s8" style="text-align: left">
+                        <div class="white-text DisplayContent">
                             @tweet.Text
-                        </span>
+                        </div>
                     </div>
                     <div class="col s1" style="text-align: left">
-                        <span class="white-text" style="font-size: 60px; text-shadow: 1px 1px 2px #ccc;">
+                        <span class="white-text" style="font-size: 2.5em; text-shadow: 1px 1px 2px #ccc;">
                             @tweet.DatePosted.ToString("t")
                         </span>
                     </div>
@@ -64,13 +79,13 @@
             }
 
             @*<div class="paging">
-                <ul class="pagination" style="margin: auto; padding-bottom: 20px">
-                    @{
-                        var data = Model as IPagedList<TweetViewModel>;
-                    }
-                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
-                </ul>
-            </div>*@
+                    <ul class="pagination" style="margin: auto; padding-bottom: 20px">
+                        @{
+                            var data = Model as IPagedList<TweetViewModel>;
+                        }
+                        @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+                    </ul>
+                </div>*@
             <br />
             <br />
             <br />
@@ -78,6 +93,29 @@
         </div>
     </div>
 
+    <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
+
+<script language="javascript">
+    
+    $(function() {
+        var $quotes = $(".DisplayContent");
+        for (var $quote in $quotes) {
+            var $numWords = $quote.text().split(" ").length;
+
+            if (($numWords >= 1) && ($numWords < 10)) {
+                $quote.css("font-size", "5rem");
+            } else if (($numWords >= 10) && ($numWords < 20)) {
+                $quote.css("font-size", "3rem");
+            } else if (($numWords >= 20) && ($numWords < 30)) {
+                $quote.css("font-size", "2.3rem");
+            } else if (($numWords >= 30) && ($numWords < 40)) {
+                $quote.css("font-size", "2rem");
+            } else {
+                $quote.css("font-size", "1.8rem");
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
