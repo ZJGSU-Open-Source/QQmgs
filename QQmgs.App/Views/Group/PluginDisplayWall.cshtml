@@ -8,6 +8,11 @@
     Layout = "";
 }
 
+@{
+    var lastPage = Math.Max(1, (int)ViewData["PageNumber"] - 1);
+    var nextPage = (int)ViewData["PageNumber"] + 1;
+}
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -16,15 +21,15 @@
     <title>全球某工商墙</title>
 
     <!-- JavaScript Baidu Analytics -->
-    @*<script>
-            var _hmt = _hmt || [];
-            (function() {
-                var hm = document.createElement("script");
-                hm.src = "//hm.baidu.com/hm.js?a6245c7118c12f7de3692c2972eb41b6";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();
-        </script>*@
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?a6245c7118c12f7de3692c2972eb41b6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
     <!-- CSS -->
     <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -35,87 +40,92 @@
     <style type="text/css">
         .DisplayContent {
         }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
     </style>
-
-    <div style="background-size: 100% auto; background-repeat: no-repeat; background-image: url(http://picview.info/download/20150302/abstract-code-black-programming-technology-computer-1024x768.jpg);">
+    <div style="position:fixed; width: 100%; height: 100%;background: url(http://picview.info/download/20150302/abstract-code-black-programming-technology-computer-1024x768.jpg) no-repeat center center; background-size: cover; z-index: 1;"></div>
+    <div style="position: relative; z-index: 999; overflow: hidden; width: 100%; height: 100%;">
         @*<img src="~/img/Photo/pro.jpg" style="width:100%; height:100%; " alt="" />*@
-        <div>
-            <h2 style="text-align: center; margin: auto; color: white">信息学院迎新晚会 · 全球某工商墙</h2>
 
-            <br />
-            <br />
+        <h2 style="text-align: center; margin: auto; color: white">信息学院迎新晚会 · 全球某工商墙</h2>
 
-            @foreach (var tweet in Model)
+        <br />
+        <br />
+
+        @foreach (var tweet in Model)
             {
-                <div class="row">
-                    <div class="col s3" style="text-align: center">
-                        <div class="row">
-                            @if (tweet.HasAvatarImage)
-                            {
-                                <img src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" style="max-width: 150px; vertical-align: middle">
-                            }
-                            else
-                            {
-                                <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img" style="max-width: 150px; vertical-align: middle">
-                            }
-                        </div>
-                        <div class="row">
-                            <span class="white-text" style="font-size: 2.5em; text-shadow: 1px 1px 2px #ccc;">
-                                @tweet.Author
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col s8" style="text-align: left">
-                        <div class="white-text DisplayContent">
-                            @tweet.Text
-                        </div>
-                    </div>
-                    <div class="col s1" style="text-align: left">
-                        <span class="white-text" style="font-size: 2.5em; text-shadow: 1px 1px 2px #ccc;">
-                            @tweet.DatePosted.ToString("t")
-                        </span>
-                    </div>
-                </div>
-            }
-
-            @*<div class="paging">
-                    <ul class="pagination" style="margin: auto; padding-bottom: 20px">
-                        @{
-                            var data = Model as IPagedList<TweetViewModel>;
+            <div style="display: flex; display: -webkit-flex; color: #fff; font-size: 5rem; max-height: 230px; overflow-y: hidden;">
+                <div style="flex: 3; align-self: center; text-align: center;">
+                    <div style="line-height: 0">
+                        @if (tweet.HasAvatarImage)
+                        {
+                            <img src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" style="max-width: 150px;">
                         }
-                        @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
-                    </ul>
-                </div>*@
-            <br />
-            <br />
-            <br />
+                        else
+                        {
+                            <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img" style="max-width: 150px;">
+                        }
+                    </div>
+                    <p class="white-text" style="margin: 0; padding-bottom: 10px;font-size: 0.5em; text-shadow: 1px 1px 2px #ccc;">
+                        @tweet.Author
+                    </p>
+                </div>
+                <div style="flex: 8;">
+                    <div class="white-text DisplayContent">@tweet.Text</div>
+                </div>
+                <div style="flex: 1.2; align-self: center;">
+                    <span class="white-text" style="font-size: 0.6em; text-shadow: 1px 1px 2px #ccc;">
+                        @tweet.DatePosted.ToString("t")
+                    </span>
+                </div>
+            </div>
+        }
+        @*<div class="paging">
+                <ul class="pagination" style="margin: auto; padding-bottom: 20px">
+                    @{
+                        var data = Model as IPagedList<TweetViewModel>;
+                    }
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+                </ul>
+            </div>*@
+        <br />
+        <br />
 
+        <div style="position: absolute; bottom: 0; right:0px;">
+            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"] , p = lastPage})" class="waves-effect waves-light btn-large" style="padding: 0 0.4em; font-size: 40px; margin-right: 7px;"><</a>
+            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"] , p = nextPage})" class="waves-effect waves-light btn-large" style="padding: 0 0.4em; font-size: 40px;">></a>
         </div>
+
     </div>
 
     <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
 
-<script language="javascript">
-    
-    $(function() {
-        var $quotes = $(".DisplayContent");
-        for (var $quote in $quotes) {
-            var $numWords = $quote.text().split(" ").length;
+    <script language="javascript">
 
-            if (($numWords >= 1) && ($numWords < 10)) {
-                $quote.css("font-size", "5rem");
-            } else if (($numWords >= 10) && ($numWords < 20)) {
-                $quote.css("font-size", "3rem");
-            } else if (($numWords >= 20) && ($numWords < 30)) {
-                $quote.css("font-size", "2.3rem");
-            } else if (($numWords >= 30) && ($numWords < 40)) {
-                $quote.css("font-size", "2rem");
-            } else {
-                $quote.css("font-size", "1.8rem");
-            }
-        }
-    });
-</script>
+        $(function () {
+            var $quotes = $(".DisplayContent");
+            $quotes.each(function (index, self) {
+                var $numWords = $(self).text().split("").length;
+
+                if (($numWords >= 1) && ($numWords < 10)) {
+                    $(self).css("font-size", "7rem");
+                } else if (($numWords >= 10) && ($numWords < 20)) {
+                    $(self).css("font-size", "5rem");
+                } else if (($numWords >= 20) && ($numWords < 30)) {
+                    $(self).css("font-size", "4rem");
+                } else if (($numWords >= 30) && ($numWords < 40)) {
+                    $(self).css("font-size", "3rem");
+                } else if (($numWords >= 40) && ($numWords < 65)) {
+                    $(self).css("font-size", "2.5rem");
+                } else {
+                    $(self).css("font-size", "2rem");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
