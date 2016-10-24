@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
@@ -23,7 +24,6 @@ using Twitter.Models;
 
 namespace Twitter.App.Controllers.APIControllers
 {
-    [CrossSite]
     [RoutePrefix("api/activity")]
     [Authorize]
     public class ActivityController : TwitterApiController

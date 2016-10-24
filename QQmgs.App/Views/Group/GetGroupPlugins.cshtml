@@ -65,14 +65,13 @@
             {
                 <li><a href="#">签到(开发中)</a></li>
             }
-            @if (Model.HasDisplayWall)
-            {
-                <li><a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"], p = 1})">全球某工商墙</a></li>
-            }
+            @*@if (Model.HasDisplayWall)*@
+            <li><a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"], p = 1})">全球某工商墙</a></li>
             @if (Model.HasInfoFocus)
             {
                 <li><a href="#">信息聚焦(开发中)</a></li>
             }
+            <li><a href="#">管理应用(开发中)</a></li>
         </ul>
     </div>
 </div>

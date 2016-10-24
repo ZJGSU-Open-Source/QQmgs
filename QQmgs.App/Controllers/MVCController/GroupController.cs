@@ -708,6 +708,7 @@ namespace Twitter.App.Controllers
             ViewData["GroupName"] = group.Name;
             ViewData["GroupId"] = groupId;
             ViewData["PageNumber"] = p;
+            ViewData["TweetsCount"] = tweets.Count;
             ViewData["IsPrivate"] = group.IsPrivate ? "true" : "false";
 
             return View(tweetsViewModel);

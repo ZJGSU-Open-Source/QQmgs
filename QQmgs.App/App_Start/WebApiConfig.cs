@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Twitter.App
 {
@@ -17,11 +18,15 @@ namespace Twitter.App
             config.Routes.MapHttpRoute(
                 "DefaultApi",
                 "api/{controller}/{id}",
-                new {id = RouteParameter.Optional});
+                new { id = RouteParameter.Optional });
 
             // Enforce HTTPS
             // TODO: enable global HTTPS
             // config.Filters.Add(new Filters.RequireHttpsAttribute());
+
+            // Enable CORS
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
         }
     }
 }

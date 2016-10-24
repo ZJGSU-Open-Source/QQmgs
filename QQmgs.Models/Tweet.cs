@@ -19,7 +19,7 @@ namespace Twitter.Models
         public int Id { get; set; }
 
         [Required]
-        [MinLength(2)]
+        [MinLength(1)]
         [MaxLength(250)]
         public string Text { get; set; }
 
