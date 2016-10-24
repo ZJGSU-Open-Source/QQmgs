@@ -55,6 +55,14 @@ namespace Twitter.Data
                 .HasForeignKey(r => r.AuthorId)
                 .WillCascadeOnDelete(false);
 
+            // group plugin
+            modelBuilder.Entity<Group>()
+                .HasOptional(g => g.GroupPlugin)
+                .WithRequired(plugin => plugin.Group);
+
+            modelBuilder.Entity<GroupPlugin>()
+                .HasKey(plugin => plugin.GroupId);
+
             modelBuilder.Entity<Tweet>()
                 .HasRequired(t => t.Group)
                 .WithMany(u => u.Tweets)

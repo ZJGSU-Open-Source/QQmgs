@@ -210,7 +210,7 @@ namespace Twitter.App.BusinessLogic
 
         #endregion
 
-        #region User View Model
+        #region Group View Model
 
         public static GroupVieModels ToGroupVieModel(this Group g)
         {
@@ -280,7 +280,8 @@ namespace Twitter.App.BusinessLogic
                         PublishTime = reply.PublishTime,
                         Author = reply.Author.RealName,
                         HasAvatarImage = reply.Author.HasAvatarImage,
-                        AvatarImageName = reply.Author.AvatarImageName.RetrievePhotoThumnails(reply.Author.HasAvatarImage)
+                        AvatarImageName =
+                            reply.Author.AvatarImageName.RetrievePhotoThumnails(reply.Author.HasAvatarImage)
                     }).ToList()
                 }),
                 JoinedActivities = user.JoinedActivities.Select(activity => new ActivityViewModel
@@ -303,7 +304,8 @@ namespace Twitter.App.BusinessLogic
                         AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
-                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
+                    CreatorAvatarImage =
+                        activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
                     Organizer = activity.Organizer,
@@ -329,7 +331,8 @@ namespace Twitter.App.BusinessLogic
                         AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
-                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
+                    CreatorAvatarImage =
+                        activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
                     Organizer = activity.Organizer,
@@ -511,7 +514,8 @@ namespace Twitter.App.BusinessLogic
                         AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
-                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
+                    CreatorAvatarImage =
+                        activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
                     Organizer = activity.Organizer,
@@ -556,7 +560,8 @@ namespace Twitter.App.BusinessLogic
                         AvatarImage = participant.AvatarImageName.RetrievePhotoThumnails(participant.HasAvatarImage),
                         HasAvatarImage = participant.HasAvatarImage
                     }).ToList(),
-                    CreatorAvatarImage = activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
+                    CreatorAvatarImage =
+                        activity.Creator.AvatarImageName.RetrievePhotoThumnails(activity.Creator.HasAvatarImage),
                     HasCreatorAvatarImage = activity.Creator.HasAvatarImage,
                     IsDisplay = activity.IsDisplay,
                     Organizer = activity.Organizer,
@@ -591,5 +596,20 @@ namespace Twitter.App.BusinessLogic
         }
 
         #endregion
+
+        #region Group Plugins View Model
+
+        public static GroupPluginViewModel ToGroupPluginViewModel(this GroupPlugin plugin)
+        {
+            return new GroupPluginViewModel
+            {
+                HasCheckInPad = plugin.HasCheckInPad,
+                HasDisplayWall = plugin.HasDisplayWall,
+                HasInfoFocus = plugin.HasInfoFocus
+            };
+        }
+
+        #endregion
+
     }
 }

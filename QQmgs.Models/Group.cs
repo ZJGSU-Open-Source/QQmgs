@@ -49,6 +49,7 @@ namespace Twitter.Models
 
         public virtual ICollection<User> Users { get; set; }
 
+        public virtual GroupPlugin GroupPlugin { get; set; }
     }
 
     public enum Classification

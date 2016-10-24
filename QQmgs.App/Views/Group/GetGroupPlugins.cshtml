@@ -1,0 +1,78 @@
+﻿@model Twitter.App.Models.ViewModels.GroupPluginViewModel
+
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    a, img {
+        border: 0;
+    }
+
+    /*body {
+        font: 12px/180% Arial, Helvetica, sans-serif, "微软雅黑";
+    }*/
+
+    .pluginMenu {
+        margin: 0px 5%;
+        width: 720px;
+        position: fixed;
+    }
+
+    .navbox {
+        float: left;
+    }
+
+    ul.nav {
+        width: 200px;
+        padding: 60px 0 60px 0;
+        background: url() no-repeat;
+    }
+
+        ul.nav li {
+            margin: 5px 0 0 0;
+        }
+
+            ul.nav li a {
+                background: #cbcbcb url() no-repeat;
+                color: #174867;
+                padding: 7px 15px 7px 15px;
+                width: 100px;
+                display: block;
+                text-decoration: none;
+                -webkit-transition: all 0.3s ease-out;
+                -moz-transition: all 0.3s ease-out;
+                -o-transition: all 0.3s ease-out;
+                -webkit-box-shadow: 2px 2px 4px #888;
+                -moz-box-shadow: 2px 2px 4px #888;
+                -o-box-shadow: 2px 2px 4px #888;
+            }
+
+                ul.nav li a:hover {
+                    background: #ebebeb url() no-repeat;
+                    color: #67a5cd;
+                    padding: 7px 15px 7px 30px;
+                }
+</style>
+
+<div class="pluginMenu hide-on-med-and-down" style="font: 12px/180% Arial, Helvetica, sans-serif;">
+    <div class="navbox">
+        <ul class="nav">
+            <li><a href="#">小组应用</a></li>
+            @if (Model.HasCheckInPad)
+            {
+                <li><a href="#">签到(开发中)</a></li>
+            }
+            @if (Model.HasDisplayWall)
+            {
+                <li><a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"], p = 1})">全球某工商墙</a></li>
+            }
+            @if (Model.HasInfoFocus)
+            {
+                <li><a href="#">信息聚焦(开发中)</a></li>
+            }
+        </ul>
+    </div>
+</div>

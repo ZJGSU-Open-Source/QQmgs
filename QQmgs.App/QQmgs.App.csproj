@@ -310,6 +310,7 @@
     <Compile Include="Models\ViewModels\ActivityViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseReviewVideModel.cs" />
     <Compile Include="Models\ViewModels\DevLogViewModel.cs" />
+    <Compile Include="Models\ViewModels\GroupPluginViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupVieModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\PhotoViewModel.cs" />
@@ -561,6 +562,7 @@
     <Content Include="Views\M\Activity.cshtml" />
     <Content Include="Views\Group\GetParticipatedGroups.cshtml" />
     <Content Include="Views\Group\PluginDisplayWall.cshtml" />
+    <Content Include="Views\Group\GetGroupPlugins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

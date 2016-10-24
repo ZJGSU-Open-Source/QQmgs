@@ -644,6 +644,24 @@ namespace Twitter.App.Controllers
             return RedirectToAction("Get", new { groupId = groupId, p = 1 });
         }
 
+        [HttpGet]
+        [Route("GroupPlugins")]
+        public ActionResult GetGroupPlugins(int groupId)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{groupId} not found");
+            }
+
+            var plugins = group.GroupPlugin ?? new GroupPlugin();
+            var pluginsViewModel = plugins.ToGroupPluginViewModel();
+
+            ViewData["GroupId"] = groupId;
+
+            return PartialView(pluginsViewModel);
+        }
+
         [AllowAnonymous]
         [HttpGet]
         [Route("{groupId:int}/plugin/displaywall/{p:int}")]

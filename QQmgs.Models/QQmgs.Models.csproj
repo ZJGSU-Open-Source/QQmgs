@@ -62,6 +62,7 @@
     <Compile Include="DataAnnotations\CustomRequiredEmail.cs" />
     <Compile Include="DevLog.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="GroupPlugin.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Photo.cs" />
