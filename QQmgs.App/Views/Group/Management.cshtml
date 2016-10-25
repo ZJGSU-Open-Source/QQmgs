@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<Twitter.App.Models.ViewModels.TweetViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+            <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+            <a href="#" class="breadcrumb">后台内容审查</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h5 class="center" style="color: orange">@ViewData["GroupName"] 后台内容审查</h5>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th data-field="1">上墙编号</th>
+                <th data-field="2">用户</th>
+                <th data-field="3">联系方式</th>
+                <th data-field="4">发布内容</th>
+                <th data-field="5">发布时间</th>
+                <th data-field="6">是否上墙</th>
+                <th data-field="7">下墙/上墙</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var tweet in Model)
+            {
+                <tr>
+                    <td style="max-width: 30px">@tweet.Id</td>
+                    <td>@tweet.Author</td>
+                    <td>@tweet.AuthorPhoneNumber</td>
+                    <td style="max-width: 300px">@tweet.Text</td>
+                    <td>@tweet.DatePosted.ToString("hh:mm:ss")</td>
+                    <td>
+                        @if (tweet.IsSoftDeleted)
+                        {
+                            <a>未展示</a>
+                        }
+                        else
+                        {
+                            <a>展示中 ing</a>
+                        }
+                    </td>
+                    <td>
+                        @if (tweet.IsSoftDeleted)
+                        {
+                            <a href="@Url.Action("ManagementOnOrOff", new {groupId = ViewData["GroupId"], tweetId = @tweet.Id})" class="btn waves-effect waves-light" style="background-color: blueviolet">上墙</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ManagementOnOrOff", new {groupId = ViewData["GroupId"], tweetId = @tweet.Id})" class="btn waves-effect waves-light">下墙</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

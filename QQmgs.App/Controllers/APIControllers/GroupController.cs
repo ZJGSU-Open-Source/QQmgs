@@ -62,7 +62,7 @@ namespace Twitter.App.Controllers.APIControllers
                 Id = t.Id,
                 Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
-                IsEvent = t.IsEvent,
+                IsSoftDeleted = t.IsSoftDeleted,
                 Text = t.Text,
                 UsersFavouriteCount = t.UsersFavourite.Count,
                 RepliesCount = t.Reply.Count,

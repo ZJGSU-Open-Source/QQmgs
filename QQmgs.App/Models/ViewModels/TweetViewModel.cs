@@ -19,7 +19,7 @@ namespace Twitter.App.Models.ViewModels
         public string AuthorStatus { get; set; }
 
         [JsonProperty("is_event")]
-        public bool IsEvent { get; set; }
+        public bool IsSoftDeleted { get; set; }
 
         [JsonProperty("text")]
         public string Text { get; set; }

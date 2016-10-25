@@ -572,8 +572,9 @@
     <Content Include="Views\Group\GetParticipatedGroups.cshtml" />
     <Content Include="Views\Group\PluginDisplayWall.cshtml" />
     <Content Include="Views\Group\GetGroupPlugins.cshtml" />
-    <Content Include="Views\Group\GetGroupDisplayWallRaffle.cshtml" />
-    <Content Include="Views\Group\GetGroupDisplayWallRaffleAwardedPersonResult.cshtml" />
+    <Content Include="Views\Group\PluginDisplayWallRaffle.cshtml" />
+    <Content Include="Views\Group\PluginDisplayWallRaffleResult.cshtml" />
+    <Content Include="Views\Group\Management.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

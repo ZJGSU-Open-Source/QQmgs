@@ -44,7 +44,7 @@
     }
     ++index;
 
-    if (tweet.IsEvent)
+    if (tweet.IsSoftDeleted)
     {
         Html.RenderPartial("../Tweets/PushInformation", tweet);
     }

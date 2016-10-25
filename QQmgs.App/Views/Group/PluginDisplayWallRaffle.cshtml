@@ -1,4 +1,4 @@
-﻿@model Twitter.App.Models.ViewModels.UserViewModel
+﻿@model System.Collections.Generic.List<Twitter.App.Models.ViewModels.UserViewModel>
 @using System.Text
 @using Twitter.App.Constants
 
@@ -6,11 +6,6 @@
     Layout = "";
 }
 
-@{
-    var phoneNumber = new StringBuilder(Model.PhoneNumber);
-    phoneNumber.Remove(3, 4);
-    phoneNumber.Insert(3, "****");
-}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -55,12 +50,18 @@
         <br />
         <br />
 
+        @foreach (var user in Model)
+        {
+            var phoneNumber = new StringBuilder(user.PhoneNumber);
+            phoneNumber.Remove(3, 4);
+            phoneNumber.Insert(3, "****");
+
             <div style="display: flex; justify-content: space-around; display: -webkit-flex; color: #fff; font-size: 5rem; max-height: 200px; overflow: hidden;">
                 <div style="box-sizing: border-box;width:24%; align-self: center; text-align: center;">
                     <div style="line-height: 0">
-                        @if (Model.HasAvatarImage)
+                        @if (user.HasAvatarImage)
                         {
-                            <img src="~/img/Uploads/Thumbnails/@Model.AvatarImageName" alt="" class="circle responsive-img" style="max-width: 137px;">
+                            <img src="~/img/Uploads/Thumbnails/@user.AvatarImageName" alt="" class="circle responsive-img" style="max-width: 137px;">
                         }
                         else
                         {
@@ -68,18 +69,19 @@
                         }
                     </div>
                     <p class="white-text" style="margin: 0; padding-bottom: 10px;font-size: 0.5em; text-shadow: 1px 1px 2px #ccc;">
-                        @Model.RealName
+                        @user.RealName
                     </p>
                 </div>
                 <div style="width:60%;box-sizing: border-box; line-height: 1.2">
                     <div class="white-text DisplayContent" style="word-wrap:break-word;">@phoneNumber</div>
                 </div>
             </div>
+        }
         <br />
         <br />
 
         <div class="center">
-            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"], p = 1})" class="btn btn-default">返回首页</a>
+            <a href="@Url.Action("PluginDisplayWallRaffleResult", new {groupId = ViewData["GroupId"]})" class="btn btn-default">开始抽奖</a>
         </div>
 
         <div style="position: absolute; bottom: 0; left:15px;">

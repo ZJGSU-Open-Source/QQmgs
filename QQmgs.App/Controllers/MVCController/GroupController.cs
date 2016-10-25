@@ -93,7 +93,7 @@ namespace Twitter.App.Controllers
             // get posted tweets
             var tweets = Data.Users.Find(loggedUserId).Tweets;
             var groupIds = tweets.Select(tweet => tweet.GroupId).Distinct().ToList();
-            
+
             // get posted replies
             var replies = Data.Users.Find(loggedUserId).Replies;
             var tweetIds = replies.Select(reply => reply.TweetId).Distinct();
@@ -143,7 +143,7 @@ namespace Twitter.App.Controllers
                 Id = t.Id,
                 Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
-                IsEvent = t.IsEvent,
+                IsSoftDeleted = t.IsSoftDeleted,
                 Text = t.Text,
                 UsersFavouriteCount = t.UsersFavourite.Count,
                 RepliesCount = t.Reply.Count,
@@ -161,7 +161,9 @@ namespace Twitter.App.Controllers
                     AvatarImageName = reply.Author.AvatarImageName,
                     HasAvatarImage = reply.Author.HasAvatarImage
                 }).ToList()
-            }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
+            })
+            .Where(model => model.IsSoftDeleted == false)
+            .OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
             // pass Group info to view
             ViewData["GroupName"] = group.Name;
@@ -217,7 +219,7 @@ namespace Twitter.App.Controllers
             this.Data.Group.Add(group);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Get", new {groupId = group.Id, p = 1});
+            return RedirectToAction("Get", new { groupId = group.Id, p = 1 });
         }
 
         [HttpGet]
@@ -525,7 +527,7 @@ namespace Twitter.App.Controllers
             // check target user group
             if (user.Groups.Any(g => g.Id == model.GroupId))
             {
-                return RedirectToAction("Get", new {groupId = model.GroupId, p = 1});
+                return RedirectToAction("Get", new { groupId = model.GroupId, p = 1 });
             }
 
             user.Groups.Add(group);
@@ -645,6 +647,90 @@ namespace Twitter.App.Controllers
         }
 
         [HttpGet]
+        [Route("{groupId:int}/management/{p:int}")]
+        public ActionResult Management(int groupId, int p = 1)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
+            var loggedUser = User.Identity.GetUserId();
+            var loggedUserName = User.Identity.GetUserName();
+            if (!(loggedUser == group.CreaterId || loggedUserName == "13588201467"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // check private group
+            if (group.IsPrivate)
+            {
+                var loggedUserId = this.User.Identity.GetUserId();
+
+                var foundUser = group.Users.Any(user => user.Id == loggedUserId);
+                if (foundUser == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            var tweets = group.Tweets;
+            if (tweets == null)
+            {
+                return HttpNotFound($"There's no tweet in the group with id {groupId}");
+            }
+
+            var tweetsViewModel = tweets.Select(t => new TweetViewModel
+            {
+                Id = t.Id,
+                Author = t.Author.RealName,
+                AuthorStatus = t.Author.Status,
+                IsSoftDeleted = t.IsSoftDeleted,
+                Text = t.Text,
+                AuthorPhoneNumber = t.Author.UserName,
+                UsersFavouriteCount = t.UsersFavourite.Count,
+                RepliesCount = t.Reply.Count,
+                RetweetsCount = t.Retweets.Count,
+                DatePosted = t.DatePosted,
+                GroupId = t.GroupId,
+                HasAvatarImage = t.Author.HasAvatarImage,
+                AvatarImageName = t.Author.AvatarImageName,
+                ReplyList = t.Reply.Select(reply => new ReplyViewModel
+                {
+                    Text = reply.Content,
+                    Id = reply.Id,
+                    PublishTime = reply.PublishTime,
+                    Author = reply.Author.RealName,
+                    AvatarImageName = reply.Author.AvatarImageName,
+                    HasAvatarImage = reply.Author.HasAvatarImage
+                }).ToList()
+            }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: 1000);
+
+            // pass Group info to view
+            ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
+            ViewData["PageNumber"] = p;
+
+            return this.View(tweetsViewModel);
+        }
+
+        public ActionResult ManagementOnOrOff(int groupId, int tweetId)
+        {
+            var tweet = Data.Tweets.Find(tweetId);
+            if (tweet == null)
+            {
+                return HttpNotFound($"There's no tweet with id {tweetId}");
+            }
+
+            tweet.IsSoftDeleted = !tweet.IsSoftDeleted;
+            Data.Tweets.Update(tweet);
+            Data.SaveChanges();
+
+            return RedirectToAction("Management", new { groupId = groupId, p = 1 });
+        }
+
+        [HttpGet]
         [Route("GroupPlugins")]
         public ActionResult GetGroupPlugins(int groupId)
         {
@@ -684,7 +770,7 @@ namespace Twitter.App.Controllers
                 Id = t.Id,
                 Author = t.Author.RealName,
                 AuthorStatus = t.Author.Status,
-                IsEvent = t.IsEvent,
+                IsSoftDeleted = t.IsSoftDeleted,
                 Text = t.Text,
                 UsersFavouriteCount = t.UsersFavourite.Count,
                 RepliesCount = t.Reply.Count,
@@ -702,14 +788,15 @@ namespace Twitter.App.Controllers
                     AvatarImageName = reply.Author.AvatarImageName,
                     HasAvatarImage = reply.Author.HasAvatarImage
                 }).ToList()
-            }).OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: 3);
+            })
+            .Where(model => model.IsSoftDeleted == false)
+            .OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: 3);
 
             // pass Group info to view
             ViewData["GroupName"] = group.Name;
             ViewData["GroupId"] = groupId;
             ViewData["PageNumber"] = p;
             ViewData["TweetsCount"] = tweets.Count;
-            ViewData["IsPrivate"] = group.IsPrivate ? "true" : "false";
 
             return View(tweetsViewModel);
         }
@@ -717,7 +804,7 @@ namespace Twitter.App.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("{groupId:int}/plugin/displaywall/raffle")]
-        public ActionResult GetGroupDisplayWallRaffle(int groupId)
+        public ActionResult PluginDisplayWallRaffle(int groupId)
         {
             var group = Data.Group.Find(groupId);
             if (group == null)
@@ -745,7 +832,7 @@ namespace Twitter.App.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("{groupId:int}/plugin/displaywall/raffleResult")]
-        public ActionResult GetGroupDisplayWallRaffleAwardedPersonResult(int groupId)
+        public ActionResult PluginDisplayWallRaffleResult(int groupId)
         {
             var group = Data.Group.Find(groupId);
             if (group == null)

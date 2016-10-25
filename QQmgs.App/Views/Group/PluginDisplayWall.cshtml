@@ -18,8 +18,8 @@
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="refresh" content="1120">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="refresh" content="20">
 
     <title>全球某工商墙</title>
 
@@ -47,46 +47,49 @@
         html, body {
             width: 100%;
             height: 100%;
+            overflow: hidden;
+            font-family: '幼圆';
+            min-width: 900px;
         }
     </style>
-    <div style="position:fixed; width: 100%; height: 100%;background: url(http://picview.info/download/20150302/abstract-code-black-programming-technology-computer-1024x768.jpg) no-repeat center center; background-size: cover; z-index: 1;"></div>
-    <div style="position: relative; z-index: 999; overflow: hidden; width: 100%; height: 100%;">
-        @*<img src="~/img/Photo/pro.jpg" style="width:100%; height:100%; " alt="" />*@
-
-        <h2 style="text-align: center; margin: auto; color: white; font-size: 2.8rem">@ViewData["GroupName"] · 全球某工商墙 (@tweetsCount 条信息)</h2>
-
-        <br />
-        <br />
-
+    <div style="position:fixed;width:100%;height:100%;background:url(http://picview.info/download/20150302/abstract-code-black-programming-technology-computer-1024x768.jpg) no-repeat center center; background-size:cover;z-index:1;"></div>
+    <div class="J-bigcode" style="position:absolute;z-index:9999;display:none;width:100%;height:100%;justify-content:center;align-items:center;background:rgba(0,0,0,.8);"><img src="code.jpg" class="J-bigcodeimg" style="width:80vh;" /></div>
+    <div style="width:100%;height:100%;position:absolute;z-index:999;">
+        <!--@*<img src="~/img/Photo/pro.jpg" style="width:100%; height:100%; " alt="" />*@-->
+        <div style="height:10vh;line-height:10vh;text-align:center;position:relative;">
+            <span style="color:#fff;font-size:2.8rem">@ViewData["GroupName"] · 全球某工商墙</span>
+            <div style="position:absolute;right:10vw;top:2.7vh;color:#fff;line-height:20px;">
+                @tweetsCount<br>条信息
+            </div>
+            <div style="position:absolute;right:1vw;top:1vh;cursor:pointer;">
+                <img src="code.jpg" style="height:8vh;" class="J-code" />
+            </div>
+        </div>
         @foreach (var tweet in Model)
             {
-            <div style="display: flex; justify-content: space-around; display: -webkit-flex; color: #fff; font-size: 5rem; max-height: 200px; overflow: hidden;">
-                <div style="box-sizing: border-box;width:24%; align-self: center; text-align: center;">
-                    <div style="line-height: 0">
+            <div style="display:flex;display:-webkit-flex;justify-content:flex-start;align-items:center;width:90vw;height:25vh;background:rgba(40,40,40,.5);margin:1vh auto;box-sizing: border-box;position:relative;border-radius:10px;box-shadow:0 0 4px #4e4848;">
+                <div style="align-self:center;text-align:center;width:200px;flex-shrink:0;">
+                    <div style="line-height:0;width:100%;">
                         @if (tweet.HasAvatarImage)
                         {
-                            <img src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" style="max-width: 137px;">
+                            <img src="~/img/Uploads/Thumbnails/@tweet.AvatarImageName" alt="" class="circle responsive-img" style="width:50%;">
                         }
                         else
                         {
-                            <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img" style="max-width: 137px;">
+                            <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img" style="width:50%;">
                         }
                     </div>
-                    <p class="white-text" style="margin: 0; padding-bottom: 10px;font-size: 0.5em; text-shadow: 1px 1px 2px #ccc;">
-                        @tweet.Author
-                    </p>
+                    <p style="font-size:1.5em;color:#fff;font-weight:600;margin:3% 0 0 0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">@tweet.Author</p>
                 </div>
-                <div style="width:60%;box-sizing: border-box; line-height: 1.2">
-                    <div class="white-text DisplayContent" style="word-wrap:break-word;">@tweet.Text</div>
+                <div style="line-height:1.2;max-height:100%;padding:3vh 20px;">
+                    <div class="white-text DisplayContent" style="word-wrap:break-word;text-align:justify;overflow:hidden;max-height:19vh;">@tweet.Text</div>
                 </div>
-                <div style="width:15%;box-sizing:border-box; align-self: center; text-align: center; ">
-                    <span class="white-text" style="font-size: 0.48em; text-shadow: 1px 1px 2px #ccc;">
-                        @tweet.DatePosted.ToString("hh:mm")
-                    </span>
+                <div style="position:absolute;bottom:1%;right:1%;">
+                    <span style="font-size:16px;color:#fff;z-index:9999;">@tweet.DatePosted.ToString("hh:mm")</span>
                 </div>
             </div>
         }
-        @*<div class="paging">
+        <!--@*<div class="paging">
                 <ul class="pagination" style="margin: auto; padding-bottom: 20px">
                     @{
                         var data = Model as IPagedList<TweetViewModel>;
@@ -95,21 +98,20 @@
                 </ul>
             </div>*@
         <br />
-        <br />
-
-        <div style="position: absolute; bottom: 0; right:0px;">
-            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"] , p = lastPage})" class="waves-effect waves-light btn-large" style="padding: 0 0.4em; font-size: 40px; margin-right: 7px;"><</a>
-            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"] , p = nextPage})" class="waves-effect waves-light btn-large" style="padding: 0 0.4em; font-size: 40px;">></a>
+        <br />-->
+        <div style="position:absolute;bottom:0;right:0;">
+            <a href="#" class="waves-effect waves-light btn-large" style="padding:0 0.4em;font-size:20px;margin-right:7px;background:rgba(0,0,0,.4);">home</a>
+            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"] , p = lastPage})" class="waves-effect waves-light btn-large" style="padding:0 0.4em;font-size:40px;margin-right:7px;background:rgba(0,0,0,.4);"><</a>
+            <a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"] , p = nextPage})" class="waves-effect waves-light btn-large" style="padding:0 0.4em;font-size:40px;background:rgba(0,0,0,.4);">></a>
         </div>
 
         <div class="center">
-            <a href="@Url.Action("GetGroupDisplayWallRaffle", new {groupId = ViewData["GroupId"]})" class="btn btn-default">进入抽奖</a>
+            <a href="@Url.Action("PluginDisplayWallRaffle", new {groupId = ViewData["GroupId"]})" class="btn btn-default">进入抽奖</a>
         </div>
 
-        <div style="position: absolute; bottom: 0; left:15px;">
-            <a style="color: #ffffff; font-size: 0.8rem">全球某工商 | QQmgs.com - 做最 in 的社交，开最 high 的 party</a>
+        <div style="position:absolute;bottom:0;left:1vw;">
+            <a style="color:#fff;font-size:0.8rem;cursor:pointer;">全球某工商 | QQmgs.com - 做最 in 的社交，开最 high 的 party</a>
         </div>
-
     </div>
 
     <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
@@ -138,6 +140,18 @@
                 } else {
                     $(self).css("font-size", "2rem");
                 }
+            });
+
+            var bigcode=$('.J-bigcode');
+            var code=$('.J-code');
+            code.click(function(){
+            	bigcode.css({
+            		'display':'flex',
+            		'display':'-webkit-flex'
+            	});
+            });
+            bigcode.click(function(){
+            	$(this).css('display','none');
             });
         });
     </script>

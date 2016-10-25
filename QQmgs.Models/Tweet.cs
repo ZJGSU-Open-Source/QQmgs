@@ -23,7 +23,7 @@ namespace Twitter.Models
         [MaxLength(250)]
         public string Text { get; set; }
 
-        public bool IsEvent { get; set; }
+        public bool IsSoftDeleted { get; set; }
 
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]

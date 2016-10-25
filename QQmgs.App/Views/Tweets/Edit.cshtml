@@ -9,7 +9,7 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.IsEvent)
+        @Html.HiddenFor(model => model.IsSoftDeleted)
         @Html.HiddenFor(model => model.AuthorId)
         @Html.HiddenFor(model => model.GroupId)
         @Html.HiddenFor(model => model.IsRetweet)

@@ -118,7 +118,7 @@ namespace Twitter.App.Controllers
                 Text = model.Text,
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
-                IsEvent = false,
+                IsSoftDeleted = false,
                 GroupId = model.GroupId
             };
 
@@ -194,7 +194,7 @@ namespace Twitter.App.Controllers
                 Text = model.Text,
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
-                IsEvent = false,
+                IsSoftDeleted = false,
                 GroupId = model.GroupId
             };
 
