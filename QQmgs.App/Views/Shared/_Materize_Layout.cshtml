@@ -43,27 +43,27 @@
                 }
                 else
                 {
-                    <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
-                    <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
-                    <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+                    <li><a href="@Url.Action("index", "Photo")">摄影分享</a></li>
+                    <li><a href="@Url.Action("Register", "Account")">注册</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">登陆</a></li>
                 }
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
                 @if (Request.IsAuthenticated)
             {
-                    <li><a href="@Url.Action("index", "CourseReview")">@Resources.ReviewCourse</a></li>
-                    <li><a href="@Url.Action("index", "Group")">@Resources.Group</a></li>
-                    <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
+                    <li><a href="@Url.Action("index", "CourseReview")">课程点评</a></li>
+                    <li><a href="@Url.Action("index", "Group")">兴趣小组</a></li>
+                    <li><a href="@Url.Action("index", "Photo")">摄影分享</a></li>
                     <li><a href="@Url.Action("index", "Activity")">商大活动</a></li>
                     <li><a href="@Url.Action("Search", "Group")">搜索</a></li>
                     <li><a href="@Url.Action("Index", "Manage")">设置</a></li>
                 }
                 else
                 {
-                    <li><a href="@Url.Action("index", "Photo")">@Resources.PhotoSharing</a></li>
-                    <li><a href="@Url.Action("Register", "Account")">@Resources.Register</a></li>
-                    <li><a href="@Url.Action("Login", "Account")">@Resources.LogInButton</a></li>
+                    <li><a href="@Url.Action("index", "Photo")">摄影分享</a></li>
+                    <li><a href="@Url.Action("Register", "Account")">注册</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">登陆</a></li>
                 }
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -83,13 +83,6 @@
                         实时社交网络。大家可以在各个兴趣小组的板块下自由交流，同时可以创建自己的兴趣小组。全球某工商旨在帮助大家寻找在校内志同道合的朋友，解决大家打球时找不到球友，跑步时一个人太无聊的尴尬场面。
                     </p>
                 </div>
-                @*<div class="col l4 s12">
-                        <h5 class="white-text">链接</h5>
-                        <ul>
-                            <li><a class="white-text" href="http://www.zjsu.edu.cn">浙江工商大学官网</a></li>
-                            <li><a class="white-text" href="http://cie.zjsu.edu.cn">信息学院官网</a></li>
-                        </ul>
-                    </div>*@
                 <div class="col l4 s12">
                     <h6 style="font-size: 17px" class="white-text">加入全球某工商</h6>
                     <a style="font-size: 14px" class="white-text" href="@Url.Action("Job", "Home")">

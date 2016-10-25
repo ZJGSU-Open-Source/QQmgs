@@ -14,7 +14,7 @@ namespace ScheduledJob
 
         public static async Task SendMailAsync(string content)
         {
-            const string testDestination = "544629036@qq.com";
+            const string testDestination = "100103398@qq.com";
             const string subject = "Shuaiyi的机器人";
             var body = content;
 
