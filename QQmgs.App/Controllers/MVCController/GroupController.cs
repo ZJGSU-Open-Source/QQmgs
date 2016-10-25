@@ -715,9 +715,61 @@ namespace Twitter.App.Controllers
         }
 
         [HttpGet]
-        [Route("GroupPlugins")]
-        public ActionResult GetGroupPlugins(int groupId)
+        [AllowAnonymous]
+        [Route("{groupId:int}/plugin/displaywall/raffle")]
+        public ActionResult GetGroupDisplayWallRaffle(int groupId)
         {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
+            var tweets = group.Tweets;
+            if (tweets == null)
+            {
+                return HttpNotFound($"There's no tweet in the group with id {groupId}");
+            }
+
+            // TODO: temp take 3 for test
+            var authorIds = tweets.Select(tweet => tweet.AuthorId).Distinct().ToList();
+            var usersViewModel = authorIds.Select(authorId => this.Data.Users.Find(authorId).ToUserBioViewModel()).Take(3).ToList();
+
+            // pass Group info to view
+            ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
+
+            return View(usersViewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("{groupId:int}/plugin/displaywall/raffleResult")]
+        public ActionResult GetGroupDisplayWallRaffleAwardedPersonResult(int groupId)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
+            var tweets = group.Tweets;
+            if (tweets == null)
+            {
+                return HttpNotFound($"There's no tweet in the group with id {groupId}");
+            }
+
+            var authorIds = tweets.Select(tweet => tweet.AuthorId).Distinct().ToList();
+            var users = authorIds.Select(authorId => this.Data.Users.Find(authorId).ToUserBioViewModel()).ToList();
+
+            var rnd = new Random();
+            var index = rnd.Next(users.Count);
+
+            // pass Group info to view
+            ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
+
+            return View(users[index]);
         }
 
         private static bool IsNotGroupMember(Group group, string userId)
