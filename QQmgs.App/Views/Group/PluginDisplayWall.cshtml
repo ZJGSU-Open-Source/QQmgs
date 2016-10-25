@@ -11,7 +11,7 @@
 @{
     var lastPage = Math.Max(1, (int)ViewData["PageNumber"] - 1);
     var nextPage = (int)ViewData["PageNumber"] + 1;
-    int tweetsCount = (int)ViewData["TweetsCount"];
+    var tweetsCount = (int)ViewData["TweetsCount"];
 }
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="refresh" content="100010">
+    <meta http-equiv="refresh" content="20">
 
     <title>全球某工商墙</title>
 

@@ -714,6 +714,12 @@ namespace Twitter.App.Controllers
             return View(tweetsViewModel);
         }
 
+        [HttpGet]
+        [Route("GroupPlugins")]
+        public ActionResult GetGroupPlugins(int groupId)
+        {
+        }
+
         private static bool IsNotGroupMember(Group group, string userId)
         {
             return group.Users.All(user => user.Id != userId);

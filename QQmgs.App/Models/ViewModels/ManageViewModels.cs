@@ -10,6 +10,8 @@
 
     public class IndexViewModel
     {
+        public string RealName { get; set; }
+
         public bool HasPassword { get; set; }
 
         public bool HasAvatarImage { get; set; }

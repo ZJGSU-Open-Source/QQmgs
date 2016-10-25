@@ -95,7 +95,8 @@ namespace Twitter.App.Controllers
                                 RegisteredTime = registeredTime,
                                 RegisterTimeInterval = registerTimeInterval,
                                 HasAvatarImage = user.HasAvatarImage,
-                                AvatarImageName = user.AvatarImageName
+                                AvatarImageName = user.AvatarImageName,
+                                RealName = user.RealName
             };
 
             return this.View(model);
