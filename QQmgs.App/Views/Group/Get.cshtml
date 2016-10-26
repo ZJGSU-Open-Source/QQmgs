@@ -6,11 +6,17 @@
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
+
 <nav style="background: #009688">
     <div class="nav-wrapper container">
         <div class="col s12">
             <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
             <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+            
+            <a class="hide-on-small-and-down" style="float: right" href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" >一键分享</a>
+            <div class="bdsharebuttonbox" style="float: right; margin-top: 10px">
+                <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a><a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a><a title="分享到Facebook" class="bds_fbook" href="#" data-cmd="fbook"></a><a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a><a title="分享到QQ好友" class="bds_sqq" href="#" data-cmd="sqq"></a>
+            </div>
         </div>
     </div>
 </nav>
@@ -50,6 +56,9 @@
     Html.RenderAction("GetGroupPlugins");
 }
 
+
+
+
 <div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
     <div class="container">
 
@@ -61,7 +70,7 @@
             <div class="row" style="max-width: 700px; margin: auto">
                 <div class="hide-on-small-only">
                     @{
-                        Html.RenderAction("GetGroupMembers", new {groupId = (int) ViewData["GroupId"]});
+                        Html.RenderAction("GetGroupMembers", new { groupId = (int)ViewData["GroupId"] });
                     }
                 </div>
                 <div class="hide-on-small-only" style="margin-top: 30px">
@@ -77,17 +86,17 @@
                     </div>
                 </div>
             </div>
-        }
+                            }
 
         <div class="row center hide-on-small-only">
             <h5 class="header col s12 light grey-text">@Resources.Group · @ViewData["GroupName"]</h5>
         </div>
         <div class="row hide-on-small-only" style="max-width: 700px; margin: auto">
             <div class="col s4">
-                <img style="max-width: 200px" src="~/img/Photo/friday_party.gif" alt=""/>
+                <img style="max-width: 200px" src="~/img/Photo/friday_party.gif" alt="" />
             </div>
             <div class="col s8" style="margin-top: 30px">
-                @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -99,7 +108,7 @@
                                 <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
                             </div>
                             <div class="form-group col s2" style="margin-top: 35px">
-                                <input type="submit" value="Post" class="awesome-button"/>
+                                <input type="submit" value="Post" class="awesome-button" />
                             </div>
                         </div>
                     </form>
@@ -125,16 +134,16 @@
                     @{
                         var data = Model as IPagedList<TweetViewModel>;
                     }
-                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new {p = page}))
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
                 </ul>
             </div>
         </div>
 
         @*<div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
-            <a class="btn-floating btn-large red" href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})">
-                <i class="large material-icons">mode_edit</i>
-            </a>
-        </div>*@
+                <a class="btn-floating btn-large red" href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </div>*@
 
 
     </div>
@@ -143,3 +152,24 @@
 <div class="hide-on-med-and-up" style="background:#26a69a; height:70px; width: 100%; position: fixed; bottom: 0;">
     <a href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})" style="color: #ffffff; display: block; height: 100%; text-align: center; line-height: 70px; font-size: 3rem;">我要上墙</a>
 </div>
+
+
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "全球某工商在线 · 专属商大学生的社交网络 (https://www.qqmgs.com)",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "https://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {}
+    };
+    with (document)
+        0[(getElementsByTagName('head')[0] || body)
+            .appendChild(createElement('script'))
+            .src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' +
+            ~(-new Date() / 36e5)];
+</script>
