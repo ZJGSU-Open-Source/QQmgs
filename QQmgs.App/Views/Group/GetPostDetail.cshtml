@@ -7,9 +7,10 @@
 <nav style="background: #009688">
     <div class="nav-wrapper container">
         <div class="col s12">
-            <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+            <a class="hide-on-small-and-down breadcrumb" href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" >@ViewData["GroupName"]</a>
 
-            <a class="hide-on-small-and-down" style="float: right" href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})">分享</a>
+            <a style="float: right" href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})">分享</a>
             <div class="bdsharebuttonbox" style="float: right; margin-top: 10px">
                 <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a><a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a><a title="分享到Facebook" class="bds_fbook" href="#" data-cmd="fbook"></a><a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
             </div>
