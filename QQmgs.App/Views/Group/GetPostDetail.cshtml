@@ -1,0 +1,60 @@
+﻿@model Twitter.App.Models.ViewModels.TweetViewModel
+
+@{
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+
+            <a class="hide-on-small-and-down" style="float: right" href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})">分享</a>
+            <div class="bdsharebuttonbox" style="float: right; margin-top: 10px">
+                <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a><a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a><a title="分享到Facebook" class="bds_fbook" href="#" data-cmd="fbook"></a><a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
+    <div class="container">
+
+        <div class="row center">
+            <h5 class="header col s12 light grey-text" style="margin: auto">BREAKKKING NEWS</h5>
+        </div>
+
+        <div style="max-width: 700px; margin: auto">
+            <ul class="">
+
+                @{
+                    Html.RenderPartial("MaterializedTweet", Model);
+                }
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "@Model.Text | 全球某工商 QQmgs.com · 专属商大学生的社交网络 (http://www.qqmgs.com)",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "https://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {}
+    };
+    with (document)
+        0[(getElementsByTagName('head')[0] || body)
+            .appendChild(createElement('script'))
+            .src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' +
+            ~(-new Date() / 36e5)];
+</script>

@@ -176,6 +176,40 @@ namespace Twitter.App.BusinessLogic
 
         #endregion
 
+        #region Tweet View Model
+
+        public static TweetViewModel ToTweetViewModel(this Tweet t)
+        {
+            return new TweetViewModel
+            {
+                Id = t.Id,
+                Author = t.Author.RealName,
+                AuthorStatus = t.Author.Status,
+                AuthorPhoneNumber = t.Author.UserName,
+                IsSoftDeleted = t.IsSoftDeleted,
+                Text = t.Text,
+                UsersFavouriteCount = t.UsersFavourite.Count,
+                RepliesCount = t.Reply.Count,
+                RetweetsCount = t.Retweets.Count,
+                DatePosted = t.DatePosted,
+                GroupId = t.GroupId,
+                HasAvatarImage = t.Author.HasAvatarImage,
+                AvatarImageName =
+                    t.Author.HasAvatarImage
+                        ? t.Author.AvatarImageName
+                        : null,
+                ReplyList = t.Reply.Select(reply => new ReplyViewModel
+                {
+                    Text = reply.Content,
+                    Id = reply.Id,
+                    PublishTime = reply.PublishTime,
+                    Author = reply.Author.RealName
+                }).ToList()
+            };
+        }
+
+        #endregion
+
         #region Activity View Model
 
         public static ActivityViewModel ToActivityViewModel(this Activity a)

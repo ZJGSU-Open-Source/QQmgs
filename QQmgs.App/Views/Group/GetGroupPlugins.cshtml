@@ -1,5 +1,12 @@
 ﻿@model Twitter.App.Models.ViewModels.GroupPluginViewModel
 
+@{
+    var avtiveFeatureNumber = 0;
+    avtiveFeatureNumber += Model.HasCheckInPad ? 1 : 0;
+    avtiveFeatureNumber += Model.HasDisplayWall ? 1 : 0;
+    avtiveFeatureNumber += Model.HasInfoFocus ? 1 : 0;
+}
+
 <style type="text/css">
     * {
         margin: 0;
@@ -60,13 +67,15 @@
 <div class="pluginMenu hide-on-med-and-down" style="font: 12px/180% Arial, Helvetica, sans-serif;">
     <div class="navbox">
         <ul class="nav">
-            <li><a href="#">小组应用</a></li>
+            <li><a href="#">小组应用(@avtiveFeatureNumber)</a></li>
             @if (Model.HasCheckInPad)
             {
                 <li><a href="#">签到(开发中)</a></li>
             }
-            @*@if (Model.HasDisplayWall)*@
-            <li><a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"], p = 1})">全球某工商墙</a></li>
+            @if (Model.HasDisplayWall)
+            {
+                <li><a href="@Url.Action("PluginDisplayWall", new {groupId = ViewData["GroupId"], p = 1})">全球某工商墙</a></li>
+            }
             @if (Model.HasInfoFocus)
             {
                 <li><a href="#">信息聚焦(开发中)</a></li>

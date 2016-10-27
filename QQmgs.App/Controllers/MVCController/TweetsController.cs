@@ -222,7 +222,8 @@ namespace Twitter.App.Controllers
                 {
                     this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
-                return RedirectToAction("Get", "Group", new { groupId = tweet.GroupId, p = 1 });
+
+                return RedirectToAction("GetPostDetail", "Group", new { groupId = tweet.GroupId, tweetId = tweet.Id });
             }
 
             var loggedUserId = this.User.Identity.GetUserId();
@@ -262,7 +263,7 @@ namespace Twitter.App.Controllers
             this.Data.Group.Update(group);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Get", "Group", new { groupId = tweet.GroupId, p = 1 });
+            return RedirectToAction("GetPostDetail", "Group", new { groupId = tweet.GroupId, tweetId = tweet.Id });
 
             //return PartialView(
             //    "Reply",
@@ -292,6 +293,26 @@ namespace Twitter.App.Controllers
             }
 
             return tweet.UsersFavourite.Count;
+        }
+
+        [HttpGet]
+        public RedirectToRouteResult FavouriteTempRedirectToDetail(int groupId, int tweetId)
+        {
+            var loggedUserId = this.User.Identity.GetUserId();
+            var tweet = this.Data.Tweets.Find(tweetId);
+
+            if (Data.Users.Find(loggedUserId).FavouriteTweets.Contains(tweet))
+            {
+                this.Data.Users.Find(loggedUserId).FavouriteTweets.Remove(tweet);
+                this.Data.SaveChanges();
+            }
+            else
+            {
+                this.Data.Users.Find(loggedUserId).FavouriteTweets.Add(tweet);
+                this.Data.SaveChanges();
+            }
+
+            return RedirectToAction("GetPostDetail", "Group", new {groupId = groupId, tweetId = tweetId});
         }
 
         [HttpGet]

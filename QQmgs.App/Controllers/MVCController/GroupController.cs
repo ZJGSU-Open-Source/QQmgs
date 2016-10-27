@@ -79,6 +79,8 @@ namespace Twitter.App.Controllers
             var groupQuard = this.Data.Group.All()
                 .OrderByDescending(group => group.Tweets.Count)
                 .Select(ViewModelsHelper.AsGroupViewModel)
+                .Where(models => models.IsPrivate == false)
+                .Where(models => models.IsDisplay)
                 .Take(4).ToList();
 
             return PartialView(groupQuard);
@@ -171,7 +173,53 @@ namespace Twitter.App.Controllers
             ViewData["PageNumber"] = p;
             ViewData["IsPrivate"] = group.IsPrivate ? "true" : "false";
 
+            // TODO: temp add group plugin, remove ASAP
+            if (group.GroupPlugin == null)
+            {
+                group.GroupPlugin = new GroupPlugin();
+                Data.Group.Update(group);
+                Data.SaveChanges();
+            }
+
             return this.View(tweetsViewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{groupId:int}/post/{tweetId:int}")]
+        public ActionResult GetPostDetail(int groupId, int tweetId)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with id {groupId} not found");
+            }
+
+            // check private group
+            if (group.IsPrivate)
+            {
+                var loggedUserId = this.User.Identity.GetUserId();
+
+                var foundUser = group.Users.Any(user => user.Id == loggedUserId);
+                if (foundUser == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            var tweet = this.Data.Tweets.Find(tweetId);
+            if (tweet == null)
+            {
+                return HttpNotFound($"Tweet with id {groupId} not found");
+            }
+
+            var tweetViewModel = tweet.ToTweetViewModel();
+
+            // pass Group info to view
+            ViewData["GroupName"] = group.Name;
+            ViewData["GroupId"] = groupId;
+
+            return this.View(tweetViewModel);
         }
 
         public ActionResult Create()
@@ -217,6 +265,11 @@ namespace Twitter.App.Controllers
             }
 
             this.Data.Group.Add(group);
+            this.Data.SaveChanges();
+
+            // add group corresponding plugins
+            group.GroupPlugin = new GroupPlugin();
+            this.Data.Group.Update(group);
             this.Data.SaveChanges();
 
             return RedirectToAction("Get", new { groupId = group.Id, p = 1 });

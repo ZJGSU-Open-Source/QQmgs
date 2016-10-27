@@ -89,6 +89,7 @@
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
       <Private>True</Private>
@@ -265,6 +266,7 @@
     <Compile Include="BusinessLogic\ManagerHelper.cs" />
     <Compile Include="BusinessLogic\PhotoHelper.cs" />
     <Compile Include="BusinessLogic\QueryRealAddress.cs" />
+    <Compile Include="BusinessLogic\RoleHelper.cs" />
     <Compile Include="BusinessLogic\RsaSecurity.cs" />
     <Compile Include="BusinessLogic\ViewModelsHelper.cs" />
     <Compile Include="Common\Guard.cs" />
@@ -575,6 +577,7 @@
     <Content Include="Views\Group\PluginDisplayWallRaffle.cshtml" />
     <Content Include="Views\Group\PluginDisplayWallRaffleResult.cshtml" />
     <Content Include="Views\Group\Management.cshtml" />
+    <Content Include="Views\Group\GetPostDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
