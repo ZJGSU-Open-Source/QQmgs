@@ -711,7 +711,7 @@ namespace Twitter.App.Controllers
 
             var loggedUser = User.Identity.GetUserId();
             var loggedUserName = User.Identity.GetUserName();
-            if (!(loggedUser == group.CreaterId || loggedUserName == "13588201467"))
+            if (!(loggedUser == group.CreaterId || RoleHelper.IsAdmin()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
