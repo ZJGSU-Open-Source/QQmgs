@@ -302,6 +302,7 @@ namespace Twitter.App.Controllers
                 return this.View();
             }
 
+            // Update user table
             user.Email = email;
             Data.Users.Update(user);
             Data.SaveChanges();

@@ -26,10 +26,9 @@ namespace Twitter.App.Controllers.MVCController
         public ActionResult Index()
         {
             // permision check
-            var userName = this.User.Identity.GetUserName();
-            if (userName != "13588201467")
+            if (!RoleHelper.IsAdmin())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied, current user phone number is {userName}");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied");
             }
 
             var items = this.Data.UserLogTrace.All()
@@ -135,6 +134,12 @@ namespace Twitter.App.Controllers.MVCController
         [Route("user")]
         public ActionResult Statistics()
         {
+            // permision check
+            if (!RoleHelper.IsAdmin())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied");
+            }
+
             var result = new List<UserStatisticsViewModel>();
 
             for (var dateTime = DateTime.Now; dateTime.Month != DateTime.Now.AddMonths(-3).Month; dateTime = dateTime.AddDays(-1))
