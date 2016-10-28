@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Twitter.App.BusinessLogic;
+using Twitter.App.EmotionAnalysis;
 
 namespace Twitter.App.Controllers.APIControllers
 {
@@ -11,11 +12,14 @@ namespace Twitter.App.Controllers.APIControllers
     [RoutePrefix("api/ping")]
     public class PingController : ApiController
     {
-
         [Route("")]
         [HttpGet]
         public HttpResponseMessage Get()
         {
+            //var res =
+            //    EmotionAnalysis.EmotionAnalysis.Go(
+            //        "http://www.qqmgs.com/img/Uploads/Thumbnails/cf24872d-5854-479e-b629-31e84e84d0fb_IMG_20160903_135159.jpg");
+
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
