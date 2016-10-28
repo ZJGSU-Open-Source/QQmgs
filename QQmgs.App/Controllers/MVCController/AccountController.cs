@@ -298,7 +298,8 @@ namespace Twitter.App.Controllers
             // Should be bad request if not qqmgs scheme GUID Email
             if (!(user.Email.Length == 46 && user.Email.Contains("qqmgs.com")))
             {
-                return this.RedirectToAction("Index", "Home");
+                ModelState.AddModelError(string.Empty, $"在此无法更改邮箱");
+                return this.View();
             }
 
             user.Email = email;
