@@ -297,4 +297,16 @@
   <data name="Phone_Number" xml:space="preserve">
     <value>电话号码</value>
   </data>
+  <data name="InvalidSchoolId" xml:space="preserve">
+    <value>亲，请输入正确的10位数字商大学号哦</value>
+  </data>
+  <data name="SchoolId" xml:space="preserve">
+    <value>学号</value>
+  </data>
+  <data name="SchoolIdLong" xml:space="preserve">
+    <value>亲，请输入正确的10位数字商大学号哦</value>
+  </data>
+  <data name="SchoolIdRequired" xml:space="preserve">
+    <value>亲，请告诉我你的专属商大学号</value>
+  </data>
 </root>

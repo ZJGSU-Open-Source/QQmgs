@@ -297,4 +297,16 @@
   <data name="Phone_Number" xml:space="preserve">
     <value>Phone Number</value>
   </data>
+  <data name="InvalidSchoolId" xml:space="preserve">
+    <value>School ID should be exactly 10 digits long</value>
+  </data>
+  <data name="SchoolId" xml:space="preserve">
+    <value>School ID</value>
+  </data>
+  <data name="SchoolIdLong" xml:space="preserve">
+    <value>School ID should be exactly 10 digits long</value>
+  </data>
+  <data name="SchoolIdRequired" xml:space="preserve">
+    <value>School ID is required</value>
+  </data>
 </root>

@@ -1,20 +1,20 @@
 ﻿using Twitter.App.BusinessLogic;
 using Twitter.Data.UnitOfWork;
+using Twitter.App.Constants;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using Twitter.App.Helper;
+using Twitter.App.Models.ViewModels;
+using Twitter.Models;
 
 namespace Twitter.App.Controllers
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.Owin;
-    using Microsoft.Owin.Security;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web;
-    using System.Web.Mvc;
-    using Twitter.App.Helper;
-    using Twitter.App.Models.ViewModels;
-    using Twitter.Models;
-
     [Authorize]
     public class AccountController : TwitterBaseController
     {
@@ -254,13 +254,64 @@ namespace Twitter.App.Controllers
                 //await UserManager.SendEmailAsync(user.Id, "全球某工商 注册确认【系统邮件】", callbackUrl);
 
                 // return View("DisplayEmail");
-                return this.RedirectToAction("Question", "Home");
+                return this.RedirectToAction("ProfileSupplement");
             }
 
             this.AddErrors(result);
 
             // If we got this far, something failed, redisplay form
             return this.View(model);
+        }
+
+        public ActionResult ProfileSupplement()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProfileSupplement(ProfileSupplementViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(state => state.Errors).ToList();
+                foreach (var error in errors)
+                {
+                    this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
+                }
+                return this.View();
+            }
+
+            var email = $"{model.EmailPrefix}{Constants.Constants.StudentEmailPostfix}";
+
+            // Check Email registered
+            var result = await UserManager.FindByEmailAsync(email);
+
+            if (result != null)
+            {
+                ModelState.AddModelError(string.Empty, $"邮箱{email}已经被同学注册啦！");
+                return this.View();
+            }
+
+            var user = Data.Users.Find(User.Identity.GetUserId());
+
+            // Should be bad request if not qqmgs scheme GUID Email
+            if (!(user.Email.Length == 46 && user.Email.Contains("qqmgs.com")))
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            user.Email = email;
+            Data.Users.Update(user);
+            Data.SaveChanges();
+
+            // Send an email with this link
+            var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url?.Scheme);
+
+            await UserManager.SendEmailAsync(user.Id, "全球某工商 注册确认【系统邮件】", callbackUrl);
+
+            return View("DisplayEmail");
         }
 
         // GET: /Account/ConfirmEmail
@@ -273,7 +324,17 @@ namespace Twitter.App.Controllers
             }
 
             var result = await this.UserManager.ConfirmEmailAsync(userId, code);
-            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if (!result.Succeeded)
+            {
+                return View("Error");
+            }
+
+            var userName = Data.Users.Find(userId).RealName;
+            var confirmedNumber = Data.Users.All().Count(user => user.EmailConfirmed);
+    
+            var tuple = new Tuple<string, int>(userName, confirmedNumber);
+
+            return this.View("ConfirmEmail", tuple);
         }
 
         // GET: /Account/ForgotPassword

@@ -10,6 +10,8 @@ namespace Twitter.App.Constants
 
         public static string WebHostPrefix = "http://www.qqmgs.com";
 
+        public static string StudentEmailPostfix = "@pop.zjgsu.edu.cn";
+
         #region Photo
 
         public static string PhotoLocation = "~\\img" + Path.DirectorySeparatorChar + "Uploads" +

@@ -1,13 +1,7 @@
-﻿@model Tuple<string, int>
+﻿@model dynamic
 @{
     ViewBag.Title = "全球某工商 - 连接每一位商大师生";
     Layout = "";
-}
-
-@{
-    var number = Model.Item2;
-    var userName = Model.Item1;
-    var words = $"{userName}是第{number}位加入全球某工商的浙小商，快来和我一起high吧~";
 }
 
 <!DOCTYPE html>
@@ -29,6 +23,7 @@
     <div class="index-main" style="position: relative; z-index: 1">
         <div class="index-main-body">
             <div class="index-header">
+                @*<h1 class="logo hide-text">知乎</h1>*@
                 <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
                 <h2 class="subtitle">连接每一位商大师生</h2>
             </div>
@@ -40,19 +35,28 @@
                     </div>
                 </div>
                 <div class="view view-signup selected" data-za-module="SignUpForm">
-                    <h4 class="center">注册成功!</h4>
-                    <br/>
-                    <h6 class="center">@userName，是第 <a style="font-size: 38px; color: #039be5">@number</a> 位成功验证的浙小商</h6>
+                    @using (Html.BeginForm("ProfileSupplement", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
 
-                    <div class="bdsharebuttonbox" style="float: right; margin-top: 10px">
-                        <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a><a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a><a title="分享到Facebook" class="bds_fbook" href="#" data-cmd="fbook"></a><a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a><a title="分享到QQ好友" class="bds_sqq" href="#" data-cmd="sqq"></a>
-                    </div>
-                    <br/>
+                        <form>
+                            <div class="group-inputs">
+                                <div class="input-field" style="margin-top: 0px">
+                                    <input name="EmailPrefix" placeholder="商大邮箱 (学号)" id="ZJSU_Email" type="text" style="margin-bottom: 0px; width: 45%; padding-left: 5%" class="validate">
+                                    <a style="font-size: 15px">@@ pop.zjgsu.edu.cn</a>
+                                </div>
+                            </div>
+                            <div class="button-wrapper command" style="margin-top: 5px">
 
+                                <button class="sign-button submit" type="submit" style="margin-top: 10px">发送验证邮件</button>
+                            </div>
+                        </form>
+                    }
                     <div class="QRCode" style="margin-top: 28px">
-                        <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("Index", "Home")'" type="button">
+                        <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("Question", "Home")'" type="button">
                             <span class="sprite-global-icon-qrcode"></span>
-                            <span class="QRCode-toggleButtonText ">进入全球某工商</span>
+                            <span class="QRCode-toggleButtonText ">跳过此步</span>
                         </button>
                     </div>
                 </div>
@@ -79,24 +83,5 @@
     <script src="~/Scripts/particles.js/particles.js"></script>
     <script src="~/Scripts/particles.js/app.js"></script>
 
-    <script>
-        window._bd_share_config = {
-            "common": {
-                "bdSnsKey": {},
-                "bdText": "@words | 全球某工商 QQmgs.com · 开最high的Party，做最in的社交 (http://www.qqmgs.com)",
-                "bdMini": "2",
-                "bdMiniList": false,
-                "bdPic": "https://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg",
-                "bdStyle": "0",
-                "bdSize": "24"
-            },
-            "share": {}
-        };
-        with (document)
-            0[(getElementsByTagName('head')[0] || body)
-                .appendChild(createElement('script'))
-                .src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' +
-                ~(-new Date() / 36e5)];
-    </script>
 </body>
 </html>

@@ -313,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to School ID should be exactly 10 digits long.
+        /// </summary>
+        public static string InvalidSchoolId {
+            get {
+                return ResourceManager.GetString("InvalidSchoolId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid user name, user name cannot contains white spce.
         /// </summary>
         public static string InvalidUserName {
@@ -534,6 +543,33 @@ namespace Resources {
         public static string ReviewCourse {
             get {
                 return ResourceManager.GetString("ReviewCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to School ID.
+        /// </summary>
+        public static string SchoolId {
+            get {
+                return ResourceManager.GetString("SchoolId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to School ID should be exactly 10 digits long.
+        /// </summary>
+        public static string SchoolIdLong {
+            get {
+                return ResourceManager.GetString("SchoolIdLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to School ID is required.
+        /// </summary>
+        public static string SchoolIdRequired {
+            get {
+                return ResourceManager.GetString("SchoolIdRequired", resourceCulture);
             }
         }
         

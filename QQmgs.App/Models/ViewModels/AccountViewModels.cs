@@ -155,6 +155,17 @@ namespace Twitter.App.Models.ViewModels
         public string UserName { get; set; }
     }
 
+    public class ProfileSupplementViewModel
+    {
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "SchoolIdRequired")]
+        [Display(Name = "SchoolId", ResourceType = typeof(Resources.Resources))]
+        [StringLength(10, ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "SchoolIdLong", MinimumLength = 10)]
+        [RegularExpression(@"^[0-9]+$", ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "InvalidSchoolId")]
+        public string EmailPrefix { get; set; }
+    }
 
     public class UserInfoViewModel
     {
