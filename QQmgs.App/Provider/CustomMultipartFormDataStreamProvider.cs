@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -17,7 +18,17 @@ namespace Twitter.App.Provider
 
         public override string GetLocalFileName(HttpContentHeaders headers)
         {
-            var fileName = headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+            var fileName = headers.ContentDisposition.FileName;
+
+            if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+            {
+                fileName = fileName.Trim('"');
+            }
+            if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+            {
+                fileName = Path.GetFileName(fileName);
+            }
+
             return $"{Guid.NewGuid()}_{fileName}";
         }
     }

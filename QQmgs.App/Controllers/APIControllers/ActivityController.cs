@@ -251,6 +251,7 @@ namespace Twitter.App.Controllers.APIControllers
                 .All()
                 .FirstOrDefault(t => t.Id == activityId);
 
+            // Check activity existence
             if (activity == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Cannot find activity for activity ID {activityId}");
@@ -268,15 +269,20 @@ namespace Twitter.App.Controllers.APIControllers
 
             try
             {
-                // Read the form data.
+                // Retrieve the form data, and save the file on server
                 await Request.Content.ReadAsMultipartAsync(provider);
 
-                // This illustrates how to get the file names.
                 foreach (var file in provider.FileData)
                 {
-                    var fileName = file.LocalFileName.Split(Path.DirectorySeparatorChar).Last().Trim('\"');
-                    
-                    var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.AvatarImage);
+                    // Check the user uploaded file name whether valiad
+                    if (string.IsNullOrEmpty(file.Headers.ContentDisposition.FileName))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, "This file name is null or empty");
+                    }
+
+                    var fileName = file.LocalFileName.Split(Path.DirectorySeparatorChar).Last();
+
+                    var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.ActivityImage);
 
                     var photo = new Photo
                     {
@@ -297,9 +303,12 @@ namespace Twitter.App.Controllers.APIControllers
                     activity.ActivityImage = fileName;
                     this.Data.Activity.Update(activity);
                     this.Data.SaveChanges();
+
+                    // Quit when upload succeeded
+                    return Request.CreateResponse(HttpStatusCode.OK);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.NoContent);
             }
             catch (Exception e)
             {
