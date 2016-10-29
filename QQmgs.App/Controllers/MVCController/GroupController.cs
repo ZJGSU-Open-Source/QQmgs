@@ -76,14 +76,14 @@ namespace Twitter.App.Controllers
             //}
 
 
-            var groupQuard = this.Data.Group.All()
+            var groupCombination = this.Data.Group.All()
                 .OrderByDescending(group => group.Tweets.Count)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .Where(models => models.IsPrivate == false)
                 .Where(models => models.IsDisplay)
-                .Take(4).ToList();
+                .Take(6).ToList();
 
-            return PartialView(groupQuard);
+            return PartialView(groupCombination);
         }
 
         [HttpGet]

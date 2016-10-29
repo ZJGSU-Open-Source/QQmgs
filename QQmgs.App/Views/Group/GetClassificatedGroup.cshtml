@@ -2,7 +2,7 @@
 @model IEnumerable<Twitter.App.Models.ViewModels.GroupVieModels>
 
 <div class="col s4 center-align">
-    <h6 class="header col s12 light grey-text">@ViewData["Classification"]</h6>
+    <h6 class="header col s12 light grey-text">@ViewData["Classification"] 推荐</h6>
     <div class="collection" style="max-width: 300px; margin: auto">
         @foreach (var group in Model)
         {
@@ -18,7 +18,7 @@
             </div>
 
             <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">
-                <div style="text-align: left; margin-left: 30px; ">@group.Name
+                <div style="text-align: left; margin-left: 30px; font-size: 0.9rem">@group.Name
                     <span class="badge hide-on-med-and-down">@group.TweetsCount 条讨论</span>
                 </div>
             </a>

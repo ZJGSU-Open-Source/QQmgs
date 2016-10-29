@@ -1,97 +1,59 @@
 ﻿@using Twitter.App.Models.ViewModels
 @model LoginViewModel
 @{
-    ViewBag.Title = "全球某工商 - 连接每一位商大师生";
-    Layout = "";
+    ViewBag.Title = "登陆";
+    Layout = "~/Views/Shared/_Login_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <title>全球某工商 - 连接每一位商大师生</title>
-    <meta name="description" content="qqmgs.com login page.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="~/Content/particles.js/style.css" rel="stylesheet" media="screen">
-    <link href="~/Content/particles.js/zh.css" rel="stylesheet" media="screen">
-    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-</head>
-<body>
-    <!-- particles.js container -->
-    <div id="particles-js" style="position: absolute; top: 0; z-index: 0; display: block; width: 100%; height: 100%"></div>
-
-    <div class="index-main" style="position: relative; z-index: 1">
-        <div class="index-main-body">
-            <div class="index-header">
-                @*<h1 class="logo hide-text">知乎</h1>*@
-                <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
-                <h2 class="subtitle">连接每一位商大师生</h2>
-            </div>
-            <div class="desk-front sign-flow clearfix sign-flow-simple">
-                <div class="index-tab-navs">
-                    <div class="navs-slider" data-active-index="1">
-                        <a href="@Url.Action("Register")">注册</a>
-                        <a href="@Url.Action("Login")" class="active">登录</a>
-                        <span class="navs-slider-bar"></span>
-                    </div>
+<div class="index-main" style="position: relative; z-index: 1">
+    <div class="index-main-body">
+        <div class="index-header">
+            @*<h1 class="logo hide-text">知乎</h1>*@
+            <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
+            <h2 class="subtitle">连接每一位商大师生</h2>
+        </div>
+        <div class="desk-front sign-flow clearfix sign-flow-simple">
+            <div class="index-tab-navs">
+                <div class="navs-slider" data-active-index="1">
+                    <a href="@Url.Action("Register")">注册</a>
+                    <a href="#!" class="active">登录</a>
+                    <span class="navs-slider-bar"></span>
                 </div>
-                <div class="view view-signin selected">
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+            </div>
+            <div class="view view-signin selected">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
 
-                        <form>
-                            <div class="group-inputs">
-                                <div class="input-field" style="margin-top: 0px">
-                                    <input name="UserName" placeholder="手机号" id="first_name" type="text" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
-                                </div>
-                                <div class="input-field" style="margin-top: 0px">
-                                    <input name="Password" placeholder="密码" id="password" type="password" style="margin-bottom: 0px; border-bottom: none; width: 95%; padding-left: 5%" class="validate">
-                                </div>
+                    <form>
+                        <div class="group-inputs">
+                            <div class="input-field" style="margin-top: 0px">
+                                <input name="UserName" placeholder="手机号" id="first_name" type="text" style="margin-bottom: 0px; width: 95%; padding-left: 5%" class="validate">
                             </div>
-                            <div class="button-wrapper command">
-                                <button class="sign-button submit" type="submit">登录</button>
+                            <div class="input-field" style="margin-top: 0px">
+                                <input name="Password" placeholder="密码" id="password" type="password" style="margin-bottom: 0px; border-bottom: none; width: 95%; padding-left: 5%" class="validate">
                             </div>
-                            <div class="signin-misc-wrapper clearfix">
-                                <label class="remember-me">
-                                    <input name="RememberMe" type="checkbox" id="remember-me-input" checked="checked" />
-                                    <label for="remember-me-input" style="font-size: 12px">记住我</label>
-                                </label>
-                                <a class="unable-login" href="@Url.Action("ForgotPassword")">忘记密码?</a>
-                            </div>
-                        </form>
-                    }
-                    <div class="QRCode">
-                        <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("About", "Home")'" type="button">
-                            <span class="sprite-global-icon-qrcode"></span>
-                            <span class="QRCode-toggleButtonText ">点击了解全球某工商.com</span>
-                        </button>
-                    </div>
+                        </div>
+                        <div class="button-wrapper command">
+                            <button class="sign-button submit" type="submit">登录</button>
+                        </div>
+                        <div class="signin-misc-wrapper clearfix">
+                            <label class="remember-me">
+                                <input name="RememberMe" type="checkbox" id="remember-me-input" checked="checked" />
+                                <label for="remember-me-input" style="font-size: 12px">记住我</label>
+                            </label>
+                            <a class="unable-login" href="@Url.Action("ForgotPassword")">忘记密码?</a>
+                        </div>
+                    </form>
+                }
+                <div class="QRCode">
+                    <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("About", "Home")'" type="button">
+                        <span class="sprite-global-icon-qrcode"></span>
+                        <span class="QRCode-toggleButtonText ">点击了解全球某工商.com</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer" style="position: relative; z-index: 1">
-        <span>2016 全球某工商</span>
-        <span class="dot">·</span>
-        <a href="@Url.Action("About", "Home")" class="footer-mobile-show">联系我们</a>
-        <span class="dot">·</span>
-        <a href="@Url.Action("Job", "Home")">来全球某工商工作</a>
-        <span class="dot">·</span>
-        <a href="http://www.miibeian.gov.cn/" target="_blank">浙 ICP 备 15036767 号</a>
-        <span class="dot">·</span>
-        <span>浙公网安备 33011802000821 号</span>
-    </div>
-
-    <!-- martial scripts -->
-    <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/MaterizeJS/materialize.js"></script>
-
-    <!-- scripts -->
-    <script src="~/Scripts/particles.js/particles.js"></script>
-    <script src="~/Scripts/particles.js/app.js"></script>
-
-</body>
-</html>
+</div>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="@ViewBag.Title">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title | 全球某工商 - 连接每一位商大师生</title>
+    <link href="~/Content/particles.js/style.css" rel="stylesheet" media="screen">
+    <link href="~/Content/particles.js/zh.css" rel="stylesheet" media="screen">
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+    <!-- particles.js container -->
+    <div id="particles-js" style="position: absolute; top: 0; z-index: 0; display: block; width: 100%; height: 100%"></div>
+
+    @RenderBody()
+
+    <div class="footer" style="position: relative; z-index: 1">
+        <span>2016 全球某工商</span>
+        <span class="dot">·</span>
+        <a href="@Url.Action("About", "Home")" class="footer-mobile-show">联系我们</a>
+        <span class="dot">·</span>
+        <a href="@Url.Action("Job", "Home")">来全球某工商工作</a>
+        <span class="dot">·</span>
+        <a href="http://www.miibeian.gov.cn/" target="_blank">浙 ICP 备 15036767 号</a>
+        <span class="dot">·</span>
+        <span>浙公网安备 33011802000821 号</span>
+    </div>
+</body>
+
+<!-- martial scripts -->
+<script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/MaterizeJS/materialize.js"></script>
+
+<!-- scripts -->
+<script src="~/Scripts/particles.js/particles.js"></script>
+<script src="~/Scripts/particles.js/app.js"></script>
+
+<!-- JavaScript Baidu Analytics -->
+<script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?a6245c7118c12f7de3692c2972eb41b6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+</script>

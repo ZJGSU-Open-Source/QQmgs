@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
-<nav style="background: #009688">
+<nav style="background: #009688; height: 53px; line-height: 53px">
     <div class="nav-wrapper container" style="padding-top: 0px">
         <div class="col s12">
             <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
@@ -44,7 +44,7 @@
         
         <div class="section">
             <div class="row center" style="margin: auto">
-                <h5 class="header col s12 light grey-text">所有兴趣小组 (@Model.ToList().Count)</h5>
+                <h6 class="header col s12 light grey-text">所有兴趣小组 (@Model.ToList().Count)</h6>
             </div>
 
             <div class="collection" style="max-width: 700px; margin: auto">
@@ -87,7 +87,7 @@
 
         <div class="section">
             <div class="row center" style="margin: auto">
-                <h5 class="header col s12 light grey-text">加入的私密小组</h5>
+                <h6 class="header col s12 light grey-text">加入的私密小组</h6>
             </div>
             <div class="collection" style="max-width: 700px; margin: auto">
             @{
@@ -99,7 +99,7 @@
 
         <div class="section">
             <div class="row center">
-                <h5 class="header col s12 light grey-text">更多功能</h5>
+                <h6 class="header col s12 light grey-text">更多功能</h6>
             </div>
             <div class="center">
                 <a class="teal-text">请告诉我们你的意见和建议 :)</a>

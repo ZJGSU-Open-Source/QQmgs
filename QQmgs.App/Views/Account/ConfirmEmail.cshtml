@@ -1,102 +1,63 @@
 ﻿@model Tuple<string, int>
 @{
-    ViewBag.Title = "全球某工商 - 连接每一位商大师生";
-    Layout = "";
-}
+    ViewBag.Title = "邮件确认";
+    Layout = "~/Views/Shared/_Login_Layout.cshtml";
 
-@{
     var number = Model.Item2;
     var userName = Model.Item1;
     var words = $"{userName}是第{number}位加入全球某工商的浙小商，快来和我一起high吧~";
 }
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <title>全球某工商 - 连接每一位商大师生</title>
-    <meta name="description" content="qqmgs.com login page.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="~/Content/particles.js/style.css" rel="stylesheet" media="screen">
-    <link href="~/Content/particles.js/zh.css" rel="stylesheet" media="screen">
-    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-</head>
-<body>
-    <!-- particles.js container -->
-    <div id="particles-js" style="position: absolute; top: 0; z-index: 0; display: block; width: 100%; height: 100%"></div>
-
-    <div class="index-main" style="position: relative; z-index: 1">
-        <div class="index-main-body">
-            <div class="index-header">
-                <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
-                <h2 class="subtitle">连接每一位商大师生</h2>
-            </div>
-            <div class="desk-front sign-flow clearfix sign-flow-simple">
-                <div class="index-tab-navs">
-                    <div class="navs-slider" data-active-index="0">
-                        <a href="#" class="active" style="width: 6em">浙小商验证</a>
-                        <span class="navs-slider-bar" style="width: 4.3em"></span>
-                    </div>
+<div class="index-main" style="position: relative; z-index: 1">
+    <div class="index-main-body">
+        <div class="index-header">
+            <h1 style="font-size: 60px; margin-top: 0px">全球某工商</h1>
+            <h2 class="subtitle">连接每一位商大师生</h2>
+        </div>
+        <div class="desk-front sign-flow clearfix sign-flow-simple">
+            <div class="index-tab-navs">
+                <div class="navs-slider" data-active-index="0">
+                    <a href="#" class="active" style="width: 6em">浙小商验证</a>
+                    <span class="navs-slider-bar" style="width: 4.3em"></span>
                 </div>
-                <div class="view view-signup selected" data-za-module="SignUpForm">
-                    <h4 class="center">注册成功!</h4>
-                    <br/>
-                    <h6 class="center">@userName，是第 <a style="font-size: 38px; color: #039be5">@number</a> 位成功验证的浙小商</h6>
+            </div>
+            <div class="view view-signup selected" data-za-module="SignUpForm">
+                <h4 class="center">注册成功!</h4>
+                <br />
+                <h6 class="center">@userName，是第 <a style="font-size: 38px; color: #039be5">@number</a> 位成功验证的浙小商</h6>
 
-                    <div class="bdsharebuttonbox" style="float: right; margin-top: 10px">
-                        <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a><a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a><a title="分享到Facebook" class="bds_fbook" href="#" data-cmd="fbook"></a><a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a><a title="分享到QQ好友" class="bds_sqq" href="#" data-cmd="sqq"></a>
-                    </div>
-                    <br/>
+                <div class="bdsharebuttonbox" style="float: right; margin-top: 10px">
+                    <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a><a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a><a title="分享到Facebook" class="bds_fbook" href="#" data-cmd="fbook"></a><a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a><a title="分享到QQ好友" class="bds_sqq" href="#" data-cmd="sqq"></a>
+                </div>
+                <br />
 
-                    <div class="QRCode" style="margin-top: 28px">
-                        <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("Index", "Home")'" type="button">
-                            <span class="sprite-global-icon-qrcode"></span>
-                            <span class="QRCode-toggleButtonText ">进入全球某工商</span>
-                        </button>
-                    </div>
+                <div class="QRCode" style="margin-top: 28px">
+                    <button class="QRCode-toggleButton" onclick="location.href = '@Url.Action("Index", "Home")'" type="button">
+                        <span class="sprite-global-icon-qrcode"></span>
+                        <span class="QRCode-toggleButtonText ">进入全球某工商</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer" style="position: relative; z-index: 1">
-        <span>2016 全球某工商</span>
-        <span class="dot">·</span>
-        <a href="@Url.Action("About", "Home")" class="footer-mobile-show">联系我们</a>
-        <span class="dot">·</span>
-        <a href="@Url.Action("Job", "Home")">来全球某工商工作</a>
-        <span class="dot">·</span>
-        <a href="http://www.miibeian.gov.cn/" target="_blank">浙 ICP 备 15036767 号</a>
-        <span class="dot">·</span>
-        <span>浙公网安备 33011802000821 号</span>
-    </div>
+</div>
 
-    <!-- martial scripts -->
-    <script src="~/Scripts/MaterizeJS/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/MaterizeJS/materialize.js"></script>
-
-    <!-- scripts -->
-    <script src="~/Scripts/particles.js/particles.js"></script>
-    <script src="~/Scripts/particles.js/app.js"></script>
-
-    <script>
-        window._bd_share_config = {
-            "common": {
-                "bdSnsKey": {},
-                "bdText": "@words | 全球某工商 QQmgs.com · 开最high的Party，做最in的社交 http://www.qqmgs.com",
-                "bdMini": "2",
-                "bdMiniList": false,
-                "bdPic": "https://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg",
-                "bdStyle": "0",
-                "bdSize": "24"
-            },
-            "share": {}
-        };
-        with (document)
-            0[(getElementsByTagName('head')[0] || body)
-                .appendChild(createElement('script'))
-                .src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' +
-                ~(-new Date() / 36e5)];
-    </script>
-</body>
-</html>
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "@words | 全球某工商 QQmgs.com · 开最high的Party，做最in的社交 http://www.qqmgs.com",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "https://qqmgs.com/img/Uploads/ceb5a6b6-9dfa-4d7f-bb0d-aff3ad454aad_20131108111102-1464680280.jpg",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {}
+    };
+    with (document)
+        0[(getElementsByTagName('head')[0] || body)
+            .appendChild(createElement('script'))
+            .src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' +
+            ~(-new Date() / 36e5)];
+</script>

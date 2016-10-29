@@ -2,14 +2,14 @@
 
 <div class="section hide-on-small-only" style="padding-top: 0px; padding-bottom: 0px">
     <div class="row center" style="margin: auto">
-        <h5 class="header col s12 light grey-text">为您推荐的兴趣小组</h5>
+        <h6 class="header col s12 light grey-text">实时校园热搜</h6>
     </div>
 
     <div class="row" style="margin: auto">
         @foreach (var group in Model)
         {
-            <div class="col s3">
-                <div class="card" style="max-width: 220px;">
+            <div class="col s2">
+                <div class="card" style="max-width: 160px;">
                     <div class="card-image waves-effect waves-block waves-light">
                         @if (group.HasImageOverview)
                         {
@@ -28,8 +28,10 @@
                         </p>
                     </div>
                     <div class="card-reveal" style="-ms-opacity: 0.83; opacity: 0.83">
-                        <span class="card-title grey-text text-darken-4">@group.Name<i class="material-icons right">close</i></span>
-                        
+                        <span class="card-title grey-text text-darken-4" style="font-size: 1rem">
+                            @group.Name
+                        </span>
+
                         @{
                             if (group.Description == null)
                             {
@@ -37,11 +39,14 @@
                             }
                         }
 
-                        <p>简介: @group.Description</p>
-                        <p>创建于 @group.CreatedTime.ToString("D")</p>
+                        <div style="font-size: 0.8rem">
+                            <p>简介: @group.Description</p>
+                            <p>创建于 @group.CreatedTime.ToString("M")</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        }
+                            }
     </div>
 </div>
