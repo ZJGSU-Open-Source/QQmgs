@@ -57,27 +57,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity.cs" />
-    <Compile Include="CourseReview.cs" />
+    <Compile Include="ActivityModels\Activity.cs" />
+    <Compile Include="ActivityModels\ActivityPhoto.cs" />
+    <Compile Include="CourseReviewModels\CourseReview.cs" />
     <Compile Include="DataAnnotations\CustomRequiredEmail.cs" />
     <Compile Include="DevLog.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="GroupPlugin.cs" />
-    <Compile Include="Message.cs" />
-    <Compile Include="Notification.cs" />
-    <Compile Include="Photo.cs" />
+    <Compile Include="GroupModels\Group.cs" />
+    <Compile Include="GroupModels\GroupPhoto.cs" />
+    <Compile Include="GroupModels\GroupPlugin.cs" />
+    <Compile Include="GroupModels\Message.cs" />
+    <Compile Include="Interfaces\IPhoto.cs" />
+    <Compile Include="GroupModels\Notification.cs" />
+    <Compile Include="PhotoModels\Image.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reply.cs" />
-    <Compile Include="Report.cs" />
-    <Compile Include="Trace\HighAccLocationByIpResult.cs" />
-    <Compile Include="Tweet.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Trace\UserLogTrace.cs" />
+    <Compile Include="GroupModels\Reply.cs" />
+    <Compile Include="GroupModels\Report.cs" />
+    <Compile Include="TraceModels\HighAccLocationByIpResult.cs" />
+    <Compile Include="GroupModels\Tweet.cs" />
+    <Compile Include="UserModels\User.cs" />
+    <Compile Include="TraceModels\UserLogTrace.cs" />
+    <Compile Include="UserModels\UserAvatar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

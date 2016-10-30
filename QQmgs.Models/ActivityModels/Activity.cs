@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Twitter.Models.UserModels;
 
-namespace Twitter.Models
+namespace Twitter.Models.ActivityModels
 {
     public class Activity
     {
         public Activity()
         {
             this.Participents = new HashSet<User>();
+            this.ActivityPhotos = new HashSet<ActivityPhoto>();
         }
-            
+
         [Key]
         public int Id { get; set; }
 
@@ -49,6 +47,9 @@ namespace Twitter.Models
         public string Organizer { get; set; }
 
         public bool IsDisplay { get; set; }
+
+        public virtual ICollection<ActivityPhoto> ActivityPhotos { get; set; }
+
     }
 
     public enum ActivityClassficiation

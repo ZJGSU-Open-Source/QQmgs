@@ -9,6 +9,9 @@ using Twitter.App.Models.BindingModel;
 using Twitter.App.Models.BindingModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.ActivityModels;
+using Twitter.Models.GroupModels;
+using Twitter.Models.Interfaces;
 
 namespace Twitter.App.Controllers.MVCController
 {

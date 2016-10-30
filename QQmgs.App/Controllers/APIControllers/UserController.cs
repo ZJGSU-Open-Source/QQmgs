@@ -19,6 +19,8 @@ using Twitter.App.Provider;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 using Twitter.App.Constants;
+using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
 
 namespace Twitter.App.Controllers.APIControllers
 {
@@ -225,17 +227,17 @@ namespace Twitter.App.Controllers.APIControllers
 
                     var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.AvatarImage);
 
-                    var photo = new Photo
+                    var photo = new Image
                     {
                         AuthorId = loggedUserId,
                         DatePosted = DateTime.Now,
                         Name = fileName,
                         PhotoType = PhotoType.AvatarImage,
                         PhotoClasscification = PhotoClasscification.Ohter,
-                        Descrption = string.Empty,
+                        Description = string.Empty,
                         IsSoftDelete = false,
-                        OriginalHeight = uploadedFile.Height,
-                        OriginalWidth = uploadedFile.Width
+                        Height = uploadedFile.Height,
+                        Width = uploadedFile.Width
                     };
 
                     this.Data.Photo.Add(photo);

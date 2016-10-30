@@ -1,4 +1,9 @@
-﻿using Twitter.Models.Trace;
+﻿using Twitter.Models.ActivityModels;
+using Twitter.Models.CourseReviewModels;
+using Twitter.Models.GroupModels;
+using Twitter.Models.PhotoModels;
+using Twitter.Models.TraceModels;
+using Twitter.Models.UserModels;
 
 namespace Twitter.Data.UnitOfWork
 {
@@ -52,7 +57,7 @@ namespace Twitter.Data.UnitOfWork
 
         public IRepository<Group> Group => this.GetRepository<Group>();
 
-        public IRepository<Photo> Photo => this.GetRepository<Photo>();
+        public IRepository<Image> Photo => this.GetRepository<Image>();
 
         public IRepository<CourseReview> CourseReview => this.GetRepository<CourseReview>();
 

@@ -9,6 +9,7 @@ using Twitter.App.Common;
 using Twitter.App.Models.BindingModel;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.CourseReviewModels;
 
 namespace Twitter.App.Controllers.MVCController
 {

@@ -1,8 +1,9 @@
-﻿namespace Twitter.Models
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Twitter.Models.UserModels;
 
+namespace Twitter.Models.GroupModels
+{
     public class Message
     {
         [Key]

@@ -13,6 +13,10 @@ using Twitter.App.Models.BindingModel;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.GroupModels;
+using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
+using Twitter.Models.UserModels;
 using WebGrease.Css.Extensions;
 
 namespace Twitter.App.Controllers
@@ -359,7 +363,7 @@ namespace Twitter.App.Controllers
             var uploadedFile = FileUploadHelper.UploadFile(file, PhotoType.GroupImage);
             var loggedUserId = this.User.Identity.GetUserId();
 
-            var photo = new Photo
+            var photo = new Image
             {
                 AuthorId = loggedUserId,
                 Name = uploadedFile.Url,

@@ -10,7 +10,7 @@ using Twitter.App.BusinessLogic;
 using Twitter.App.DataContracts;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
-using Twitter.Models.Trace;
+using Twitter.Models.TraceModels;
 
 namespace Twitter.App.Controllers.MVCController
 {

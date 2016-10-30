@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using Glimpse.Core.Extensibility;
 using Twitter.Models;
+using Twitter.Models.Interfaces;
 
 namespace Twitter.App.BusinessLogic
 {
@@ -110,7 +111,7 @@ namespace Twitter.App.BusinessLogic
             FileStream stream = new FileStream(Path.GetFullPath(imagePath), FileMode.OpenOrCreate);
 
             // Convert our uploaded file to an image
-            Image origImage = Image.FromStream(file.InputStream);
+            System.Drawing.Image origImage = System.Drawing.Image.FromStream(file.InputStream);
 
             // resize algo
             if (photoType == PhotoType.Photo)
@@ -167,7 +168,7 @@ namespace Twitter.App.BusinessLogic
             // Create a stream to save the file to when we're done resizing
             FileStream stream = new FileStream(Path.GetFullPath(imagePath), FileMode.OpenOrCreate);
 
-            Image imgPhoto = Image.FromFile(stPhotoPath);
+            System.Drawing.Image imgPhoto = System.Drawing.Image.FromFile(stPhotoPath);
 
             // resize algo
             if (photoType == PhotoType.AvatarImage)

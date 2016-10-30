@@ -13,6 +13,8 @@ using Twitter.App.Models.BindingModel;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
 
 namespace Twitter.App.Controllers
 {
@@ -52,7 +54,7 @@ namespace Twitter.App.Controllers
 
             try
             {
-                var photo = new Photo
+                var photo = new Image
                 {
                     AuthorId = loggedUserId,
                     DatePosted = DateTime.Now,
@@ -60,10 +62,10 @@ namespace Twitter.App.Controllers
                     PhotoType = PhotoType.Photo,
                     PhotoClasscification = EnumUtils.Parse<PhotoClasscification>(model.Classcification ??
                                                             PhotoClasscification.Ohter.ToString()),
-                    Descrption = model.Description,
+                    Description = model.Description,
                     IsSoftDelete = false,
-                    OriginalHeight = uploadedFile.PhotoSize.Height,
-                    OriginalWidth = uploadedFile.PhotoSize.Width
+                    Height = uploadedFile.PhotoSize.Height,
+                    Width = uploadedFile.PhotoSize.Width
                 };
 
                 this.Data.Photo.Add(photo);
@@ -104,12 +106,12 @@ namespace Twitter.App.Controllers
         }
 
 
-        private static readonly Expression<Func<Photo, PhotoViewModel>> AsPhotoViewModel =
+        private static readonly Expression<Func<Image, PhotoViewModel>> AsPhotoViewModel =
             t => new PhotoViewModel
             {
                 Author = t.Author.RealName,
                 Name = t.Name,
-                Description = t.Descrption
+                Description = t.Description
             };
     }
 }

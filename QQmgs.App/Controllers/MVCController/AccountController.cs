@@ -12,6 +12,8 @@ using System.Web.Mvc;
 using Twitter.App.Helper;
 using Twitter.App.Models.ViewModels;
 using Twitter.Models;
+using Twitter.Models.TraceModels;
+using Twitter.Models.UserModels;
 
 namespace Twitter.App.Controllers
 {

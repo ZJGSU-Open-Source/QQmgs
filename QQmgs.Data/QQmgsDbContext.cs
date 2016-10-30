@@ -1,7 +1,12 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Twitter.Models.Trace;
+using Twitter.Models.ActivityModels;
+using Twitter.Models.CourseReviewModels;
+using Twitter.Models.GroupModels;
+using Twitter.Models.PhotoModels;
+using Twitter.Models.TraceModels;
+using Twitter.Models.UserModels;
 
 namespace Twitter.Data
 {
@@ -49,13 +54,35 @@ namespace Twitter.Data
                 .HasForeignKey(m => m.RecipientId)
                 .WillCascadeOnDelete(false);
 
+            // Reply of Tweet
             modelBuilder.Entity<Reply>()
                 .HasRequired(r => r.Author)
                 .WithMany(u => u.Replies)
                 .HasForeignKey(r => r.AuthorId)
                 .WillCascadeOnDelete(false);
 
-            // group plugin
+            // UserAvatar of User
+            modelBuilder.Entity<UserAvatar>()
+                .HasRequired(ua => ua.Author)
+                .WithMany(u => u.UserAvatars)
+                .HasForeignKey(ua => ua.AuthorId)
+                .WillCascadeOnDelete(false);
+
+            // ActivityPhoto of Activity
+            modelBuilder.Entity<ActivityPhoto>()
+                .HasRequired(ap => ap.Activity)
+                .WithMany(a => a.ActivityPhotos)
+                .HasForeignKey(ap => ap.ActivityId)
+                .WillCascadeOnDelete(false);
+
+            // GroupPhoto of Group
+            modelBuilder.Entity<GroupPhoto>()
+                .HasRequired(gp => gp.Group)
+                .WithMany(g => g.GroupPhotos)
+                .HasForeignKey(gp => gp.GroupId)
+                .WillCascadeOnDelete(false);
+
+            // Group plugin
             modelBuilder.Entity<Group>()
                 .HasOptional(g => g.GroupPlugin)
                 .WithRequired(plugin => plugin.Group);
@@ -75,7 +102,7 @@ namespace Twitter.Data
                 .HasForeignKey(t => t.AuthorId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Photo>()
+            modelBuilder.Entity<Image>()
                 .HasRequired(t => t.Author)
                 .WithMany(u => u.Photos)
                 .HasForeignKey(t => t.AuthorId)

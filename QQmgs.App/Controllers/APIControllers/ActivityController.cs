@@ -21,6 +21,9 @@ using Twitter.App.Models.ViewModels;
 using Twitter.App.Provider;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.ActivityModels;
+using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
 
 namespace Twitter.App.Controllers.APIControllers
 {
@@ -272,6 +275,13 @@ namespace Twitter.App.Controllers.APIControllers
                 // Retrieve the form data, and save the file on server
                 await Request.Content.ReadAsMultipartAsync(provider);
 
+                // Return no content if file data equal to zero
+                var fileSize = provider.FileData.Count;
+                if (fileSize == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+
                 foreach (var file in provider.FileData)
                 {
                     // Check the user uploaded file name whether valiad
@@ -284,17 +294,17 @@ namespace Twitter.App.Controllers.APIControllers
 
                     var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.ActivityImage);
 
-                    var photo = new Photo
+                    var photo = new Image
                     {
                         AuthorId = loggedUserId,
                         DatePosted = DateTime.Now,
                         Name = fileName,
                         PhotoType = PhotoType.ActivityImage,
                         PhotoClasscification = PhotoClasscification.Ohter,
-                        Descrption = string.Empty,
+                        Description = string.Empty,
                         IsSoftDelete = false,
-                        OriginalHeight = uploadedFile.Height,
-                        OriginalWidth = uploadedFile.Width
+                        Height = uploadedFile.Height,
+                        Width = uploadedFile.Width
                     };
 
                     this.Data.Photo.Add(photo);

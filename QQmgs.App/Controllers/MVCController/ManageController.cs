@@ -3,6 +3,8 @@ using Twitter.App.BusinessLogic;
 using Twitter.App.Helper;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
 
 namespace Twitter.App.Controllers
 {
@@ -386,7 +388,7 @@ namespace Twitter.App.Controllers
             var uploadedFile = FileUploadHelper.UploadFile(file);
             var loggedUserId = this.User.Identity.GetUserId();
 
-            var photo = new Photo
+            var photo = new Image
             {
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,

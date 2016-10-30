@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Twitter.Models.UserModels;
 
-namespace Twitter.Models
+namespace Twitter.Models.GroupModels
 {
     public class Group
     {
@@ -13,6 +11,7 @@ namespace Twitter.Models
         {
             this.Tweets = new HashSet<Tweet>();
             this.Users = new HashSet<User>();
+            this.GroupPhotos = new HashSet<GroupPhoto>();
         }
 
         [Key]
@@ -50,6 +49,8 @@ namespace Twitter.Models
         public virtual ICollection<User> Users { get; set; }
 
         public virtual GroupPlugin GroupPlugin { get; set; }
+
+        public virtual ICollection<GroupPhoto> GroupPhotos { get; set; }
     }
 
     public enum Classification

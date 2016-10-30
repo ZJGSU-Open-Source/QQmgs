@@ -19,6 +19,7 @@ using Twitter.App.Provider;
 using Twitter.App.Results;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.UserModels;
 
 namespace Twitter.App.Controllers.APIControllers
 {

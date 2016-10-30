@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using Twitter.App.Provider;
+using Twitter.Models.UserModels;
 
 namespace Twitter.App
 {

@@ -1,9 +1,10 @@
-﻿namespace Twitter.Models
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Twitter.Models.UserModels;
 
+namespace Twitter.Models.GroupModels
+{
     public class Report
     {
         [Key]

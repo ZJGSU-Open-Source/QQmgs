@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Twitter.Models.UserModels;
 
-namespace Twitter.Models
+namespace Twitter.Models.GroupModels
 {
     public class Tweet
     {

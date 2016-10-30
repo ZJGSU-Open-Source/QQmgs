@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Twitter.Models.Interfaces;
+using Twitter.Models.UserModels;
 
-namespace Twitter.Models
+namespace Twitter.Models.PhotoModels
 {
-    public class Photo
+    public class Image : IPhoto
     {
-        public Photo()
+        public Image()
         {
             this.UsersFavourite = new HashSet<User>();
         }
@@ -25,7 +24,7 @@ namespace Twitter.Models
         [Required]
         public string AuthorId { get; set; }
 
-        public string Descrption { get; set; }
+        public string Description { get; set; }
 
         public virtual User Author { get; set; }
 
@@ -35,19 +34,11 @@ namespace Twitter.Models
 
         public bool IsSoftDelete { get; set; }
 
-        public int OriginalWidth { get; set; }
+        public int Width { get; set; }
 
-        public int OriginalHeight { get; set; }
+        public int Height { get; set; }
 
         public virtual ICollection<User> UsersFavourite { get; set; }
-    }
-
-    public enum PhotoType
-    {
-        Photo = 0,
-        AvatarImage = 1,
-        GroupImage = 2,
-        ActivityImage = 3
     }
 
     public enum PhotoClasscification

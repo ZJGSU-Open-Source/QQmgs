@@ -7,7 +7,12 @@ using System.Web;
 using Twitter.App.DataContracts;
 using Twitter.App.Models.ViewModels;
 using Twitter.Models;
-using Twitter.Models.Trace;
+using Twitter.Models.ActivityModels;
+using Twitter.Models.CourseReviewModels;
+using Twitter.Models.GroupModels;
+using Twitter.Models.PhotoModels;
+using Twitter.Models.TraceModels;
+using Twitter.Models.UserModels;
 
 namespace Twitter.App.BusinessLogic
 {
@@ -81,14 +86,14 @@ namespace Twitter.App.BusinessLogic
                 AvatarImageName = u.AvatarImageName
             };
 
-        public static readonly Expression<Func<Photo, PhotoViewModel>> AsPhotoViewModel =
+        public static readonly Expression<Func<Image, PhotoViewModel>> AsPhotoViewModel =
             p => new PhotoViewModel
             {
-                Description = p.Descrption,
+                Description = p.Description,
                 Author = p.Author.RealName,
                 Name = p.Name,
-                Height = p.OriginalHeight,
-                Width = p.OriginalWidth,
+                Height = p.Height,
+                Width = p.Width,
                 Id = p.Id,
                 HasAvatarImage = p.Author.HasAvatarImage,
                 AvatarImageName = p.Author.AvatarImageName
@@ -374,11 +379,11 @@ namespace Twitter.App.BusinessLogic
                 }),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
                 {
-                    Description = photo.Descrption,
+                    Description = photo.Description,
                     Author = photo.Author.RealName,
                     Name = photo.Name,
-                    Height = photo.OriginalHeight,
-                    Width = photo.OriginalWidth,
+                    Height = photo.Height,
+                    Width = photo.Width,
                     Id = photo.Id,
                     HasAvatarImage = photo.Author.HasAvatarImage,
                     AvatarImageName = photo.Author.AvatarImageName.RetrievePhotoThumnails(photo.Author.HasAvatarImage),
@@ -436,11 +441,11 @@ namespace Twitter.App.BusinessLogic
                 AvatarImageName = user.AvatarImageName.RetrievePhotoThumnails(user.HasAvatarImage),
                 PostedPhotos = user.Photos.Select(photo => new PhotoViewModel
                 {
-                    Description = photo.Descrption,
+                    Description = photo.Description,
                     Author = photo.Author.RealName,
                     Name = photo.Name,
-                    Height = photo.OriginalHeight,
-                    Width = photo.OriginalWidth,
+                    Height = photo.Height,
+                    Width = photo.Width,
                     Id = photo.Id,
                     HasAvatarImage = photo.Author.HasAvatarImage,
                     AvatarImageName = photo.Author.AvatarImageName

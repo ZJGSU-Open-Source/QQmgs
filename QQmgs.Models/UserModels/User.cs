@@ -1,24 +1,28 @@
-﻿using Twitter.Models.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Twitter.Models.ActivityModels;
+using Twitter.Models.CourseReviewModels;
+using Twitter.Models.DataAnnotations;
+using Twitter.Models.GroupModels;
+using Twitter.Models.PhotoModels;
+using Twitter.Models.TraceModels;
 
-namespace Twitter.Models
+namespace Twitter.Models.UserModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-
     public class User : IdentityUser
     {
         public User()
         {
+            this.UserAvatars = new HashSet<UserAvatar>();
             this.Tweets = new HashSet<Tweet>();
             this.Followers = new HashSet<User>();
             this.FollowingUsers = new HashSet<User>();
-            this.Photos = new HashSet<Photo>();
+            this.Photos = new HashSet<Image>();
             this.CourseReviews = new HashSet<CourseReview>();
             this.UserLoginTraces = new HashSet<UserLogTrace>();
             this.Groups = new HashSet<Group>();
@@ -46,13 +50,15 @@ namespace Twitter.Models
 
         public override string PhoneNumber { get; set; }
 
+        public virtual ICollection<UserAvatar> UserAvatars { get; set; }
+
         public virtual ICollection<Reply> Replies { get; set; } 
 
         public virtual ICollection<Tweet> Tweets { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
 
-        public virtual ICollection<Photo> Photos { get; set; } 
+        public virtual ICollection<Image> Photos { get; set; } 
 
         public virtual ICollection<Activity> CreatedActivities { get; set; }
 
@@ -68,7 +74,7 @@ namespace Twitter.Models
 
         public virtual ICollection<Tweet> FavouriteTweets { get; set; }
 
-        public virtual ICollection<Photo> FavouritePhotos { get; set; }
+        public virtual ICollection<Image> FavouritePhotos { get; set; }
 
         // MVC Web App
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
@@ -85,6 +91,7 @@ namespace Twitter.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+
             // Add custom user claims here
             return userIdentity;
         }
