@@ -1,5 +1,5 @@
 ﻿@using Twitter.App.Constants
-@model Twitter.Models.GroupModels.Group
+@model Twitter.App.Models.ViewModels.GroupVieModels
 @{
     ViewBag.Title = "Edit Group";
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
@@ -13,7 +13,7 @@
         @Model.Name, 创建于 @Model.CreatedTime.ToString("M")
     </h5>
     <div class="center">
-        @if (Model.GroupPhotos.Count > 0)
+        @if (Model.GroupPhotos.Any())
         {
             <img src="~/img/Uploads/Thumbnails/@Model.GroupPhotos.LastOrDefault().Name" alt="" />
         }

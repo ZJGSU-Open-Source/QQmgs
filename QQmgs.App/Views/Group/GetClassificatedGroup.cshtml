@@ -7,9 +7,9 @@
         @foreach (var group in Model)
         {
             <div>
-                @if (group.HasImageOverview)
+                @if (group.GroupPhotos.Any())
                 {
-                    <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.ImageOverview" alt="">
+                    <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.GroupPhotos.LastOrDefault().Name" alt="">
                 }
                 else
                 {

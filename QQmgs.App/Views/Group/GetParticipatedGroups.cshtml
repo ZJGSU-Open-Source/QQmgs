@@ -42,5 +42,15 @@
                 </div>
             </a>
         }
+
+        @if (Model.Count() >= Constants.DefaultParticipatedGroupNumber)
+        {
+            <a href="#!" class="collection-item">
+                <div class="center">
+                    加载更多
+                </div>
+            </a>
+        }
+
     </div>
 </div>

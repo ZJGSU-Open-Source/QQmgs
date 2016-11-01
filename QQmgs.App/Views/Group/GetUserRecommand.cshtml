@@ -11,9 +11,9 @@
             <div class="col s2">
                 <div class="card" style="max-width: 160px;">
                     <div class="card-image waves-effect waves-block waves-light">
-                        @if (group.HasImageOverview)
+                        @if (group.GroupPhotos.Any())
                         {
-                            <img class="activator" src="~/img/Uploads/Thumbnails/@group.ImageOverview" alt="">
+                            <img class="activator" src="~/img/Uploads/Thumbnails/@group.GroupPhotos.LastOrDefault().Name" alt="">
                         }
                         else
                         {

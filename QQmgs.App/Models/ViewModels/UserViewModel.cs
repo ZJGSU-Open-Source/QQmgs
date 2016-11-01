@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Twitter.Models;
 
@@ -26,6 +27,9 @@ namespace Twitter.App.Models.ViewModels
 
         [JsonProperty("avatar_image_name")]
         public string AvatarImageName { get; set; }
+
+        [JsonProperty("registered_time")]
+        public DateTime RegisteredTime { get; set; }
 
         [JsonProperty("joined_groups")]
         public IEnumerable<GroupVieModels> JoinedGroups { get; set; }

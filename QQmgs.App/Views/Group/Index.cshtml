@@ -17,6 +17,7 @@
 
 <div class="section no-pad-bot" id="index-banner" style="padding-top: 0px; background-color: #f5f8fa">
     <div class="container">
+
         @{
             Html.RenderAction("GetUserRecommand");
         }
@@ -24,9 +25,9 @@
         <div class="section hide-on-small-only" style="padding-top: 0px">
             <div class="row" style="margin: auto">
                 @{
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.兴趣爱好});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.社团组织});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.我爱学习});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.兴趣爱好 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社团组织 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.我爱学习 });
                 }
             </div>
         </div>
@@ -42,19 +43,19 @@
         @{
             Html.RenderAction("GetParticipatedGroups");
         }
-        
+
         <div class="section">
             <div class="row center" style="margin: auto">
-                <h6 class="header col s12 light grey-text">所有兴趣小组 (@Model.ToList().Count)</h6>
+                <h6 class="header col s12 light grey-text">最近更新的兴趣小组 (@Model.ToList().Count)</h6>
             </div>
 
             <div class="collection" style="max-width: 700px; margin: auto">
                 @foreach (var group in Model)
                 {
                     <div>
-                        @if (group.HasImageOverview)
+                        @if (group.GroupPhotos.Any())
                         {
-                            <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.ImageOverview" alt="">
+                            <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.GroupPhotos.LastOrDefault().Name" alt="">
                         }
                         else
                         {
@@ -77,6 +78,16 @@
                         </div>
                     </a>
                 }
+
+                @if (Model.Count() >= Constants.DefaultRecentlyUpdateGroupNumber)
+                {
+                    <a href="#!" class="collection-item">
+                        <div class="center">
+                            加载更多
+                        </div>
+                    </a>
+                }
+
             </div>
             <br />
             <div class="horizontal click-to-toggle center">
@@ -85,18 +96,9 @@
             <br />
         </div>
 
-
-        <div class="section">
-            <div class="row center" style="margin: auto">
-                <h6 class="header col s12 light grey-text">加入的私密小组</h6>
-            </div>
-            <div class="collection" style="max-width: 700px; margin: auto">
-            @{
-                Html.RenderAction("GetAllGroups");
-            }
-            </div>
-        </div>
-
+        @{
+            Html.RenderAction("GetAllGroups");
+        }
 
         <div class="section">
             <div class="row center">

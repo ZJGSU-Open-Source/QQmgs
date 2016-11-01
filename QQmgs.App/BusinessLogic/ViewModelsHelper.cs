@@ -32,7 +32,17 @@ namespace Twitter.App.BusinessLogic
                 TweetsCount = g.Tweets.Count,
                 LastTweetUpdateTime = g.LastTweetUpdateTime,
                 IsDisplay = g.IsDisplay,
-                IsPrivate = g.IsPrivate
+                IsPrivate = g.IsPrivate,
+                CreaterId = g.CreaterId,
+                GroupPhotos = g.GroupPhotos.Select(photo => new GroupPhotoViewModel
+                {
+                    Id = photo.Id,
+                    DatePosted = photo.DatePosted,
+                    Name = photo.Name,
+                    Description = photo.Description,
+                    AuthorId = photo.AuthorId,
+                    IsSoftDelete = photo.IsSoftDelete
+                })
             };
 
         public static readonly Expression<Func<Tweet, TweetViewModel>> AsTweetViewModel =
@@ -83,7 +93,9 @@ namespace Twitter.App.BusinessLogic
                 Status = u.Status,
                 UserId = u.Id,
                 HasAvatarImage = u.HasAvatarImage,
-                AvatarImageName = u.AvatarImageName
+                AvatarImageName = u.AvatarImageName,
+                PhoneNumber = u.UserName,
+                RegisteredTime = u.RegisteredTime
             };
 
         public static readonly Expression<Func<Image, PhotoViewModel>> AsPhotoViewModel =
@@ -264,7 +276,17 @@ namespace Twitter.App.BusinessLogic
                 TweetsCount = g.Tweets.Count,
                 LastTweetUpdateTime = g.LastTweetUpdateTime,
                 IsDisplay = g.IsDisplay,
-                IsPrivate = g.IsPrivate
+                IsPrivate = g.IsPrivate,
+                CreaterId = g.CreaterId,
+                GroupPhotos = g.GroupPhotos.Select(photo => new GroupPhotoViewModel
+                {
+                    Id = photo.Id,
+                    DatePosted = photo.DatePosted,
+                    Name = photo.Name,
+                    Description = photo.Description,
+                    AuthorId = photo.AuthorId,
+                    IsSoftDelete = photo.IsSoftDelete
+                })
             };
         }
 

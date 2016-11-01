@@ -36,6 +36,7 @@ namespace Twitter.App.Controllers
         public ActionResult Index()
         {
             var groups = this.Data.Group.All()
+                .Take(Constants.Constants.DefaultRecentlyUpdateGroupNumber)
                 .OrderByDescending(t => t.LastTweetUpdateTime)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .Where(models => models.IsDisplay)
@@ -110,7 +111,9 @@ namespace Twitter.App.Controllers
 
             // get detailed groups
             var groups =
-                groupIds.Select(id => Data.Group.Find(id).ToGroupVieModel())
+                groupIds
+                    .Take(Constants.Constants.DefaultParticipatedGroupNumber)
+                    .Select(id => Data.Group.Find(id).ToGroupVieModel())
                     .OrderByDescending(models => models.LastTweetUpdateTime).ToList();
 
             return PartialView(groups);
@@ -294,7 +297,7 @@ namespace Twitter.App.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(group);
+            return View(group.ToGroupVieModel());
         }
 
         [HttpPost]
@@ -443,20 +446,22 @@ namespace Twitter.App.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var groups = user.Groups.Select(group => new GroupVieModels
-            {
-                Id = group.Id,
-                Description = group.Description,
-                Name = group.Name,
-                CreatedTime = group.CreatedTime,
-                CreaterId = group.CreaterId,
-                HasImageOverview = group.HasImageOverview,
-                ImageOverview = group.ImageOverview,
-                IsDisplay = group.IsDisplay,
-                LastTweetUpdateTime = group.LastTweetUpdateTime,
-                TweetsCount = group.Tweets.Count,
-                IsPrivate = group.IsPrivate
-            }).OrderByDescending(models => models.LastTweetUpdateTime);
+            var groups = user.Groups
+                .Take(Constants.Constants.DefaultParticipatedPrivateGroupNumber)
+                .Select(group => new GroupVieModels
+                {
+                    Id = group.Id,
+                    Description = group.Description,
+                    Name = group.Name,
+                    CreatedTime = group.CreatedTime,
+                    CreaterId = group.CreaterId,
+                    HasImageOverview = group.HasImageOverview,
+                    ImageOverview = group.ImageOverview,
+                    IsDisplay = group.IsDisplay,
+                    LastTweetUpdateTime = group.LastTweetUpdateTime,
+                    TweetsCount = group.Tweets.Count,
+                    IsPrivate = group.IsPrivate
+                }).OrderByDescending(models => models.LastTweetUpdateTime);
 
             return PartialView(groups);
         }

@@ -28,5 +28,22 @@ namespace Twitter.App.Models.ViewModels
         public bool IsDisplay { get; set; }
 
         public bool IsPrivate { get; set; }
+
+        public IEnumerable<GroupPhotoViewModel> GroupPhotos { get; set; }
+    }
+
+    public class GroupPhotoViewModel
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public DateTime DatePosted { get; set; }
+
+        public string AuthorId { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsSoftDelete { get; set; }
     }
 }

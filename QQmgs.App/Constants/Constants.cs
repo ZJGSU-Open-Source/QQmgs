@@ -4,6 +4,12 @@ namespace Twitter.App.Constants
 {
     public class Constants
     {
+        public static int DefaultParticipatedGroupNumber = 6;
+
+        public static int DefaultRecentlyUpdateGroupNumber = 8;
+
+        public static int DefaultParticipatedPrivateGroupNumber = 6;
+
         public static int PageTweetsNumber = 16;
 
         public static int PagePhotosNumber = 8;

@@ -214,5 +214,22 @@ namespace Twitter.App.Controllers.MVCController
 
             return View(result);
         }
+
+        [Route("register")]
+        public ActionResult GetRegisteredUser()
+        {
+            // permision check
+            //if (!RoleHelper.IsAdmin())
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied");
+            //}
+
+            var users = Data.Users.All()
+                .OrderByDescending(user => user.RegisteredTime)
+                .Select(ViewModelsHelper.AsUserViewModel)
+                .ToList();
+
+            return View(users);
+        }
     }
 }

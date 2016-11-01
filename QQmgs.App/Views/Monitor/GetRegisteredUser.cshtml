@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Twitter.App.Models.ViewModels.UserViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+    
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/materizeCss/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/materizeCss/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/Site.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body style="background-color: black">
+    <h5 class="center" style="color: white">Real-time monitoring system</h5>
+    <h6 class="center" style="color: white">Last data retrieving timestamp: @DateTime.Now.ToString("G")</h6>
+    <br />
+    <table class="centered responsive-table" style="color: white">
+        <thead>
+            <tr>
+                <th data-field="uid">User ID</th>
+                <th data-field="ai">Avatart Image</th>
+                <th data-field="name">Name</th>
+                <th data-field="pn">Phone Number</th>
+                <th data-field="dp">Department</th>
+                <th data-field="rt">Registered Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="max-width: 100px; padding: 0">@item.UserId</td>
+                    <td style="padding: 0">
+                        @if (item.HasAvatarImage)
+                        {
+                            <img style="max-width: 35px" src="~/img/Uploads/@item.AvatarImageName"/>
+                        }
+                        else
+                        {
+                            <a>N/A</a>
+                        }
+                    </td>
+                    <td style="padding: 0">@item.RealName</td>
+                    <td style="padding: 0">@item.PhoneNumber</td>
+                    <td style="padding: 0">@item.Class</td>
+                    <td style="padding: 0">@item.RegisteredTime.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
