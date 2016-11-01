@@ -64,15 +64,15 @@
     </main>
 
     <footer class="page-footer teal" style="padding-top: 5px">
-        <div class="container hide-on-small-and-down">
+        <div class="container hide-on-small-and-down" style="width: 90%">
             <div class="row" style="margin: auto">
-                <div class="col l8 s12">
+                <div class="col l9 s12">
                     <h6 style="font-size: 17px" class="white-text">全球某工商简介</h6>
                     <p style="font-size: 14px" class="grey-text text-lighten-4">
-                        实时社交网络。大家可以在各个兴趣小组的板块下自由交流，同时可以创建自己的兴趣小组。全球某工商旨在帮助大家寻找在校内志同道合的朋友，解决大家打球时找不到球友，跑步时一个人太无聊的尴尬场面。
+                        随时随地创建兴趣小组，找到想找的人。全球某工商旨在帮助大家寻找在校内志同道合的朋友，解决大家打球时找不到球友，跑步时一个人太无聊的尴尬场面。
                     </p>
                 </div>
-                <div class="col l4 s12">
+                <div class="col l3 s12">
                     <h6 style="font-size: 17px" class="white-text">加入全球某工商</h6>
                     <a style="font-size: 14px" class="white-text" href="@Url.Action("Job", "Home")">
                         工作机会 (有兴趣加入我们吗(●'◡'●))
@@ -87,8 +87,13 @@
             <div class="container row show-on-small hide-on-med-and-up" style="width: 100%">
                 <a style="color: #fffff0" href="~/Downloads/Android.Version-0.0.1.apk">点击下载安卓Android手机 App</a>
             </div>
-            <div class="container row hide-on-small-and-down" style="width: 100%">
-                全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号 · @{ Html.RenderAction("GetTotalUser", "Users"); } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");} · @{Html.RenderAction("GetDailyUserLogins", "Account");}
+            <div class="container row hide-on-small-and-down" style="width: 100%; font-size: 0.82rem">
+                <div class="left">
+                    全球某工商在线 · 专属商大学生的社交网络 · 浙ICP备15036767号 · 浙公网安备 33011802000821号
+                </div>
+                <div class="right">
+                 @{ Html.RenderAction("GetTotalUser", "Users"); } · @{Html.RenderAction("GetDailyTweetPosts", "Tweets");} · @{Html.RenderAction("GetDailyUserLogins", "Account");}   
+                </div>
             </div>
         </div>
     </footer>

@@ -1,68 +1,67 @@
 ﻿@using Twitter.App.Constants
-@model Twitter.Models.Group
+@model Twitter.Models.GroupModels.Group
 @{
     ViewBag.Title = "Edit Group";
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 
 <div class="container body-content-index-tweet mdl-demo">
+    <h3>
+        更新小组信息:
+    </h3>
+    <h5>
+        @Model.Name, 创建于 @Model.CreatedTime.ToString("M")
+    </h5>
+    <div class="center">
+        @if (Model.GroupPhotos.Count > 0)
+        {
+            <img src="~/img/Uploads/Thumbnails/@Model.GroupPhotos.LastOrDefault().Name" alt="" />
+        }
+        else
+        {
+            <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img">
+        }
+        <div>
+            [
+            @Html.ActionLink("更新兴趣小组头像", "UploadGroupImage", new { groupId = Model.Id })
+            ]
+        </div>
+    </div>
+
     @using (Html.BeginForm("Edit", "Group", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="modal-body mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                     style="width: auto">
-                    <h3>
-                        Group Infomation:
-                    </h3>
+        <div class="input-field col s12 left" style="display: none !important;">
+            <input id="group-id" type="text" class="validate" name="GroupId" value="@Model.Id">
+        </div>
 
-                    <div class="form-group" style="display: none">
-                        @Html.LabelFor(g => g.Id, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(g => g.Id, new { @class = "form-control", @Value = ViewData["GroupId"] })
-                        </div>
-                    </div>
-
-                    @if (Model.HasImageOverview)
-                    {
-                        <img src="~/img/Uploads/Thumbnails/@Model.ImageOverview" alt="" />
-                    }
-                    else
-                    {
-                        <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img">
-                    }
-                    [
-                    @Html.ActionLink("上传兴趣小组头像", "UploadGroupImage", new { groupId = Model.Id })
-                    ]
-
-                    @Html.TextAreaFor(t => t.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(t => t.Name, string.Empty, new { @class = "text-danger" })
-
-                    @Html.TextAreaFor(t => t.Description, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(t => t.Description, string.Empty, new { @class = "text-danger" })
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="description" type="text" class="validate" name="Name" value="@Model.Name">
+                <label for="description">小组名称</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="description" type="text" class="validate" name="Description" value="@Model.Description">
+                <label for="description">小组的描述...</label>
+            </div>
+            @*<div class="row center">
+                <div class="input-field col s6 offset-s3">
+                    <select class="browser-default" name="Classcification">
+                        <option value="Ohter" disabled selected>选择小组分类(可选)</option>
+                        <option value="Ohter">其他</option>
+                    </select>
                 </div>
+            </div>*@
 
-                <div class="modal-body">
-                    Created time:
-                    <a>@Model.CreatedTime</a>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-0 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                        <button type="reset" class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Group")'">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
+        </div>
+        <div class="row center">
+            <div class="col s12">
+                <input class="waves-effect waves-light btn" type="submit" value="更新" />
             </div>
         </div>
-        <br />
-        <br />
-        <br />
     }
+
 </div>

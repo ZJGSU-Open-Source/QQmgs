@@ -8,7 +8,7 @@ using Twitter.Models.Interfaces;
 
 namespace Twitter.Models.UserModels
 {
-    public class UserAvatar : IPhoto
+    public class UserProfleImage : IPhoto
     {
         [Key]
         public int Id { get; set; }

@@ -13,6 +13,7 @@ using Twitter.App.Models.BindingModel;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
+using Twitter.Models.ErrorModels;
 using Twitter.Models.GroupModels;
 using Twitter.Models.Interfaces;
 using Twitter.Models.PhotoModels;
@@ -129,12 +130,10 @@ namespace Twitter.App.Controllers
             // check private group
             if (group.IsPrivate)
             {
-                var loggedUserId = this.User.Identity.GetUserId();
-
-                var foundUser = group.Users.Any(user => user.Id == loggedUserId);
-                if (foundUser == false)
+                var isUserInGroup = IsUserInPrivateGroup(group);
+                if (isUserInGroup == false)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return View("ErrorHandling", new Error($"抱歉，你还没有加入小组{group.Name}，需要秘密小组成员邀请获得许可。"));
                 }
             }
 
@@ -281,51 +280,40 @@ namespace Twitter.App.Controllers
 
         [HttpGet]
         [Route("{groupId:int}/edit")]
-        public ActionResult Edit(int? groupId)
+        public ActionResult Edit(int groupId)
         {
-            if (groupId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             var group = this.Data.Group.Find(groupId);
             if (group == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
-            //// temp delete
-            //if (group.CreaterId != User.Identity.GetUserId())
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
+            var loggedUserId = User.Identity.GetUserId();
+            if (!(group.CreaterId == loggedUserId || RoleHelper.IsAdmin()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             return View(group);
         }
 
         [HttpPost]
-        public ActionResult Edit(EditGroupBindingModel group)
+        [Route("{groupId:int}/edit")]
+        public ActionResult Edit(EditGroupBindingModel model)
         {
-            try
+            var group = this.Data.Group.Find(model.Id);
+            if (group == null)
             {
-                var existedGroup = this.Data.Group.Find(group.Id);
-                if (existedGroup == null)
-                {
-                    return HttpNotFound();
-                }
-
-                existedGroup.Name = group.Name;
-                existedGroup.Description = group.Description;
-
-                Data.Group.Update(existedGroup);
-                Data.SaveChanges();
-
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
-            catch
-            {
-                return View();
-            }
+
+            group.Name = model.Name;
+            group.Description = model.Description;
+
+            Data.Group.Update(group);
+            Data.SaveChanges();
+
+            return RedirectToAction("Get", new { groupId = model.Id, p = 1 });
         }
 
         public ActionResult Delete(int id)
@@ -360,28 +348,29 @@ namespace Twitter.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UploadGroupImage(HttpPostedFileBase file, int groupId)
         {
+            var group = this.Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
             var uploadedFile = FileUploadHelper.UploadFile(file, PhotoType.GroupImage);
             var loggedUserId = this.User.Identity.GetUserId();
 
-            var photo = new Image
+            var photo = new GroupPhoto
             {
                 AuthorId = loggedUserId,
-                Name = uploadedFile.Url,
-                PhotoType = PhotoType.GroupImage,
-                DatePosted = DateTime.Now
+                DatePosted = DateTime.Now,
+                Name = uploadedFile.Name,
+                GroupPhotoType = GroupPhotoType.Overview
             };
 
-            this.Data.Photo.Add(photo);
-            this.Data.SaveChanges();
-
-            var group = this.Data.Group.Find(groupId);
-            group.HasImageOverview = true;
-            group.ImageOverview = photo.Name;
+            group.GroupPhotos.Add(photo);
 
             this.Data.Group.Update(group);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", new { groupId = groupId });
         }
 
         [HttpGet]
@@ -924,6 +913,13 @@ namespace Twitter.App.Controllers
         private static bool IswNotGroupOwner(Group group, string userId)
         {
             return group.CreaterId != userId;
+        }
+
+        private bool IsUserInPrivateGroup(Group group)
+        {
+            var loggedUserId = User.Identity.GetUserId();
+
+            return group.Users.Any(user => user.Id == loggedUserId);
         }
     }
 }

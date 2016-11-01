@@ -1,0 +1,23 @@
+﻿@model Twitter.Models.ErrorModels.Error
+
+@{
+    ViewBag.Title = "ErrorView";
+    Layout = "~/Views/Shared/_Materize_Layout.cshtml";
+}
+
+<nav style="background: #009688">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index", "Group")" class="breadcrumb">首页</a>
+        </div>
+    </div>
+</nav>
+
+<div class="center" style="margin: auto; padding-top: 50px">
+    <img style="max-width: 200px" src="~/img/Photo/friday_party.gif" alt="" />
+
+    <h5> @Model.ErrorMessage</h5>    
+</div>
+
+<br />
+<br />

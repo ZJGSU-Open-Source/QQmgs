@@ -72,6 +72,7 @@
       <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -285,7 +286,6 @@
     <Compile Include="Controllers\MVCController\CourseReviewController.cs" />
     <Compile Include="Controllers\MVCController\CustomizedNameController.cs" />
     <Compile Include="Controllers\MVCController\GroupController.cs" />
-    <Compile Include="Controllers\MVCController\DevController.cs" />
     <Compile Include="Controllers\MVCController\MonitorController.cs" />
     <Compile Include="Controllers\MVCController\PhotoController.cs" />
     <Compile Include="Controllers\MVCController\TwitterBaseController.cs" />
@@ -580,6 +580,7 @@
     <Content Include="Views\Group\GetPostDetail.cshtml" />
     <Content Include="Views\Account\ProfileSupplement.cshtml" />
     <Content Include="Views\Shared\_Login_Layout.cshtml" />
+    <Content Include="Views\Shared\ErrorHandling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

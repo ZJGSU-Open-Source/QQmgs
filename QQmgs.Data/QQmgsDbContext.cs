@@ -33,8 +33,6 @@ namespace Twitter.Data
 
         public IDbSet<Notification> Notifications { get; set; }
 
-        public IDbSet<DevLog> DevLogs { get; set; }
-
         public static QQmgsDbContext Create()
         {
             return new QQmgsDbContext();
@@ -62,7 +60,7 @@ namespace Twitter.Data
                 .WillCascadeOnDelete(false);
 
             // UserAvatar of User
-            modelBuilder.Entity<UserAvatar>()
+            modelBuilder.Entity<UserProfleImage>()
                 .HasRequired(ua => ua.Author)
                 .WithMany(u => u.UserAvatars)
                 .HasForeignKey(ua => ua.AuthorId)

@@ -53,8 +53,6 @@ namespace Twitter.Data.UnitOfWork
 
         public IRepository<Reply> Reply => this.GetRepository<Reply>();
 
-        public IRepository<DevLog> DevLog => this.GetRepository<DevLog>();
-
         public IRepository<Group> Group => this.GetRepository<Group>();
 
         public IRepository<Image> Photo => this.GetRepository<Image>();

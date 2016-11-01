@@ -58,7 +58,7 @@ namespace Twitter.App.BusinessLogic
             // Save our thumbnail as well
             var size = ResizeImage(file, fileName, Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, photoType);
 
-            photo.Url = fileName;
+            photo.Name = fileName;
             photo.PhotoSize = size;
 
             return photo;
@@ -276,15 +276,16 @@ namespace Twitter.App.BusinessLogic
 
         public class Photo
         {
-            public string Url;
+            public string Name { get; set; }
 
-            public PhotoSize PhotoSize;
+            public PhotoSize PhotoSize { get; set; }
         }
 
         public class PhotoSize
         {
-            public int Width;
-            public int Height;
+            public int Width { get; set; }
+
+            public int Height { get; set; }
         }
     }
 }

@@ -32,8 +32,6 @@ namespace Twitter.Data.UnitOfWork
 
         IRepository<Reply> Reply { get; }
 
-        IRepository<DevLog> DevLog { get; }
-
         IRepository<Group> Group { get; }
 
         IRepository<Image> Photo { get; }

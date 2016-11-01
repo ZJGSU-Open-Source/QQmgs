@@ -61,7 +61,7 @@
     <Compile Include="ActivityModels\ActivityPhoto.cs" />
     <Compile Include="CourseReviewModels\CourseReview.cs" />
     <Compile Include="DataAnnotations\CustomRequiredEmail.cs" />
-    <Compile Include="DevLog.cs" />
+    <Compile Include="ErrorModels\Error.cs" />
     <Compile Include="GroupModels\Group.cs" />
     <Compile Include="GroupModels\GroupPhoto.cs" />
     <Compile Include="GroupModels\GroupPlugin.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="GroupModels\Tweet.cs" />
     <Compile Include="UserModels\User.cs" />
     <Compile Include="TraceModels\UserLogTrace.cs" />
-    <Compile Include="UserModels\UserAvatar.cs" />
+    <Compile Include="UserModels\UserProfleImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
