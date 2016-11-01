@@ -33,10 +33,10 @@ namespace Twitter.Models.UserModels
 
         public int Height { get; set; }
 
-        public UserAvatarType? UserAvatarType { get; set; }
+        public UserProfilePhotoType? UserProfilePhotoType { get; set; }
     }
 
-    public enum UserAvatarType
+    public enum UserProfilePhotoType
     {
         AvatarImage,
         PhotoWall

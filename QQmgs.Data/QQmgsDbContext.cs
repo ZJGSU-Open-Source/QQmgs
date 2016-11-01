@@ -62,7 +62,7 @@ namespace Twitter.Data
             // UserAvatar of User
             modelBuilder.Entity<UserProfleImage>()
                 .HasRequired(ua => ua.Author)
-                .WithMany(u => u.UserAvatars)
+                .WithMany(u => u.UserProfilePhotos)
                 .HasForeignKey(ua => ua.AuthorId)
                 .WillCascadeOnDelete(false);
 

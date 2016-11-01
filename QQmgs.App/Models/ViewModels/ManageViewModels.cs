@@ -1,4 +1,6 @@
-﻿namespace Twitter.App.Models.ViewModels
+﻿using Twitter.Models.UserModels;
+
+namespace Twitter.App.Models.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -29,6 +31,8 @@
         public DateTime RegisteredTime { get; set; }
 
         public int RegisterTimeInterval { get; set; }
+
+        public IEnumerable<UserProfilePhotoViewModel> UserProfilePhotos { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -116,5 +120,22 @@
         [DataType(DataType.Text)]
         [Display(Name = "New Status")]
         public string Status { get; set; }
+    }
+
+    public class UserProfilePhotoViewModel
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public DateTime DatePosted { get; set; }
+
+        public string AuthorId { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsSoftDelete { get; set; }
+
+        public UserProfilePhotoType UserProfilePhotoType { get; set; }
     }
 }

@@ -10,7 +10,10 @@ using Twitter.App.BusinessLogic;
 using Twitter.App.DataContracts;
 using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
+using Twitter.Models.GroupModels;
+using Twitter.Models.Interfaces;
 using Twitter.Models.TraceModels;
+using Twitter.Models.UserModels;
 
 namespace Twitter.App.Controllers.MVCController
 {
@@ -108,7 +111,6 @@ namespace Twitter.App.Controllers.MVCController
         [Route("bio")]
         public ActionResult Bio()
         {
-
             var totalActivityNumber = this.Data.Activity.All().Count();
             var totalPhotoNumber = this.Data.Photo.All().Count();
             var totalReplyNumber = this.Data.Reply.All().Count();
@@ -120,11 +122,11 @@ namespace Twitter.App.Controllers.MVCController
             var result = new UserBioStatisticsViewModel
             {
                 TotalActivityNumber = totalActivityNumber,
-                TotalPhotoNumber =  totalPhotoNumber,
-                TotalReplyNumber =  totalReplyNumber,
-                TotalReviewNumber =  totalReviewNumber,
-                TotalTweetNumber =  totalTweetNumber,
-                TotalUserNumber =  totalUserNumber,
+                TotalPhotoNumber = totalPhotoNumber,
+                TotalReplyNumber = totalReplyNumber,
+                TotalReviewNumber = totalReviewNumber,
+                TotalTweetNumber = totalTweetNumber,
+                TotalUserNumber = totalUserNumber,
                 TotalGroupNumber = totalGroupNumber
             };
 
@@ -142,12 +144,15 @@ namespace Twitter.App.Controllers.MVCController
 
             var result = new List<UserStatisticsViewModel>();
 
-            for (var dateTime = DateTime.Now; dateTime.Month != DateTime.Now.AddMonths(-3).Month; dateTime = dateTime.AddDays(-1))
+            for (var dateTime = DateTime.Now;
+                dateTime.Month != DateTime.Now.AddMonths(-3).Month;
+                dateTime = dateTime.AddDays(-1))
             {
                 var newUserNumber =
-                this.Data.Users.All()
-                    .Count(
-                        user => user.RegisteredTime.Month == dateTime.Month && user.RegisteredTime.Day == dateTime.Day);
+                    this.Data.Users.All()
+                        .Count(
+                            user =>
+                                user.RegisteredTime.Month == dateTime.Month && user.RegisteredTime.Day == dateTime.Day);
 
                 var dateTimeLastDay = dateTime.AddDays(-1);
 
@@ -166,7 +171,7 @@ namespace Twitter.App.Controllers.MVCController
                 }
                 else
                 {
-                    userIncreasingRatio = (double)newUserNumber /
+                    userIncreasingRatio = (double) newUserNumber/
                                           (double)
                                               this.Data.Users.All()
                                                   .Count(
@@ -174,7 +179,7 @@ namespace Twitter.App.Controllers.MVCController
                                                           user.RegisteredTime.Month == dateTimeLastDay.Month &&
                                                           user.RegisteredTime.Day == dateTimeLastDay.Day);
 
-                    userIncreasingRatio = (userIncreasingRatio - 1.0) * 100;
+                    userIncreasingRatio = (userIncreasingRatio - 1.0)*100;
                 }
 
                 var activeUserNumber = 1;
@@ -191,7 +196,8 @@ namespace Twitter.App.Controllers.MVCController
 
                 var newReplies =
                     this.Data.Reply.All()
-                        .Count(reply => reply.PublishTime.Month == dateTime.Month && reply.PublishTime.Day == dateTime.Day);
+                        .Count(
+                            reply => reply.PublishTime.Month == dateTime.Month && reply.PublishTime.Day == dateTime.Day);
 
                 var newPhotos =
                     this.Data.Photo.All()
@@ -218,6 +224,28 @@ namespace Twitter.App.Controllers.MVCController
         [Route("register")]
         public ActionResult GetRegisteredUser()
         {
+            // Temp test
+            //var users = Data.Users.All().Where(user => user.HasAvatarImage).ToList();
+
+            //foreach (var user in users)
+            //{
+            //    var loggerUserId = User.Identity.GetUserId();
+
+            //    var userProfilePhoto = new UserProfleImage
+            //    {
+            //        AuthorId = loggerUserId,
+            //        DatePosted = DateTime.Now,
+            //        Name = user.AvatarImageName,
+            //        UserProfilePhotoType = UserProfilePhotoType.AvatarImage
+            //    };
+
+            //    user.UserProfilePhotos.Add(userProfilePhoto);
+            //    Data.Users.Update(user);
+            //    Data.SaveChanges();
+            //}
+
+            //return HttpNotFound();
+
             // permision check
             if (!RoleHelper.IsAdmin())
             {

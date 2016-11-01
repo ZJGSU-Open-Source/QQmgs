@@ -23,21 +23,25 @@ if (c == culture)
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div>
         <h4>你好，@Model.RealName</h4>
-        <hr/>
+        <hr />
         <dl class="dl-horizontal">
             <dt>Avatar image:</dt>
             <dd>
-                @if (Model.HasAvatarImage)
-                {
-                    <img src="~/img/Uploads/Thumbnails/@Model.AvatarImageName" alt=""/>
-                }
-                else
-                {
-                    <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img">
-                }
-                [
-                @Html.ActionLink("上传用户头像", "UploadAvatarImage")
-                ]
+                <div>
+                    @if (Model.UserProfilePhotos.Any())
+                    {
+                        <img src="~/img/Uploads/Thumbnails/@Model.UserProfilePhotos.LastOrDefault().Name" alt="" />
+                    }
+                    else
+                    {
+                        <img src=@Constants.Based64UserAvatarImage alt="" class="circle responsive-img">
+                    }
+                </div>
+                <div>
+                    [
+                    @Html.ActionLink("上传用户头像", "UploadAvatarImage")
+                    ]
+                </div>
             </dd>
             <dt>@Resources.Celebration:</dt>
             <dd>
@@ -114,48 +118,48 @@ if (c == culture)
                 }*@
             @*</dd>*@
         </dl>
-    @using (Html.BeginForm("SetCulture", "Manage"))
-    {
-        <fieldset>
-            <h4>@Resources.ChooseYourLanguage</h4>
-            <hr/>
+        @using (Html.BeginForm("SetCulture", "Manage"))
+        {
+            <fieldset>
+                <h4>@Resources.ChooseYourLanguage</h4>
+                <hr />
 
-            <div style="padding: 8px">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="en-us">
-                    <input type="radio" id="en-us" class="mdl-radio__button" name="culture" value="en-us" @Selected("en-us", culture)>
-                    <span class="mdl-radio__label">English</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="zh-cn">
-                    <input type="radio" id="zh-cn" class="mdl-radio__button" name="culture" value="zh-cn" @Selected("zh-cn", culture)>
-                    <span class="mdl-radio__label">中文</span>
-                </label>
-            </div>
-
-            @*<div class="control-group">
-                <div class="controls">
-                    <label for="en-us">
-                        <input name="culture" id="en-us" value="en-us" type="radio" @Selected("en-us", culture)/> English
+                <div style="padding: 8px">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="en-us">
+                        <input type="radio" id="en-us" class="mdl-radio__button" name="culture" value="en-us" @Selected("en-us", culture)>
+                        <span class="mdl-radio__label">English</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="zh-cn">
+                        <input type="radio" id="zh-cn" class="mdl-radio__button" name="culture" value="zh-cn" @Selected("zh-cn", culture)>
+                        <span class="mdl-radio__label">中文</span>
                     </label>
                 </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <label for="zh-cn">
-                        <input name="culture" id="zh-cn" value="zh-cn" type="radio" @Selected("zh-cn", culture)/> 中文
-                    </label>
-                </div>
-            </div>*@
-        </fieldset>
-        <br/>
-    }
+
+                @*<div class="control-group">
+                        <div class="controls">
+                            <label for="en-us">
+                                <input name="culture" id="en-us" value="en-us" type="radio" @Selected("en-us", culture)/> English
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label for="zh-cn">
+                                <input name="culture" id="zh-cn" value="zh-cn" type="radio" @Selected("zh-cn", culture)/> 中文
+                            </label>
+                        </div>
+                    </div>*@
+            </fieldset>
+            <br />
+        }
     </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        (function($) {
-            $("input[type = 'radio']").click(function() {
+        (function ($) {
+            $("input[type = 'radio']").click(function () {
                 $(this).parents("form").submit(); // post form
             });
 

@@ -5,6 +5,7 @@ using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 using Twitter.Models.Interfaces;
 using Twitter.Models.PhotoModels;
+using Twitter.Models.UserModels;
 
 namespace Twitter.App.Controllers
 {
@@ -86,19 +87,27 @@ namespace Twitter.App.Controllers
             var user = this.Data.Users.Find(userId);
 
             var model = new IndexViewModel
-                            {
-                                HasPassword = this.HasPassword(), 
-                                PhoneNumber = await this.UserManager.GetPhoneNumberAsync(userId), 
-                                TwoFactor = await this.UserManager.GetTwoFactorEnabledAsync(userId), 
-                                Logins = await this.UserManager.GetLoginsAsync(userId), 
-                                BrowserRemembered =
+            {
+                HasPassword = this.HasPassword(),
+                PhoneNumber = await this.UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await this.UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await this.UserManager.GetLoginsAsync(userId),
+                BrowserRemembered =
                                     await
                                     this.AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                                RegisteredTime = registeredTime,
-                                RegisterTimeInterval = registerTimeInterval,
-                                HasAvatarImage = user.HasAvatarImage,
-                                AvatarImageName = user.AvatarImageName,
-                                RealName = user.RealName
+                RegisteredTime = registeredTime,
+                RegisterTimeInterval = registerTimeInterval,
+                HasAvatarImage = user.HasAvatarImage,
+                AvatarImageName = user.AvatarImageName,
+                RealName = user.RealName,
+                UserProfilePhotos = user.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
+                {
+                    Id = image.Id,
+                    Name = image.Name,
+                    DatePosted = image.DatePosted,
+                    AuthorId = image.AuthorId,
+                    IsSoftDelete = image.IsSoftDelete
+                })
             };
 
             return this.View(model);
@@ -113,7 +122,7 @@ namespace Twitter.App.Controllers
             var result =
                 await
                 this.UserManager.RemoveLoginAsync(
-                    this.User.Identity.GetUserId(), 
+                    this.User.Identity.GetUserId(),
                     new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
@@ -132,7 +141,7 @@ namespace Twitter.App.Controllers
 
             return this.RedirectToAction("ManageLogins", new { Message = message });
         }
-        
+
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -241,8 +250,8 @@ namespace Twitter.App.Controllers
             var result =
                 await
                 this.UserManager.ChangePasswordAsync(
-                    this.User.Identity.GetUserId(), 
-                    model.OldPassword, 
+                    this.User.Identity.GetUserId(),
+                    model.OldPassword,
                     model.NewPassword);
             if (result.Succeeded)
             {
@@ -319,8 +328,8 @@ namespace Twitter.App.Controllers
         {
             // Request a redirect to the external login provider to link a login for the current user
             return new AccountController.ChallengeResult(
-                provider, 
-                this.Url.Action("LinkLoginCallback", "Manage"), 
+                provider,
+                this.Url.Action("LinkLoginCallback", "Manage"),
                 this.User.Identity.GetUserId());
         }
 
@@ -345,7 +354,7 @@ namespace Twitter.App.Controllers
         public ActionResult ChangeStatus()
         {
             var loggedUserId = this.User.Identity.GetUserId();
-            ViewBag.oldStatus = Data.Users.Find(loggedUserId).Status; 
+            ViewBag.oldStatus = Data.Users.Find(loggedUserId).Status;
 
             return this.View();
         }
@@ -361,7 +370,7 @@ namespace Twitter.App.Controllers
             }
 
             var loggedUserId = this.User.Identity.GetUserId();
-            
+
             Data.Users.Find(loggedUserId).Status = model.Status;
             Data.SaveChanges();
 
@@ -388,20 +397,22 @@ namespace Twitter.App.Controllers
             var uploadedFile = FileUploadHelper.UploadFile(file);
             var loggedUserId = this.User.Identity.GetUserId();
 
-            var photo = new Image
+            var avatarImage = new UserProfleImage
             {
                 AuthorId = loggedUserId,
                 DatePosted = DateTime.Now,
                 Name = uploadedFile.Name,
-                PhotoType = PhotoType.AvatarImage
+                UserProfilePhotoType = UserProfilePhotoType.AvatarImage
             };
 
-            this.Data.Photo.Add(photo);
-            this.Data.SaveChanges();
-
             var user = this.Data.Users.Find(loggedUserId);
-            user.HasAvatarImage = true;
-            user.AvatarImageName = photo.Name;
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            user.UserProfilePhotos.Add(avatarImage);
+
             this.Data.Users.Update(user);
             this.Data.SaveChanges();
 
@@ -448,9 +459,9 @@ namespace Twitter.App.Controllers
                 urlPrefix += "/QQmgs.App";
             }
 
-            if (user.HasAvatarImage)
+            if (user.UserProfilePhotos.Any())
             {
-                return urlPrefix + "/img/Uploads/Thumbnails/" + user.AvatarImageName;
+                return urlPrefix + "/img/Uploads/Thumbnails/" + user.UserProfilePhotos.LastOrDefault().Name;
             }
 
             return urlPrefix + "/img/Photo/avatar.png";
@@ -512,17 +523,17 @@ namespace Twitter.App.Controllers
 
         public enum ManageMessageId
         {
-            AddPhoneSuccess, 
+            AddPhoneSuccess,
 
-            ChangePasswordSuccess, 
+            ChangePasswordSuccess,
 
-            SetTwoFactorSuccess, 
+            SetTwoFactorSuccess,
 
-            SetPasswordSuccess, 
+            SetPasswordSuccess,
 
-            RemoveLoginSuccess, 
+            RemoveLoginSuccess,
 
-            RemovePhoneSuccess, 
+            RemovePhoneSuccess,
 
             Error
         }

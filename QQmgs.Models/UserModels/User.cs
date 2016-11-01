@@ -18,7 +18,7 @@ namespace Twitter.Models.UserModels
     {
         public User()
         {
-            this.UserAvatars = new HashSet<UserProfleImage>();
+            this.UserProfilePhotos = new HashSet<UserProfleImage>();
             this.Tweets = new HashSet<Tweet>();
             this.Followers = new HashSet<User>();
             this.FollowingUsers = new HashSet<User>();
@@ -50,7 +50,7 @@ namespace Twitter.Models.UserModels
 
         public override string PhoneNumber { get; set; }
 
-        public virtual ICollection<UserProfleImage> UserAvatars { get; set; }
+        public virtual ICollection<UserProfleImage> UserProfilePhotos { get; set; }
 
         public virtual ICollection<Reply> Replies { get; set; } 
 
