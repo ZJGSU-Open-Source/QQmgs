@@ -219,10 +219,10 @@ namespace Twitter.App.Controllers.MVCController
         public ActionResult GetRegisteredUser()
         {
             // permision check
-            //if (!RoleHelper.IsAdmin())
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied");
-            //}
+            if (!RoleHelper.IsAdmin())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Permision denied");
+            }
 
             var users = Data.Users.All()
                 .OrderByDescending(user => user.RegisteredTime)
