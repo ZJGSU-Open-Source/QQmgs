@@ -36,8 +36,8 @@ namespace Twitter.App.Controllers
         public ActionResult Index()
         {
             var groups = this.Data.Group.All()
-                .Take(Constants.Constants.DefaultRecentlyUpdateGroupNumber)
                 .OrderByDescending(t => t.LastTweetUpdateTime)
+                .Take(Constants.Constants.DefaultRecentlyUpdateGroupNumber)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .Where(models => models.IsDisplay)
                 .ToList();
@@ -112,9 +112,10 @@ namespace Twitter.App.Controllers
             // get detailed groups
             var groups =
                 groupIds
-                    .Take(Constants.Constants.DefaultParticipatedGroupNumber)
                     .Select(id => Data.Group.Find(id).ToGroupVieModel())
-                    .OrderByDescending(models => models.LastTweetUpdateTime).ToList();
+                    .OrderByDescending(models => models.LastTweetUpdateTime)
+                    .Take(Constants.Constants.DefaultParticipatedGroupNumber)
+                    .ToList();
 
             return PartialView(groups);
         }
@@ -146,32 +147,11 @@ namespace Twitter.App.Controllers
                 return HttpNotFound($"There's no tweet in the group with id {groupId}");
             }
 
-            var tweetsViewModel = tweets.Select(t => new TweetViewModel
-            {
-                Id = t.Id,
-                Author = t.Author.RealName,
-                AuthorStatus = t.Author.Status,
-                IsSoftDeleted = t.IsSoftDeleted,
-                Text = t.Text,
-                UsersFavouriteCount = t.UsersFavourite.Count,
-                RepliesCount = t.Reply.Count,
-                RetweetsCount = t.Retweets.Count,
-                DatePosted = t.DatePosted,
-                GroupId = t.GroupId,
-                HasAvatarImage = t.Author.HasAvatarImage,
-                AvatarImageName = t.Author.AvatarImageName,
-                ReplyList = t.Reply.Select(reply => new ReplyViewModel
-                {
-                    Text = reply.Content,
-                    Id = reply.Id,
-                    PublishTime = reply.PublishTime,
-                    Author = reply.Author.RealName,
-                    AvatarImageName = reply.Author.AvatarImageName,
-                    HasAvatarImage = reply.Author.HasAvatarImage
-                }).ToList()
-            })
-            .Where(model => model.IsSoftDeleted == false)
-            .OrderByDescending(t => t.DatePosted).ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
+            var tweetsViewModel = tweets
+                .Select(t => t.ToTweetViewModel())
+                .Where(model => model.IsSoftDeleted == false)
+                .OrderByDescending(t => t.DatePosted)
+                .ToPagedList(pageNumber: p, pageSize: Constants.Constants.PageTweetsNumber);
 
             // pass Group info to view
             ViewData["GroupName"] = group.Name;

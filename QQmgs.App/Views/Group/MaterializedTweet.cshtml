@@ -7,7 +7,7 @@
             <div class="row valign-wrapper" style="margin-bottom: auto">
                 <div class="groupTweetLeftPart">
                     <div style="max-width: 100px; float: left">
-                        @if (Model.HasAvatarImage)
+                        @if (Model.AvatarImageName != null || Model.AvatarImageName != string.Empty)
                         {
                             <img src="~/img/Uploads/Thumbnails/@Model.AvatarImageName" alt="" class="circle responsive-img">
                         }

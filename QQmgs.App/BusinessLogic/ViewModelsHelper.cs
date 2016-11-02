@@ -210,17 +210,19 @@ namespace Twitter.App.BusinessLogic
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
-                HasAvatarImage = t.Author.HasAvatarImage,
+                HasAvatarImage = t.Author.UserProfilePhotos.Count > 0,
                 AvatarImageName =
-                    t.Author.HasAvatarImage
-                        ? t.Author.AvatarImageName
-                        : null,
+                    t.Author.UserProfilePhotos.Count > 0
+                        ? t.Author.UserProfilePhotos.LastOrDefault().Name
+                        : string.Empty,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
-                    Author = reply.Author.RealName
+                    Author = reply.Author.RealName,
+                    AvatarImageName = reply.Author.UserProfilePhotos.Count > 0 ? reply.Author.UserProfilePhotos.LastOrDefault().Name :string.Empty,
+                    HasAvatarImage = reply.Author.UserProfilePhotos.Count > 0
                 }).ToList()
             };
         }
