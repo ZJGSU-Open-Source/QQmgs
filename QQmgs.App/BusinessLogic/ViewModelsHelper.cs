@@ -159,7 +159,7 @@ namespace Twitter.App.BusinessLogic
                     Id = participant.Id,
                     Name = participant.RealName,
                     AvatarImage = participant.UserProfilePhotos.Any()
-                        ? a.Creator.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
+                        ? participant.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
                         {
                             Name = image.Name,
                             DatePosted = image.DatePosted,
@@ -251,20 +251,38 @@ namespace Twitter.App.BusinessLogic
                 RetweetsCount = t.Retweets.Count,
                 DatePosted = t.DatePosted,
                 GroupId = t.GroupId,
-                HasAvatarImage = t.Author.UserProfilePhotos.Count > 0,
-                AvatarImageName =
-                    t.Author.UserProfilePhotos.Count > 0
-                        ? t.Author.UserProfilePhotos.LastOrDefault().Name
-                        : string.Empty,
+                HasAvatarImage = t.Author.UserProfilePhotos.Any(image => image.UserProfilePhotoType == UserProfilePhotoType.AvatarImage),
+                AvatarImageName = t.Author.UserProfilePhotos.Any()
+                    ? t.Author.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
+                    {
+                        Name = image.Name,
+                        DatePosted = image.DatePosted,
+                        UserProfilePhotoType = image.UserProfilePhotoType
+                    })
+                        .Where(photo => photo.UserProfilePhotoType == UserProfilePhotoType.AvatarImage)
+                        .OrderByDescending(photo => photo.DatePosted)
+                        .FirstOrDefault()?.Name
+                    : string.Empty,
                 ReplyList = t.Reply.Select(reply => new ReplyViewModel
                 {
                     Text = reply.Content,
                     Id = reply.Id,
                     PublishTime = reply.PublishTime,
                     Author = reply.Author.RealName,
-                    AvatarImageName = reply.Author.UserProfilePhotos.Count > 0 ? reply.Author.UserProfilePhotos.LastOrDefault().Name :string.Empty,
-                    HasAvatarImage = reply.Author.UserProfilePhotos.Count > 0
-                }).ToList()
+                    AvatarImageName =
+                        reply.Author.UserProfilePhotos.Any()
+                            ? reply.Author.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
+                            {
+                                Name = image.Name,
+                                DatePosted = image.DatePosted,
+                                UserProfilePhotoType = image.UserProfilePhotoType
+                            })
+                                .Where(photo => photo.UserProfilePhotoType == UserProfilePhotoType.AvatarImage)
+                                .OrderByDescending(photo => photo.DatePosted)
+                                .FirstOrDefault()?.Name
+                            : string.Empty,
+                    HasAvatarImage = reply.Author.UserProfilePhotos.Any(image => image.UserProfilePhotoType == UserProfilePhotoType.AvatarImage)
+                })
             };
         }
 

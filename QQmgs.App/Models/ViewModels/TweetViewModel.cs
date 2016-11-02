@@ -34,7 +34,7 @@ namespace Twitter.App.Models.ViewModels
         public int RetweetsCount { get; set; }
 
         [JsonProperty("reply_list")]
-        public List<ReplyViewModel> ReplyList { get; set; }
+        public IEnumerable<ReplyViewModel> ReplyList { get; set; }
 
         [JsonProperty("date_posted")]
         public DateTime DatePosted { get; set; }
