@@ -31,12 +31,6 @@ namespace Twitter.App.Controllers.MVCController
                 .Select(ViewModelsHelper.AsActivictyViewModel)
                 .ToList();
 
-            // get each creator name from DB
-            activities.ForEach(model =>
-            {
-                model.Creator = this.Data.Users.Find(model.CreatorId).RealName;
-            });
-
             return View(activities);
         }
 

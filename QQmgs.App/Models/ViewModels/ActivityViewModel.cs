@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using Twitter.Models.ActivityModels;
 
 namespace Twitter.App.Models.ViewModels
 {
@@ -51,7 +52,7 @@ namespace Twitter.App.Models.ViewModels
         public string Classficiation { get; set; }
 
         [JsonProperty("participations")]
-        public IList<ParticipationViewModel> Participations { get; set; }
+        public IEnumerable<ParticipationViewModel> Participations { get; set; }
 
         [JsonProperty("organizer")]
         public string Organizer { get; set; }
@@ -76,5 +77,14 @@ namespace Twitter.App.Models.ViewModels
 
         [JsonProperty("join_time")]
         public DateTime JoinTime { get; set; }
+    }
+
+    public class ActivityPhotoViewModel
+    {
+        public string Name { get; set; }
+
+        public DateTime DatePosted { get; set; }
+
+        public ActivityPhotoType? ActivityPhotoType { get; set; }
     }
 }

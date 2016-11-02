@@ -121,13 +121,32 @@ namespace Twitter.App.BusinessLogic
                 LoggedUserPhoneNumber = u.PhoneNumber
             };
 
+        public static readonly Expression<Func<ActivityPhoto, ActivityPhotoViewModel>> AsActivictyPhotoViewModel =
+            p => new ActivityPhotoViewModel
+            {
+                Name = p.Name,
+                DatePosted = p.DatePosted,
+                ActivityPhotoType = p.ActivityPhotoType
+            };
+
         public static readonly Expression<Func<Activity, ActivityViewModel>> AsActivictyViewModel =
             a => new ActivityViewModel
             {
                 Id = a.Id,
                 Name = a.Name,
                 Classficiation = a.Classficiation.ToString(),
-                AvatarImage = a.ActivityPhotos.Count > 0 ? a.ActivityPhotos.LastOrDefault().Name : string.Empty,
+                AvatarImage = a.ActivityPhotos.Any()
+                    ? a.ActivityPhotos.Select(photo => new ActivityPhotoViewModel
+                    {
+                        Name = photo.Name,
+                        DatePosted = photo.DatePosted,
+                        ActivityPhotoType = photo.ActivityPhotoType
+                    })
+                        .Where(photo => photo.ActivityPhotoType == ActivityPhotoType.OverView)
+                        .OrderByDescending(photo => photo.DatePosted)
+                        .FirstOrDefault()
+                        .Name
+                    : string.Empty,
                 CreatorId = a.CreatorId,
                 Description = a.Description,
                 EndTime = a.EndTime,
@@ -139,10 +158,32 @@ namespace Twitter.App.BusinessLogic
                 {
                     Id = participant.Id,
                     Name = participant.RealName,
-                    AvatarImage = participant.UserProfilePhotos.Count > 0 ? participant.UserProfilePhotos.LastOrDefault().Name : string.Empty,
+                    AvatarImage = participant.UserProfilePhotos.Any()
+                        ? a.Creator.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
+                        {
+                            Name = image.Name,
+                            DatePosted = image.DatePosted,
+                            UserProfilePhotoType = image.UserProfilePhotoType
+                        })
+                            .Where(photo => photo.UserProfilePhotoType == UserProfilePhotoType.AvatarImage)
+                            .OrderByDescending(photo => photo.DatePosted)
+                            .FirstOrDefault()
+                            .Name
+                        : string.Empty,
                     HasAvatarImage = participant.HasAvatarImage
-                }).ToList(),
-                CreatorAvatarImage = a.Creator.UserProfilePhotos.Count > 0 ? a.Creator.UserProfilePhotos.LastOrDefault().Name : string.Empty,
+                }),
+                CreatorAvatarImage = a.Creator.UserProfilePhotos.Any()
+                    ? a.Creator.UserProfilePhotos.Select(image => new UserProfilePhotoViewModel
+                    {
+                        Name = image.Name,
+                        DatePosted = image.DatePosted,
+                        UserProfilePhotoType = image.UserProfilePhotoType
+                    })
+                        .Where(photo => photo.UserProfilePhotoType == UserProfilePhotoType.AvatarImage)
+                        .OrderByDescending(photo => photo.DatePosted)
+                        .FirstOrDefault()
+                        .Name
+                    : string.Empty,
                 HasCreatorAvatarImage = a.Creator.UserProfilePhotos.Count > 0,
                 IsDisplay = a.IsDisplay,
                 Organizer = a.Organizer,

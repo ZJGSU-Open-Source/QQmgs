@@ -136,6 +136,6 @@ namespace Twitter.App.Models.ViewModels
 
         public bool IsSoftDelete { get; set; }
 
-        public UserProfilePhotoType UserProfilePhotoType { get; set; }
+        public UserProfilePhotoType? UserProfilePhotoType { get; set; }
     }
 }
