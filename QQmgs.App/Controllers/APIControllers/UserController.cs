@@ -232,7 +232,6 @@ namespace Twitter.App.Controllers.APIControllers
                         AuthorId = loggedUserId,
                         DatePosted = DateTime.Now,
                         Name = fileName,
-                        PhotoType = PhotoType.AvatarImage,
                         PhotoClasscification = PhotoClasscification.Ohter,
                         Description = string.Empty,
                         IsSoftDelete = false,

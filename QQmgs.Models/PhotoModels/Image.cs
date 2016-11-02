@@ -28,8 +28,6 @@ namespace Twitter.Models.PhotoModels
 
         public virtual User Author { get; set; }
 
-        public PhotoType PhotoType { get; set; }
-
         public PhotoClasscification? PhotoClasscification { get; set; }
 
         public bool IsSoftDelete { get; set; }

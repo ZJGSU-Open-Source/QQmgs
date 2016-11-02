@@ -127,7 +127,7 @@ namespace Twitter.App.BusinessLogic
                 Id = a.Id,
                 Name = a.Name,
                 Classficiation = a.Classficiation.ToString(),
-                AvatarImage = a.ActivityImage ?? string.Empty,
+                AvatarImage = a.ActivityPhotos.Count > 0 ? a.ActivityPhotos.LastOrDefault().Name : string.Empty,
                 CreatorId = a.CreatorId,
                 Description = a.Description,
                 EndTime = a.EndTime,
@@ -139,11 +139,11 @@ namespace Twitter.App.BusinessLogic
                 {
                     Id = participant.Id,
                     Name = participant.RealName,
-                    AvatarImage = participant.AvatarImageName,
+                    AvatarImage = participant.UserProfilePhotos.Count > 0 ? participant.UserProfilePhotos.LastOrDefault().Name : string.Empty,
                     HasAvatarImage = participant.HasAvatarImage
                 }).ToList(),
-                CreatorAvatarImage = a.Creator.AvatarImageName,
-                HasCreatorAvatarImage = a.Creator.HasAvatarImage,
+                CreatorAvatarImage = a.Creator.UserProfilePhotos.Count > 0 ? a.Creator.UserProfilePhotos.LastOrDefault().Name : string.Empty,
+                HasCreatorAvatarImage = a.Creator.UserProfilePhotos.Count > 0,
                 IsDisplay = a.IsDisplay,
                 Organizer = a.Organizer,
                 CreatorStatus = a.Creator.Status

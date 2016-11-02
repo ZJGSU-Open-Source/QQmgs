@@ -294,23 +294,19 @@ namespace Twitter.App.Controllers.APIControllers
 
                     var uploadedFile = FileUploadHelper.ResizeImage(Constants.Constants.DefaultResizeSize, Constants.Constants.DefaultResizeSize, file.LocalFileName, fileName, PhotoType.ActivityImage);
 
-                    var photo = new Image
+                    var activityOverView = new ActivityPhoto
                     {
                         AuthorId = loggedUserId,
                         DatePosted = DateTime.Now,
                         Name = fileName,
-                        PhotoType = PhotoType.ActivityImage,
-                        PhotoClasscification = PhotoClasscification.Ohter,
-                        Description = string.Empty,
+                        ActivityPhotoType = ActivityPhotoType.OverView,
                         IsSoftDelete = false,
                         Height = uploadedFile.Height,
                         Width = uploadedFile.Width
                     };
+                    
+                    activity.ActivityPhotos.Add(activityOverView);
 
-                    this.Data.Photo.Add(photo);
-                    this.Data.SaveChanges();
-
-                    activity.ActivityImage = fileName;
                     this.Data.Activity.Update(activity);
                     this.Data.SaveChanges();
 

@@ -59,7 +59,6 @@ namespace Twitter.App.Controllers
                     AuthorId = loggedUserId,
                     DatePosted = DateTime.Now,
                     Name = uploadedFile.Name,
-                    PhotoType = PhotoType.Photo,
                     PhotoClasscification = EnumUtils.Parse<PhotoClasscification>(model.Classcification ??
                                                             PhotoClasscification.Ohter.ToString()),
                     Description = model.Description,

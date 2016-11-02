@@ -12,6 +12,7 @@ using Twitter.App.Models.ViewModels;
 using Twitter.Data.UnitOfWork;
 using Twitter.Models;
 using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
 
 namespace Twitter.App.Controllers.APIControllers
 {
@@ -33,7 +34,7 @@ namespace Twitter.App.Controllers.APIControllers
             }
 
             var photos = this.Data.Photo.All()
-                .Where(photo => photo.PhotoType == PhotoType.Photo && photo.Width != 0 && photo.Height != 0 && !photo.IsSoftDelete);
+                .Where(photo => photo.Width != 0 && photo.Height != 0 && !photo.IsSoftDelete);
 
             var photoList = photos.ToList();    
             var recentPhotos = photos.Select(ViewModelsHelper.AsPhotoViewModel).ToList();

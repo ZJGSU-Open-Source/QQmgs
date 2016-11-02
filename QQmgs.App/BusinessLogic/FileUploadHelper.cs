@@ -9,6 +9,7 @@ using System.Web;
 using Glimpse.Core.Extensibility;
 using Twitter.Models;
 using Twitter.Models.Interfaces;
+using Twitter.Models.PhotoModels;
 
 namespace Twitter.App.BusinessLogic
 {

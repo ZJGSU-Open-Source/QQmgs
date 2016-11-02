@@ -22,8 +22,6 @@ namespace Twitter.Models.GroupModels
 
         public string Description { get; set; }
 
-        public PhotoType PhotoType { get; set; }
-
         public bool IsSoftDelete { get; set; }
 
         public int Width { get; set; }
