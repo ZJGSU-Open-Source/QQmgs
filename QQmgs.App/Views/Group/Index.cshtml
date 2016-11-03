@@ -1,4 +1,4 @@
-﻿@using Twitter.App.Constants
+@using Twitter.App.Constants
 @using Twitter.Models
 @using Twitter.Models.GroupModels
 
@@ -6,7 +6,10 @@
 @{
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
-
+<style>
+.grouplist{border-bottom:1px solid #e0e0e0;}
+.grouplist:nth-child(4)~.grouplist{display:none;}
+</style>
 <nav style="background: #009688; height: 53px; line-height: 53px">
     <div class="nav-wrapper container" style="padding-top: 0px">
         <div class="col s12">
@@ -51,37 +54,38 @@
 
             <div class="collection" style="max-width: 700px; margin: auto">
                 @foreach (var group in Model)
-                {
-                    <div>
-                        @if (group.GroupPhotos.Any())
-                        {
-                            <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.GroupPhotos.LastOrDefault().Name" alt="">
-                        }
-                        else
-                        {
-                            <img style="max-width: 42px" class="left" src=@Constants.Based64GroupOverviewImage alt="">
-                        }
-                    </div>
-
-                    <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">
-                        <div style="text-align: left; margin-left: 30px; ">
-                            @group.Name
-                            <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
-                            @if (group.IsPrivate)
+                {   <div class="grouplist" style="border-bottom:1px solid #e0e0e0;">
+                        <div>
+                            @if (group.GroupPhotos.Any())
                             {
-                                <span class="new badge" data-badge-caption="条讨论">私密 @group.TweetsCount</span>
+                                <img style="width:3.0rem;margin:10px;" class="left" src="~/img/Uploads/Thumbnails/@group.GroupPhotos.LastOrDefault().Name" alt="">
                             }
                             else
                             {
-                                <span class="new badge" data-badge-caption="条讨论">@group.TweetsCount</span>
+                                <img style="width:3.0rem;margin:10px;" class="left" src=@Constants.Based64GroupOverviewImage alt="">
                             }
                         </div>
-                    </a>
+
+                        <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item" style="line-height:3.0rem;">
+                            <div style="display:flex;display:-webkit-flex;align-items:center">
+                                @group.Name
+                                <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
+                                @if (group.IsPrivate)
+                                {
+                                    <span class="new badge" data-badge-caption="条讨论" style="line-height:2.0rem;">私密 @group.TweetsCount</span>
+                                }
+                                else
+                                {
+                                    <span class="new badge" data-badge-caption="条讨论" style="line-height:2.0rem;">@group.TweetsCount</span>
+                                }
+                            </div>
+                        </a>
+                    </div>
                 }
 
                 @if (Model.Count() >= Constants.DefaultRecentlyUpdateGroupNumber)
                 {
-                    <a href="#!" class="collection-item">
+                    <a href="#!" class="collection-item" style="line-height:2.0rem;">
                         <div class="center">
                             加载更多
                         </div>
@@ -89,6 +93,25 @@
                 }
 
             </div>
+            <script>
+                (function(){
+                    $('.J-more').bind('click',function(){
+                        var groupnum=$('.grouplist').length;
+                        console.log('groupnum='+groupnum);
+                        var showgroup=$('.grouplist:visible').length+4;
+                        console.log('showgroup='+showgroup);
+                        if(showgroup<groupnum)
+                        {
+                            $('.grouplist').eq(showgroup).prevAll().show();
+                            console.log('do');
+                        }else{
+                            $('.grouplist').show();
+                            console.log('doall');
+                            $(this).hide();
+                        }
+                    });
+                })();
+            </script>
             <br />
             <div class="horizontal click-to-toggle center">
                 <a class="btn waves-effect waves-light" href="@Url.Action("Create", "Group")">创建属于你的兴趣小组</a>
