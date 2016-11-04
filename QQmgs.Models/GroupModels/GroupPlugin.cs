@@ -18,5 +18,7 @@ namespace Twitter.Models.GroupModels
         public bool HasDisplayWall { get; set; }
 
         public bool HasInfoFocus { get; set; }
+
+        public bool HasACMProblemRecommendation { get; set; }
     }
 }

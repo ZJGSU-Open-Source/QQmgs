@@ -582,6 +582,7 @@
     <Content Include="Views\Shared\_Login_Layout.cshtml" />
     <Content Include="Views\Shared\ErrorHandling.cshtml" />
     <Content Include="Views\Monitor\GetRegisteredUser.cshtml" />
+    <Content Include="Views\Group\GetGroupInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

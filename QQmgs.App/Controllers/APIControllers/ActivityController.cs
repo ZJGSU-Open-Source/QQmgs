@@ -247,7 +247,8 @@ namespace Twitter.App.Controllers.APIControllers
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
             {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.UnsupportedMediaType,
+                    "This request is not properly formatted"));
             }
 
             var activity = Data.Activity

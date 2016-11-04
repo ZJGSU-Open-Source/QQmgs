@@ -235,8 +235,7 @@ namespace Twitter.App.Controllers
                 LastTweetUpdateTime = currentTime,
                 IsDisplay = true,
                 Classification = Classification.未分类,
-                IsPrivate = isPrivate,
-                GroupPlugin = new GroupPlugin()
+                IsPrivate = isPrivate
             };
 
             if (isPrivate)
@@ -251,6 +250,11 @@ namespace Twitter.App.Controllers
             }
 
             this.Data.Group.Add(group);
+            this.Data.SaveChanges();
+
+            // add group corresponding plugins
+            group.GroupPlugin = new GroupPlugin();
+            this.Data.Group.Update(group);
             this.Data.SaveChanges();
 
             return RedirectToAction("Get", new { groupId = group.Id, p = 1 });
@@ -754,6 +758,19 @@ namespace Twitter.App.Controllers
             Data.SaveChanges();
 
             return RedirectToAction("Management", new { groupId = groupId, p = 1 });
+        }
+
+        [HttpGet]
+        [Route("GroupInfo")]
+        public ActionResult GetGroupInfo(int groupId)
+        {
+            var group = Data.Group.Find(groupId);
+            if (group == null)
+            {
+                return HttpNotFound($"Group with Id:{groupId} not found");
+            }
+
+            return PartialView(group.ToGroupVieModel());
         }
 
         [HttpGet]
