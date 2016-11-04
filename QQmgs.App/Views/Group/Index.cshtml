@@ -53,8 +53,9 @@
             </div>
 
             <div class="collection" style="max-width: 700px; margin: auto">
+                <div class="J-groupList">
                 @foreach (var group in Model)
-                {   <div class="grouplist" style="border-bottom:1px solid #e0e0e0;">
+                {   <div style="border-bottom:1px solid #e0e0e0;">
                         <div>
                             @if (group.GroupPhotos.Any())
                             {
@@ -67,16 +68,16 @@
                         </div>
 
                         <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item" style="line-height:3.0rem;">
-                            <div style="display:flex;display:-webkit-flex;align-items:center">
+                            <div style="position:relative;">
                                 @group.Name
                                 <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
                                 @if (group.IsPrivate)
                                 {
-                                    <span class="new badge" data-badge-caption="条讨论" style="line-height:2.0rem;">私密 @group.TweetsCount</span>
+                                    <span class="new badge" data-badge-caption="条讨论" style="height:2.0rem;line-height:2.0rem;top:0;bottom:0;margin:auto 0;right:0;">私密 @group.TweetsCount</span>
                                 }
                                 else
                                 {
-                                    <span class="new badge" data-badge-caption="条讨论" style="line-height:2.0rem;">@group.TweetsCount</span>
+                                    <span class="new badge" data-badge-caption="条讨论" style="height:2.0rem;line-height:2.0rem;top:0;bottom:0;margin:auto 0;right:0;">@group.TweetsCount</span>
                                 }
                             </div>
                         </a>
@@ -85,7 +86,7 @@
 
                 @if (Model.Count() >= Constants.DefaultRecentlyUpdateGroupNumber)
                 {
-                    <a href="#!" class="collection-item" style="line-height:2.0rem;">
+                    <a href="javascript:void(0)" class="collection-item J-more" style="line-height:2.0rem;">
                         <div class="center">
                             加载更多
                         </div>
@@ -95,19 +96,27 @@
             </div>
             <script>
                 (function(){
+                    var groupList=$('.J-groupList'); 
+                    groupList.children('div').eq(4).nextAll().hide();//这里修改第一次显示多少个，当前为4，表示显示5个
+                    var num=5;//这里修改点击一次加载多少个，当前是5，表示一次加载5个
                     $('.J-more').bind('click',function(){
-                        var groupnum=$('.grouplist').length;
-                        console.log('groupnum='+groupnum);
-                        var showgroup=$('.grouplist:visible').length+4;
-                        console.log('showgroup='+showgroup);
-                        if(showgroup<groupnum)
+                        var i=groupList.children('div:visible').length,//当前显示了多少个
+                            j=0,
+                            count=groupList.children('div').length;//一共有多少个
+                        if(count-i<=0)
                         {
-                            $('.grouplist').eq(showgroup).prevAll().show();
-                            console.log('do');
-                        }else{
-                            $('.grouplist').show();
-                            console.log('doall');
                             $(this).hide();
+                        }else{
+                            for(;j<num;j++)
+                            {
+                                groupList.children('div').eq(i+j).fadeIn();
+                                console.log(i+j);
+                                if(i+j-count>=0)
+                                {
+                                    $(this).hide();
+                                    break;
+                                }
+                            }
                         }
                     });
                 })();
