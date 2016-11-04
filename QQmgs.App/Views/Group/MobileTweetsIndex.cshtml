@@ -3,7 +3,36 @@
 @using Twitter.App.Models.ViewModels
 @model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
 
+<nav style="background: #009688;height: 53px; line-height: 53px">
+    <div class="nav-wrapper container">
+        <div class="col s12">
+            <a href="@Url.Action("Index")" class="breadcrumb">首页</a>
+            <a href="@Url.Action("Get", new {groupId = ViewData["GroupId"], p = 1})" class="breadcrumb">@ViewData["GroupName"]</a>
+        </div>
+    </div>
+</nav>
+
 <div style="max-width: 700px; margin: auto; background-color: #f5f8fa">
+
+    <div>
+        @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s9">
+                        <textarea style="font-size: 18px" class="materialize-textarea" id="input_text" type="text" length="200" name="Text" placeholder="和大家分享你的此时此刻 ..."></textarea>
+                        <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
+                    </div>
+                    <div class="form-group col s2" style="margin-top: 35px">
+                        <input type="submit" value="Post" class="awesome-button" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+
     <ul class="">
         @foreach (var tweet in Model)
         {
@@ -16,13 +45,13 @@
             @{
                 var data = Model as IPagedList<TweetViewModel>;
             }
-            @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+            @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new {p = page}))
         </ul>
     </div>
 </div>
 
-<div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
+@*<div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
     <a class="btn-floating btn-large red" href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})">
         <i class="large material-icons">mode_edit</i>
     </a>
-</div>
+</div>*@
