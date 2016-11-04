@@ -1,0 +1,28 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
+
+<div style="max-width: 700px; margin: auto; background-color: #f5f8fa">
+    <ul class="">
+        @foreach (var tweet in Model)
+        {
+            Html.RenderPartial("MaterializedTweet", tweet);
+        }
+    </ul>
+    <br>
+    <div class="paging">
+        <ul class="pagination" style="margin: auto; padding-bottom: 20px">
+            @{
+                var data = Model as IPagedList<TweetViewModel>;
+            }
+            @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+        </ul>
+    </div>
+</div>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
+    <a class="btn-floating btn-large red" href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})">
+        <i class="large material-icons">mode_edit</i>
+    </a>
+</div>

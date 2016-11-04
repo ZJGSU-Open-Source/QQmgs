@@ -1,0 +1,88 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Twitter.App.Models.ViewModels
+@model IEnumerable<Twitter.App.Models.ViewModels.TweetViewModel>
+
+@{
+    Html.RenderAction("GetGroupInfo");
+    Html.RenderAction("GetGroupPlugins");
+}
+
+<div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
+    <div class="container">
+
+        @if (string.Compare(ViewData["IsPrivate"].ToString(), "true", StringComparison.Ordinal) == 0)
+        {
+            <div class="row center">
+                <h5 class="header col s12 light grey-text">私密成员列表</h5>
+            </div>
+            <div class="row" style="max-width: 700px; margin: auto">
+                <div>
+                    @{
+                        Html.RenderAction("GetGroupMembers", new {groupId = (int) ViewData["GroupId"]});
+                    }
+                </div>
+                <div style="margin-top: 30px">
+                    <div class="col s8">
+                        @{
+                            Html.RenderAction("InviteUserToGroup");
+                        }
+                    </div>
+                    <div class="col s4">
+                        @{
+                            Html.RenderAction("SetGroupVisibility");
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row" style="max-width: 700px; margin: auto">
+            <div class="col s4">
+                <img style="max-width: 200px" src="~/img/Photo/friday_party.gif" alt="" />
+            </div>
+            <div class="col s8" style="margin-top: 30px">
+                @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10">
+                                <textarea style="font-size: 30px" class="materialize-textarea" id="input_text" type="text" length="200" name="Text"></textarea>
+                                <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
+                                <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
+                            </div>
+                            <div class="form-group col s2" style="margin-top: 35px">
+                                <input type="submit" value="Post" class="awesome-button" />
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+
+        </div>
+
+        <div class="row center">
+            <h5 class="header col s12 light grey-text" style="margin: auto">大家的发言</h5>
+        </div>
+
+        <div style="max-width: 700px; margin: auto">
+            <ul class="">
+                @foreach (var tweet in Model)
+                {
+                    Html.RenderPartial("MaterializedTweet", tweet);
+                }
+            </ul>
+            <br>
+            <div class="paging">
+                <ul class="pagination" style="margin: auto; padding-bottom: 20px">
+                    @{
+                        var data = Model as IPagedList<TweetViewModel>;
+                    }
+                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

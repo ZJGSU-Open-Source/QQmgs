@@ -16,98 +16,18 @@
     </div>
 </nav>
 
-@{
-    Html.RenderAction("GetGroupInfo");
-    Html.RenderAction("GetGroupPlugins");
-}
+<div class="hide-on-med-and-up">
+    @{
+        Html.RenderPartial("MobileTweetsIndex", Model);
+    }
+</div>
 
-<div class="section no-pad-bot" id="index-banner" style="background-color: #f5f8fa">
-    <div class="container">
-
-        @if (string.Compare(ViewData["IsPrivate"].ToString(), "true", StringComparison.Ordinal) == 0)
-        {
-            <div class="row center hide-on-small-only">
-                <h5 class="header col s12 light grey-text">私密成员列表</h5>
-            </div>
-            <div class="row" style="max-width: 700px; margin: auto">
-                <div class="hide-on-small-only">
-                    @{
-                        Html.RenderAction("GetGroupMembers", new {groupId = (int) ViewData["GroupId"]});
-                    }
-                </div>
-                <div class="hide-on-small-only" style="margin-top: 30px">
-                    <div class="col s8">
-                        @{
-                            Html.RenderAction("InviteUserToGroup");
-                        }
-                    </div>
-                    <div class="col s4">
-                        @{
-                            Html.RenderAction("SetGroupVisibility");
-                        }
-                    </div>
-                </div>
-            </div>
-        }
-
-        <div class="row hide-on-small-only" style="max-width: 700px; margin: auto">
-            <div class="col s4">
-                <img style="max-width: 200px" src="~/img/Photo/friday_party.gif" alt="" />
-            </div>
-            <div class="col s8" style="margin-top: 30px">
-                @using (Html.BeginForm("CreateTweet", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s10">
-                                <textarea style="font-size: 30px" class="materialize-textarea" id="input_text" type="text" length="200" name="Text"></textarea>
-                                <input id="hidden_group_id_property" type="text" name="GroupId" value="@ViewData["GroupId"]" style="display: none !important;">
-                                <label for="input_text"><a style="font-size: 16px; color: #009688">在这里和大家分享你此时此刻的想法 ...</a></label>
-                            </div>
-                            <div class="form-group col s2" style="margin-top: 35px">
-                                <input type="submit" value="Post" class="awesome-button" />
-                            </div>
-                        </div>
-                    </form>
-                }
-            </div>
-
-        </div>
-
-        <div class="row center">
-            <h5 class="header col s12 light grey-text" style="margin: auto">大家的发言</h5>
-        </div>
-
-        <div style="max-width: 700px; margin: auto">
-            <ul class="">
-                @foreach (var tweet in Model)
-                {
-                    Html.RenderPartial("MaterializedTweet", tweet);
-                }
-            </ul>
-            <br>
-            <div class="paging">
-                <ul class="pagination" style="margin: auto; padding-bottom: 20px">
-                    @{
-                        var data = Model as IPagedList<TweetViewModel>;
-                    }
-                    @Html.PagedListPager(list: data, generatePageUrl: page => Url.Action("Get", new { p = page }))
-                </ul>
-            </div>
-        </div>
-
-        <div class="fixed-action-btn" style="bottom: 45px; right: 38px;">
-                <a class="btn-floating btn-large red" href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})">
-                    <i class="large material-icons">mode_edit</i>
-                </a>
-            </div>
-
-
-    </div>
+<div class="hide-on-small-and-down">
+    @{
+        Html.RenderPartial("PCTweetsIndex", Model);
+    }
 </div>
 
 @*<div class="hide-on-med-and-up" style="background:#26a69a; height:70px; width: 100%; position: fixed; bottom: 0;">
-    <a href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})" style="color: #ffffff; display: block; height: 100%; text-align: center; line-height: 70px; font-size: 3rem;">发言</a>
-</div>*@
+        <a href="@Url.Action("CreateTweet", "Tweets", new {groupId = $"{ViewData["GroupId"]}"})" style="color: #ffffff; display: block; height: 100%; text-align: center; line-height: 70px; font-size: 3rem;">发言</a>
+    </div>*@

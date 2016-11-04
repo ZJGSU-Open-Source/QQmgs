@@ -583,6 +583,8 @@
     <Content Include="Views\Shared\ErrorHandling.cshtml" />
     <Content Include="Views\Monitor\GetRegisteredUser.cshtml" />
     <Content Include="Views\Group\GetGroupInfo.cshtml" />
+    <Content Include="Views\Group\MobileTweetsIndex.cshtml" />
+    <Content Include="Views\Group\PCTweetsIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
