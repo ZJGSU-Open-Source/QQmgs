@@ -184,7 +184,7 @@ namespace Twitter.App.BusinessLogic
                         .FirstOrDefault()
                         .Name
                     : string.Empty,
-                HasCreatorAvatarImage = a.Creator.UserProfilePhotos.Count > 0,
+                HasCreatorAvatarImage = a.Creator.UserProfilePhotos.Any(),
                 IsDisplay = a.IsDisplay,
                 Organizer = a.Organizer,
                 CreatorStatus = a.Creator.Status
