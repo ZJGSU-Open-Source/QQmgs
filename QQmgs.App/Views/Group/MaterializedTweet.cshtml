@@ -1,9 +1,10 @@
-﻿@using Twitter.App.Constants
+﻿@using System.Globalization
+@using Twitter.App.Constants
 @model Twitter.App.Models.ViewModels.TweetViewModel
 
 <li>
-    <div class="col s12 m8 offset-m2 l6 offset-l3 hoverable" id="@($"Post{@Model.Id}")">
-        <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px; margin-bottom: 0px; padding-bottom: 1px">
+    <div class="col s12 m8 offset-m2 l6 offset-l3" id="@($"Post{@Model.Id}")">
+        <div class="card-panel grey lighten-5 z-depth-1" style="padding-top: 5px; margin-bottom: 0px; padding-bottom: 1px; padding-right: 15px;padding-left: 13px">
             <div class="row valign-wrapper" style="margin-bottom: auto">
                 <div class="groupTweetLeftPart">
                     <div style="max-width: 100px; float: left">
@@ -22,8 +23,8 @@
                         <a class="groupTweetAuthor" style="font-family: GillSans, Calibri, Trebuchet, sans-serif;">@Model.Author</a>
                         <a style="font-size: 12px; color: gray; padding-left: 6px">@Model.AuthorStatus</a>
                         @*<a class="btn right" href="@Url.Action("GetPostDetail", "Group", new {groupId = ViewData["GroupId"], tweetId = Model.Id})" style="font-size: 12px; max-height: 110px; padding: 0 1.8px; height: 30px; line-height: 2.5">详细</a>
-                        <a class="btn right" href="@Url.Action("FavouriteTempRedirectToDetail", "Tweets", new {tweetId = Model.Id, groupId = Model.GroupId})"  style="font-size: 12px; max-height: 110px; padding: 0 1.8px; margin-right: 8px; height: 30px; line-height: 2.5">赞<span class="badge" style="position: static;font-size: 13px; color: white">@Model.UsersFavouriteCount</span>*@
-                        </a>
+                        <a class="btn right" href="@Url.Action("FavouriteTempRedirectToDetail", "Tweets", new {tweetId = Model.Id, groupId = Model.GroupId})"  style="font-size: 12px; max-height: 110px; padding: 0 1.8px; margin-right: 8px; height: 30px; line-height: 2.5">赞<span class="badge" style="position: static;font-size: 13px; color: white">@Model.UsersFavouriteCount</span>
+                        </a>*@
                         <br />
                         <div class="flow-text">
                             @Model.Text <br />
@@ -51,7 +52,7 @@
                         </div>*@
 
                     <div>
-                        <a style="float: right; font-size: 12px">@Model.DatePosted.ToString("h:mm tt MMMM dd")</a>
+                        <a style="float: right; font-size: 0.8rem">@Model.DatePosted.ToString("MM-dd HH:mm dddd", new CultureInfo("zh-CN", false))</a>
                     </div>
 
                 </div>
