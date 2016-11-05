@@ -372,21 +372,5 @@ namespace Twitter.App.Controllers
 
             return "Delete Successfully";
         }
-
-        [AllowAnonymous]
-        public ActionResult GetDailyTweetPosts()
-        {
-            var currentYear = DateTime.Now.Year;
-            var currentMonth = DateTime.Now.Month;
-            var currentDay = DateTime.Now.Day;
-            var tweetNumber =
-                this.Data.Tweets.All()
-                    .Count(
-                        tweet =>
-                            tweet.DatePosted.Year == currentYear && tweet.DatePosted.Month == currentMonth &&
-                            tweet.DatePosted.Day == currentDay);
-
-            return PartialView(tweetNumber);
-        }
     }
 }

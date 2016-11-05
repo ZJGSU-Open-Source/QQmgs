@@ -1,4 +1,6 @@
-﻿namespace Twitter.App.Controllers
+﻿using Twitter.App.Ambient;
+
+namespace Twitter.App.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -36,13 +38,5 @@
 
         //    return !users.Any() ? this.View() : this.View(pagedUsers);
         //}
-
-        [AllowAnonymous]
-        public ActionResult GetTotalUser()
-        {
-            var userNumber = this.Data.Users.All().Count();
-
-            return PartialView(userNumber);
-        }
     }
 }

@@ -250,6 +250,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ambient\AssemblyHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -287,6 +288,7 @@
     <Compile Include="Controllers\MVCController\CustomizedNameController.cs" />
     <Compile Include="Controllers\MVCController\GroupController.cs" />
     <Compile Include="Controllers\MVCController\MonitorController.cs" />
+    <Compile Include="Controllers\MVCController\MVCAssistController.cs" />
     <Compile Include="Controllers\MVCController\PhotoController.cs" />
     <Compile Include="Controllers\MVCController\TwitterBaseController.cs" />
     <Compile Include="Controllers\MVCController\HomeController.cs" />
@@ -585,6 +587,8 @@
     <Content Include="Views\Group\GetGroupInfo.cshtml" />
     <Content Include="Views\Group\MobileTweetsIndex.cshtml" />
     <Content Include="Views\Group\PCTweetsIndex.cshtml" />
+    <Content Include="Views\Users\GetCurrentQQmgsVersion.cshtml" />
+    <Content Include="Views\MVCAssist\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
