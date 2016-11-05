@@ -38,7 +38,6 @@ namespace Twitter.App.Controllers
             var groups = this.Data.Group.All()
                 .OrderByDescending(t => t.LastTweetUpdateTime)
                 .Where(models => models.IsDisplay)
-                .Take(Constants.Constants.DefaultRecentlyUpdateGroupNumber)
                 .Select(ViewModelsHelper.AsGroupViewModel)
                 .ToList();
 
