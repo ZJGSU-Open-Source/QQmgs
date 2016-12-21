@@ -3,7 +3,7 @@
 
 <div class="section" style="padding: 0px">
     <div class="row center" style="margin: auto">
-        <h6 class="header col s12 light grey-text">参与的兴趣小组 (@Model.ToList().Count)</h6>
+        <h6 class="header col s12 light grey-text" style="font-weight: bold">参与的兴趣小组 (@Model.ToList().Count)</h6>
     </div>
 
     @{
@@ -14,43 +14,74 @@
     }
 
     <div class="collection" style="max-width: 700px; margin: auto">
-        @foreach (var group in Model)
-        {
-            <div>
-                @if (group.HasImageOverview)
-                {
-                    <img style="max-width: 42px" class="left" src="~/img/Uploads/Thumbnails/@group.ImageOverview" alt="">
-                }
-                else
-                {
-                    <img style="max-width: 42px" class="left" src=@Constants.Based64GroupOverviewImage alt="">
-                }
-            </div>
+        <div class="J-groupList-groups">
+            @foreach (var group in Model)
+            {
+                <div style="border-bottom: 1px solid #e0e0e0;">
+                    <div>
+                        @if (group.GroupPhotos.Any())
+                        {
+                            <img style="width: 3.0rem; margin: 10px;" class="left" src="~/img/Uploads/Thumbnails/@group.GroupPhotos.LastOrDefault().Name" alt="">
+                        }
+                        else
+                        {
+                            <img style="width: 3.0rem; margin: 10px;" class="left" src=@Constants.Based64GroupOverviewImage alt="">
+                        }
+                    </div>
 
-            <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item">
-                <div style="text-align: left; margin-left: 30px;">
-                    @group.Name
-                    <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
-                    @if (group.IsPrivate)
-                    {
-                        <span class="new badge" data-badge-caption="条讨论">私密 @group.TweetsCount</span>
-                    }
-                    else
-                    {
-                        <span class="new badge" data-badge-caption="条讨论">@group.TweetsCount</span>
-                    }
+                    <a href="@Url.Action("Get", new {groupId = group.Id, p = 1})" class="collection-item" style="line-height: 3.0rem;">
+                        <div style="position: relative;">
+                            @group.Name
+                            <small class="hide-on-small-and-down"> · 最后更新: @group.LastTweetUpdateTime.ToString("M")</small>
+                            @if (group.IsPrivate)
+                            {
+                                <span class="new badge" data-badge-caption="条讨论" style="height: 2.0rem; line-height: 2.0rem; top: 0; bottom: 0; margin: auto 0; right: 0;">私密 @group.TweetsCount</span>
+                            }
+                            else
+                            {
+                                <span class="new badge" data-badge-caption="条讨论" style="height: 2.0rem; line-height: 2.0rem; top: 0; bottom: 0; margin: auto 0; right: 0;">@group.TweetsCount</span>
+                            }
+                        </div>
+                    </a>
                 </div>
-            </a>
-        }
+            }
 
-        @if (Model.Count() >= Constants.DefaultParticipatedGroupNumber)
-        {
-            <a href="#!" class="collection-item">
-                <div class="center">
-                    加载更多
-                </div>
-            </a>
-        }
+            @if (Model.Count() >= Constants.DefaultRecentlyUpdateGroupNumber)
+            {
+                <a href="javascript:void(0)" class="collection-item J-more" style="line-height: 2.0rem;">
+                    <div class="center">
+                        加载更多
+                    </div>
+                </a>
+            }
 
+        </div>
     </div>
 </div>
+
+<script language="javascript">
+    (function () {
+        var groupList = $('.J-groupList-groups');
+        groupList.children('div').eq(4).nextAll('div').hide(); //这里修改第一次显示多少个，当前为4，表示显示5个
+        var num = 5; //这里修改点击一次加载多少个，当前是5，表示一次加载4个
+        $('.J-more')
+            .bind('click',
+                function () {
+                    var i = groupList.children('div:visible').length, //当前显示了多少个
+                        j = 0,
+                        count = groupList.children('div').length; //一共有多少个
+                    if (count - i <= 0) {
+                        $(this).hide();
+                    } else {
+                        for (; j < num; j++) {
+                            groupList.children('div').eq(i + j).fadeIn();
+                            console.log(i + j);
+                            if (i + j - count >= 0) {
+                                $(this).hide();
+                                break;
+                            }
+                        }
+                    }
+                });
+    })();
+</script>

@@ -96,24 +96,29 @@ namespace Twitter.App.Controllers
         public ActionResult GetParticipatedGroups()
         {
             var loggedUserId = this.User.Identity.GetUserId();
+            var user = Data.Users.Find(loggedUserId);
 
             // get posted tweets
-            var tweets = Data.Users.Find(loggedUserId).Tweets;
-            var groupIds = tweets.Select(tweet => tweet.GroupId).Distinct().ToList();
+            var tweets = user.Tweets;
+            var groupIdResult = tweets.Select(tweet => tweet.GroupId).Distinct().ToList();
 
             // get posted replies
-            var replies = Data.Users.Find(loggedUserId).Replies;
+            var replies = user.Replies;
             var tweetIds = replies.Select(reply => reply.TweetId).Distinct();
-            groupIds.AddRange(tweetIds.Select(id => Data.Tweets.Find(id).GroupId).Distinct());
 
-            groupIds = groupIds.Distinct().ToList();
+            groupIdResult.AddRange(tweetIds.Select(id => Data.Tweets.Find(id).GroupId).Distinct());
+
+            // get created groups
+            var createdGroups = user.Groups;
+            groupIdResult.AddRange(createdGroups.Select(group => group.Id));
+
+            groupIdResult = groupIdResult.Distinct().ToList();
 
             // get detailed groups
             var groups =
-                groupIds
+                groupIdResult
                     .Select(id => Data.Group.Find(id).ToGroupVieModel())
                     .OrderByDescending(models => models.LastTweetUpdateTime)
-                    .Take(Constants.Constants.DefaultParticipatedGroupNumber)
                     .ToList();
 
             return PartialView(groups);

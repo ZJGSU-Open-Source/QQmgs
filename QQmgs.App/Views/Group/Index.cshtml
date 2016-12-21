@@ -7,14 +7,14 @@
     Layout = "~/Views/Shared/_Materize_Layout.cshtml";
 }
 @*<style>
-    .grouplist {
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-        .grouplist:nth-child(4) ~ .grouplist {
-            display: none;
+        .grouplist {
+            border-bottom: 1px solid #e0e0e0;
         }
-</style>*@
+
+            .grouplist:nth-child(4) ~ .grouplist {
+                display: none;
+            }
+    </style>*@
 <nav style="background: #009688; height: 53px; line-height: 53px">
     <div class="nav-wrapper container" style="padding-top: 0px">
         <div class="col s12">
@@ -33,9 +33,9 @@
         <div class="section hide-on-small-only" style="padding-top: 0px">
             <div class="row" style="margin: auto">
                 @{
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.兴趣爱好});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.社团组织});
-                    Html.RenderAction("GetClassificatedGroup", "Group", new {classification = Classification.我爱学习});
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.兴趣爱好 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.社团组织 });
+                    Html.RenderAction("GetClassificatedGroup", "Group", new { classification = Classification.我爱学习 });
                 }
             </div>
         </div>
@@ -54,11 +54,11 @@
 
         <div class="section">
             <div class="row center" style="margin: auto">
-                <h6 class="header col s12 light grey-text">最近更新的兴趣小组 (@Model.ToList().Count)</h6>
+                <h6 class="header col s12 light grey-text" style="font-weight: bold">最近更新的兴趣小组 (@Model.ToList().Count)</h6>
             </div>
 
             <div class="collection" style="max-width: 700px; margin: auto">
-                <div class="J-groupList">
+                <div class="J-groupList-index">
                     @foreach (var group in Model)
                     {
                         <div style="border-bottom: 1px solid #e0e0e0;">
@@ -101,43 +101,40 @@
 
                 </div>
 
-                <br/>
-                <div class="horizontal click-to-toggle center">
-                    <a class="btn waves-effect waves-light" href="@Url.Action("Create", "Group")">创建属于你的兴趣小组</a>
-                </div>
-                <br/>
-            </div>
 
-            @{
+            </div>
+            <div class="horizontal click-to-toggle center" style="margin-top: 20px">
+                <a class="btn waves-effect waves-light" href="@Url.Action("Create", "Group")">创建属于你的兴趣小组</a>
+            </div>
+            
+            @*@{
                 Html.RenderAction("GetAllGroups");
-            }
+            }*@
 
             <div class="section">
                 <div class="row center">
-                    <h6 class="header col s12 light grey-text">更多功能</h6>
+                    <h6 class="header col s12 light grey-text">更多...</h6>
                 </div>
                 <div class="center">
                     <a class="teal-text">请告诉我们你的意见和建议 :)</a>
-                    <br/>
+                    <br />
                     <div style="padding-top: 10px">
                         <a href="@Url.Action("Get", new {groupId = 47, p = 1})" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>提意见</a>
                     </div>
                 </div>
-                <br/>
-                <br/>
             </div>
         </div>
     </div>
 </div>
 
 <script language="javascript">
-    (function() {
-        var groupList = $('.J-groupList');
-        groupList.children('div').eq(4).nextAll('div').hide(); //这里修改第一次显示多少个，当前为4，表示显示5个
-        var num = 5; //这里修改点击一次加载多少个，当前是5，表示一次加载5个
+    (function () {
+        var groupList = $('.J-groupList-index');
+        groupList.children('div').eq(8).nextAll('div').hide(); //这里修改第一次显示多少个，当前为8，表示显示9个
+        var num = 9; //这里修改点击一次加载多少个，当前是9，表示一次加载9个
         $('.J-more')
             .bind('click',
-                function() {
+                function () {
                     var i = groupList.children('div:visible').length, //当前显示了多少个
                         j = 0,
                         count = groupList.children('div').length; //一共有多少个
