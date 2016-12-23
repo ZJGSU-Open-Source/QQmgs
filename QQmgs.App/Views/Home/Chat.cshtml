@@ -47,7 +47,6 @@
             var userName = makeUserName();
             Materialize.toast('随机分配得到你的匿名昵称: ' + userName, 18000); // 4000 is the duration of the toast
 
-
             $('#title').append('<h6>当前昵称: ' + userName + '. 刷新页面更换新昵称.</h6>');
 
             // Create a function that the hub can call back to display messages.
@@ -61,10 +60,16 @@
                     minute: "numeric"
                 });
 
-                // Add the message to the page.
-                $('#discussion').append('<li class="collection-item">' + currentdate + ' <strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
-
+                if (name === '【系统消息】') {
+                    // Add the message to the page.
+                    $('#discussion').append('<li class="collection-item" style="color: cornflowerblue; font-size: 12px">' + currentdate + ' <strong>' + htmlEncode(name)
+                        + '</strong>: ' + htmlEncode(message) + '</li>');
+                } else {
+                    // Add the message to the page.
+                    $('#discussion').append('<li class="collection-item">' + currentdate + ' <strong>' + htmlEncode(name)
+                        + '</strong>: ' + htmlEncode(message) + '</li>');
+                }
+                
                 // Scroll to page bottom
                 $("#discussion").scrollTop($("#discussion")[0].scrollHeight);
             };
@@ -89,10 +94,12 @@
                 });
             });
         });
+
         // This optional function html-encodes messages for display in the page.
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+
     </script>
 }
