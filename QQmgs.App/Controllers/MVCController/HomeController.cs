@@ -65,5 +65,11 @@ namespace Twitter.App.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult Chat()
+        {
+            return View();
+        }
     }
 }

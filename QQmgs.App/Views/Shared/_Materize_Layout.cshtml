@@ -29,8 +29,9 @@
             <ul class="right hide-on-med-and-down">
                 @if (Request.IsAuthenticated)
                 {
-                    <li><a style="color: rgb(82, 146, 0);font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Activity")">活动</a></li>
-                    <li><a style="color: #0F959D;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "CourseReview")">点评</a></li>
+                    <li><a style="color: #0000cd;font-weight: bold;font-size: 18px;" href="@Url.Action("Chat", "Home")">聊天</a></li>
+                    @*<li><a style="color: rgb(82, 146, 0);font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Activity")">活动</a></li>*@
+                    @*<li><a style="color: #0F959D;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "CourseReview")">点评</a></li>*@
                     <li><a style="color: #F7A54C;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Group")">小组</a></li>
                     <li><a style="color: #61ABDB;font-weight: bold;font-size: 18px;" href="@Url.Action("index", "Photo")">摄影</a></li>
                     <li><a href="@Url.Action("Search", "Group")" class="tooltipped" data-position="down" data-delay="30" data-tooltip="搜索"><i class="material-icons">search</i></a></li>
@@ -47,10 +48,11 @@
             <ul id="nav-mobile" class="side-nav">
                 @if (Request.IsAuthenticated)
             {
-                    <li><a href="@Url.Action("index", "CourseReview")">课程点评</a></li>
+                    @*<li><a href="@Url.Action("index", "CourseReview")">课程点评</a></li>*@
                     <li><a href="@Url.Action("index", "Group")">兴趣小组</a></li>
+                    <li><a href="@Url.Action("Chat", "Home")">匿名聊天</a></li>
                     <li><a href="@Url.Action("index", "Photo")">摄影分享</a></li>
-                    <li><a href="@Url.Action("index", "Activity")">商大活动</a></li>
+                    @*<li><a href="@Url.Action("index", "Activity")">商大活动</a></li>*@
                     <li><a href="@Url.Action("Search", "Group")">搜索</a></li>
                     <li><a href="@Url.Action("Index", "Manage")">设置</a></li>
                 }
@@ -104,6 +106,8 @@
             </div>
         </div>
     </footer>
+
+    @RenderSection("Scripts", false)
 
     <!-- JavaScript Baidu Analytics -->
     <script>
