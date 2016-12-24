@@ -25,7 +25,7 @@
 <body>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
+            <a id="logo-container" style="font-size: 1.5rem" href="@Url.Action("Index", "Home")" class="brand-logo">@Resources.QQmgscom</a>
             <ul class="right hide-on-med-and-down">
                 @if (Request.IsAuthenticated)
                 {
@@ -71,7 +71,7 @@
         @RenderBody()
     </main>
 
-    <footer class="page-footer teal" style="padding-top: 5px">
+    <footer class="page-footer teal" style="padding-top: 0px">
         <div class="container hide-on-small-and-down" style="width: 90%">
             <div class="row" style="margin: auto">
                 <div class="col l9 s12">
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-copyright center">
+        <div class="footer-copyright center" id="mobile-footer">
             <div class="container row show-on-small hide-on-med-and-up" style="width: 100%">
                 <a style="color: #fffff0" href="https://pan.baidu.com/s/1gfPt8FD">安卓 Android App</a>
             </div>

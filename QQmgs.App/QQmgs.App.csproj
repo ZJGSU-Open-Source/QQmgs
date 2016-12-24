@@ -447,6 +447,7 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cardio\main.js" />
+    <Content Include="Scripts\Chat\Chatting.js" />
     <Content Include="Scripts\Custom\app.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
