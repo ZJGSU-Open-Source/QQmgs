@@ -4,6 +4,7 @@
 
     // Reference the auto-generated proxy for the hub.
     var chat = $.connection.chatHub;
+    var userName = "";
 
     function makeUserName() {
         var nameList = [
@@ -13,6 +14,16 @@
 
         var idx = Math.floor(Math.random() * (nameList.length - 1));
         return nameList[idx];
+    }
+
+    function initUserName(name) {
+        userName = name;
+        Materialize.toast('随机分配得到你的匿名昵称: ' + userName, 18000);
+
+        // Get the user name and store it to prepend to messages.
+        $('#displayname').val(userName);
+
+        $('#title').append('<h6>当前昵称: ' + userName + '. 刷新页面更换新昵称.</h6>');
     }
 
     $("#message").keyup(function (event) {
@@ -25,14 +36,34 @@
         $.cookie('QQmgs-chat-userid', chat.state.id, { path: '/', expires: 30 });
     }
 
-    // Auto generate name for user
-    var userName = makeUserName();
-    Materialize.toast('随机分配得到你的匿名昵称: ' + userName, 18000);
+    chat.client.addUser = function (user, exists) {
+        $('#title').append('<h6>id: ' + user.Id + '</h6>');
+        $('#title').append('<h6>name: ' + user.Name + '</h6>');
+        $('#title').append('<h6>hash: ' + user.Hash + '</h6>');
 
-    // Get the user name and store it to prepend to messages.
-    $('#displayname').val(userName);
+        initUserName(user.Name);
+        
+        //var id = 'u-' + user.Name;
+        //if (document.getElementById(id)) {
+        //    return;
+        //}
 
-    $('#title').append('<h6>当前昵称: ' + userName + '. 刷新页面更换新昵称.</h6>');
+        //var data = {
+        //    name: user.Name,
+        //    hash: user.Hash
+        //};
+
+        //var e = $('#new-user-template').tmpl(data)
+        //                               .appendTo($('#users'));
+        //refreshUsers();
+
+        //if (!exists && this.state.name != user.Name) {
+        //    addMessage(user.Name + ' just entered ' + this.state.room, 'notification');
+        //    e.hide().fadeIn('slow');
+        //}
+
+        updateCookie();
+    };
 
     // Create a function that the hub can call back to display messages.
     chat.client.addNewMessageToPage = function (name, message) {
@@ -66,7 +97,12 @@
     $.connection.hub.start({ transport: window.activeTransport },
         function () {
             chat.server.join()
-                .done(function () {
+                .done(function (success) {
+
+                    if (success === false) {
+                        $.cookie('QQmgs-chat-userid', '');
+                    }
+
                     chat.server.send('【系统消息】', '欢迎“' + userName + '”加入群聊.');
 
                     $('#sendmessage')

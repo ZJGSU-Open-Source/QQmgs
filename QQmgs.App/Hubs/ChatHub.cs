@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,36 +22,25 @@ namespace Twitter.App.Hubs
 
         public bool Join()
         {
-            return false;
-
-            // Check the user id cookie
             Cookie userIdCookie;
 
             if (!Context.RequestCookies.TryGetValue("QQmgs-chat-userid", out userIdCookie))
             {
-                return false;
+                userIdCookie = new Cookie("QQmgs-chat-userid", "");
             }
 
             var user = Users.Values.FirstOrDefault(u => u.Id == userIdCookie.Value);
-
             if (user == null)
             {
-                // add new user and add to client caller
-                AddUser(new DateTime().ToLongTimeString());
+                AddUser(GetMD5Hash(DateTime.Now.ToString(CultureInfo.InvariantCulture)));
 
                 return false;
             }
 
             // Update the users's client id mapping if already connected
             user.ConnectionId = Context.ConnectionId;
-
-            // Set some client state
-            Clients.Caller.id = user.Id;
-            Clients.Caller.name = user.Name;
-            Clients.Caller.hash = user.Hash;
-                
-            // Add this user to the list of users
-            Clients.Caller.addUser(user);
+            
+            AddUserToClient(user);
 
             return true;
         }
@@ -73,11 +63,11 @@ namespace Twitter.App.Hubs
 
             var user = Users.Values.FirstOrDefault(u => u.ConnectionId == Context.ConnectionId);
 
-            if (user != null)
-            {
-                ChatUser ignoredUser;
-                Users.TryRemove(user.Name, out ignoredUser);
-            }
+            //if (user != null)
+            //{
+            //    ChatUser ignoredUser;
+            //    Users.TryRemove(user.Name, out ignoredUser);
+            //}
 
             return null;
         }
@@ -102,6 +92,16 @@ namespace Twitter.App.Hubs
                 .Select(b => b.ToString("x2")));
         }
 
+        private void AddUserToClient(ChatUser user)
+        {
+            Clients.Caller.id = user.Id;
+            Clients.Caller.name = user.Name;
+            Clients.Caller.hash = user.Hash;
+
+            // Add this user to the list of users
+            Clients.Caller.addUser(user);
+        }
+
         private ChatUser AddUser(string newUserName)
         {
             var user = new ChatUser(newUserName, GetMD5Hash(newUserName))
@@ -111,11 +111,7 @@ namespace Twitter.App.Hubs
 
             Users[newUserName] = user;
 
-            Clients.Caller.name = user.Name;
-            Clients.Caller.hash = user.Hash;
-            Clients.Caller.id = user.Id;
-
-            Clients.Caller.addUser(user);
+            AddUserToClient(user);
 
             return user;
         }
