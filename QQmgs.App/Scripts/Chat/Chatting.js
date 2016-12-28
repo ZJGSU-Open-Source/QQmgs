@@ -1,13 +1,13 @@
 ﻿$(function () {
     // clear mobile footer
-    $("#mobile-footer").remove();
+    $(".page-footer").remove();
 
     // Reference the auto-generated proxy for the hub.
     var chat = $.connection.chatHub;
     var userName = "";
 
     function addMessage(content, type) {
-        var e = $('<li class="collection-item" />').html(content).appendTo($('#discussion'));
+        var e = $('<li/>').html(content).appendTo($('#discussion'));
         //refreshMessages();
 
         if (type) {

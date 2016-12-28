@@ -3,29 +3,49 @@
 }
 
 <style>
+    body {
+        background: url('https://res.wx.qq.com/zh_CN/htmledition/v2/images/web_wechat_login_bg31e225.jpg') center center / cover no-repeat;
+        background-image: url('https://res.wx.qq.com/zh_CN/htmledition/v2/images/web_wechat_login_bg31e225.jpg');
+        background-position-x: center;
+        background-position-y: center;
+        background-size: cover;
+        background-attachment: initial;
+        background-origin: initial;
+        background-clip: initial;
+        background-color: initial;
+    }
+
     .notification {
+        line-height: 1.5rem;
         color: #bbb;
         font-size: 12px;
         padding-top: 2px !important;
         padding-bottom: 1px !important;
         padding-left: 15px !important;
+        margin: 0;
     }
+
     .msg {
+        padding: 9px 13px;
+        height: 40px;
+        margin: 0;
+        line-height: 1.5rem;
         font-size: 13px;
         padding-left: 15px !important;
     }
 </style>
 
-<h5 id="title" class="center">商大<a style="color: gray; font-weight: bold">匿名</a>群聊</h5>
-<div class="container">
-    <input type="hidden" id="displayname" />
+<div class="container" style="background-color: #EEE; margin-bottom: 15px; margin-top: 10px">
+    <h5 id="title" class="center" style="padding-top: 15px">商大<a style="color: gray; font-weight: bold">匿名</a>群聊</h5>
+    
+    <input type="hidden" id="displayname"/>
     <ul class="collection with-header" id="discussion" style="overflow: auto; height: 365px"></ul>
     <div class="row center" style="margin: auto">
         <div class="col s8">
-            <input type="text" id="message" placeholder="输入你想说的话" />
+            <input type="text" id="message" placeholder="输入你想说的话"/>
         </div>
         <div class="col s2">
-            <input class="waves-effect waves-light btn" type="button" id="sendmessage" value="Send" />
+            <input class="waves-effect waves-light btn" type="button" id="sendmessage" value="Send"/>
         </div>
     </div>
 </div>
