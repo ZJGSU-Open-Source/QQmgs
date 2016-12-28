@@ -6,43 +6,46 @@
     var chat = $.connection.chatHub;
     var userName = "";
 
-    function makeUserName() {
-        var nameList = [
-            "钱江湾", "金沙港", "金字塔", "字母楼", "保研路", "酱饼妹", "裸奔男", "墨湖", "碧湖", "教工路", "学正街", "二号大街", "中门", "球门", "鸟门",
-            "信息楼", "经济楼", "管理楼", "食品楼", "环境楼", "二号田径场", "钱塘江", "金沙湖"
-        ];
+    function addMessage(content, type) {
+        var e = $('<li class="collection-item" />').html(content).appendTo($('#discussion'));
+        //refreshMessages();
 
-        var idx = Math.floor(Math.random() * (nameList.length - 1));
-        return nameList[idx];
+        if (type) {
+            e.addClass(type);
+        }
+        //updateUnread();
+        e[0].scrollIntoView();
+
+        return e;
     }
 
     function initUserName(name) {
         userName = name;
-        Materialize.toast('随机分配得到你的匿名昵称: ' + userName, 18000);
 
         // Get the user name and store it to prepend to messages.
         $('#displayname').val(userName);
 
-        $('#title').append('<h6>当前昵称: ' + userName + '. 刷新页面更换新昵称.</h6>');
-    }
+        $('#title').append('<h6>当前昵称: <a style="color: #0000cd;font-weight: bold;">' + userName + '</a></h6>');
 
-    $("#message").keyup(function (event) {
-        if (event.keyCode === 13) {
-            $("#sendmessage").click();
-        }
-    });
+        Materialize.toast('随机分配匿名昵称: ' + userName, 3000);
+
+        chat.server.send('system', '欢迎“' + userName + '”加入群聊.');
+    }
 
     function updateCookie() {
         $.cookie('QQmgs-chat-userid', chat.state.id, { path: '/', expires: 30 });
     }
 
     chat.client.addUser = function (user, exists) {
-        $('#title').append('<h6>id: ' + user.Id + '</h6>');
-        $('#title').append('<h6>name: ' + user.Name + '</h6>');
-        $('#title').append('<h6>hash: ' + user.Hash + '</h6>');
+
+        // DEBUG
+        //$('#title').append('<h6>id: ' + user.Id + '</h6>');
+        //$('#title').append('<h6>name: ' + user.Name + '</h6>');
+        //$('#title').append('<h6>hash: ' + user.Hash + '</h6>');
+        //$('#title').append('<h6>state name: ' + this.state.name + '</h6>');
 
         initUserName(user.Name);
-        
+
         //var id = 'u-' + user.Name;
         //if (document.getElementById(id)) {
         //    return;
@@ -76,18 +79,16 @@
             minute: "numeric"
         });
 
-        if (name === '【系统消息】') {
-            // Add the message to the page.
-            $('#discussion').append('<li class="collection-item" style="color: cornflowerblue; font-size: 12px; padding-top: 2px; padding-bottom: 1px; padding-left: 15px;">' + currentdate + ' <strong>' + htmlEncode(name)
-                + '</strong>: ' + htmlEncode(message) + '</li>');
+        if (name === 'system') {
+            var chattingNotify = currentdate + '  ' + htmlEncode(message);
+
+            addMessage(chattingNotify, 'notification');
         } else {
-            // Add the message to the page.
-            $('#discussion').append('<li class="collection-item" style="padding-left: 15px">' + currentdate + ' <strong>' + htmlEncode(name)
-                + '</strong>: ' + htmlEncode(message) + '</li>');
+            var chattingMsg = currentdate + '  <a style="font-weight: bold; color: black">' + htmlEncode(name) + '</a>: ' + htmlEncode(message);
+
+            addMessage(chattingMsg, 'msg');
         }
 
-        // Scroll to page bottom
-        $("#discussion").scrollTop($("#discussion")[0].scrollHeight);
     };
 
     // Set initial focus to message input box.
@@ -99,27 +100,30 @@
             chat.server.join()
                 .done(function (success) {
 
+                    // DEBUG
+                    // for (var i = 0; i < 3; ++i) chat.server.send('Dava', 'Try ' + i);
+
                     if (success === false) {
                         $.cookie('QQmgs-chat-userid', '');
                     }
 
-                    chat.server.send('【系统消息】', '欢迎“' + userName + '”加入群聊.');
-
                     $('#sendmessage')
                         .click(function () {
-
-                            // Call the Send method on the hub.
                             chat.server.send(userName, $('#message').val());
-
-                            // Clear text box and reset focus for next comment.
                             $('#message').val('').focus();
                         });
+
                 });
         });
 
-    // This optional function html-encodes messages for display in the page.
     function htmlEncode(value) {
         var encodedValue = $('<div />').text(value).html();
         return encodedValue;
     }
+
+    $("#message").keyup(function (event) {
+        if (event.keyCode === 13) {
+            $("#sendmessage").click();
+        }
+    });
 })

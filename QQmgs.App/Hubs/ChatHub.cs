@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using Twitter.App.BusinessLogic;
 
 namespace Twitter.App.Hubs
 {
     public class ChatHub : Hub
     {
-        // Current online user number
         private static int _userNumber = 0;
 
         private static readonly ConcurrentDictionary<string, ChatUser> Users = new ConcurrentDictionary<string, ChatUser>(StringComparer.OrdinalIgnoreCase);
@@ -32,7 +32,8 @@ namespace Twitter.App.Hubs
             var user = Users.Values.FirstOrDefault(u => u.Id == userIdCookie.Value);
             if (user == null)
             {
-                AddUser(GetMD5Hash(DateTime.Now.ToString(CultureInfo.InvariantCulture)));
+                var nickName = GenerateRondomNickName();
+                AddUser(nickName);
 
                 return false;
             }
@@ -59,9 +60,12 @@ namespace Twitter.App.Hubs
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            Clients.All.addNewMessageToPage("【系统消息】", $"有一位小伙伴离开了群聊, {_userNumber--} 人当前在线.");
-
             var user = Users.Values.FirstOrDefault(u => u.ConnectionId == Context.ConnectionId);
+
+            if (user != null)
+            {
+                Clients.All.addNewMessageToPage("system", $"\"{user.Name}\"退出了群聊, 当前{_userNumber--} 人在线.");
+            }
 
             //if (user != null)
             //{
@@ -83,6 +87,11 @@ namespace Twitter.App.Hubs
             });
 
             return users;
+        }
+
+        public int GetUserNumber()
+        {
+            return Users.Count;
         }
 
         private static string GetMD5Hash(string name)
@@ -114,6 +123,36 @@ namespace Twitter.App.Hubs
             AddUserToClient(user);
 
             return user;
+        }
+
+        private static string GenerateRondomNickName()
+        {
+            var names = new List<string>
+            {
+                "钱江湾",
+                "金沙港",
+                "金字塔",
+                "字母楼",
+                "保研路",
+                "酱饼妹",
+                "裸奔男",
+                "墨湖",
+                "碧湖",
+                "教工路",
+                "学正街",
+                "二号大街",
+                "中门",
+                "球门",
+                "鸟门",
+                "信息楼",
+                "经济楼",
+                "管理楼",
+                "食品楼",
+                "环境楼",
+                "二号田径场"
+            };
+
+            return names.PickRandom();
         }
     }
 
