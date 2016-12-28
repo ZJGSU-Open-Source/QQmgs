@@ -402,6 +402,8 @@
     <Content Include="img\Photo\huang.gif" />
     <Content Include="img\Photo\pro.jpg" />
     <Content Include="img\Photo\Sun_Flower_in_ZJSU.jpg" />
+    <Content Include="img\Photo\_female.jpg" />
+    <Content Include="img\Photo\_male.jpg" />
     <Content Include="img\popup.jpg" />
     <Content Include="img\pricing1.jpg" />
     <Content Include="img\pricing2.jpg" />

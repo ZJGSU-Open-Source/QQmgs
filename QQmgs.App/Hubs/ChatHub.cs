@@ -19,6 +19,8 @@ namespace Twitter.App.Hubs
 
         private static readonly ConcurrentDictionary<string, ChatUser> Users = new ConcurrentDictionary<string, ChatUser>(StringComparer.OrdinalIgnoreCase);
 
+        private static int ChattingHistoryRecord { get; } = 15;
+
         private static int _chattingHistoryIndex = 0;
 
         private static readonly ConcurrentDictionary<int, ChatMessage> ChattingHistory = new ConcurrentDictionary<int, ChatMessage>();
@@ -112,15 +114,15 @@ namespace Twitter.App.Hubs
             return ChattingHistory.Select(pair => new ChatMessage(pair.Value.User, pair.Value.Text));
         }
 
-        private void AddChattingHistory(IDictionary<int, ChatMessage> dictionary, ChatMessage msg)
+        private static void AddChattingHistory(IDictionary<int, ChatMessage> dictionary, ChatMessage msg)
         {
             dictionary[_chattingHistoryIndex] = msg;
             _chattingHistoryIndex++;
 
             // Only keep 6 latest messages in runtime memory
-            if (_chattingHistoryIndex >= 7)
+            if (_chattingHistoryIndex >= ChattingHistoryRecord)
             {
-                dictionary.Remove(_chattingHistoryIndex - 7);
+                dictionary.Remove(_chattingHistoryIndex - ChattingHistoryRecord);
             }
         }
 
