@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,6 +107,7 @@ namespace Twitter.App.Hubs
             Clients.Caller.id = user.Id;
             Clients.Caller.name = user.Name;
             Clients.Caller.hash = user.Hash;
+            Clients.Caller.registeredTime = user.RegisteredTime;
 
             // Add this user to the list of users
             Clients.Caller.addUser(user);
@@ -115,7 +117,8 @@ namespace Twitter.App.Hubs
         {
             var user = new ChatUser(newUserName, GetMD5Hash(newUserName))
             {
-                ConnectionId = Context.ConnectionId
+                ConnectionId = Context.ConnectionId,
+                RegisteredTime = DateTime.Now
             };
 
             Users[newUserName] = user;
@@ -183,6 +186,8 @@ namespace Twitter.App.Hubs
         public string Name { get; set; }
 
         public string Hash { get; set; }
+
+        public DateTime RegisteredTime { get; set; }
 
         public ChatUser()
         {

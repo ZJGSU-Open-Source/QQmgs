@@ -13,39 +13,45 @@
         background-origin: initial;
         background-clip: initial;
         background-color: initial;
+        font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
     }
 
     .notification {
+        border-radius:5px;
+        /*width: 25%;*/
+        max-width: 250px;
+        margin: 10px auto;
+        padding: 1px 18px;
+        background-color: #dcdcdc;
+        text-align: center;
+        display: block;
         line-height: 1.5rem;
-        color: #bbb;
+        color: white;
         font-size: 12px;
-        padding-top: 2px !important;
-        padding-bottom: 1px !important;
-        padding-left: 15px !important;
-        margin: 0;
     }
 
     .msg {
-        padding: 9px 13px;
-        height: 40px;
+        word-wrap: break-word;
+        display: block;
+        padding: 13px 13px;
         margin: 0;
         line-height: 1.5rem;
-        font-size: 13px;
-        padding-left: 15px !important;
+        font-size: 15px;
+        padding-left: 25px !important;
     }
 </style>
 
-<div class="container" style="background-color: #EEE; margin-bottom: 15px; margin-top: 10px">
+<div class="container" style="background-color: #EEE; margin-bottom: 15px; margin-top: 10px; max-width: 1000px; width: 100%">
     <h5 id="title" class="center" style="padding-top: 15px">商大<a style="color: gray; font-weight: bold">匿名</a>群聊</h5>
     
     <input type="hidden" id="displayname"/>
     <ul class="collection with-header" id="discussion" style="overflow: auto; height: 365px"></ul>
     <div class="row center" style="margin: auto">
-        <div class="col s8">
-            <input type="text" id="message" placeholder="输入你想说的话"/>
+        <div class="col s10">
+            <input type="text" id="message" placeholder=""/>
         </div>
-        <div class="col s2">
-            <input class="waves-effect waves-light btn" type="button" id="sendmessage" value="Send"/>
+        <div class="col s2" style="padding-left: 0; padding-top: 7px">
+            <input class="waves-effect waves-light btn" type="button" id="sendmessage" value="Send" style="padding: 0 3px"/>
         </div>
     </div>
 </div>

@@ -7,7 +7,10 @@
     var userName = "";
 
     function addMessage(content, type) {
-        var e = $('<li/>').html(content).appendTo($('#discussion'));
+        var len = $('<li/>').appendTo($('#discussion'));
+        len.addClass('content');
+
+        var e = $('<div/>').html(content).appendTo(len);
         //refreshMessages();
 
         if (type) {
@@ -19,7 +22,7 @@
         return e;
     }
 
-    function initUserName(name) {
+    function initUserName(name, time) {
         userName = name;
 
         // Get the user name and store it to prepend to messages.
@@ -44,7 +47,7 @@
         //$('#title').append('<h6>hash: ' + user.Hash + '</h6>');
         //$('#title').append('<h6>state name: ' + this.state.name + '</h6>');
 
-        initUserName(user.Name);
+        initUserName(user.Name, user.RegisteredTime);
 
         //var id = 'u-' + user.Name;
         //if (document.getElementById(id)) {
@@ -80,11 +83,12 @@
         });
 
         if (name === 'system') {
-            var chattingNotify = currentdate + '  ' + htmlEncode(message);
+            var chattingNotify = currentdate + ': ' + htmlEncode(message);
 
             addMessage(chattingNotify, 'notification');
         } else {
-            var chattingMsg = currentdate + '  <a style="font-weight: bold; color: black">' + htmlEncode(name) + '</a>: ' + htmlEncode(message);
+            var chattingMsg = '<a style="color: black">浙江工商大学的' + htmlEncode(name) + '</a>: ' +
+            '<a style="background-color: white; color: black; padding: 9px 13px;border-radius:5px;line-height: 1.6rem;">' + htmlEncode(message) + '</a>';
 
             addMessage(chattingMsg, 'msg');
         }
