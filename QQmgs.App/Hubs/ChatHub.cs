@@ -19,10 +19,17 @@ namespace Twitter.App.Hubs
 
         private static readonly ConcurrentDictionary<string, ChatUser> Users = new ConcurrentDictionary<string, ChatUser>(StringComparer.OrdinalIgnoreCase);
 
+        private static int _chattingHistoryIndex = 0;
+
+        private static readonly ConcurrentDictionary<int, ChatMessage> ChattingHistory = new ConcurrentDictionary<int, ChatMessage>();
+
         public static string DefaultChattingRoom { get; } = "defaultRoom";
 
         public bool Join()
         {
+            // Loading chatting history
+            Clients.Caller.loadHistory(GetChattingHistory());
+
             Cookie userIdCookie;
 
             if (!Context.RequestCookies.TryGetValue("QQmgs-chat-userid", out userIdCookie))
@@ -50,6 +57,8 @@ namespace Twitter.App.Hubs
         public void Send(string name, string message)
         {
             Clients.All.addNewMessageToPage(name, message);
+
+            AddChattingHistory(ChattingHistory, new ChatMessage(name, message));
         }
         
         public override Task OnConnected()
@@ -65,7 +74,10 @@ namespace Twitter.App.Hubs
 
             if (user != null)
             {
-                Clients.All.addNewMessageToPage("system", $"\"{user.Name}\"退出了群聊, 当前{_userNumber--} 人在线.");
+                var msg = $"\"{user.Name}\"退出了群聊, 当前{_userNumber--} 人在线.";
+                Clients.All.addNewMessageToPage("system", msg);
+
+                AddChattingHistory(ChattingHistory, new ChatMessage("system", msg));
             }
 
             //if (user != null)
@@ -93,6 +105,23 @@ namespace Twitter.App.Hubs
         public int GetUserNumber()
         {
             return Users.Count;
+        }
+
+        private IEnumerable<ChatMessage> GetChattingHistory()
+        {
+            return ChattingHistory.Select(pair => new ChatMessage(pair.Value.User, pair.Value.Text));
+        }
+
+        private void AddChattingHistory(IDictionary<int, ChatMessage> dictionary, ChatMessage msg)
+        {
+            dictionary[_chattingHistoryIndex] = msg;
+            _chattingHistoryIndex++;
+
+            // Only keep 6 latest messages in runtime memory
+            if (_chattingHistoryIndex >= 7)
+            {
+                dictionary.Remove(_chattingHistoryIndex - 7);
+            }
         }
 
         private static string GetMD5Hash(string name)

@@ -95,6 +95,35 @@
 
     };
 
+    chat.client.loadHistory = function (ch) {
+        $.each(ch,
+            function() {
+                // Get current time
+                var currentdate = new Date().toLocaleTimeString('en-US',
+                {
+                    hour12: false,
+                    hour: "numeric",
+                    minute: "numeric"
+                });
+
+                if (this.User === 'system') {
+                    var chattingNotify = currentdate + ': ' + htmlEncode(this.Text);
+
+                    addMessage(chattingNotify, 'notification');
+                } else {
+                    var chattingMsg = '<a style="color: black">浙江工商大学的' +
+                        htmlEncode(this.User) +
+                        '</a>: ' +
+                        '<a style="background-color: white; color: black; padding: 9px 13px;border-radius:5px;line-height: 1.6rem;">' +
+                        htmlEncode(this.Text) +
+                        '</a>';
+
+                    addMessage(chattingMsg, 'msg');
+                }
+
+            });
+    }
+
     // Set initial focus to message input box.
     $('#message').focus();
 
@@ -103,7 +132,7 @@
         function () {
             chat.server.join()
                 .done(function (success) {
-
+                    
                     // DEBUG
                     // for (var i = 0; i < 3; ++i) chat.server.send('Dava', 'Try ' + i);
 
