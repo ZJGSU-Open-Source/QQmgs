@@ -43,7 +43,9 @@ namespace Twitter.App.Hubs
             if (user == null)
             {
                 var nickName = GenerateRondomNickName();
-                AddUser(nickName);
+                var randomSexValue = nickName.Length%2 == 0;
+
+                AddUser(nickName, randomSexValue);
 
                 return false;
             }
@@ -139,14 +141,15 @@ namespace Twitter.App.Hubs
             Clients.Caller.name = user.Name;
             Clients.Caller.hash = user.Hash;
             Clients.Caller.registeredTime = user.RegisteredTime;
+            Clients.Caller.isMale = user.IsMale;
 
             // Add this user to the list of users
             Clients.Caller.addUser(user);
         }
 
-        private ChatUser AddUser(string newUserName)
+        private ChatUser AddUser(string newUserName, bool userSexValue = false)
         {
-            var user = new ChatUser(newUserName, GetMD5Hash(newUserName))
+            var user = new ChatUser(newUserName, GetMD5Hash(newUserName), userSexValue)
             {
                 ConnectionId = Context.ConnectionId,
                 RegisteredTime = DateTime.Now
@@ -218,13 +221,15 @@ namespace Twitter.App.Hubs
 
         public string Hash { get; set; }
 
+        public bool IsMale { get; set; }
+
         public DateTime RegisteredTime { get; set; }
 
         public ChatUser()
         {
         }
 
-        public ChatUser(string name, string hash)
+        public ChatUser(string name, string hash, bool isMale = false)
         {
             Name = name;
             Hash = hash;

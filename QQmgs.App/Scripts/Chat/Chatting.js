@@ -111,12 +111,8 @@
 
                     addMessage(chattingNotify, 'notification');
                 } else {
-                    var chattingMsg = '<a style="color: black">浙江工商大学的' +
-                        htmlEncode(this.User) +
-                        '</a>: ' +
-                        '<a style="background-color: white; color: black; padding: 9px 13px;border-radius:5px;line-height: 1.6rem;">' +
-                        htmlEncode(this.Text) +
-                        '</a>';
+                    var chattingMsg = '<a style="color: black">浙江工商大学的' + htmlEncode(this.User) + '</a>' + '<img src="https://www.qqmgs.com/img/photo/_female.jpg" style="max-height: 20px; margin-left: 5px;"> ' +
+            ': <a style="margin-left: 5px; background-color: white; color: black; padding: 9px 13px;border-radius:5px;line-height: 1.6rem;">' + htmlEncode(this.Text) + '</a>';
 
                     addMessage(chattingMsg, 'msg');
                 }
